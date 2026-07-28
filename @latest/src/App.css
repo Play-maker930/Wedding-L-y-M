@@ -626,6 +626,89 @@ button:focus {
    WEDDING
 ================================= */
 
+.wedding-page {
+  padding-bottom: 100px;
+}
+
+.wedding-intro {
+  max-width: 460px;
+
+  margin: 25px auto 0;
+
+  color: var(--gray);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* =================================
+   WEDDING DATE BANNER
+================================= */
+
+.wedding-date-banner {
+  max-width: 760px;
+
+  margin: 0 auto 45px;
+
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  align-items: center;
+
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+
+  padding: 22px 0;
+}
+
+.wedding-date-side,
+.wedding-date-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.wedding-date-side {
+  gap: 5px;
+}
+
+.wedding-date-side span,
+.wedding-date-main span {
+  font-size: 7px;
+  letter-spacing: 3px;
+
+  color: var(--gray);
+}
+
+.wedding-date-side strong {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.wedding-date-main {
+  padding: 0 25px;
+
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.wedding-date-main strong {
+  margin-top: 2px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 27px;
+  font-weight: 400;
+}
+
+/* =================================
+   EVENT CARDS
+================================= */
+
 .event-grid {
   max-width: 1100px;
   margin: 0 auto;
@@ -638,7 +721,9 @@ button:focus {
 }
 
 .event-card {
-  min-height: 330px;
+  position: relative;
+
+  min-height: 410px;
 
   padding: 40px;
 
@@ -649,48 +734,208 @@ button:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  transition:
+    background 0.4s ease,
+    transform 0.4s ease;
 }
 
-.event-card:last-child {
-  border-right: none;
+.event-card:hover {
+  background: #eee8de;
 }
 
 .event-card.featured {
   background: #eee8de;
 }
 
+.event-card.featured:hover {
+  background: #e8e0d4;
+}
+
+.event-card:last-child {
+  border-right: none;
+}
+
 .event-number {
   font-size: 9px;
+
   color: var(--champagne-dark);
+
   letter-spacing: 2px;
 }
 
 .event-label {
-  margin-top: 35px;
+  margin-top: 27px;
+  margin-bottom: 0;
 
   font-size: 9px;
   letter-spacing: 3px;
+
   color: var(--gray);
 }
 
-.event-card h3 {
-  margin: 15px 0 6px;
+.event-icon {
+  margin-top: 20px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--champagne);
+
+  border-radius: 50%;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 38px;
-  font-weight: 400;
+  font-size: 20px;
+
+  color: var(--champagne-dark);
 }
 
-.event-card > p:not(.event-label):not(.event-time) {
-  font-size: 10px;
+.event-card h3 {
+  margin: 18px 0 5px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 31px;
+  font-weight: 400;
+
+  line-height: 1.05;
+}
+
+.event-place {
+  margin: 0;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+
   color: var(--gray);
 }
 
 .event-time {
-  margin: 25px 0;
+  margin: 20px 0 15px;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
+  font-size: 27px;
+}
+
+.event-map-button {
+  text-decoration: none;
+
+  margin-top: auto;
+}
+
+.event-map-button span {
+  font-size: 13px;
+}
+
+/* =================================
+   DRESS CODE
+================================= */
+
+.dress-code-line {
+  width: 45px;
+  height: 1px;
+
+  margin: 20px 0 16px;
+
+  background: var(--champagne-dark);
+}
+
+.dress-code-note {
+  margin: 0;
+
+  color: var(--gray);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+/* =================================
+   WEDDING TIMELINE
+================================= */
+
+.wedding-timeline {
+  max-width: 760px;
+
+  margin: 55px auto 0;
+
+  position: relative;
+}
+
+.timeline-line {
+  position: absolute;
+
+  top: 22px;
+  bottom: 22px;
+
+  left: 116px;
+
+  width: 1px;
+
+  background: var(--line);
+}
+
+.timeline-item {
+  position: relative;
+
+  min-height: 90px;
+
+  display: grid;
+  grid-template-columns: 90px 52px 1fr;
+
+  align-items: center;
+}
+
+.timeline-time {
+  text-align: right;
+
+  padding-right: 20px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+}
+
+.timeline-dot {
+  position: relative;
+  z-index: 2;
+
+  width: 9px;
+  height: 9px;
+
+  margin: 0 auto;
+
+  border: 1px solid var(--champagne-dark);
+
+  border-radius: 50%;
+
+  background: var(--ivory);
+}
+
+.timeline-item > div:last-child {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 20px;
+}
+
+.timeline-item strong {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.timeline-item span:not(.timeline-time) {
+  margin-top: 3px;
+
+  color: var(--gray);
+
+  font-size: 8px;
+  letter-spacing: 1px;
 }
 
 /* =================================
@@ -1122,6 +1367,41 @@ button:focus {
 
   /* WEDDING */
 
+  .wedding-page {
+    padding-bottom: 80px;
+  }
+
+  .wedding-intro {
+    margin-top: 20px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .wedding-date-banner {
+    width: 100%;
+
+    margin-bottom: 35px;
+
+    grid-template-columns: 1fr 1.15fr 1fr;
+
+    padding: 18px 0;
+  }
+
+  .wedding-date-side span,
+  .wedding-date-main span {
+    font-size: 6px;
+    letter-spacing: 2px;
+  }
+
+  .wedding-date-side strong {
+    font-size: 19px;
+  }
+
+  .wedding-date-main strong {
+    font-size: 23px;
+  }
+
   .event-grid {
     width: 100%;
 
@@ -1131,7 +1411,7 @@ button:focus {
 
   .event-card {
     width: 100%;
-    min-height: 290px;
+    min-height: 340px;
 
     padding: 35px 25px;
 
@@ -1144,11 +1424,53 @@ button:focus {
   }
 
   .event-card h3 {
-    font-size: 39px;
+    font-size: 36px;
   }
 
   .event-label {
-    margin-top: 28px;
+    margin-top: 25px;
+  }
+
+  .event-icon {
+    margin-top: 18px;
+  }
+
+  .event-time {
+    margin: 18px 0 15px;
+  }
+
+  .wedding-timeline {
+    width: 100%;
+
+    margin-top: 45px;
+  }
+
+  .timeline-line {
+    left: 86px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 65px 42px 1fr;
+    min-height: 85px;
+  }
+
+  .timeline-time {
+    padding-right: 12px;
+
+    font-size: 18px;
+  }
+
+  .timeline-item > div:last-child {
+    padding-left: 15px;
+  }
+
+  .timeline-item strong {
+    font-size: 20px;
+  }
+
+  .timeline-item span:not(.timeline-time) {
+    font-size: 7px;
+    line-height: 1.4;
   }
 
   /* INFORMATION */
@@ -1316,5 +1638,789 @@ button:focus {
 
   .footer span:not(:first-child) {
     display: none;
+  }
+
+  /* WEDDING SMALL PHONE */
+
+  .wedding-intro {
+    font-size: 15px;
+  }
+
+  .wedding-date-banner {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    padding: 16px 0;
+  }
+
+  .wedding-date-side strong {
+    font-size: 17px;
+  }
+
+  .wedding-date-main strong {
+    font-size: 21px;
+  }
+
+  .wedding-date-main {
+    padding: 0 12px;
+  }
+
+  .event-card {
+    min-height: 330px;
+
+    padding: 32px 20px;
+  }
+
+  .event-card h3 {
+    font-size: 33px;
+  }
+
+  .timeline-line {
+    left: 72px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 55px 35px 1fr;
+  }
+
+  .timeline-time {
+    font-size: 16px;
+    padding-right: 8px;
+  }
+
+  .timeline-item > div:last-child {
+    padding-left: 10px;
+  }
+
+  .timeline-item strong {
+    font-size: 18px;
+  }
+
+  .timeline-item span:not(.timeline-time) {
+    font-size: 6px;
+  }
+}
+/* ==========================================
+   LA BODA — NUEVO DISEÑO
+========================================== */
+
+.wedding-page {
+  width: 100%;
+  min-height: calc(100vh - 82px);
+  padding-top: 0;
+  background: var(--ivory);
+  color: var(--black);
+}
+
+
+/* =========================
+   WEDDING INTRO
+========================= */
+
+.wedding-intro {
+  min-height: 650px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 100px 30px;
+}
+
+.section-kicker {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gray);
+}
+
+.wedding-intro h1 {
+  margin-top: 18px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(65px, 9vw, 110px);
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+.decorative-line {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin: 35px 0;
+}
+
+.decorative-line span {
+  width: 55px;
+  height: 1px;
+
+  background: var(--champagne-dark);
+}
+
+.decorative-line i {
+  color: var(--champagne-dark);
+
+  font-size: 18px;
+  font-style: normal;
+}
+
+.intro-text {
+  max-width: 480px;
+
+  color: var(--gray);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  line-height: 1.4;
+}
+
+.date-display {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 55px;
+}
+
+.date-display > span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 76px;
+  line-height: 0.7;
+  font-weight: 300;
+}
+
+.date-display div {
+  text-align: left;
+
+  border-left: 1px solid var(--champagne-dark);
+
+  padding-left: 15px;
+}
+
+.date-display strong {
+  display: block;
+
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
+.date-display small {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.city {
+  margin-top: 20px;
+
+  font-size: 10px;
+  letter-spacing: 3px;
+
+  color: var(--gray);
+}
+
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline-section {
+  background: #ffffff;
+
+  padding: 110px 8vw;
+}
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 80px;
+}
+
+.section-heading h2 {
+  margin-top: 12px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.timeline {
+  max-width: 950px;
+
+  margin: 0 auto;
+
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+
+  position: absolute;
+
+  left: 50%;
+  top: 20px;
+  bottom: 20px;
+
+  width: 1px;
+
+  background: var(--champagne-dark);
+
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: grid;
+
+  grid-template-columns: 1fr 80px 1fr;
+
+  align-items: center;
+
+  min-height: 260px;
+}
+
+.timeline-item:nth-child(odd) .timeline-time {
+  text-align: right;
+
+  padding-right: 55px;
+}
+
+.timeline-item:nth-child(even) .timeline-time {
+  grid-column: 3;
+  grid-row: 1;
+
+  text-align: left;
+
+  padding-left: 55px;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  grid-column: 1;
+  grid-row: 1;
+
+  text-align: right;
+}
+
+.timeline-dot {
+  grid-column: 2;
+  grid-row: 1;
+
+  width: 54px;
+  height: 54px;
+
+  border: 1px solid var(--champagne-dark);
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto;
+
+  z-index: 2;
+
+  color: var(--champagne-dark);
+
+  font-size: 13px;
+}
+
+.timeline-time {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 50px;
+
+  color: var(--black);
+}
+
+.timeline-time span {
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+
+  margin-left: 5px;
+
+  color: var(--gray);
+}
+
+.timeline-content {
+  padding-left: 55px;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  padding-left: 0;
+  padding-right: 55px;
+}
+
+.timeline-label {
+  margin-bottom: 10px;
+
+  font-size: 9px;
+  letter-spacing: 3px;
+
+  color: var(--champagne-dark);
+
+  font-weight: 500;
+}
+
+.timeline-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 30px;
+  font-weight: 500;
+
+  line-height: 1.1;
+}
+
+.timeline-content p:last-child {
+  max-width: 320px;
+
+  margin-top: 12px;
+
+  color: var(--gray);
+
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   VENUES
+========================= */
+
+.venues-section {
+  padding: 120px 8vw;
+}
+
+.venue-grid {
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 25px;
+}
+
+.venue-card {
+  position: relative;
+
+  background: #ffffff;
+
+  padding: 55px 45px;
+
+  min-height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 20px 50px rgba(28, 27, 25, 0.10);
+}
+
+.venue-card.featured {
+  background: var(--black);
+
+  color: #ffffff;
+}
+
+.venue-number {
+  position: absolute;
+
+  top: 25px;
+  right: 30px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 16px;
+
+  color: var(--champagne-dark);
+}
+
+.venue-icon {
+  font-size: 30px;
+
+  color: var(--champagne-dark);
+
+  margin-bottom: 25px;
+}
+
+.venue-type {
+  margin-bottom: 12px;
+
+  font-size: 9px;
+  letter-spacing: 3px;
+
+  color: var(--champagne-dark);
+
+  font-weight: 500;
+}
+
+.venue-card h3 {
+  max-width: 350px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 36px;
+  font-weight: 400;
+
+  line-height: 1.05;
+}
+
+.venue-city {
+  margin-top: 12px;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+
+  color: inherit;
+
+  opacity: 0.7;
+}
+
+.map-button {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 15px;
+
+  width: fit-content;
+
+  margin-top: 35px;
+
+  padding-bottom: 7px;
+
+  border-bottom: 1px solid var(--champagne-dark);
+
+  color: inherit;
+
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  text-decoration: none;
+}
+
+.map-button span {
+  transition: transform 0.3s ease;
+}
+
+.map-button:hover span {
+  transform: translateX(6px);
+}
+
+
+/* =========================
+   DRESS CODE
+========================= */
+
+.dress-section {
+  min-height: 500px;
+
+  background: #eee8de;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  align-items: center;
+
+  padding: 80px 12vw;
+}
+
+.dress-content {
+  text-align: center;
+}
+
+.dress-content h2 {
+  margin: 25px 0;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(70px, 8vw, 110px);
+
+  font-weight: 300;
+
+  line-height: 0.9;
+}
+
+.dress-line {
+  width: 60px;
+  height: 1px;
+
+  background: var(--champagne-dark);
+
+  margin: 0 auto 25px;
+}
+
+.dress-content > p:last-child {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 20px;
+
+  color: var(--gray);
+}
+
+.dress-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dress-circle {
+  width: 230px;
+  height: 230px;
+
+  border: 1px solid var(--champagne-dark);
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.dress-circle::before {
+  content: '';
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  border: 1px solid rgba(185, 164, 134, 0.4);
+
+  border-radius: 50%;
+}
+
+.dress-circle span {
+  font-size: 10px;
+  letter-spacing: 5px;
+
+  color: var(--black);
+}
+
+
+/* =========================
+   WEDDING FOOTER
+========================= */
+
+.wedding-footer {
+  text-align: center;
+
+  padding: 100px 30px;
+
+  background: var(--ivory);
+}
+
+.small-heart {
+  color: var(--champagne-dark);
+
+  font-size: 28px;
+
+  margin-bottom: 20px;
+}
+
+.wedding-footer p {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 24px;
+
+  color: var(--gray);
+}
+
+.wedding-footer strong {
+  display: block;
+
+  margin-top: 20px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 30px;
+
+  font-weight: 400;
+}
+
+
+/* ==========================================
+   LA BODA — MOBILE
+========================================== */
+
+@media (max-width: 850px) {
+
+  .wedding-page {
+    min-height: calc(100vh - 68px);
+
+    padding-top: 0;
+  }
+
+  .wedding-intro {
+    min-height: 570px;
+
+    padding: 80px 25px;
+  }
+
+  .wedding-intro h1 {
+    font-size: 70px;
+  }
+
+  .intro-text {
+    max-width: 340px;
+
+    font-size: 20px;
+  }
+
+  .date-display {
+    margin-top: 45px;
+  }
+
+  .date-display > span {
+    font-size: 65px;
+  }
+
+  .timeline-section {
+    padding: 85px 25px;
+  }
+
+  .section-heading {
+    margin-bottom: 55px;
+  }
+
+  .section-heading h2 {
+    font-size: 42px;
+
+    line-height: 1;
+  }
+
+  .timeline::before {
+    left: 23px;
+  }
+
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    display: grid;
+
+    grid-template-columns: 46px 1fr;
+
+    min-height: auto;
+
+    margin-bottom: 65px;
+  }
+
+  .timeline-dot,
+  .timeline-item:nth-child(even) .timeline-dot {
+    grid-column: 1;
+    grid-row: 1;
+
+    width: 46px;
+    height: 46px;
+  }
+
+  .timeline-time,
+  .timeline-item:nth-child(even) .timeline-time {
+    grid-column: 2;
+    grid-row: 1;
+
+    text-align: left;
+
+    padding: 0 0 0 25px;
+
+    font-size: 42px;
+
+    align-self: center;
+  }
+
+  .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    grid-column: 2;
+    grid-row: 2;
+
+    text-align: left;
+
+    padding: 20px 0 0 25px;
+  }
+
+  .timeline-content h3 {
+    font-size: 28px;
+  }
+
+  .timeline-content p:last-child {
+    max-width: 100%;
+  }
+
+  .venues-section {
+    padding: 85px 20px;
+  }
+
+  .venue-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .venue-card {
+    min-height: 350px;
+
+    padding: 45px 30px;
+  }
+
+  .venue-card h3 {
+    font-size: 34px;
+  }
+
+  .dress-section {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+
+    padding: 90px 25px;
+  }
+
+  .dress-content h2 {
+    font-size: 80px;
+  }
+
+  .dress-circle {
+    width: 190px;
+    height: 190px;
+  }
+
+  .dress-circle::before {
+    width: 155px;
+    height: 155px;
+  }
+
+  .wedding-footer {
+    padding: 80px 25px;
+  }
+
+  .wedding-footer p {
+    font-size: 21px;
   }
 }

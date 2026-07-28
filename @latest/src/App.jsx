@@ -336,111 +336,283 @@ function App() {
           </section>
         )}
 
-        {/* ================================
-            LA BODA
-        ================================= */}
+{/* ================================
+    LA BODA
+================================= */}
 
-        {activePage === 'boda' && (
-          <section className="inner-page page-transition">
+{activePage === 'boda' && (
+  <section className="wedding-page page-transition">
 
-            <div className="inner-heading">
+    {/* INTRO */}
+    <section className="wedding-intro">
 
-              <p className="eyebrow">
-                15 · 01 · 2027
-              </p>
+      <p className="section-kicker">
+        EL GRAN DÍA
+      </p>
 
-              <h2>
-                La <em>boda</em>
-              </h2>
+      <h1>
+        La boda
+      </h1>
 
-            </div>
+      <div className="decorative-line">
+        <span></span>
+        <i>♡</i>
+        <span></span>
+      </div>
 
-            <div className="event-grid">
+      <p className="intro-text">
+        Un día para celebrar nuestro amor junto a las personas
+        que más queremos.
+      </p>
 
-              <div className="event-card">
+      <div className="date-display">
+        <span>15</span>
 
-                <span className="event-number">
-                  01
-                </span>
+        <div>
+          <strong>ENERO</strong>
+          <small>2027</small>
+        </div>
+      </div>
 
-                <p className="event-label">
-                  CEREMONIA
-                </p>
+      <p className="city">
+        RIONEGRO, MEDELLÍN
+      </p>
 
-                <h3>
-                  Villa Celeste
-                </h3>
+    </section>
 
-                <p>
-                  Medellín, Colombia
-                </p>
 
-                <p className="event-time">
-                  4:00 PM
-                </p>
+    {/* TIMELINE */}
+    <section className="timeline-section">
 
-                <button className="text-button">
-                  VER UBICACIÓN →
-                </button>
+      <div className="section-heading">
 
-              </div>
+        <p className="section-kicker">
+          EL DÍA
+        </p>
 
-              <div className="event-card featured">
+        <h2>
+          Un mismo día, dos momentos especiales
+        </h2>
 
-                <span className="event-number">
-                  02
-                </span>
+      </div>
 
-                <p className="event-label">
-                  CELEBRACIÓN
-                </p>
+      <div className="timeline">
 
-                <h3>
-                  Villa Celeste
-                </h3>
+        {/* CEREMONIA */}
+        <div className="timeline-item">
 
-                <p>
-                  Medellín, Colombia
-                </p>
+          <div className="timeline-time">
+            04:00
+            <span>PM</span>
+          </div>
 
-                <p className="event-time">
-                  6:00 PM
-                </p>
+          <div className="timeline-dot">
+            <span>✦</span>
+          </div>
 
-                <button className="text-button">
-                  VER UBICACIÓN →
-                </button>
+          <div className="timeline-content">
 
-              </div>
+            <p className="timeline-label">
+              CEREMONIA
+            </p>
 
-              <div className="event-card">
+            <h3>
+              Parroquia María Madre de Dios
+            </h3>
 
-                <span className="event-number">
-                  03
-                </span>
+            <p>
+              Comenzamos nuestro día más especial
+              rodeados de quienes más queremos.
+            </p>
 
-                <p className="event-label">
-                  DRESS CODE
-                </p>
+          </div>
 
-                <h3>
-                  Formal
-                </h3>
+        </div>
 
-                <p>
-                  Elegancia atemporal
-                </p>
 
-                <p className="event-time">
-                  —
-                </p>
+        {/* RECEPCIÓN */}
+        <div className="timeline-item">
 
-              </div>
+          <div className="timeline-time">
+            05:30
+            <span>PM</span>
+          </div>
 
-            </div>
+          <div className="timeline-dot">
+            <span>✦</span>
+          </div>
 
-          </section>
-        )}
+          <div className="timeline-content">
+
+            <p className="timeline-label">
+              RECEPCIÓN & FIESTA
+            </p>
+
+            <h3>
+              Centro de Eventos Villa Celeste
+            </h3>
+
+            <p>
+              Después de la ceremonia, nos encontramos
+              para brindar, celebrar y disfrutar juntos.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* VENUES */}
+    <section className="venues-section">
+
+      <div className="section-heading">
+
+        <p className="section-kicker">
+          UBICACIONES
+        </p>
+
+        <h2>
+          Dos lugares, un mismo día
+        </h2>
+
+      </div>
+
+      <div className="venue-grid">
+
+        {/* CEREMONIA */}
+        <article className="venue-card">
+
+          <div className="venue-number">
+            01
+          </div>
+
+          <div className="venue-icon">
+            ♧
+          </div>
+
+          <p className="venue-type">
+            CEREMONIA
+          </p>
+
+          <h3>
+            Parroquia María Madre de Dios
+          </h3>
+
+          <p className="venue-city">
+            Rionegro, Medellín
+          </p>
+
+          <a
+            href="https://maps.app.goo.gl/FHVkaW2yG1aKZSuQ8"
+            target="_blank"
+            rel="noreferrer"
+            className="map-button"
+          >
+            Ver ubicación
+            <span>→</span>
+          </a>
+
+        </article>
+
+
+        {/* RECEPCIÓN */}
+        <article className="venue-card featured">
+
+          <div className="venue-number">
+            02
+          </div>
+
+          <div className="venue-icon">
+            ♧
+          </div>
+
+          <p className="venue-type">
+            RECEPCIÓN & FIESTA
+          </p>
+
+          <h3>
+            Centro de Eventos Villa Celeste
+          </h3>
+
+          <p className="venue-city">
+            Rionegro, Medellín
+          </p>
+
+          <a
+            href="https://maps.app.goo.gl/KMGNEnh7BD2gjPHz9"
+            target="_blank"
+            rel="noreferrer"
+            className="map-button"
+          >
+            Ver ubicación
+            <span>→</span>
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    {/* DRESS CODE */}
+    <section className="dress-section">
+
+      <div className="dress-content">
+
+        <p className="section-kicker">
+          CÓDIGO DE VESTIMENTA
+        </p>
+
+        <h2>
+          Formal
+        </h2>
+
+        <div className="dress-line"></div>
+
+        <p>
+          Una noche especial merece vestir
+          para la ocasión.
+        </p>
+
+      </div>
+
+      <div className="dress-decoration">
+
+        <div className="dress-circle">
+          <span>FORMAL</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    {/* BOTTOM NOTE */}
+    <section className="wedding-footer">
+
+      <div className="small-heart">
+        ♡
+      </div>
+
+      <p>
+        Estamos felices de compartir este día
+        contigo.
+      </p>
+
+      <strong>
+        Luis & Melanie
+      </strong>
+
+    </section>
+
+  </section>
+)}
+        
 
         {/* ================================
             INFORMACIÓN
