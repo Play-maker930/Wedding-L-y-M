@@ -56,10 +56,8 @@ button:focus {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 82px;
-
   z-index: 100;
 
   display: grid;
@@ -294,7 +292,6 @@ button:focus {
 .page {
   width: 100%;
   min-height: calc(100vh - 82px);
-
   padding-top: 82px;
 }
 
@@ -331,10 +328,6 @@ button:focus {
   object-fit: cover;
   object-position: center;
 }
-
-/* =================================
-   HOME CONTENT
-================================= */
 
 .home-content {
   min-height: calc(100vh - 82px);
@@ -627,315 +620,488 @@ button:focus {
 ================================= */
 
 .wedding-page {
+  width: 100%;
+  min-height: calc(100vh - 82px);
+  padding-top: 0;
   padding-bottom: 100px;
+
+  background: var(--ivory);
+  color: var(--black);
 }
+
+/* =================================
+   WEDDING INTRO
+================================= */
 
 .wedding-intro {
-  max-width: 460px;
-
-  margin: 25px auto 0;
-
-  color: var(--gray);
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-/* =================================
-   WEDDING DATE BANNER
-================================= */
-
-.wedding-date-banner {
-  max-width: 760px;
-
-  margin: 0 auto 45px;
-
-  display: grid;
-  grid-template-columns: 1fr 1.3fr 1fr;
-  align-items: center;
-
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-
-  padding: 22px 0;
-}
-
-.wedding-date-side,
-.wedding-date-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  text-align: center;
-}
-
-.wedding-date-side {
-  gap: 5px;
-}
-
-.wedding-date-side span,
-.wedding-date-main span {
-  font-size: 7px;
-  letter-spacing: 3px;
-
-  color: var(--gray);
-}
-
-.wedding-date-side strong {
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 22px;
-  font-weight: 400;
-}
-
-.wedding-date-main {
-  padding: 0 25px;
-
-  border-left: 1px solid var(--line);
-  border-right: 1px solid var(--line);
-}
-
-.wedding-date-main strong {
-  margin-top: 2px;
-
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 27px;
-  font-weight: 400;
-}
-
-/* =================================
-   EVENT CARDS
-================================= */
-
-.event-grid {
-  max-width: 1100px;
-  margin: 0 auto;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.event-card {
-  position: relative;
-
-  min-height: 410px;
-
-  padding: 40px;
-
-  border-right: 1px solid var(--line);
-
-  text-align: center;
+  min-height: 650px;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  transition:
-    background 0.4s ease,
-    transform 0.4s ease;
-}
-
-.event-card:hover {
-  background: #eee8de;
-}
-
-.event-card.featured {
-  background: #eee8de;
-}
-
-.event-card.featured:hover {
-  background: #e8e0d4;
-}
-
-.event-card:last-child {
-  border-right: none;
-}
-
-.event-number {
-  font-size: 9px;
-
-  color: var(--champagne-dark);
-
-  letter-spacing: 2px;
-}
-
-.event-label {
-  margin-top: 27px;
-  margin-bottom: 0;
-
-  font-size: 9px;
-  letter-spacing: 3px;
-
-  color: var(--gray);
-}
-
-.event-icon {
-  margin-top: 20px;
-
-  width: 42px;
-  height: 42px;
-
-  display: flex;
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--champagne);
+  text-align: center;
 
-  border-radius: 50%;
+  padding: 100px 30px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: white;
+
+  position: relative;
+}
+
+.wedding-intro .section-kicker,
+.wedding-intro h1,
+.wedding-intro .decorative-line,
+.wedding-intro .intro-text,
+.wedding-intro .date-display,
+.wedding-intro .city {
+  position: relative;
+  z-index: 2;
+}
+
+.wedding-intro .section-kicker,
+.wedding-intro .city {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.wedding-intro h1 {
+  margin-top: 18px;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-size: clamp(65px, 9vw, 110px);
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+.decorative-line {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin: 35px 0;
+}
+
+.decorative-line span {
+  width: 55px;
+  height: 1px;
+
+  background: var(--champagne);
+}
+
+.decorative-line i {
+  color: var(--champagne);
+
+  font-size: 18px;
+  font-style: normal;
+}
+
+.intro-text {
+  max-width: 480px;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  line-height: 1.4;
+}
+
+.date-display {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 55px;
+}
+
+.date-display > span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 76px;
+  line-height: 0.7;
+  font-weight: 300;
+}
+
+.date-display div {
+  text-align: left;
+
+  border-left: 1px solid var(--champagne);
+
+  padding-left: 15px;
+}
+
+.date-display strong {
+  display: block;
+
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+
+.date-display small {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.city {
+  margin-top: 20px;
+
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+/* =================================
+   VENUES
+================================= */
+
+.venues-section {
+  padding: 120px 8vw;
+}
+
+.venue-grid {
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 25px;
+}
+
+.venue-card {
+  position: relative;
+
+  background: #ffffff;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 20px 50px rgba(28, 27, 25, 0.10);
+}
+
+.venue-card.featured {
+  background: var(--black);
+
+  color: #ffffff;
+}
+
+.venue-number {
+  position: absolute;
+
+  top: 25px;
+  right: 30px;
+
+  z-index: 3;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 16px;
 
   color: var(--champagne-dark);
 }
 
-.event-card h3 {
-  margin: 18px 0 5px;
+.venue-image {
+  width: 100%;
+  height: 280px;
+
+  overflow: hidden;
+
+  background: #ddd4c5;
+}
+
+.venue-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.6s ease;
+}
+
+.venue-card:hover .venue-image img {
+  transform: scale(1.04);
+}
+
+.venue-info {
+  padding: 45px;
+}
+
+.venue-type {
+  margin: 0 0 12px;
+
+  font-size: 9px;
+  letter-spacing: 3px;
+
+  color: var(--champagne-dark);
+
+  font-weight: 500;
+}
+
+.venue-card h3 {
+  max-width: 350px;
+
+  margin: 0;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 31px;
+
+  font-size: 36px;
   font-weight: 400;
 
   line-height: 1.05;
 }
 
-.event-place {
-  margin: 0;
+.venue-city {
+  margin-top: 12px;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+
+  color: inherit;
+
+  opacity: 0.7;
+}
+
+.venue-description {
+  max-width: 400px;
+
+  margin: 20px 0 0;
+
+  color: inherit;
+
+  opacity: 0.7;
+
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.venue-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-top: 25px;
+}
+
+.map-button {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 15px;
+
+  width: fit-content;
+
+  padding-bottom: 7px;
+
+  border-bottom: 1px solid var(--champagne-dark);
+
+  color: inherit;
 
   font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 
-  letter-spacing: 1px;
-
-  color: var(--gray);
-}
-
-.event-time {
-  margin: 20px 0 15px;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 27px;
-}
-
-.event-map-button {
   text-decoration: none;
-
-  margin-top: auto;
 }
 
-.event-map-button span {
-  font-size: 13px;
+.map-button span {
+  transition: transform 0.3s ease;
+}
+
+.map-button:hover span {
+  transform: translateX(6px);
+}
+
+/* =================================
+   CALENDAR BUTTON
+================================= */
+
+.calendar-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 20px;
+  padding: 10px 0;
+
+  border: none;
+  border-bottom: 1px solid var(--champagne-dark);
+
+  background: transparent;
+
+  cursor: pointer;
+
+  color: inherit;
+
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  transition:
+    letter-spacing 0.3s ease,
+    color 0.3s ease;
+}
+
+.calendar-button span {
+  font-size: 15px;
+  line-height: 1;
+
+  color: var(--champagne-dark);
+}
+
+.calendar-button:hover {
+  letter-spacing: 2.5px;
+  color: var(--champagne-dark);
 }
 
 /* =================================
    DRESS CODE
 ================================= */
 
-.dress-code-line {
-  width: 45px;
-  height: 1px;
+.dress-section {
+  min-height: 500px;
 
-  margin: 20px 0 16px;
-
-  background: var(--champagne-dark);
-}
-
-.dress-code-note {
-  margin: 0;
-
-  color: var(--gray);
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
-  line-height: 1.35;
-}
-
-/* =================================
-   WEDDING TIMELINE
-================================= */
-
-.wedding-timeline {
-  max-width: 760px;
-
-  margin: 55px auto 0;
-
-  position: relative;
-}
-
-.timeline-line {
-  position: absolute;
-
-  top: 22px;
-  bottom: 22px;
-
-  left: 116px;
-
-  width: 1px;
-
-  background: var(--line);
-}
-
-.timeline-item {
-  position: relative;
-
-  min-height: 90px;
+  background: #eee8de;
 
   display: grid;
-  grid-template-columns: 90px 52px 1fr;
+
+  grid-template-columns: 1fr 1fr;
 
   align-items: center;
+
+  padding: 80px 12vw;
 }
 
-.timeline-time {
-  text-align: right;
+.dress-content {
+  text-align: center;
+}
 
-  padding-right: 20px;
+.dress-content h2 {
+  margin: 25px 0;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+
+  font-size: clamp(70px, 8vw, 110px);
+
+  font-weight: 300;
+
+  line-height: 0.9;
 }
 
-.timeline-dot {
-  position: relative;
-  z-index: 2;
+.dress-line {
+  width: 60px;
+  height: 1px;
 
-  width: 9px;
-  height: 9px;
+  background: var(--champagne-dark);
 
-  margin: 0 auto;
+  margin: 0 auto 25px;
+}
+
+.dress-content > p:last-child {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 20px;
+
+  color: var(--gray);
+}
+
+.dress-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dress-circle {
+  width: 230px;
+  height: 230px;
 
   border: 1px solid var(--champagne-dark);
 
   border-radius: 50%;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.dress-circle::before {
+  content: '';
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  border: 1px solid rgba(185, 164, 134, 0.4);
+
+  border-radius: 50%;
+}
+
+.dress-circle span {
+  font-size: 10px;
+  letter-spacing: 5px;
+
+  color: var(--black);
+}
+
+/* =================================
+   WEDDING FOOTER
+================================= */
+
+.wedding-footer {
+  text-align: center;
+
+  padding: 100px 30px;
+
   background: var(--ivory);
 }
 
-.timeline-item > div:last-child {
-  display: flex;
-  flex-direction: column;
+.small-heart {
+  color: var(--champagne-dark);
 
-  padding-left: 20px;
+  font-size: 28px;
+
+  margin-bottom: 20px;
 }
 
-.timeline-item strong {
+.wedding-footer p {
   font-family: 'Cormorant Garamond', serif;
 
-  font-size: 22px;
-  font-weight: 400;
-}
-
-.timeline-item span:not(.timeline-time) {
-  margin-top: 3px;
+  font-size: 24px;
 
   color: var(--gray);
+}
 
-  font-size: 8px;
-  letter-spacing: 1px;
+.wedding-footer strong {
+  display: block;
+
+  margin-top: 20px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 30px;
+
+  font-weight: 400;
 }
 
 /* =================================
@@ -1004,6 +1170,576 @@ button:focus {
 
   font-size: 9px;
   letter-spacing: 1px;
+}
+
+/* =================================
+   HOSPEDAJE
+================================= */
+
+.accommodation-page {
+  width: 100%;
+
+  background: var(--ivory);
+}
+
+/* HERO */
+
+.accommodation-hero {
+  position: relative;
+
+  min-height: 500px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background-image: url('https://movich-las-lomas-hotel-medellin.hotel-dir.com/data/Imgs/700x500w/12780/1278031/1278031309/movich-hotel-las-lomas-rionegro-img-2.JPEG');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: white;
+}
+
+.accommodation-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      rgba(28, 27, 25, 0.40),
+      rgba(28, 27, 25, 0.50)
+    );
+}
+
+.accommodation-hero-content {
+  position: relative;
+  z-index: 2;
+
+  padding: 40px 25px;
+}
+
+.accommodation-hero-content p {
+  margin: 0 0 20px;
+
+  font-size: 9px;
+  letter-spacing: 5px;
+}
+
+.accommodation-hero-content h1 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(70px, 10vw, 125px);
+
+  font-weight: 300;
+
+  line-height: 0.8;
+}
+
+.accommodation-hero-content span {
+  display: block;
+
+  margin-top: 30px;
+
+  font-size: 9px;
+  letter-spacing: 4px;
+}
+
+/* CONTENT */
+
+.accommodation-content {
+  width: 100%;
+}
+
+/* INTRO */
+
+.accommodation-intro {
+  max-width: 750px;
+
+  margin: 0 auto;
+
+  padding: 110px 30px 80px;
+
+  text-align: center;
+}
+
+.accommodation-intro h2 {
+  margin: 18px 0 30px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(55px, 7vw, 90px);
+
+  font-weight: 300;
+
+  line-height: 0.9;
+}
+
+.accommodation-intro h2 em {
+  font-style: italic;
+}
+
+.accommodation-intro > p:not(.section-kicker) {
+  color: var(--gray);
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 20px;
+
+  line-height: 1.5;
+}
+
+.accommodation-intro strong {
+  color: var(--black);
+}
+
+/* HIGHLIGHTS */
+
+.accommodation-highlight-grid {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1px;
+
+  background: var(--line);
+}
+
+.accommodation-highlight {
+  min-height: 260px;
+
+  padding: 50px;
+
+  background: white;
+}
+
+.accommodation-highlight span {
+  display: block;
+
+  margin-bottom: 20px;
+
+  font-size: 8px;
+  letter-spacing: 3px;
+
+  color: var(--champagne-dark);
+}
+
+.accommodation-highlight strong {
+  display: block;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 48px;
+
+  font-weight: 400;
+}
+
+.accommodation-highlight p {
+  max-width: 420px;
+
+  margin: 15px 0 0;
+
+  color: var(--gray);
+
+  font-size: 11px;
+
+  line-height: 1.8;
+}
+
+.code-highlight {
+  background: var(--black);
+
+  color: white;
+}
+
+.code-highlight p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.code-highlight strong {
+  color: var(--champagne);
+}
+
+/* DETAILS */
+
+.accommodation-details {
+  max-width: 1000px;
+
+  margin: 70px auto 110px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.accommodation-detail {
+  padding: 45px 35px;
+
+  text-align: center;
+
+  border-right: 1px solid var(--line);
+}
+
+.accommodation-detail:last-child {
+  border-right: none;
+}
+
+.accommodation-detail span {
+  display: block;
+
+  margin-bottom: 20px;
+
+  font-size: 8px;
+
+  letter-spacing: 3px;
+
+  color: var(--champagne-dark);
+}
+
+.accommodation-detail strong {
+  display: block;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 31px;
+
+  font-weight: 400;
+}
+
+.accommodation-detail p {
+  margin: 10px 0 0;
+
+  color: var(--gray);
+
+  font-size: 10px;
+
+  line-height: 1.6;
+}
+
+/* ROOM SECTION */
+
+.accommodation-section {
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  padding: 0 30px 120px;
+}
+
+.accommodation-section > h2 {
+  margin: 15px 0 50px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(42px, 5vw, 60px);
+
+  font-weight: 400;
+}
+
+.room-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.room-card {
+  min-height: 330px;
+
+  padding: 40px 30px;
+
+  background: white;
+
+  border: 1px solid rgba(28, 27, 25, 0.08);
+}
+
+.room-card > span {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 18px;
+
+  color: var(--champagne-dark);
+}
+
+.room-card h3 {
+  margin: 30px 0 15px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 32px;
+
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+.room-card p {
+  color: var(--gray);
+
+  font-size: 11px;
+
+  line-height: 1.8;
+}
+
+.room-card p strong {
+  color: var(--black);
+}
+
+.room-price {
+  display: block;
+
+  margin-top: 25px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 20px;
+
+  font-weight: 500;
+
+  color: var(--black);
+}
+
+.room-card small {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+
+  color: var(--gray);
+}
+
+/* AIRPORT */
+
+.airport-transfer {
+  max-width: 1000px;
+
+  margin: 0 auto 120px;
+
+  padding: 60px;
+
+  display: grid;
+
+  grid-template-columns: 90px 1fr;
+
+  gap: 35px;
+
+  align-items: center;
+
+  background: #eee8de;
+}
+
+.airport-icon {
+  width: 70px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--champagne-dark);
+
+  border-radius: 50%;
+
+  color: var(--champagne-dark);
+
+  font-size: 20px;
+}
+
+.airport-transfer h2 {
+  margin: 12px 0;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 45px;
+
+  font-weight: 400;
+}
+
+.airport-transfer p {
+  margin: 8px 0;
+
+  color: var(--gray);
+
+  font-size: 11px;
+
+  line-height: 1.7;
+}
+
+.airport-transfer strong {
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 22px;
+
+  font-weight: 500;
+}
+
+/* RESERVATION */
+
+.reservation-section {
+  padding: 110px 30px;
+
+  text-align: center;
+
+  background: white;
+}
+
+.reservation-section h2 {
+  margin: 15px 0 20px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: clamp(50px, 6vw, 80px);
+
+  font-weight: 300;
+}
+
+.reservation-section > p:not(.section-kicker) {
+  color: var(--gray);
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 20px;
+}
+
+.reservation-section > p strong {
+  color: var(--black);
+}
+
+.reservation-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-top: 35px;
+}
+
+.reservation-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  min-width: 190px;
+
+  padding: 17px 25px;
+
+  text-decoration: none;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  transition: all 0.3s ease;
+}
+
+.reservation-button.primary {
+  background: var(--black);
+
+  color: white;
+}
+
+.reservation-button.secondary {
+  border: 1px solid var(--black);
+
+  color: var(--black);
+}
+
+.reservation-button:hover {
+  transform: translateY(-3px);
+}
+
+.reservation-contact {
+  max-width: 600px;
+
+  margin: 55px auto 0;
+
+  padding-top: 30px;
+
+  border-top: 1px solid var(--line);
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 60px;
+}
+
+.reservation-contact div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.reservation-contact span {
+  font-size: 7px;
+
+  letter-spacing: 2px;
+
+  color: var(--champagne-dark);
+}
+
+.reservation-contact strong {
+  font-size: 10px;
+
+  font-weight: 400;
+}
+
+/* ACCOMMODATION FOOTER */
+
+.accommodation-footer {
+  padding: 100px 30px;
+
+  text-align: center;
+
+  background: var(--ivory);
+}
+
+.accommodation-footer p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 25px;
+
+  line-height: 1.4;
+
+  color: var(--gray);
+}
+
+.accommodation-footer strong {
+  display: block;
+
+  margin-top: 25px;
+
+  font-family: 'Cormorant Garamond', serif;
+
+  font-size: 25px;
+
+  font-weight: 400;
 }
 
 /* =================================
@@ -1263,7 +1999,7 @@ button:focus {
     width: 12px;
   }
 
-  /* COUNTDOWN MOBILE */
+  /* COUNTDOWN */
 
   .countdown {
     margin-top: 25px;
@@ -1368,109 +2104,104 @@ button:focus {
   /* WEDDING */
 
   .wedding-page {
+    min-height: calc(100vh - 68px);
+
+    padding-top: 0;
     padding-bottom: 80px;
   }
 
   .wedding-intro {
-    margin-top: 20px;
+    min-height: 570px;
 
-    font-size: 16px;
-    line-height: 1.5;
+    padding: 80px 25px;
   }
 
-  .wedding-date-banner {
-    width: 100%;
-
-    margin-bottom: 35px;
-
-    grid-template-columns: 1fr 1.15fr 1fr;
-
-    padding: 18px 0;
+  .wedding-intro h1 {
+    font-size: 70px;
   }
 
-  .wedding-date-side span,
-  .wedding-date-main span {
-    font-size: 6px;
-    letter-spacing: 2px;
-  }
+  .intro-text {
+    max-width: 340px;
 
-  .wedding-date-side strong {
-    font-size: 19px;
-  }
-
-  .wedding-date-main strong {
-    font-size: 23px;
-  }
-
-  .event-grid {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-  }
-
-  .event-card {
-    width: 100%;
-    min-height: 340px;
-
-    padding: 35px 25px;
-
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .event-card:last-child {
-    border-bottom: none;
-  }
-
-  .event-card h3 {
-    font-size: 36px;
-  }
-
-  .event-label {
-    margin-top: 25px;
-  }
-
-  .event-icon {
-    margin-top: 18px;
-  }
-
-  .event-time {
-    margin: 18px 0 15px;
-  }
-
-  .wedding-timeline {
-    width: 100%;
-
-    margin-top: 45px;
-  }
-
-  .timeline-line {
-    left: 86px;
-  }
-
-  .timeline-item {
-    grid-template-columns: 65px 42px 1fr;
-    min-height: 85px;
-  }
-
-  .timeline-time {
-    padding-right: 12px;
-
-    font-size: 18px;
-  }
-
-  .timeline-item > div:last-child {
-    padding-left: 15px;
-  }
-
-  .timeline-item strong {
     font-size: 20px;
   }
 
-  .timeline-item span:not(.timeline-time) {
+  .date-display {
+    margin-top: 45px;
+  }
+
+  .date-display > span {
+    font-size: 65px;
+  }
+
+  .venues-section {
+    padding: 85px 20px;
+  }
+
+  .venue-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .venue-card {
+    min-height: 0;
+
+    padding: 0;
+  }
+
+  .venue-image {
+    height: 260px;
+  }
+
+  .venue-info {
+    padding: 40px 30px 45px;
+  }
+
+  .venue-card h3 {
+    font-size: 34px;
+  }
+
+  .venue-description {
+    font-size: 11px;
+  }
+
+  .venue-actions {
+    margin-top: 25px;
+  }
+
+  .calendar-button {
     font-size: 7px;
-    line-height: 1.4;
+  }
+
+  .dress-section {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+
+    padding: 90px 25px;
+  }
+
+  .dress-content h2 {
+    font-size: 80px;
+  }
+
+  .dress-circle {
+    width: 190px;
+    height: 190px;
+  }
+
+  .dress-circle::before {
+    width: 155px;
+    height: 155px;
+  }
+
+  .wedding-footer {
+    padding: 80px 25px;
+  }
+
+  .wedding-footer p {
+    font-size: 21px;
   }
 
   /* INFORMATION */
@@ -1494,6 +2225,127 @@ button:focus {
 
   .info-grid strong {
     font-size: 31px;
+  }
+
+  /* HOSPEDAJE */
+
+  .accommodation-hero {
+    min-height: 430px;
+  }
+
+  .accommodation-hero-content h1 {
+    font-size: 78px;
+  }
+
+  .accommodation-intro {
+    padding: 80px 25px 60px;
+  }
+
+  .accommodation-intro h2 {
+    font-size: 62px;
+  }
+
+  .accommodation-intro > p:not(.section-kicker) {
+    font-size: 19px;
+  }
+
+  .accommodation-highlight-grid {
+    width: 100%;
+
+    grid-template-columns: 1fr;
+  }
+
+  .accommodation-highlight {
+    min-height: 230px;
+
+    padding: 40px 25px;
+  }
+
+  .accommodation-highlight strong {
+    font-size: 43px;
+  }
+
+  .accommodation-details {
+    margin: 55px 20px 80px;
+
+    grid-template-columns: 1fr;
+  }
+
+  .accommodation-detail {
+    border-right: none;
+
+    border-bottom: 1px solid var(--line);
+  }
+
+  .accommodation-detail:last-child {
+    border-bottom: none;
+  }
+
+  .accommodation-section {
+    padding: 0 20px 80px;
+  }
+
+  .accommodation-section > h2 {
+    font-size: 45px;
+
+    margin-bottom: 35px;
+  }
+
+  .room-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .room-card {
+    min-height: auto;
+
+    padding: 35px 25px;
+  }
+
+  .airport-transfer {
+    margin: 0 20px 80px;
+
+    padding: 40px 25px;
+
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+
+  .airport-transfer h2 {
+    font-size: 40px;
+  }
+
+  .reservation-section {
+    padding: 80px 20px;
+  }
+
+  .reservation-section h2 {
+    font-size: 58px;
+  }
+
+  .reservation-buttons {
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+  .reservation-button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .reservation-contact {
+    flex-direction: column;
+
+    gap: 25px;
+  }
+
+  .accommodation-footer {
+    padding: 80px 25px;
+  }
+
+  .accommodation-footer p {
+    font-size: 21px;
   }
 
   /* GALLERY */
@@ -1646,781 +2498,83 @@ button:focus {
     font-size: 15px;
   }
 
-  .wedding-date-banner {
-    grid-template-columns: 1fr 1fr 1fr;
-
-    padding: 16px 0;
-  }
-
-  .wedding-date-side strong {
-    font-size: 17px;
-  }
-
-  .wedding-date-main strong {
-    font-size: 21px;
-  }
-
-  .wedding-date-main {
-    padding: 0 12px;
-  }
-
-  .event-card {
-    min-height: 330px;
-
-    padding: 32px 20px;
-  }
-
-  .event-card h3 {
-    font-size: 33px;
-  }
-
-  .timeline-line {
-    left: 72px;
-  }
-
-  .timeline-item {
-    grid-template-columns: 55px 35px 1fr;
-  }
-
-  .timeline-time {
-    font-size: 16px;
-    padding-right: 8px;
-  }
-
-  .timeline-item > div:last-child {
-    padding-left: 10px;
-  }
-
-  .timeline-item strong {
-    font-size: 18px;
-  }
-
-  .timeline-item span:not(.timeline-time) {
-    font-size: 6px;
-  }
-}
-/* ==========================================
-   LA BODA — NUEVO DISEÑO
-========================================== */
-
-.wedding-page {
-  width: 100%;
-  min-height: calc(100vh - 82px);
-  padding-top: 0;
-  background: var(--ivory);
-  color: var(--black);
-}
-
-
-/* =========================
-   WEDDING INTRO
-========================= */
-
-.wedding-intro {
-  min-height: 650px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  padding: 100px 30px;
-}
-
-.section-kicker {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--gray);
-}
-
-.wedding-intro h1 {
-  margin-top: 18px;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(65px, 9vw, 110px);
-  font-weight: 300;
-  line-height: 0.9;
-}
-
-.decorative-line {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-
-  margin: 35px 0;
-}
-
-.decorative-line span {
-  width: 55px;
-  height: 1px;
-
-  background: var(--champagne-dark);
-}
-
-.decorative-line i {
-  color: var(--champagne-dark);
-
-  font-size: 18px;
-  font-style: normal;
-}
-
-.intro-text {
-  max-width: 480px;
-
-  color: var(--gray);
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 23px;
-  line-height: 1.4;
-}
-
-.date-display {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-
-  margin-top: 55px;
-}
-
-.date-display > span {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 76px;
-  line-height: 0.7;
-  font-weight: 300;
-}
-
-.date-display div {
-  text-align: left;
-
-  border-left: 1px solid var(--champagne-dark);
-
-  padding-left: 15px;
-}
-
-.date-display strong {
-  display: block;
-
-  font-size: 12px;
-  letter-spacing: 3px;
-  font-weight: 500;
-}
-
-.date-display small {
-  display: block;
-
-  margin-top: 4px;
-
-  font-size: 10px;
-  letter-spacing: 2px;
-}
-
-.city {
-  margin-top: 20px;
-
-  font-size: 10px;
-  letter-spacing: 3px;
-
-  color: var(--gray);
-}
-
-
-/* =========================
-   TIMELINE
-========================= */
-
-.timeline-section {
-  background: #ffffff;
-
-  padding: 110px 8vw;
-}
-
-.section-heading {
-  text-align: center;
-
-  margin-bottom: 80px;
-}
-
-.section-heading h2 {
-  margin-top: 12px;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(38px, 5vw, 58px);
-  font-weight: 400;
-  line-height: 1.05;
-}
-
-.timeline {
-  max-width: 950px;
-
-  margin: 0 auto;
-
-  position: relative;
-}
-
-.timeline::before {
-  content: '';
-
-  position: absolute;
-
-  left: 50%;
-  top: 20px;
-  bottom: 20px;
-
-  width: 1px;
-
-  background: var(--champagne-dark);
-
-  transform: translateX(-50%);
-}
-
-.timeline-item {
-  display: grid;
-
-  grid-template-columns: 1fr 80px 1fr;
-
-  align-items: center;
-
-  min-height: 260px;
-}
-
-.timeline-item:nth-child(odd) .timeline-time {
-  text-align: right;
-
-  padding-right: 55px;
-}
-
-.timeline-item:nth-child(even) .timeline-time {
-  grid-column: 3;
-  grid-row: 1;
-
-  text-align: left;
-
-  padding-left: 55px;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-  grid-column: 1;
-  grid-row: 1;
-
-  text-align: right;
-}
-
-.timeline-dot {
-  grid-column: 2;
-  grid-row: 1;
-
-  width: 54px;
-  height: 54px;
-
-  border: 1px solid var(--champagne-dark);
-
-  background: #ffffff;
-
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: auto;
-
-  z-index: 2;
-
-  color: var(--champagne-dark);
-
-  font-size: 13px;
-}
-
-.timeline-time {
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 50px;
-
-  color: var(--black);
-}
-
-.timeline-time span {
-  font-family: 'Montserrat', sans-serif;
-
-  font-size: 10px;
-  letter-spacing: 2px;
-
-  margin-left: 5px;
-
-  color: var(--gray);
-}
-
-.timeline-content {
-  padding-left: 55px;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-  padding-left: 0;
-  padding-right: 55px;
-}
-
-.timeline-label {
-  margin-bottom: 10px;
-
-  font-size: 9px;
-  letter-spacing: 3px;
-
-  color: var(--champagne-dark);
-
-  font-weight: 500;
-}
-
-.timeline-content h3 {
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 30px;
-  font-weight: 500;
-
-  line-height: 1.1;
-}
-
-.timeline-content p:last-child {
-  max-width: 320px;
-
-  margin-top: 12px;
-
-  color: var(--gray);
-
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-
-/* =========================
-   VENUES
-========================= */
-
-.venues-section {
-  padding: 120px 8vw;
-}
-
-.venue-grid {
-  max-width: 1050px;
-
-  margin: 0 auto;
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 25px;
-}
-
-.venue-card {
-  position: relative;
-
-  background: #ffffff;
-
-  padding: 55px 45px;
-
-  min-height: 400px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  overflow: hidden;
-
-  transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-.venue-card:hover {
-  transform: translateY(-8px);
-
-  box-shadow:
-    0 20px 50px rgba(28, 27, 25, 0.10);
-}
-
-.venue-card.featured {
-  background: var(--black);
-
-  color: #ffffff;
-}
-
-.venue-number {
-  position: absolute;
-
-  top: 25px;
-  right: 30px;
-
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 16px;
-
-  color: var(--champagne-dark);
-}
-
-.venue-icon {
-  font-size: 30px;
-
-  color: var(--champagne-dark);
-
-  margin-bottom: 25px;
-}
-
-.venue-type {
-  margin-bottom: 12px;
-
-  font-size: 9px;
-  letter-spacing: 3px;
-
-  color: var(--champagne-dark);
-
-  font-weight: 500;
-}
-
-.venue-card h3 {
-  max-width: 350px;
-
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 36px;
-  font-weight: 400;
-
-  line-height: 1.05;
-}
-
-.venue-city {
-  margin-top: 12px;
-
-  font-size: 10px;
-  letter-spacing: 2px;
-
-  color: inherit;
-
-  opacity: 0.7;
-}
-
-.map-button {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 15px;
-
-  width: fit-content;
-
-  margin-top: 35px;
-
-  padding-bottom: 7px;
-
-  border-bottom: 1px solid var(--champagne-dark);
-
-  color: inherit;
-
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-
-  text-decoration: none;
-}
-
-.map-button span {
-  transition: transform 0.3s ease;
-}
-
-.map-button:hover span {
-  transform: translateX(6px);
-}
-
-
-/* =========================
-   DRESS CODE
-========================= */
-
-.dress-section {
-  min-height: 500px;
-
-  background: #eee8de;
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  align-items: center;
-
-  padding: 80px 12vw;
-}
-
-.dress-content {
-  text-align: center;
-}
-
-.dress-content h2 {
-  margin: 25px 0;
-
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: clamp(70px, 8vw, 110px);
-
-  font-weight: 300;
-
-  line-height: 0.9;
-}
-
-.dress-line {
-  width: 60px;
-  height: 1px;
-
-  background: var(--champagne-dark);
-
-  margin: 0 auto 25px;
-}
-
-.dress-content > p:last-child {
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 20px;
-
-  color: var(--gray);
-}
-
-.dress-decoration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dress-circle {
-  width: 230px;
-  height: 230px;
-
-  border: 1px solid var(--champagne-dark);
-
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
-}
-
-.dress-circle::before {
-  content: '';
-
-  position: absolute;
-
-  width: 190px;
-  height: 190px;
-
-  border: 1px solid rgba(185, 164, 134, 0.4);
-
-  border-radius: 50%;
-}
-
-.dress-circle span {
-  font-size: 10px;
-  letter-spacing: 5px;
-
-  color: var(--black);
-}
-
-
-/* =========================
-   WEDDING FOOTER
-========================= */
-
-.wedding-footer {
-  text-align: center;
-
-  padding: 100px 30px;
-
-  background: var(--ivory);
-}
-
-.small-heart {
-  color: var(--champagne-dark);
-
-  font-size: 28px;
-
-  margin-bottom: 20px;
-}
-
-.wedding-footer p {
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 24px;
-
-  color: var(--gray);
-}
-
-.wedding-footer strong {
-  display: block;
-
-  margin-top: 20px;
-
-  font-family: 'Cormorant Garamond', serif;
-
-  font-size: 30px;
-
-  font-weight: 400;
-}
-
-
-/* ==========================================
-   LA BODA — MOBILE
-========================================== */
-
-@media (max-width: 850px) {
-
-  .wedding-page {
-    min-height: calc(100vh - 68px);
-
-    padding-top: 0;
-  }
-
-  .wedding-intro {
-    min-height: 570px;
-
-    padding: 80px 25px;
-  }
-
   .wedding-intro h1 {
-    font-size: 70px;
-  }
-
-  .intro-text {
-    max-width: 340px;
-
-    font-size: 20px;
-  }
-
-  .date-display {
-    margin-top: 45px;
-  }
-
-  .date-display > span {
     font-size: 65px;
   }
 
-  .timeline-section {
-    padding: 85px 25px;
+  .date-display > span {
+    font-size: 60px;
   }
 
-  .section-heading {
-    margin-bottom: 55px;
+  .venue-image {
+    height: 220px;
   }
 
-  .section-heading h2 {
-    font-size: 42px;
-
-    line-height: 1;
-  }
-
-  .timeline::before {
-    left: 23px;
-  }
-
-  .timeline-item,
-  .timeline-item:nth-child(even) {
-    display: grid;
-
-    grid-template-columns: 46px 1fr;
-
-    min-height: auto;
-
-    margin-bottom: 65px;
-  }
-
-  .timeline-dot,
-  .timeline-item:nth-child(even) .timeline-dot {
-    grid-column: 1;
-    grid-row: 1;
-
-    width: 46px;
-    height: 46px;
-  }
-
-  .timeline-time,
-  .timeline-item:nth-child(even) .timeline-time {
-    grid-column: 2;
-    grid-row: 1;
-
-    text-align: left;
-
-    padding: 0 0 0 25px;
-
-    font-size: 42px;
-
-    align-self: center;
-  }
-
-  .timeline-content,
-  .timeline-item:nth-child(even) .timeline-content {
-    grid-column: 2;
-    grid-row: 2;
-
-    text-align: left;
-
-    padding: 20px 0 0 25px;
-  }
-
-  .timeline-content h3 {
-    font-size: 28px;
-  }
-
-  .timeline-content p:last-child {
-    max-width: 100%;
-  }
-
-  .venues-section {
-    padding: 85px 20px;
-  }
-
-  .venue-grid {
-    grid-template-columns: 1fr;
-
-    gap: 18px;
-  }
-
-  .venue-card {
-    min-height: 350px;
-
-    padding: 45px 30px;
+  .venue-info {
+    padding: 35px 22px 40px;
   }
 
   .venue-card h3 {
-    font-size: 34px;
+    font-size: 33px;
   }
 
-  .dress-section {
-    grid-template-columns: 1fr;
+  .calendar-button {
+    max-width: 100%;
 
-    gap: 60px;
+    font-size: 6.5px;
 
-    padding: 90px 25px;
+    letter-spacing: 1.5px;
   }
 
-  .dress-content h2 {
-    font-size: 80px;
+  .calendar-button span {
+    font-size: 14px;
   }
 
-  .dress-circle {
-    width: 190px;
-    height: 190px;
+  /* HOSPEDAJE SMALL PHONE */
+
+  .accommodation-hero {
+    min-height: 390px;
   }
 
-  .dress-circle::before {
-    width: 155px;
-    height: 155px;
+  .accommodation-hero-content {
+    padding: 30px 20px;
   }
 
-  .wedding-footer {
-    padding: 80px 25px;
+  .accommodation-hero-content h1 {
+    font-size: 68px;
   }
 
-  .wedding-footer p {
-    font-size: 21px;
+  .accommodation-hero-content p {
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+
+  .accommodation-hero-content span {
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+
+  .accommodation-intro h2 {
+    font-size: 57px;
+  }
+
+  .accommodation-highlight strong {
+    font-size: 40px;
+  }
+
+  .accommodation-detail strong {
+    font-size: 29px;
+  }
+
+  .room-card h3 {
+    font-size: 30px;
+  }
+
+  .airport-transfer h2 {
+    font-size: 37px;
+  }
+
+  .reservation-section h2 {
+    font-size: 52px;
   }
 }
