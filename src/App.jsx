@@ -722,7 +722,9 @@ function App() {
                 </p>
 
                 <h2>
-                  Dos lugares, un mismo día
+                Un sí para siempre.
+                <br />
+                <em>Dos escenarios inolvidables.</em>
                 </h2>
 
               </div>
@@ -808,10 +810,10 @@ function App() {
                   </div>
 
                   <div className="venue-image">
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHgcGg0oCZDRcWWvYaJEY59gndKn1bruOiqw2EpQArkAJJr95Ke3Uu6P1X&s=10"
-                      alt="Centro de Eventos Villa Celeste"
-                    />
+                  <img
+  src="https://images.pixieset.com/47662229/51c69cd63d50919fcd4655c2833839fd-xxlarge.jpg"
+  alt="Centro de Eventos Villa Celeste"
+/>
                   </div>
 
                   <div className="venue-info">
