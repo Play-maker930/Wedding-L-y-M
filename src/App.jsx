@@ -173,6 +173,37 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
         <path d="M9 3c0 2 1.3 3 3 3s3-1 3-3M9 11h6" />
       </>
     ),
+    sun: (
+      <>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+      </>
+    ),
+    umbrella: (
+      <>
+        <path d="M3 12a9 9 0 0 1 18 0H3Z" />
+        <path d="M12 12v7a2 2 0 0 0 4 0" />
+      </>
+    ),
+    mountain: (
+      <>
+        <path d="m3 20 6-10 4 6 2-3 6 7Z" />
+        <path d="m7.5 12.5 1.5 1.5 1.5-1.5" />
+      </>
+    ),
+    camera: (
+      <>
+        <rect x="3" y="6" width="18" height="13" rx="2" />
+        <path d="m8 6 1.5-2h5L16 6" />
+        <circle cx="12" cy="12.5" r="3.2" />
+      </>
+    ),
+    wallet: (
+      <>
+        <path d="M4 5h14a2 2 0 0 1 2 2v12H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" />
+        <path d="M16 11h6v5h-6a2.5 2.5 0 0 1 0-5Z" />
+      </>
+    ),
   }
 
   const scrollDressInspiration = (direction) => {
@@ -1197,7 +1228,10 @@ function App() {
                 <span className="info-arrow">→</span>
               </button>
 
-              <button className="info-card">
+              <button
+                className="info-card"
+                onClick={() => navigate('medellin')}
+              >
                 <span className="info-number">04</span>
 
                 <span className="info-icon">
@@ -2010,6 +2044,410 @@ function App() {
                 BUSCAR VUELOS
                 <span>↗</span>
               </a>
+
+            </section>
+
+          </section>
+        )}
+
+        {/* ================================
+            MEDELLÍN
+        ================================= */}
+
+        {activePage === 'medellin' && (
+          <section className="medellin-page page-transition">
+
+            <button
+              type="button"
+              className="subpage-back-button"
+              onClick={() => navigate('informacion')}
+            >
+              <LineIcon name="arrowLeft" size={18} />
+              VOLVER A INFORMACIÓN
+            </button>
+
+            <section className="medellin-hero">
+
+              <div className="medellin-hero-overlay"></div>
+
+              <div className="medellin-hero-content">
+                <p className="section-kicker">
+                  DESCUBRE ANTIOQUIA
+                </p>
+
+                <h1>
+                  Medellín
+                  <em> y Rionegro</em>
+                </h1>
+
+                <p>
+                  Una ciudad vibrante, rodeada de montañas,
+                  naturaleza, cultura y una gastronomía que
+                  vale la pena descubrir.
+                </p>
+              </div>
+
+            </section>
+
+            <section className="medellin-difference">
+
+              <div className="medellin-difference-heading">
+                <p className="section-kicker">
+                  ANTES DE VIAJAR
+                </p>
+
+                <h2>
+                  Dos destinos,
+                  <em> una misma experiencia</em>
+                </h2>
+              </div>
+
+              <div className="medellin-difference-grid">
+
+                <article>
+                  <div className="medellin-place-icon">
+                    <LineIcon name="map" size={30} />
+                  </div>
+
+                  <span>01</span>
+
+                  <h3>Medellín</h3>
+
+                  <p>
+                    Es la ciudad principal: allí encontrarás
+                    museos, restaurantes, cafés, vida urbana y
+                    algunos de los atractivos turísticos más
+                    reconocidos de la región.
+                  </p>
+
+                  <small>
+                    Ideal para visitar antes o después de la boda.
+                  </small>
+                </article>
+
+                <article className="featured">
+                  <div className="medellin-place-icon">
+                    <LineIcon name="mountain" size={30} />
+                  </div>
+
+                  <span>02</span>
+
+                  <h3>Rionegro</h3>
+
+                  <p>
+                    Es un municipio distinto, ubicado en el
+                    Oriente antioqueño. Aquí se encuentran el
+                    aeropuerto MDE, el hotel sede, la iglesia
+                    y Villa Celeste.
+                  </p>
+
+                  <small>
+                    Es la zona recomendada para hospedarse.
+                  </small>
+                </article>
+
+              </div>
+
+              <div className="medellin-important-note">
+                <div>
+                  <LineIcon name="warning" size={26} />
+                </div>
+
+                <p>
+                  <strong>Para el fin de semana de la boda,</strong>
+                  recomendamos hospedarse en Rionegro. Así estarán
+                  cerca del aeropuerto, el hotel sede y los lugares
+                  de la celebración.
+                </p>
+              </div>
+
+            </section>
+
+            <section className="medellin-weather">
+
+              <div className="medellin-weather-heading">
+                <p className="section-kicker">
+                  CLIMA Y MALETA
+                </p>
+
+                <h2>
+                  La eterna primavera
+                </h2>
+
+                <p>
+                  Medellín suele tener temperaturas agradables
+                  durante el día. Rionegro puede sentirse más
+                  fresco, especialmente en la noche.
+                </p>
+              </div>
+
+              <div className="medellin-weather-grid">
+
+                <article>
+                  <LineIcon name="sun" size={30} />
+                  <h3>Clima templado</h3>
+                  <p>
+                    En Medellín las temperaturas suelen estar
+                    aproximadamente entre 16 °C y 26 °C.
+                  </p>
+                </article>
+
+                <article>
+                  <LineIcon name="coat" size={30} />
+                  <h3>Noches frescas</h3>
+                  <p>
+                    Lleva un abrigo ligero para las noches
+                    en Rionegro.
+                  </p>
+                </article>
+
+                <article>
+                  <LineIcon name="umbrella" size={30} />
+                  <h3>Lluvia ocasional</h3>
+                  <p>
+                    Un paraguas pequeño puede ser útil porque
+                    el clima puede cambiar durante el día.
+                  </p>
+                </article>
+
+                <article>
+                  <LineIcon name="suitcase" size={30} />
+                  <h3>Zapatos cómodos</h3>
+                  <p>
+                    Ideales para recorrer la ciudad, museos
+                    y zonas con calles inclinadas.
+                  </p>
+                </article>
+
+              </div>
+
+            </section>
+
+            <section className="medellin-attractions">
+
+              <div className="medellin-section-heading">
+                <p className="section-kicker">
+                  IMPERDIBLES
+                </p>
+
+                <h2>
+                  Lugares que vale la pena conocer
+                </h2>
+
+                <p>
+                  Una selección de experiencias para aprovechar
+                  tu visita a Medellín.
+                </p>
+              </div>
+
+              <div className="medellin-attractions-grid">
+
+                <article className="medellin-attraction-card large">
+                  <img
+                    src="https://images.pexels.com/photos/12638911/pexels-photo-12638911.jpeg?auto=compress&dpr=1&h=900&w=1400"
+                    alt="Vista de Comuna 13 en Medellín"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>01</span>
+                    <h3>Comuna 13</h3>
+                    <p>
+                      Arte urbano, historia, transformación
+                      social y vistas de la ciudad.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src="https://images.unsplash.com/photo-1590598016835-83cf3357ebc5?auto=format&fit=crop&w=1200&q=85"
+                    alt="Vista panorámica de Medellín"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>02</span>
+                    <h3>El Poblado y Provenza</h3>
+                    <p>
+                      Restaurantes, cafés y una de las zonas
+                      más conocidas para salir.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src="https://images.unsplash.com/photo-1512250431446-d0b4b57b27ec?auto=format&fit=crop&w=1200&q=85"
+                    alt="Medellín de noche"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>03</span>
+                    <h3>Plaza Botero</h3>
+                    <p>
+                      Arte, arquitectura y cultura en el
+                      corazón de la ciudad.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src="https://images.unsplash.com/photo-1590598016835-83cf3357ebc5?auto=format&fit=crop&w=1200&q=85"
+                    alt="Paisaje urbano de Medellín"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>04</span>
+                    <h3>Jardín Botánico</h3>
+                    <p>
+                      Naturaleza y tranquilidad en medio
+                      de la ciudad.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src="https://images.unsplash.com/photo-1512250431446-d0b4b57b27ec?auto=format&fit=crop&w=1200&q=85"
+                    alt="Vista nocturna de Medellín"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>05</span>
+                    <h3>Parque Arví</h3>
+                    <p>
+                      Naturaleza, senderos y aire fresco
+                      en las montañas.
+                    </p>
+                  </div>
+                </article>
+
+              </div>
+
+            </section>
+
+            <section className="medellin-escapes">
+
+              <div className="medellin-section-heading centered">
+                <p className="section-kicker">
+                  ESCAPADAS CERCANAS
+                </p>
+
+                <h2>
+                  Un poco más de Antioquia
+                </h2>
+              </div>
+
+              <div className="medellin-escape-grid">
+
+                <article className="medellin-escape-feature">
+                  <img
+                    src="https://images.unsplash.com/photo-1639534448069-a47cf42d7cb9?auto=format&fit=crop&w=1500&q=85"
+                    alt="Paisaje de Guatapé"
+                  />
+
+                  <div>
+                    <span>DÍA COMPLETO</span>
+                    <h3>Guatapé y Piedra del Peñol</h3>
+                    <p>
+                      Una excursión llena de paisajes, colores
+                      y vistas del embalse.
+                    </p>
+                  </div>
+                </article>
+
+                <div className="medellin-escape-list">
+
+                  <article>
+                    <span>01</span>
+                    <h3>Santa Elena</h3>
+                    <p>
+                      Naturaleza, flores y tradición silletera.
+                    </p>
+                  </article>
+
+                  <article>
+                    <span>02</span>
+                    <h3>Llanogrande</h3>
+                    <p>
+                      Restaurantes, cafés y ambiente campestre
+                      muy cerca de Rionegro.
+                    </p>
+                  </article>
+
+                </div>
+
+              </div>
+
+            </section>
+
+            <section className="medellin-quick-guide">
+
+              <div className="medellin-guide-item">
+                <LineIcon name="wallet" size={27} />
+                <span>MONEDA</span>
+                <strong>Peso colombiano</strong>
+              </div>
+
+              <div className="medellin-guide-item">
+                <LineIcon name="plane" size={27} />
+                <span>AEROPUERTO</span>
+                <strong>MDE · Rionegro</strong>
+              </div>
+
+              <div className="medellin-guide-item">
+                <LineIcon name="hotel" size={27} />
+                <span>ZONA DE LA BODA</span>
+                <strong>Rionegro</strong>
+              </div>
+
+              <div className="medellin-guide-item">
+                <LineIcon name="camera" size={27} />
+                <span>PARA TURISMO</span>
+                <strong>Medellín</strong>
+              </div>
+
+            </section>
+
+            <section className="medellin-cta">
+
+              <p className="section-kicker">
+                DISFRUTA EL VIAJE
+              </p>
+
+              <h2>
+                Haz de este viaje
+                <em> parte de la celebración</em>
+              </h2>
+
+              <p>
+                Reserva un poco de tiempo para descubrir
+                la ciudad, disfrutar su gastronomía y conocer
+                algunos de los lugares que hacen de Antioquia
+                un destino tan especial.
+              </p>
+
+              <div className="medellin-cta-actions">
+                <a
+                  href="https://www.medellin.travel/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="medellin-cta-button primary"
+                >
+                  EXPLORAR MEDELLÍN
+                  <span>↗</span>
+                </a>
+
+                <a
+                  href="https://maps.google.com/?q=Rionegro%2C+Antioquia"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="medellin-cta-button secondary"
+                >
+                  VER RIONEGRO
+                  <span>↗</span>
+                </a>
+              </div>
 
             </section>
 
