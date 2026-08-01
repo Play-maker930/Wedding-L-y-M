@@ -2,6 +2,16 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import portadaImg from './assets/Portada.jpg'
 import bodaFondoImg from './assets/la boda.jpg'
+import dressWomenMain from './assets/dress_women_main.png'
+import dressMenMain from './assets/dress_men_main.png'
+import dressWomen1 from './assets/dress_women_1.png'
+import dressWomen2 from './assets/dress_women_2.png'
+import dressWomen3 from './assets/dress_women_3.png'
+import dressWomen4 from './assets/dress_women_4.png'
+import dressMen1 from './assets/dress_men_1.png'
+import dressMen2 from './assets/dress_men_2.png'
+import dressMen3 from './assets/dress_men_3.png'
+import monogramGold from './assets/monogram_gold.png'
 
 
 function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
@@ -163,6 +173,26 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
         <path d="M9 3c0 2 1.3 3 3 3s3-1 3-3M9 11h6" />
       </>
     ),
+  }
+
+  const scrollDressInspiration = (direction) => {
+    const container = document.querySelector(
+      '.dress-inspiration-track'
+    )
+
+    if (!container) {
+      return
+    }
+
+    const distance = Math.min(
+      container.clientWidth * 0.8,
+      520
+    )
+
+    container.scrollBy({
+      left: direction * distance,
+      behavior: 'smooth',
+    })
   }
 
   return (
@@ -402,8 +432,13 @@ function App() {
         <button
           className="brand"
           onClick={() => navigate('inicio')}
+          aria-label="Ir al inicio"
         >
-          L&M
+          <img
+            src={monogramGold}
+            alt="Monograma de Luis y Melanie"
+            className="monogram-header"
+          />
         </button>
 
         <nav className="desktop-nav">
@@ -449,7 +484,16 @@ function App() {
       >
 
         <div className="mobile-menu-header">
-          <span>LUIS & MELANIE</span>
+          <button
+            className="mobile-menu-brand"
+            onClick={() => navigate('inicio')}
+            aria-label="Ir al inicio"
+          >
+            <img
+              src={monogramGold}
+              alt="Monograma de Luis y Melanie"
+            />
+          </button>
 
           <button
             onClick={() => setMenuOpen(false)}
@@ -509,6 +553,13 @@ function App() {
             </div>
 
             <div className="home-content">
+
+              <img
+                src={monogramGold}
+                alt=""
+                aria-hidden="true"
+                className="home-monogram-watermark"
+              />
 
               <p className="eyebrow">
                 NOS CASAMOS
@@ -722,9 +773,7 @@ function App() {
                 </p>
 
                 <h2>
-                Un sí para siempre.
-                <br />
-                <em>Dos escenarios inolvidables.</em>
+                  Dos lugares, un mismo día
                 </h2>
 
               </div>
@@ -810,10 +859,10 @@ function App() {
                   </div>
 
                   <div className="venue-image">
-                  <img
-  src="https://images.pixieset.com/47662229/51c69cd63d50919fcd4655c2833839fd-xxlarge.jpg"
-  alt="Centro de Eventos Villa Celeste"
-/>
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHgcGg0oCZDRcWWvYaJEY59gndKn1bruOiqw2EpQArkAJJr95Ke3Uu6P1X&s=10"
+                      alt="Centro de Eventos Villa Celeste"
+                    />
                   </div>
 
                   <div className="venue-info">
@@ -877,33 +926,167 @@ function App() {
 
             {/* DRESS CODE */}
 
-            <section className="dress-section">
+            <section className="dress-code-section">
 
-              <div className="dress-content">
-
+              <div className="dress-code-heading">
                 <p className="section-kicker">
-                  CÓDIGO DE VESTIMENTA
+                  DRESS CODE
                 </p>
 
                 <h2>
-                  Formal
+                  Elegancia para
+                  <em> una noche inolvidable</em>
                 </h2>
 
-                <div className="dress-line"></div>
-
                 <p>
-                  Una noche especial merece vestir
-                  para la ocasión.
+                  Queremos que todos se sientan cómodos y
+                  elegantes mientras celebramos con nosotros.
                 </p>
+              </div>
+
+              <div className="dress-look-grid">
+
+                <article className="dress-look-card">
+
+                  <div className="dress-look-label">
+                    MUJERES
+                  </div>
+
+                  <div className="dress-look-image">
+                    <img
+                      src={dressWomenMain}
+                      alt="Inspiración de vestimenta formal para mujeres"
+                    />
+                  </div>
+
+                  <div className="dress-look-copy">
+                    <h3>
+                      Vestido largo o midi elegante
+                    </h3>
+
+                    <p>
+                      Para mantener la armonía visual de la
+                      celebración, agradecemos evitar el blanco,
+                      marfil, sage y verde oliva. Estos últimos
+                      están reservados para las damas de honor.
+                    </p>
+                  </div>
+
+                </article>
+
+                <article className="dress-look-card">
+
+                  <div className="dress-look-label">
+                    CABALLEROS
+                  </div>
+
+                  <div className="dress-look-image">
+                    <img
+                      src={dressMenMain}
+                      alt="Inspiración de vestimenta formal para caballeros"
+                    />
+                  </div>
+
+                  <div className="dress-look-copy">
+                    <h3>
+                      Traje completo
+                    </h3>
+
+                    <p>
+                      Preferiblemente en tonos oscuros,
+                      con camisa de vestir y zapatos formales.
+                    </p>
+                  </div>
+
+                </article>
 
               </div>
 
-              <div className="dress-decoration">
+              <section className="dress-inspiration">
 
-                <div className="dress-circle">
-                  <span>FORMAL</span>
+                <div className="dress-inspiration-heading">
+                  <p className="section-kicker">
+                    INSPIRACIÓN
+                  </p>
+
+                  <h3>
+                    Ideas para la ocasión
+                  </h3>
                 </div>
 
+                <div className="dress-inspiration-shell">
+
+                  <button
+                    type="button"
+                    className="dress-inspiration-arrow previous"
+                    onClick={() => scrollDressInspiration(-1)}
+                    aria-label="Ver inspiración anterior"
+                  >
+                    <LineIcon name="chevronLeft" size={24} />
+                  </button>
+
+                  <div className="dress-inspiration-track">
+
+                    <div className="dress-inspiration-group">
+                      <span>MUJERES</span>
+
+                      <div className="dress-inspiration-cards">
+                        {[dressWomen1, dressWomen2, dressWomen3, dressWomen4]
+                          .map((photo, index) => (
+                            <figure key={photo}>
+                              <img
+                                src={photo}
+                                alt={`Inspiración de vestido ${index + 1}`}
+                              />
+                            </figure>
+                          ))}
+                      </div>
+                    </div>
+
+                    <div className="dress-inspiration-group">
+                      <span>CABALLEROS</span>
+
+                      <div className="dress-inspiration-cards">
+                        {[dressMen1, dressMen2, dressMen3]
+                          .map((photo, index) => (
+                            <figure key={photo}>
+                              <img
+                                src={photo}
+                                alt={`Inspiración de traje ${index + 1}`}
+                              />
+                            </figure>
+                          ))}
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <button
+                    type="button"
+                    className="dress-inspiration-arrow next"
+                    onClick={() => scrollDressInspiration(1)}
+                    aria-label="Ver más inspiración"
+                  >
+                    <LineIcon name="chevronRight" size={24} />
+                  </button>
+
+                </div>
+
+              </section>
+
+              <div className="dress-code-note">
+                <div className="small-heart">
+                  ♡
+                </div>
+
+                <p>
+                  Lo más importante es que te sientas tú mismo
+                  y disfrutes cada momento con nosotros.
+                </p>
+
+                <em>
+                  ¡Gracias por ser parte de este día tan especial!
+                </em>
               </div>
 
             </section>
@@ -1095,28 +1278,43 @@ function App() {
               <div className="stay-summary-card">
 
                 <div className="stay-summary-item">
-                  <LineIcon name="calendar" size={21} />
-                  <span>FECHAS</span>
-                  <strong>14 — 16</strong>
-                  <small>ENERO 2027</small>
+                  <div className="stay-summary-icon">
+                    <LineIcon name="calendar" size={29} />
+                  </div>
+
+                  <div className="stay-summary-copy">
+                    <span>FECHAS</span>
+                    <strong>14 — 16</strong>
+                    <small>ENERO 2027</small>
+                  </div>
                 </div>
 
                 <div className="stay-summary-divider"></div>
 
                 <div className="stay-summary-item">
-                  <LineIcon name="priceTag" size={21} />
-                  <span>TARIFA</span>
-                  <strong>COP 445.000</strong>
-                  <small>POR NOCHE · HABITACIÓN DOBLE</small>
+                  <div className="stay-summary-icon">
+                    <LineIcon name="priceTag" size={29} />
+                  </div>
+
+                  <div className="stay-summary-copy">
+                    <span>TARIFA</span>
+                    <strong>COP 445.000</strong>
+                    <small>POR NOCHE · HABITACIÓN DOBLE</small>
+                  </div>
                 </div>
 
                 <div className="stay-summary-divider"></div>
 
                 <div className="stay-summary-item stay-code">
-                  <LineIcon name="key" size={21} />
-                  <span>CÓDIGO DE GRUPO</span>
-                  <strong>OJ6</strong>
-                  <small>PARA ACCEDER A LA TARIFA ESPECIAL</small>
+                  <div className="stay-summary-icon">
+                    <LineIcon name="key" size={29} />
+                  </div>
+
+                  <div className="stay-summary-copy">
+                    <span>CÓDIGO DE GRUPO</span>
+                    <strong>OJ6</strong>
+                    <small>PARA ACCEDER A LA TARIFA ESPECIAL</small>
+                  </div>
                 </div>
 
                 <div className="stay-summary-actions">
@@ -1902,8 +2100,12 @@ function App() {
 
       <footer className="footer">
 
-        <span>
-          LUIS & MELANIE
+        <span className="footer-monogram-wrap">
+          <img
+            src={monogramGold}
+            alt="Luis y Melanie"
+            className="footer-monogram"
+          />
         </span>
 
         <span>

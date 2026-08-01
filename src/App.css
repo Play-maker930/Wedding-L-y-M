@@ -75,16 +75,35 @@ button:focus {
 .brand {
   justify-self: start;
 
+  width: 92px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0;
+
   border: none;
   background: transparent;
 
   cursor: pointer;
+}
 
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  letter-spacing: 1px;
+.monogram-header {
+  width: 68px;
+  height: auto;
 
-  color: var(--black);
+  display: block;
+
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.brand:hover .monogram-header {
+  transform: scale(1.04);
+  opacity: 0.88;
 }
 
 .desktop-nav {
@@ -217,11 +236,31 @@ button:focus {
 
   cursor: pointer;
 
+  color: var(--black);
+}
+
+.mobile-menu-header > button:last-child {
   font-size: 32px;
   font-weight: 300;
   line-height: 1;
+}
 
-  color: var(--black);
+.mobile-menu-brand {
+  width: 58px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0;
+}
+
+.mobile-menu-brand img {
+  width: 50px;
+  height: auto;
+
+  display: block;
 }
 
 .mobile-menu-links {
@@ -330,6 +369,8 @@ button:focus {
 }
 
 .home-content {
+  position: relative;
+
   min-height: calc(100vh - 82px);
 
   display: flex;
@@ -339,6 +380,28 @@ button:focus {
   text-align: center;
 
   padding: 60px 45px 45px;
+}
+
+.home-monogram-watermark {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: min(72%, 520px);
+  height: auto;
+
+  opacity: 0.045;
+
+  pointer-events: none;
+  user-select: none;
+
+  transform: translate(-50%, -50%);
+}
+
+.home-content > *:not(.home-monogram-watermark) {
+  position: relative;
+  z-index: 2;
 }
 
 .eyebrow {
@@ -976,92 +1039,269 @@ button:focus {
    DRESS CODE
 ================================= */
 
-.dress-section {
-  min-height: 500px;
+.dress-code-section {
+  padding: 115px 5vw 105px;
 
-  background: #eee8de;
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  align-items: center;
-
-  padding: 80px 12vw;
+  background: var(--ivory);
 }
 
-.dress-content {
+.dress-code-heading {
+  max-width: 760px;
+
+  margin: 0 auto 65px;
+
   text-align: center;
 }
 
-.dress-content h2 {
-  margin: 25px 0;
+.dress-code-heading h2 {
+  margin: 20px 0 22px;
 
   font-family: 'Cormorant Garamond', serif;
-
-  font-size: clamp(70px, 8vw, 110px);
-
+  font-size: clamp(58px, 7vw, 96px);
   font-weight: 300;
-
-  line-height: 0.9;
+  line-height: 0.92;
 }
 
-.dress-line {
-  width: 60px;
-  height: 1px;
-
-  background: var(--champagne-dark);
-
-  margin: 0 auto 25px;
+.dress-code-heading h2 em {
+  display: block;
+  font-weight: 300;
 }
 
-.dress-content > p:last-child {
-  font-family: 'Cormorant Garamond', serif;
+.dress-code-heading > p:last-child {
+  max-width: 570px;
 
-  font-size: 20px;
+  margin: 0 auto;
 
   color: var(--gray);
+
+  font-size: 12px;
+  line-height: 1.8;
 }
 
-.dress-decoration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.dress-look-grid {
+  max-width: 1180px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
 }
 
-.dress-circle {
-  width: 230px;
-  height: 230px;
+.dress-look-card {
+  padding: 35px 35px 38px;
 
-  border: 1px solid var(--champagne-dark);
+  background: #eee8de;
 
-  border-radius: 50%;
+  text-align: center;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.dress-look-label {
+  margin-bottom: 25px;
 
+  font-size: 11px;
+  letter-spacing: 4px;
+
+  color: var(--black);
+}
+
+.dress-look-image {
+  width: 100%;
+  height: 560px;
+
+  overflow: hidden;
+
+  background: #e8e0d5;
+}
+
+.dress-look-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.dress-look-copy {
+  padding: 30px 15px 0;
+}
+
+.dress-look-copy h3 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.dress-look-copy p {
+  margin: 11px auto 0;
+
+  max-width: 380px;
+
+  color: var(--gray);
+
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.dress-inspiration {
+  max-width: 1180px;
+
+  margin: 95px auto 0;
+}
+
+.dress-inspiration-heading {
+  margin-bottom: 30px;
+
+  text-align: center;
+}
+
+.dress-inspiration-heading h3 {
+  margin: 16px 0 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 300;
+}
+
+.dress-inspiration-shell {
   position: relative;
 }
 
-.dress-circle::before {
-  content: '';
+.dress-inspiration-track {
+  display: flex;
+  gap: 26px;
 
-  position: absolute;
+  overflow-x: auto;
 
-  width: 190px;
-  height: 190px;
+  padding: 0 55px 12px;
 
-  border: 1px solid rgba(185, 164, 134, 0.4);
-
-  border-radius: 50%;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
-.dress-circle span {
-  font-size: 10px;
-  letter-spacing: 5px;
+.dress-inspiration-track::-webkit-scrollbar {
+  display: none;
+}
+
+.dress-inspiration-group {
+  flex: 0 0 auto;
+}
+
+.dress-inspiration-group > span {
+  display: block;
+
+  margin-bottom: 14px;
+
+  text-align: center;
+
+  font-size: 9px;
+  letter-spacing: 3px;
 
   color: var(--black);
+}
+
+.dress-inspiration-cards {
+  display: flex;
+  gap: 10px;
+}
+
+.dress-inspiration-cards figure {
+  flex: 0 0 145px;
+
+  width: 145px;
+  height: 285px;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  background: #eee8de;
+}
+
+.dress-inspiration-cards img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.dress-inspiration-arrow {
+  position: absolute;
+  top: 55%;
+
+  z-index: 4;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(28, 27, 25, 0.16);
+  border-radius: 50%;
+
+  background: rgba(247, 244, 238, 0.94);
+
+  color: var(--black);
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+}
+
+.dress-inspiration-arrow.previous {
+  left: 0;
+}
+
+.dress-inspiration-arrow.next {
+  right: 0;
+}
+
+.dress-code-note {
+  max-width: 1180px;
+
+  margin: 70px auto 0;
+  padding: 34px 30px;
+
+  border: 1px solid rgba(28, 27, 25, 0.12);
+
+  text-align: center;
+}
+
+.dress-code-note .small-heart {
+  margin-bottom: 12px;
+
+  color: var(--champagne-dark);
+}
+
+.dress-code-note p {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+
+  color: var(--black);
+}
+
+.dress-code-note em {
+  display: block;
+
+  margin-top: 8px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+
+  color: var(--champagne-dark);
 }
 
 /* =================================
@@ -1382,7 +1622,7 @@ button:focus {
 
   padding: 0 6vw;
 
-  transform: translateY(-42px);
+  transform: translateY(-34px);
 }
 
 .stay-summary-card {
@@ -1392,40 +1632,61 @@ button:focus {
 
   display: grid;
   grid-template-columns:
-    minmax(150px, 0.8fr)
+    minmax(185px, 0.9fr)
     1px
-    minmax(220px, 1.2fr)
+    minmax(245px, 1.15fr)
     1px
-    minmax(160px, 0.8fr)
-    minmax(220px, 1.2fr);
+    minmax(205px, 0.9fr)
+    minmax(220px, 1.05fr);
 
   align-items: center;
 
-  padding: 28px 30px;
+  padding: 20px 24px;
 
   background: #ffffff;
 
   box-shadow:
-    0 22px 70px rgba(28, 27, 25, 0.12);
+    0 18px 55px rgba(28, 27, 25, 0.11);
 }
 
 .stay-summary-item {
-  padding: 0 28px;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 0 22px;
 }
 
-.stay-summary-item > svg {
-  margin-bottom: 12px;
+.stay-summary-icon {
+  flex: 0 0 auto;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(185, 164, 134, 0.55);
+  border-radius: 50%;
 
   color: var(--champagne-dark);
+}
+
+.stay-summary-copy {
+  min-width: 0;
 }
 
 .stay-summary-item span {
   display: block;
 
-  margin-bottom: 9px;
+  margin-bottom: 6px;
 
-  font-size: 7px;
-  letter-spacing: 2.5px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2.3px;
 
   color: var(--champagne-dark);
 }
@@ -1434,30 +1695,31 @@ button:focus {
   display: block;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 400;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .stay-summary-item small {
   display: block;
 
-  margin-top: 8px;
+  margin-top: 6px;
 
-  font-size: 7px;
-  letter-spacing: 1.5px;
+  font-size: 6.5px;
+  letter-spacing: 1.35px;
 
   color: var(--gray);
 }
 
 .stay-code strong {
   color: var(--champagne-dark);
-  font-size: 38px;
+  font-size: 34px;
 }
 
 .stay-summary-divider {
   width: 1px;
-  height: 72px;
+  height: 62px;
 
   background: var(--line);
 }
@@ -1465,9 +1727,9 @@ button:focus {
 .stay-summary-actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 
-  padding-left: 25px;
+  padding-left: 20px;
 }
 
 .stay-button {
@@ -2827,6 +3089,21 @@ button:focus {
    FOOTER
 ================================= */
 
+.footer-monogram-wrap {
+  width: 48px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+}
+
+.footer-monogram {
+  width: 36px;
+  height: auto;
+
+  display: block;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -2876,7 +3153,12 @@ button:focus {
   }
 
   .brand {
-    font-size: 26px;
+    width: 58px;
+    height: 56px;
+  }
+
+  .monogram-header {
+    width: 48px;
   }
 
   .desktop-nav,
@@ -2921,6 +3203,14 @@ button:focus {
     min-height: 54vh;
 
     padding: 42px 24px 35px;
+  }
+
+  .home-monogram-watermark {
+    top: 45%;
+
+    width: min(76%, 330px);
+
+    opacity: 0.04;
   }
 
   .home-content h1 {
@@ -3124,26 +3414,64 @@ button:focus {
     font-size: 7px;
   }
 
-  .dress-section {
+  .dress-code-section {
+    padding: 85px 20px 75px;
+  }
+
+  .dress-code-heading {
+    margin-bottom: 45px;
+  }
+
+  .dress-code-heading h2 {
+    font-size: 62px;
+  }
+
+  .dress-look-grid {
     grid-template-columns: 1fr;
-
-    gap: 60px;
-
-    padding: 90px 25px;
   }
 
-  .dress-content h2 {
-    font-size: 80px;
+  .dress-look-card {
+    padding: 28px 22px 32px;
   }
 
-  .dress-circle {
-    width: 190px;
-    height: 190px;
+  .dress-look-image {
+    height: 470px;
   }
 
-  .dress-circle::before {
-    width: 155px;
-    height: 155px;
+  .dress-inspiration {
+    margin-top: 70px;
+  }
+
+  .dress-inspiration-heading h3 {
+    font-size: 38px;
+  }
+
+  .dress-inspiration-track {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
+
+  .dress-inspiration-cards figure {
+    flex-basis: 125px;
+
+    width: 125px;
+    height: 245px;
+  }
+
+  .dress-inspiration-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .dress-code-note {
+    margin-top: 55px;
+
+    padding: 28px 20px;
+  }
+
+  .dress-code-note p,
+  .dress-code-note em {
+    font-size: 18px;
   }
 
   .wedding-footer {
@@ -3237,7 +3565,7 @@ button:focus {
   .stay-summary-wrap {
     padding: 0 20px;
 
-    transform: translateY(-28px);
+    transform: translateY(-24px);
   }
 
   .stay-summary-card {
@@ -3245,13 +3573,36 @@ button:focus {
     flex-direction: column;
     align-items: stretch;
 
-    padding: 10px 24px 24px;
+    padding: 6px 22px 22px;
   }
 
   .stay-summary-item {
-    padding: 24px 0;
+    gap: 16px;
+
+    padding: 18px 0;
 
     border-bottom: 1px solid var(--line);
+  }
+
+  .stay-summary-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .stay-summary-item span {
+    font-size: 9px;
+  }
+
+  .stay-summary-item strong {
+    font-size: 25px;
+  }
+
+  .stay-summary-item small {
+    font-size: 6px;
+  }
+
+  .stay-code strong {
+    font-size: 32px;
   }
 
   .stay-summary-divider {
@@ -3259,7 +3610,7 @@ button:focus {
   }
 
   .stay-summary-actions {
-    padding: 24px 0 0;
+    padding: 20px 0 0;
   }
 
   .stay-intro {
@@ -3676,6 +4027,14 @@ button:focus {
     display: none;
   }
 
+  .footer-monogram-wrap {
+    justify-content: center;
+  }
+
+  .footer-monogram {
+    width: 38px;
+  }
+
   /* INFORMATION + VUELOS SMALL PHONE */
 
   .info-card {
@@ -3733,6 +4092,23 @@ button:focus {
 
   .flights-cta h2 {
     font-size: 54px;
+  }
+
+  /* DRESS CODE SMALL PHONE */
+
+  .dress-code-heading h2 {
+    font-size: 54px;
+  }
+
+  .dress-look-image {
+    height: 410px;
+  }
+
+  .dress-inspiration-cards figure {
+    flex-basis: 112px;
+
+    width: 112px;
+    height: 225px;
   }
 
   /* WEDDING SMALL PHONE */
