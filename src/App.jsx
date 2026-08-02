@@ -2,15 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import portadaImg from './assets/Portada.jpg'
 import bodaFondoImg from './assets/la boda.jpg'
-import dressWomenMain from './assets/dress_women_main.png'
-import dressMenMain from './assets/dress_men_main.png'
-import dressWomen1 from './assets/dress_women_1.png'
-import dressWomen2 from './assets/dress_women_2.png'
-import dressWomen3 from './assets/dress_women_3.png'
-import dressWomen4 from './assets/dress_women_4.png'
-import dressMen1 from './assets/dress_men_1.png'
-import dressMen2 from './assets/dress_men_2.png'
-import dressMen3 from './assets/dress_men_3.png'
+import dressCodeFormal from './assets/dress-code-formal.png'
 import monogramGold from './assets/monogram_gold.png'
 import weddingMusic from './assets/wedding-music.m4a'
 import InvitationEnvelope from './InvitationEnvelope'
@@ -693,35 +685,16 @@ function App() {
     })
   }
 
-  const scrollDressInspiration = (direction) => {
-    const container = document.querySelector(
-      '.dress-inspiration-track'
-    )
-
-    if (!container) {
-      return
-    }
-
-    const distance = Math.min(
-      container.clientWidth * 0.8,
-      520
-    )
-
-    container.scrollBy({
-      left: direction * distance,
-      behavior: 'smooth',
-    })
-  }
   return (
     <>
       <audio
-  ref={musicRef}
-  src={weddingMusic}
-  preload="auto"
-  onPlay={() => setIsMusicPlaying(true)}
-  onPause={() => setIsMusicPlaying(false)}
-  onEnded={() => setIsMusicPlaying(false)}
-/>
+        ref={musicRef}
+        src={weddingMusic}
+        preload="auto"
+        onPlay={() => setIsMusicPlaying(true)}
+        onPause={() => setIsMusicPlaying(false)}
+        onEnded={() => setIsMusicPlaying(false)}
+      />
 
       <InvitationEnvelope
         isVisible={showInvitation}
@@ -1265,7 +1238,7 @@ function App() {
 
             {/* DRESS CODE */}
 
-            <section className="dress-code-section">
+            <section className="dress-code-section dress-code-simple">
 
               <div className="dress-code-heading">
                 <p className="section-kicker">
@@ -1283,149 +1256,69 @@ function App() {
                 </p>
               </div>
 
-              <div className="dress-look-grid">
-
-                <article className="dress-look-card">
-
-                  <div className="dress-look-label">
-                    MUJERES
-                  </div>
-
-                  <div className="dress-look-image">
-                    <img
-                      src={dressWomenMain}
-                      alt="Inspiración de vestimenta formal para mujeres"
-                    />
-                  </div>
-
-                  <div className="dress-look-copy">
-                    <h3>
-                      Vestido largo o midi elegante
-                    </h3>
-
-                    <p>
-                      Para mantener la armonía visual de la
-                      celebración, agradecemos evitar el blanco,
-                      marfil, sage y verde oliva. Estos últimos
-                      están reservados para las damas de honor.
-                    </p>
-                  </div>
-
-                </article>
-
-                <article className="dress-look-card">
-
-                  <div className="dress-look-label">
-                    CABALLEROS
-                  </div>
-
-                  <div className="dress-look-image">
-                    <img
-                      src={dressMenMain}
-                      alt="Inspiración de vestimenta formal para caballeros"
-                    />
-                  </div>
-
-                  <div className="dress-look-copy">
-                    <h3>
-                      Traje completo
-                    </h3>
-
-                    <p>
-                      Preferiblemente en tonos oscuros,
-                      con camisa de vestir y zapatos formales.
-                    </p>
-                  </div>
-
-                </article>
-
+              <div className="dress-code-visual">
+                <img
+                  src={dressCodeFormal}
+                  alt="Código de vestimenta formal para mujeres y caballeros"
+                />
               </div>
 
-              <section className="dress-inspiration">
+              <div className="dress-code-details">
 
-                <div className="dress-inspiration-heading">
-                  <p className="section-kicker">
-                    INSPIRACIÓN
-                  </p>
+                <div className="dress-code-detail-block">
+                  <span>MUJERES</span>
 
                   <h3>
-                    Ideas para la ocasión
+                    Vestido largo
                   </h3>
-                </div>
 
-                <div className="dress-inspiration-shell">
+                  <div className="dress-code-avoid">
+                    <strong>EVITAR</strong>
 
-                  <button
-                    type="button"
-                    className="dress-inspiration-arrow previous"
-                    onClick={() => scrollDressInspiration(-1)}
-                    aria-label="Ver inspiración anterior"
-                  >
-                    <LineIcon name="chevronLeft" size={24} />
-                  </button>
+                    <div className="dress-code-color-list">
 
-                  <div className="dress-inspiration-track">
+                      <div className="dress-code-color-item">
+                        <span
+                          className="dress-code-color-swatch color-white"
+                          aria-hidden="true"
+                        ></span>
 
-                    <div className="dress-inspiration-group">
-                      <span>MUJERES</span>
-
-                      <div className="dress-inspiration-cards">
-                        {[dressWomen1, dressWomen2, dressWomen3, dressWomen4]
-                          .map((photo, index) => (
-                            <figure key={photo}>
-                              <img
-                                src={photo}
-                                alt={`Inspiración de vestido ${index + 1}`}
-                              />
-                            </figure>
-                          ))}
+                        <small>BLANCO</small>
                       </div>
+
+                      <div className="dress-code-color-item">
+                        <span
+                          className="dress-code-color-swatch color-olive"
+                          aria-hidden="true"
+                        ></span>
+
+                        <small>VERDE OLIVA</small>
+                      </div>
+
                     </div>
 
-                    <div className="dress-inspiration-group">
-                      <span>CABALLEROS</span>
-
-                      <div className="dress-inspiration-cards">
-                        {[dressMen1, dressMen2, dressMen3]
-                          .map((photo, index) => (
-                            <figure key={photo}>
-                              <img
-                                src={photo}
-                                alt={`Inspiración de traje ${index + 1}`}
-                              />
-                            </figure>
-                          ))}
-                      </div>
-                    </div>
-
+                    <p>
+                      El verde oliva está reservado para
+                      nuestras damas de honor.
+                    </p>
                   </div>
-
-                  <button
-                    type="button"
-                    className="dress-inspiration-arrow next"
-                    onClick={() => scrollDressInspiration(1)}
-                    aria-label="Ver más inspiración"
-                  >
-                    <LineIcon name="chevronRight" size={24} />
-                  </button>
-
                 </div>
 
-              </section>
+                <div className="dress-code-detail-divider"></div>
 
-              <div className="dress-code-note">
-                <div className="small-heart">
-                  ♡
+                <div className="dress-code-detail-block">
+                  <span>CABALLEROS</span>
+
+                  <h3>
+                    Traje formal completo
+                  </h3>
+
+                  <p>
+                    Recomendamos traje en tonos oscuros,
+                    camisa de vestir y zapatos formales.
+                  </p>
                 </div>
 
-                <p>
-                  Lo más importante es que te sientas tú mismo
-                  y disfrutes cada momento con nosotros.
-                </p>
-
-                <em>
-                  ¡Gracias por ser parte de este día tan especial!
-                </em>
               </div>
 
             </section>

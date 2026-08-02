@@ -1041,21 +1041,21 @@ button:focus {
 
 .dress-code-section {
   padding: 115px 5vw 105px;
-
   background: var(--ivory);
+}
+
+.dress-code-simple {
+  overflow: hidden;
 }
 
 .dress-code-heading {
   max-width: 760px;
-
-  margin: 0 auto 65px;
-
+  margin: 0 auto 58px;
   text-align: center;
 }
 
 .dress-code-heading h2 {
   margin: 20px 0 22px;
-
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(58px, 7vw, 96px);
   font-weight: 300;
@@ -1069,240 +1069,139 @@ button:focus {
 
 .dress-code-heading > p:last-child {
   max-width: 570px;
-
   margin: 0 auto;
-
   color: var(--gray);
-
   font-size: 12px;
   line-height: 1.8;
 }
 
-.dress-look-grid {
-  max-width: 1180px;
-
+.dress-code-visual {
+  max-width: 980px;
   margin: 0 auto;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
 }
 
-.dress-look-card {
-  padding: 35px 35px 38px;
+.dress-code-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
 
-  background: #eee8de;
+.dress-code-details {
+  max-width: 980px;
+  margin: 55px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 44px;
+  align-items: stretch;
+  padding: 42px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
 
+.dress-code-detail-block {
   text-align: center;
 }
 
-.dress-look-label {
-  margin-bottom: 25px;
-
-  font-size: 11px;
-  letter-spacing: 4px;
-
-  color: var(--black);
-}
-
-.dress-look-image {
-  width: 100%;
-  height: 560px;
-
-  overflow: hidden;
-
-  background: #e8e0d5;
-}
-
-.dress-look-image img {
-  width: 100%;
-  height: 100%;
-
+.dress-code-detail-block > span {
   display: block;
-
-  object-fit: cover;
-  object-position: center;
+  margin-bottom: 13px;
+  color: var(--champagne-dark);
+  font-size: 8px;
+  letter-spacing: 2.5px;
 }
 
-.dress-look-copy {
-  padding: 30px 15px 0;
-}
-
-.dress-look-copy h3 {
+.dress-code-detail-block h3 {
   margin: 0;
-
   font-family: 'Cormorant Garamond', serif;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 400;
 }
 
-.dress-look-copy p {
-  margin: 11px auto 0;
-
+.dress-code-detail-block p {
   max-width: 380px;
-
+  margin: 14px auto 0;
   color: var(--gray);
-
   font-size: 10px;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
-.dress-inspiration {
-  max-width: 1180px;
-
-  margin: 95px auto 0;
+.dress-code-avoid {
+  margin-top: 24px;
 }
 
-.dress-inspiration-heading {
-  margin-bottom: 30px;
-
-  text-align: center;
-}
-
-.dress-inspiration-heading h3 {
-  margin: 16px 0 0;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 44px;
-  font-weight: 300;
-}
-
-.dress-inspiration-shell {
-  position: relative;
-}
-
-.dress-inspiration-track {
-  display: flex;
-  gap: 26px;
-
-  overflow-x: auto;
-
-  padding: 0 55px 12px;
-
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-
-.dress-inspiration-track::-webkit-scrollbar {
-  display: none;
-}
-
-.dress-inspiration-group {
-  flex: 0 0 auto;
-}
-
-.dress-inspiration-group > span {
+.dress-code-avoid > strong {
   display: block;
 
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 
-  text-align: center;
+  color: var(--black);
+
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.dress-code-color-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 34px;
+}
+
+.dress-code-color-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+}
+
+.dress-code-color-item small {
+  color: var(--black);
 
   font-size: 9px;
-  letter-spacing: 3px;
-
-  color: var(--black);
+  letter-spacing: 1.8px;
 }
 
-.dress-inspiration-cards {
-  display: flex;
-  gap: 10px;
-}
-
-.dress-inspiration-cards figure {
-  flex: 0 0 145px;
-
-  width: 145px;
-  height: 285px;
-
-  margin: 0;
-
-  overflow: hidden;
-
-  border-radius: 8px;
-
-  background: #eee8de;
-}
-
-.dress-inspiration-cards img {
-  width: 100%;
-  height: 100%;
+.dress-code-color-swatch {
+  width: 64px;
+  height: 64px;
 
   display: block;
 
-  object-fit: cover;
-  object-position: center;
-}
-
-.dress-inspiration-arrow {
-  position: absolute;
-  top: 55%;
-
-  z-index: 4;
-
-  width: 44px;
-  height: 44px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid rgba(28, 27, 25, 0.16);
+  border: 1px solid rgba(185, 164, 134, 0.85);
   border-radius: 50%;
 
-  background: rgba(247, 244, 238, 0.94);
-
-  color: var(--black);
-
-  cursor: pointer;
-
-  transform: translateY(-50%);
+  box-shadow:
+    0 8px 20px rgba(28, 27, 25, 0.08);
 }
 
-.dress-inspiration-arrow.previous {
-  left: 0;
+.dress-code-color-swatch.color-white {
+  background: #ffffff;
 }
 
-.dress-inspiration-arrow.next {
-  right: 0;
+.dress-code-color-swatch.color-olive {
+  background: #8a8560;
 }
 
-.dress-code-note {
-  max-width: 1180px;
+.dress-code-avoid p {
+  max-width: 340px;
 
-  margin: 70px auto 0;
-  padding: 34px 30px;
-
-  border: 1px solid rgba(28, 27, 25, 0.12);
-
-  text-align: center;
-}
-
-.dress-code-note .small-heart {
-  margin-bottom: 12px;
-
-  color: var(--champagne-dark);
-}
-
-.dress-code-note p {
-  margin: 0;
+  margin-top: 20px;
 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 21px;
+  font-size: 18px;
+  line-height: 1.45;
 
   color: var(--black);
 }
 
-.dress-code-note em {
-  display: block;
-
-  margin-top: 8px;
-
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
-
-  color: var(--champagne-dark);
+.dress-code-detail-divider {
+  width: 1px;
+  height: 100%;
+  background: var(--line);
 }
+
 
 /* =================================
    WEDDING FOOTER
@@ -4534,59 +4433,44 @@ button:focus {
   }
 
   .dress-code-heading {
-    margin-bottom: 45px;
+    margin-bottom: 42px;
   }
 
   .dress-code-heading h2 {
     font-size: 62px;
   }
 
-  .dress-look-grid {
+  .dress-code-visual {
+    width: 100%;
+  }
+
+  .dress-code-details {
     grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 42px;
+    padding: 34px 0;
   }
 
-  .dress-look-card {
-    padding: 28px 22px 32px;
+  .dress-code-detail-divider {
+    width: 100%;
+    height: 1px;
   }
 
-  .dress-look-image {
-    height: 470px;
+  .dress-code-detail-block h3 {
+    font-size: 28px;
   }
 
-  .dress-inspiration {
-    margin-top: 70px;
+  .dress-code-color-list {
+    gap: 26px;
   }
 
-  .dress-inspiration-heading h3 {
-    font-size: 38px;
+  .dress-code-color-swatch {
+    width: 58px;
+    height: 58px;
   }
 
-  .dress-inspiration-track {
-    padding-left: 42px;
-    padding-right: 42px;
-  }
-
-  .dress-inspiration-cards figure {
-    flex-basis: 125px;
-
-    width: 125px;
-    height: 245px;
-  }
-
-  .dress-inspiration-arrow {
-    width: 38px;
-    height: 38px;
-  }
-
-  .dress-code-note {
-    margin-top: 55px;
-
-    padding: 28px 20px;
-  }
-
-  .dress-code-note p,
-  .dress-code-note em {
-    font-size: 18px;
+  .dress-code-avoid p {
+    font-size: 17px;
   }
 
   .wedding-footer {
@@ -5432,120 +5316,17 @@ button:focus {
     font-size: 54px;
   }
 
-  .dress-look-image {
-    height: 410px;
-  }
-
-  .dress-inspiration-cards figure {
-    flex-basis: 112px;
-
-    width: 112px;
-    height: 225px;
-  }
-
-  /* MEDELLÍN SMALL PHONE */
-
-  .medellin-hero {
-    min-height: 460px;
-
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .medellin-hero-content h1 {
-    font-size: 63px;
-  }
-
-  .medellin-difference-heading h2,
-  .medellin-weather-heading h2,
-  .medellin-section-heading h2 {
-    font-size: 50px;
-  }
-
-  .medellin-weather-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .medellin-weather-grid article,
-  .medellin-weather-grid article:nth-child(even),
-  .medellin-weather-grid article:nth-last-child(-n + 2) {
-    border-right: none;
-    border-bottom: 1px solid rgba(28, 27, 25, 0.16);
-  }
-
-  .medellin-weather-grid article:last-child {
-    border-bottom: none;
-  }
-
-  .medellin-attraction-card,
-  .medellin-attraction-card.large {
-    min-height: 370px;
-  }
-
-  .medellin-attraction-overlay {
-    padding: 28px 24px;
-  }
-
-  .medellin-attraction-overlay h3 {
-    font-size: 32px;
-  }
-
-  .medellin-escape-feature {
-    min-height: 380px;
-  }
-
-  .medellin-quick-guide {
-    grid-template-columns: 1fr;
-  }
-
-  .medellin-guide-item,
-  .medellin-guide-item:nth-child(2),
-  .medellin-guide-item:nth-child(3),
-  .medellin-guide-item:nth-child(4) {
-    border-left: 1px solid var(--line);
-    border-right: 1px solid var(--line);
-    border-top: none;
-  }
-
-  .medellin-guide-item:first-child {
-    border-top: 1px solid var(--line);
-  }
-
-  .medellin-cta h2 {
-    font-size: 54px;
-  }
-
-  /* RSVP SMALL PHONE */
-
-  .rsvp-hero {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .rsvp-hero-copy h1 {
-    font-size: 57px;
-  }
-
-  .rsvp-form {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .rsvp-step-heading h2 {
-    font-size: 31px;
-  }
-
-  .rsvp-field input,
-  .rsvp-field textarea {
-    font-size: 20px;
-  }
-
-  .rsvp-choice strong {
+  .dress-code-detail-block h3 {
     font-size: 26px;
   }
 
-  .rsvp-success h2 {
-    font-size: 56px;
+  .dress-code-color-swatch {
+    width: 54px;
+    height: 54px;
+  }
+
+  .dress-code-color-item small {
+    font-size: 8px;
   }
 
   /* WEDDING SMALL PHONE */
