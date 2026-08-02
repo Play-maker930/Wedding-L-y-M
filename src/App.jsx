@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import portadaImg from './assets/Portada.jpg'
 import bodaFondoImg from './assets/la boda.jpg'
+import parroquiaImg from './assets/parroquia.jpg'
 import dressCodeFormal from './assets/dress-code-formal.png'
 import monogramGold from './assets/monogram_gold.png'
 import weddingMusic from './assets/wedding-music.m4a'
@@ -146,6 +147,14 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
         <circle cx="12" cy="12" r="9" />
         <path d="M9.8 9a2.4 2.4 0 1 1 3.5 2.1c-.8.4-1.3 1-1.3 1.9" />
         <path d="M12 17h.01" />
+      </>
+    ),
+    gift: (
+      <>
+        <rect x="3" y="9" width="18" height="12" rx="1.5" />
+        <path d="M12 9v12M3 13h18" />
+        <path d="M12 9H7.5A2.5 2.5 0 1 1 10 6.5C10 8 12 9 12 9Z" />
+        <path d="M12 9h4.5A2.5 2.5 0 1 0 14 6.5C14 8 12 9 12 9Z" />
       </>
     ),
     suitcase: (
@@ -885,9 +894,9 @@ function App() {
 
               <div className="home-date">
                 <span>15</span>
-                <div></div>
+                <i aria-hidden="true">·</i>
                 <span>ENERO</span>
-                <div></div>
+                <i aria-hidden="true">·</i>
                 <span>2027</span>
               </div>
 
@@ -1085,7 +1094,8 @@ function App() {
                 </p>
 
                 <h2>
-                  Dos lugares, un mismo día
+                  El escenario de
+                  <em>nuestra historia</em>
                 </h2>
 
               </div>
@@ -1102,8 +1112,9 @@ function App() {
 
                   <div className="venue-image">
                     <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqwv67X6UuHbIqh_XnKxqYepUZUewh8_hn1x-SwqMYddn8IflGbdM-BuRo&s=10"
+                      src={parroquiaImg}
                       alt="Parroquia María Madre de Dios"
+                      loading="lazy"
                     />
                   </div>
 
@@ -1323,24 +1334,6 @@ function App() {
 
             </section>
 
-            {/* FOOTER BODA */}
-
-            <section className="wedding-footer">
-
-              <div className="small-heart">
-                ♡
-              </div>
-
-              <p>
-                Estamos felices de compartir este día
-                contigo.
-              </p>
-
-              <strong>
-                Luis & Melanie
-              </strong>
-
-            </section>
 
           </section>
         )}
@@ -1392,28 +1385,9 @@ function App() {
                 <span className="info-arrow">→</span>
               </button>
 
-              <button
-                className="info-card"
-                onClick={() => navigate('vuelos')}
-              >
-                <span className="info-number">02</span>
-
-                <span className="info-icon">
-                  <LineIcon name="plane" size={30} />
-                </span>
-
-                <span className="info-card-copy">
-                  <strong>Vuelos</strong>
-                  <small>
-                    Aeropuerto recomendado y guía de viaje
-                  </small>
-                </span>
-
-                <span className="info-arrow">→</span>
-              </button>
 
               <button className="info-card">
-                <span className="info-number">03</span>
+                <span className="info-number">02</span>
 
                 <span className="info-icon">
                   <LineIcon name="bus" size={30} />
@@ -1433,7 +1407,7 @@ function App() {
                 className="info-card"
                 onClick={() => navigate('medellin')}
               >
-                <span className="info-number">04</span>
+                <span className="info-number">03</span>
 
                 <span className="info-icon">
                   <LineIcon name="mapPin" size={30} />
@@ -1450,16 +1424,16 @@ function App() {
               </button>
 
               <button className="info-card">
-                <span className="info-number">05</span>
+                <span className="info-number">04</span>
 
                 <span className="info-icon">
-                  <LineIcon name="help" size={30} />
+                  <LineIcon name="gift" size={30} />
                 </span>
 
                 <span className="info-card-copy">
-                  <strong>Preguntas frecuentes</strong>
+                  <strong>Regalos</strong>
                   <small>
-                    Respuestas para planificar tu experiencia
+                    Un detalle para celebrar con nosotros
                   </small>
                 </span>
 
@@ -1994,264 +1968,6 @@ function App() {
         )}
 
         {/* ================================
-            VUELOS
-        ================================= */}
-
-        {activePage === 'vuelos' && (
-          <section className="flights-page page-transition">
-
-            <button
-              type="button"
-              className="subpage-back-button"
-              onClick={() => navigate('informacion')}
-            >
-              <LineIcon name="arrowLeft" size={18} />
-              VOLVER A INFORMACIÓN
-            </button>
-
-            <section className="flights-hero">
-
-              <div className="flights-hero-overlay"></div>
-
-              <div className="flights-hero-content">
-                <p className="section-kicker">
-                  PLANIFICA TU VIAJE
-                </p>
-
-                <h1>
-                  Tu viaje
-                  <em> comienza aquí</em>
-                </h1>
-
-                <p>
-                  Todo lo esencial para llegar a Rionegro
-                  y acompañarnos en nuestro gran día.
-                </p>
-              </div>
-
-            </section>
-
-            <section className="flights-airport">
-
-              <div className="flights-airport-code">
-                <LineIcon name="plane" size={38} />
-                <strong>MDE</strong>
-              </div>
-
-              <div className="flights-airport-copy">
-                <p className="section-kicker">
-                  AEROPUERTO RECOMENDADO
-                </p>
-
-                <h2>
-                  José María Córdova
-                </h2>
-
-                <p>
-                  El Aeropuerto Internacional José María
-                  Córdova (MDE) está ubicado en Rionegro y es
-                  el aeropuerto recomendado para asistir a
-                  nuestra boda.
-                </p>
-
-                <div className="flights-airport-note">
-                  <LineIcon name="mapPin" size={22} />
-                  <span>
-                    Aproximadamente a 15 minutos del hotel sede.
-                  </span>
-                </div>
-              </div>
-
-            </section>
-
-            <section className="flights-routes">
-
-              <div className="flights-section-heading">
-                <p className="section-kicker">
-                  DESDE DÓNDE VUELAS
-                </p>
-
-                <h2>
-                  Conexiones hacia Medellín
-                </h2>
-
-                <p>
-                  Busca vuelos con destino final MDE.
-                  La disponibilidad y duración pueden variar
-                  según tu ciudad de origen.
-                </p>
-              </div>
-
-              <div className="flights-route-grid">
-
-                <article className="flight-route-card featured">
-                  <span>PTY</span>
-                  <h3>Ciudad de Panamá</h3>
-                  <p>
-                    Existen opciones directas hacia Medellín.
-                    Revisa los horarios disponibles para las
-                    fechas de la celebración.
-                  </p>
-                </article>
-
-                <article className="flight-route-card">
-                  <span>USA</span>
-                  <h3>Estados Unidos</h3>
-                  <p>
-                    Puedes encontrar rutas directas desde
-                    algunas ciudades o conexiones hacia MDE,
-                    según tu punto de partida.
-                  </p>
-                </article>
-
-                <article className="flight-route-card">
-                  <span>LATAM</span>
-                  <h3>Otros destinos</h3>
-                  <p>
-                    Busca conexiones con destino final MDE
-                    y prioriza itinerarios que te permitan
-                    llegar con suficiente anticipación.
-                  </p>
-                </article>
-
-              </div>
-
-            </section>
-
-            <section className="flights-timeline">
-
-              <div className="flights-section-heading centered">
-                <p className="section-kicker">
-                  FECHAS RECOMENDADAS
-                </p>
-
-                <h2>
-                  Organiza tu llegada
-                </h2>
-              </div>
-
-              <div className="flight-timeline-grid">
-
-                <article>
-                  <span className="flight-day">14</span>
-                  <div>
-                    <small>JUEVES · ENERO</small>
-                    <h3>Llegada recomendada</h3>
-                    <p>
-                      Instálate con calma en el hotel y disfruta
-                      la víspera de la celebración.
-                    </p>
-                  </div>
-                </article>
-
-                <article className="wedding-day">
-                  <span className="flight-day">15</span>
-                  <div>
-                    <small>VIERNES · ENERO</small>
-                    <h3>Día de la boda</h3>
-                    <p>
-                      La ceremonia inicia a las 4:00 PM.
-                    </p>
-                  </div>
-                </article>
-
-                <article>
-                  <span className="flight-day">16</span>
-                  <div>
-                    <small>SÁBADO · ENERO</small>
-                    <h3>Regreso sugerido</h3>
-                    <p>
-                      La tarifa especial del hotel está
-                      disponible hasta el 16 de enero.
-                    </p>
-                  </div>
-                </article>
-
-              </div>
-
-            </section>
-
-            <section className="flights-tips">
-
-              <article>
-                <div className="flight-tip-icon">
-                  <LineIcon name="suitcase" size={30} />
-                </div>
-
-                <div>
-                  <h3>Equipaje</h3>
-                  <p>
-                    Lleva todo lo necesario para una boda
-                    formal y considera las políticas de equipaje
-                    de tu aerolínea.
-                  </p>
-                </div>
-              </article>
-
-              <article>
-                <div className="flight-tip-icon">
-                  <LineIcon name="coat" size={30} />
-                </div>
-
-                <div>
-                  <h3>Clima</h3>
-                  <p>
-                    Rionegro puede sentirse fresco,
-                    especialmente durante la noche. Recomendamos
-                    llevar un abrigo ligero.
-                  </p>
-                </div>
-              </article>
-
-              <article>
-                <div className="flight-tip-icon">
-                  <LineIcon name="clock" size={30} />
-                </div>
-
-                <div>
-                  <h3>Tiempo suficiente</h3>
-                  <p>
-                    Procura llegar al menos un día antes para
-                    evitar contratiempos y disfrutar el fin de
-                    semana con tranquilidad.
-                  </p>
-                </div>
-              </article>
-
-            </section>
-
-            <section className="flights-cta">
-
-              <p className="section-kicker">
-                DESTINO · MDE
-              </p>
-
-              <h2>
-                Encuentra tu mejor vuelo
-              </h2>
-
-              <p>
-                Compara opciones según tu ciudad de origen
-                y elige el itinerario que mejor se adapte
-                a tu viaje.
-              </p>
-
-              <a
-                href="https://www.google.com/travel/flights"
-                target="_blank"
-                rel="noreferrer"
-                className="flights-search-button"
-              >
-                BUSCAR VUELOS
-                <span>↗</span>
-              </a>
-
-            </section>
-
-          </section>
-        )}
-
-        {/* ================================
             MEDELLÍN
         ================================= */}
 
@@ -2290,64 +2006,7 @@ function App() {
 
             </section>
 
-            <section className="medellin-difference">
-
-              <div className="medellin-difference-heading">
-                <p className="section-kicker">
-                  ANTES DE VIAJAR
-                </p>
-
-                <h2>
-                  Dos destinos,
-                  <em> una misma experiencia</em>
-                </h2>
-              </div>
-
-              <div className="medellin-difference-grid">
-
-                <article>
-                  <div className="medellin-place-icon">
-                    <LineIcon name="map" size={30} />
-                  </div>
-
-                  <span>01</span>
-
-                  <h3>Medellín</h3>
-
-                  <p>
-                    Es la ciudad principal: allí encontrarás
-                    museos, restaurantes, cafés, vida urbana y
-                    algunos de los atractivos turísticos más
-                    reconocidos de la región.
-                  </p>
-
-                  <small>
-                    Ideal para visitar antes o después de la boda.
-                  </small>
-                </article>
-
-                <article className="featured">
-                  <div className="medellin-place-icon">
-                    <LineIcon name="mountain" size={30} />
-                  </div>
-
-                  <span>02</span>
-
-                  <h3>Rionegro</h3>
-
-                  <p>
-                    Es un municipio distinto, ubicado en el
-                    Oriente antioqueño. Aquí se encuentran el
-                    aeropuerto MDE, el hotel sede, la iglesia
-                    y Villa Celeste.
-                  </p>
-
-                  <small>
-                    Es la zona recomendada para hospedarse.
-                  </small>
-                </article>
-
-              </div>
+            <section className="medellin-stay-note-section">
 
               <div className="medellin-important-note">
                 <div>
@@ -2628,27 +2287,6 @@ function App() {
                 un destino tan especial.
               </p>
 
-              <div className="medellin-cta-actions">
-                <a
-                  href="https://www.medellin.travel/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="medellin-cta-button primary"
-                >
-                  EXPLORAR MEDELLÍN
-                  <span>↗</span>
-                </a>
-
-                <a
-                  href="https://maps.google.com/?q=Rionegro%2C+Antioquia"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="medellin-cta-button secondary"
-                >
-                  VER RIONEGRO
-                  <span>↗</span>
-                </a>
-              </div>
 
             </section>
 
@@ -2710,12 +2348,6 @@ function App() {
 
             {rsvpStatus.state === 'success-yes' && (
               <div className="rsvp-success">
-                <img
-                  src={monogramGold}
-                  alt=""
-                  aria-hidden="true"
-                  className="rsvp-success-monogram"
-                />
 
                 <div className="rsvp-success-heart">
                   ♡
@@ -2751,12 +2383,6 @@ function App() {
 
             {rsvpStatus.state === 'success-no' && (
               <div className="rsvp-success">
-                <img
-                  src={monogramGold}
-                  alt=""
-                  aria-hidden="true"
-                  className="rsvp-success-monogram"
-                />
 
                 <div className="rsvp-success-heart">
                   ♡
@@ -2811,12 +2437,6 @@ function App() {
                     </p>
                   </div>
 
-                  <div className="rsvp-hero-monogram">
-                    <img
-                      src={monogramGold}
-                      alt="Monograma de Luis y Melanie"
-                    />
-                  </div>
 
                 </header>
 
