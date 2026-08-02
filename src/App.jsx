@@ -12,6 +12,7 @@ import dressMen1 from './assets/dress_men_1.png'
 import dressMen2 from './assets/dress_men_2.png'
 import dressMen3 from './assets/dress_men_3.png'
 import monogramGold from './assets/monogram_gold.png'
+import InvitationEnvelope from './InvitationEnvelope'
 
 
 function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
@@ -215,6 +216,8 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
 }
 
 function App() {
+  const [showInvitation, setShowInvitation] = useState(true)
+
   const [activePage, setActivePage] = useState('inicio')
   const [menuOpen, setMenuOpen] = useState(false)
   const [hotelSlide, setHotelSlide] = useState(0)
@@ -447,6 +450,10 @@ function App() {
   }
 
 
+  const openInvitation = () => {
+    setShowInvitation(false)
+  }
+
   const updateRsvpField = (field, value) => {
     setRsvpForm((currentForm) => ({
       ...currentForm,
@@ -658,7 +665,14 @@ function App() {
     })
   }
   return (
-    <div className="site">
+    <>
+      <InvitationEnvelope
+        isVisible={showInvitation}
+        monogram={monogramGold}
+        onOpen={openInvitation}
+      />
+
+      <div className="site">
 
       {/* ================================
           NAVEGACIÓN
@@ -3129,7 +3143,8 @@ function App() {
 
       </footer>
 
-    </div>
+      </div>
+    </>
   )
 }
 
