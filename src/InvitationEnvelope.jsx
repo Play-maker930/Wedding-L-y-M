@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 
-function InvitationEnvelope({ isVisible, monogram, onOpen }) {
+function InvitationEnvelope({
+  isVisible,
+  monogram,
+  onStartMusic,
+  onOpen,
+}) {
   const [isAnimating, setIsAnimating] = useState(false)
   const [isLeaving, setIsLeaving] = useState(false)
 
@@ -29,6 +34,7 @@ function InvitationEnvelope({ isVisible, monogram, onOpen }) {
   }
 
   const handleOpen = () => {
+    onStartMusic()
     setIsLeaving(true)
 
     window.setTimeout(() => {

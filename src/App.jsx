@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import portadaImg from './assets/Portada.jpg'
 import bodaFondoImg from './assets/la boda.jpg'
@@ -12,6 +12,7 @@ import dressMen1 from './assets/dress_men_1.png'
 import dressMen2 from './assets/dress_men_2.png'
 import dressMen3 from './assets/dress_men_3.png'
 import monogramGold from './assets/monogram_gold.png'
+import weddingMusic from './assets/wedding-music.m4a'
 import InvitationEnvelope from './InvitationEnvelope'
 
 
@@ -217,6 +218,8 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
 
 function App() {
   const [showInvitation, setShowInvitation] = useState(true)
+  const musicRef = useRef(null)
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false)
 
   const [activePage, setActivePage] = useState('inicio')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -450,6 +453,51 @@ function App() {
   }
 
 
+  const startWeddingMusic = async () => {
+    const audio = musicRef.current
+
+    if (!audio) {
+      return
+    }
+
+    audio.volume = 0.32
+
+    try {
+      await audio.play()
+      setIsMusicPlaying(true)
+    } catch (error) {
+      console.warn(
+        'El navegador no permitió iniciar la música.',
+        error
+      )
+    }
+  }
+
+  const toggleWeddingMusic = async () => {
+    const audio = musicRef.current
+
+    if (!audio) {
+      return
+    }
+
+    if (audio.paused) {
+      try {
+        await audio.play()
+        setIsMusicPlaying(true)
+      } catch (error) {
+        console.warn(
+          'No fue posible reproducir la música.',
+          error
+        )
+      }
+
+      return
+    }
+
+    audio.pause()
+    setIsMusicPlaying(false)
+  }
+
   const openInvitation = () => {
     setShowInvitation(false)
   }
@@ -666,11 +714,51 @@ function App() {
   }
   return (
     <>
+      <audio
+  ref={musicRef}
+  src={weddingMusic}
+  preload="auto"
+  onPlay={() => setIsMusicPlaying(true)}
+  onPause={() => setIsMusicPlaying(false)}
+  onEnded={() => setIsMusicPlaying(false)}
+/>
+
       <InvitationEnvelope
         isVisible={showInvitation}
         monogram={monogramGold}
+        onStartMusic={startWeddingMusic}
         onOpen={openInvitation}
       />
+
+      {!showInvitation && (
+        <button
+          type="button"
+          className={
+            isMusicPlaying
+              ? 'music-control is-playing'
+              : 'music-control'
+          }
+          onClick={toggleWeddingMusic}
+          aria-label={
+            isMusicPlaying
+              ? 'Pausar música'
+              : 'Reproducir música'
+          }
+          title={
+            isMusicPlaying
+              ? 'Pausar música'
+              : 'Reproducir música'
+          }
+        >
+          <span className="music-control-icon">
+            {isMusicPlaying ? '♫' : '♪'}
+          </span>
+
+          <span className="music-control-label">
+            {isMusicPlaying ? 'PAUSAR' : 'MÚSICA'}
+          </span>
+        </button>
+      )}
 
       <div className="site">
 

@@ -5729,7 +5729,7 @@ button:focus {
 
   perspective: 1500px;
 
-  transform: translateY(20px) scale(0.96);
+  transform: translateY(70px) scale(0.96);
   opacity: 0;
 
   animation:
@@ -5738,7 +5738,7 @@ button:focus {
 
 @keyframes invitationEnvelopeArrival {
   to {
-    transform: translateY(0) scale(1);
+    transform: translateY(48px) scale(1);
     opacity: 1;
   }
 }
@@ -6002,6 +6002,15 @@ button:focus {
 
   .invitation-envelope {
     width: min(430px, 94vw);
+
+    transform: translateY(58px) scale(0.96);
+  }
+
+  @keyframes invitationEnvelopeArrival {
+    to {
+      transform: translateY(38px) scale(1);
+      opacity: 1;
+    }
   }
 
   .invitation-card {
@@ -6045,6 +6054,17 @@ button:focus {
 }
 
 @media (max-width: 390px) {
+  .invitation-envelope {
+    transform: translateY(48px) scale(0.96);
+  }
+
+  @keyframes invitationEnvelopeArrival {
+    to {
+      transform: translateY(30px) scale(1);
+      opacity: 1;
+    }
+  }
+
   .invitation-card {
     padding: 24px 17px;
   }
@@ -6090,5 +6110,105 @@ button:focus {
   .invitation-envelope.is-open
   .invitation-card button {
     opacity: 1;
+  }
+}
+
+/* =================================
+   CONTROL DE MÚSICA
+================================= */
+
+.music-control {
+  position: fixed;
+  right: 24px;
+  bottom: 72px;
+
+  z-index: 9000;
+
+  min-width: 52px;
+  height: 52px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 0 16px;
+
+  border: 1px solid rgba(185, 164, 134, 0.58);
+  border-radius: 999px;
+
+  background: rgba(247, 244, 238, 0.90);
+  backdrop-filter: blur(10px);
+
+  color: var(--black);
+
+  cursor: pointer;
+
+  box-shadow:
+    0 12px 34px rgba(28, 27, 25, 0.13);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.music-control:hover {
+  transform: translateY(-3px);
+
+  background: #ffffff;
+  border-color: var(--champagne-dark);
+}
+
+.music-control-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  line-height: 1;
+
+  color: var(--champagne-dark);
+}
+
+.music-control-label {
+  font-size: 6px;
+  letter-spacing: 1.7px;
+}
+
+.music-control.is-playing .music-control-icon {
+  animation: musicPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 650px) {
+  .music-control {
+    right: 16px;
+    bottom: 82px;
+
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+
+    padding: 0;
+  }
+
+  .music-control-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-control.is-playing .music-control-icon {
+    animation: none;
   }
 }
