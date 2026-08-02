@@ -1050,7 +1050,7 @@ button:focus {
 
 .dress-code-heading {
   max-width: 760px;
-  margin: 0 auto 58px;
+  margin: 0 auto 38px;
   text-align: center;
 }
 
@@ -4433,7 +4433,7 @@ button:focus {
   }
 
   .dress-code-heading {
-    margin-bottom: 42px;
+    margin-bottom: 24px;
   }
 
   .dress-code-heading h2 {
@@ -4441,7 +4441,20 @@ button:focus {
   }
 
   .dress-code-visual {
-    width: 100%;
+    width: calc(100% + 48px);
+    max-width: none;
+
+    margin-left: -24px;
+    margin-right: -24px;
+  }
+
+  .dress-code-visual img {
+    width: 118%;
+    max-width: none;
+    height: auto;
+
+    display: block;
+    margin: 0 auto;
   }
 
   .dress-code-details {
@@ -5327,6 +5340,17 @@ button:focus {
 
   .dress-code-color-item small {
     font-size: 8px;
+  }
+
+  .dress-code-visual {
+    width: calc(100% + 36px);
+
+    margin-left: -18px;
+    margin-right: -18px;
+  }
+
+  .dress-code-visual img {
+    width: 122%;
   }
 
   /* WEDDING SMALL PHONE */
