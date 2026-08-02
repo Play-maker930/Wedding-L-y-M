@@ -132,8 +132,7 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
     ),
     plane: (
       <>
-        <path d="M22 2 15 22l-4-9-9-4Z" />
-        <path d="m22 2-11 11" />
+        <path d="M22 16.5 13.5 12V5.5a1.5 1.5 0 0 0-3 0V12L2 16.5v2l8.5-2.5v4L8 21.5V23l4-1 4 1v-1.5L13.5 20v-4l8.5 2.5Z" />
       </>
     ),
     mapPin: (
@@ -206,25 +205,7 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
     ),
   }
 
-  const scrollDressInspiration = (direction) => {
-    const container = document.querySelector(
-      '.dress-inspiration-track'
-    )
 
-    if (!container) {
-      return
-    }
-
-    const distance = Math.min(
-      container.clientWidth * 0.8,
-      520
-    )
-
-    container.scrollBy({
-      left: direction * distance,
-      behavior: 'smooth',
-    })
-  }
 
   return (
     <svg {...commonProps}>
@@ -239,6 +220,20 @@ function App() {
   const [hotelSlide, setHotelSlide] = useState(0)
   const [carouselPaused, setCarouselPaused] = useState(false)
   const [touchStartX, setTouchStartX] = useState(null)
+
+  const [rsvpForm, setRsvpForm] = useState({
+    name: '',
+    email: '',
+    attendance: '',
+    guestCount: '1',
+    guestNames: [''],
+    message: '',
+  })
+
+  const [rsvpStatus, setRsvpStatus] = useState({
+    state: 'idle',
+    message: '',
+  })
 
   const hotelPhotos = [
     'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/4d45af49.jpg?impolicy=resizecrop&rw=1200&ra=fit',
@@ -451,6 +446,217 @@ function App() {
     })
   }
 
+
+  const updateRsvpField = (field, value) => {
+    setRsvpForm((currentForm) => ({
+      ...currentForm,
+      [field]: value,
+    }))
+
+    if (rsvpStatus.state !== 'idle') {
+      setRsvpStatus({
+        state: 'idle',
+        message: '',
+      })
+    }
+  }
+
+  const selectAttendance = (attendance) => {
+    setRsvpForm((currentForm) => ({
+      ...currentForm,
+      attendance,
+      guestCount:
+        attendance === 'no'
+          ? '1'
+          : currentForm.guestCount,
+      guestNames:
+        attendance === 'no'
+          ? ['']
+          : currentForm.guestNames,
+    }))
+
+    setRsvpStatus({
+      state: 'idle',
+      message: '',
+    })
+  }
+
+  const updateGuestCount = (guestCount) => {
+    const totalGuests = Number(guestCount)
+
+    setRsvpForm((currentForm) => ({
+      ...currentForm,
+      guestCount,
+      guestNames: Array.from(
+        { length: Math.max(totalGuests - 1, 0) },
+        (_, index) => currentForm.guestNames[index] || ''
+      ),
+    }))
+  }
+
+  const updateGuestName = (index, value) => {
+    setRsvpForm((currentForm) => ({
+      ...currentForm,
+      guestNames: currentForm.guestNames.map(
+        (guestName, guestIndex) =>
+          guestIndex === index ? value : guestName
+      ),
+    }))
+  }
+
+  const submitRsvp = async (event) => {
+    event.preventDefault()
+
+    if (!rsvpForm.name.trim()) {
+      setRsvpStatus({
+        state: 'error',
+        message: 'Por favor, escribe tu nombre y apellido.',
+      })
+      return
+    }
+
+    if (!rsvpForm.email.trim()) {
+      setRsvpStatus({
+        state: 'error',
+        message: 'Por favor, escribe tu correo electrónico.',
+      })
+      return
+    }
+
+    if (!rsvpForm.attendance) {
+      setRsvpStatus({
+        state: 'error',
+        message: 'Por favor, indícanos si podrás acompañarnos.',
+      })
+      return
+    }
+
+    if (
+      rsvpForm.attendance === 'yes' &&
+      Number(rsvpForm.guestCount) > 1 &&
+      rsvpForm.guestNames.some(
+        (guestName) => !guestName.trim()
+      )
+    ) {
+      setRsvpStatus({
+        state: 'error',
+        message:
+          'Por favor, completa el nombre de cada acompañante.',
+      })
+      return
+    }
+
+    const formspreeEndpoint =
+      import.meta.env.VITE_FORMSPREE_ENDPOINT
+
+    if (!formspreeEndpoint) {
+      setRsvpStatus({
+        state: 'error',
+        message:
+          'El formulario todavía no está conectado. Agrega VITE_FORMSPREE_ENDPOINT en Vercel.',
+      })
+      return
+    }
+
+    setRsvpStatus({
+      state: 'submitting',
+      message: '',
+    })
+
+    const payload = {
+      nombre: rsvpForm.name.trim(),
+      correo: rsvpForm.email.trim(),
+      asistencia:
+        rsvpForm.attendance === 'yes'
+          ? 'Sí, asistiré'
+          : 'No podré asistir',
+      cantidad_de_personas:
+        rsvpForm.attendance === 'yes'
+          ? rsvpForm.guestCount
+          : '0',
+      acompañantes:
+        rsvpForm.attendance === 'yes' &&
+        rsvpForm.guestNames.length
+          ? rsvpForm.guestNames
+              .map((guestName) => guestName.trim())
+              .join(', ')
+          : 'No aplica',
+      mensaje:
+        rsvpForm.message.trim() ||
+        'Sin mensaje adicional',
+      boda: 'Luis & Melanie · 15 de enero de 2027',
+    }
+
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error('No fue posible enviar la respuesta.')
+      }
+
+      setRsvpStatus({
+        state:
+          rsvpForm.attendance === 'yes'
+            ? 'success-yes'
+            : 'success-no',
+        message: '',
+      })
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    } catch (error) {
+      setRsvpStatus({
+        state: 'error',
+        message:
+          'No pudimos enviar tu confirmación. Inténtalo nuevamente en unos minutos.',
+      })
+    }
+  }
+
+  const resetRsvp = () => {
+    setRsvpForm({
+      name: '',
+      email: '',
+      attendance: '',
+      guestCount: '1',
+      guestNames: [''],
+      message: '',
+    })
+
+    setRsvpStatus({
+      state: 'idle',
+      message: '',
+    })
+  }
+
+  const scrollDressInspiration = (direction) => {
+    const container = document.querySelector(
+      '.dress-inspiration-track'
+    )
+
+    if (!container) {
+      return
+    }
+
+    const distance = Math.min(
+      container.clientWidth * 0.8,
+      520
+    )
+
+    container.scrollBy({
+      left: direction * distance,
+      behavior: 'smooth',
+    })
+  }
   return (
     <div className="site">
 
@@ -891,7 +1097,7 @@ function App() {
 
                   <div className="venue-image">
                     <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHgcGg0oCZDRcWWvYaJEY59gndKn1bruOiqw2EpQArkAJJr95Ke3Uu6P1X&s=10"
+                      src="https://images.pixieset.com/47662229/51c69cd63d50919fcd4655c2833839fd-xxlarge.jpg"
                       alt="Centro de Eventos Villa Celeste"
                     />
                   </div>
@@ -2507,25 +2713,396 @@ function App() {
         {activePage === 'rsvp' && (
           <section className="rsvp-page page-transition">
 
-            <p className="eyebrow">
-              15 · 01 · 2027
-            </p>
+            {rsvpStatus.state === 'success-yes' && (
+              <div className="rsvp-success">
+                <img
+                  src={monogramGold}
+                  alt=""
+                  aria-hidden="true"
+                  className="rsvp-success-monogram"
+                />
 
-            <h2>
-              Nos encantaría
-              <br />
-              <em>contar contigo.</em>
-            </h2>
+                <div className="rsvp-success-heart">
+                  ♡
+                </div>
 
-            <p>
-              Confirma tu asistencia y acompáñanos
-              <br />
-              a celebrar este momento tan especial.
-            </p>
+                <p className="eyebrow">
+                  CONFIRMACIÓN RECIBIDA
+                </p>
 
-            <button className="rsvp-main-button">
-              CONFIRMAR ASISTENCIA
-            </button>
+                <h2>
+                  Gracias por
+                  <em> confirmar.</em>
+                </h2>
+
+                <p>
+                  Estamos muy felices de celebrar este
+                  momento contigo.
+                </p>
+
+                <strong>
+                  Luis & Melanie
+                </strong>
+
+                <button
+                  type="button"
+                  className="rsvp-secondary-button"
+                  onClick={resetRsvp}
+                >
+                  ENVIAR OTRA RESPUESTA
+                </button>
+              </div>
+            )}
+
+            {rsvpStatus.state === 'success-no' && (
+              <div className="rsvp-success">
+                <img
+                  src={monogramGold}
+                  alt=""
+                  aria-hidden="true"
+                  className="rsvp-success-monogram"
+                />
+
+                <div className="rsvp-success-heart">
+                  ♡
+                </div>
+
+                <p className="eyebrow">
+                  RESPUESTA RECIBIDA
+                </p>
+
+                <h2>
+                  Gracias por
+                  <em> avisarnos.</em>
+                </h2>
+
+                <p>
+                  Aunque no puedas acompañarnos, agradecemos
+                  muchísimo que formes parte de nuestra historia.
+                </p>
+
+                <strong>
+                  Luis & Melanie
+                </strong>
+
+                <button
+                  type="button"
+                  className="rsvp-secondary-button"
+                  onClick={resetRsvp}
+                >
+                  CAMBIAR MI RESPUESTA
+                </button>
+              </div>
+            )}
+
+            {!rsvpStatus.state.startsWith('success') && (
+              <>
+                <header className="rsvp-hero">
+
+                  <div className="rsvp-hero-copy">
+                    <p className="eyebrow">
+                      RSVP · 15 · 01 · 2027
+                    </p>
+
+                    <h1>
+                      Nos encantará
+                      <em> compartir este día contigo</em>
+                    </h1>
+
+                    <p>
+                      Tu presencia será el mejor regalo.
+                      Agradecemos confirmar tu asistencia antes
+                      del <strong>15 de noviembre de 2026</strong>.
+                    </p>
+                  </div>
+
+                  <div className="rsvp-hero-monogram">
+                    <img
+                      src={monogramGold}
+                      alt="Monograma de Luis y Melanie"
+                    />
+                  </div>
+
+                </header>
+
+                <form
+                  className="rsvp-form"
+                  onSubmit={submitRsvp}
+                  noValidate
+                >
+
+                  <section className="rsvp-form-section">
+
+                    <div className="rsvp-step-heading">
+                      <span>01</span>
+
+                      <div>
+                        <small>TUS DATOS</small>
+                        <h2>Queremos saber de ti</h2>
+                      </div>
+                    </div>
+
+                    <div className="rsvp-fields-grid">
+
+                      <label className="rsvp-field">
+                        <span>Nombre y apellido *</span>
+
+                        <input
+                          type="text"
+                          name="name"
+                          autoComplete="name"
+                          value={rsvpForm.name}
+                          onChange={(event) =>
+                            updateRsvpField(
+                              'name',
+                              event.target.value
+                            )
+                          }
+                          placeholder="Escribe tu nombre completo"
+                        />
+                      </label>
+
+                      <label className="rsvp-field">
+                        <span>Correo electrónico *</span>
+
+                        <input
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          value={rsvpForm.email}
+                          onChange={(event) =>
+                            updateRsvpField(
+                              'email',
+                              event.target.value
+                            )
+                          }
+                          placeholder="nombre@correo.com"
+                        />
+                      </label>
+
+                    </div>
+
+                  </section>
+
+                  <section className="rsvp-form-section">
+
+                    <div className="rsvp-step-heading">
+                      <span>02</span>
+
+                      <div>
+                        <small>TU RESPUESTA</small>
+                        <h2>¿Podrás acompañarnos?</h2>
+                      </div>
+                    </div>
+
+                    <div className="rsvp-attendance-grid">
+
+                      <button
+                        type="button"
+                        className={
+                          rsvpForm.attendance === 'yes'
+                            ? 'rsvp-choice selected'
+                            : 'rsvp-choice'
+                        }
+                        onClick={() =>
+                          selectAttendance('yes')
+                        }
+                      >
+                        <span className="rsvp-choice-mark">
+                          ✓
+                        </span>
+
+                        <strong>
+                          Sí, con mucha ilusión
+                        </strong>
+
+                        <small>
+                          Estaré allí para celebrar con ustedes.
+                        </small>
+                      </button>
+
+                      <button
+                        type="button"
+                        className={
+                          rsvpForm.attendance === 'no'
+                            ? 'rsvp-choice selected'
+                            : 'rsvp-choice'
+                        }
+                        onClick={() =>
+                          selectAttendance('no')
+                        }
+                      >
+                        <span className="rsvp-choice-mark">
+                          —
+                        </span>
+
+                        <strong>
+                          No podré asistir
+                        </strong>
+
+                        <small>
+                          Gracias por hacérnoslo saber.
+                        </small>
+                      </button>
+
+                    </div>
+
+                  </section>
+
+                  {rsvpForm.attendance === 'yes' && (
+                    <section className="rsvp-form-section rsvp-reveal">
+
+                      <div className="rsvp-step-heading">
+                        <span>03</span>
+
+                        <div>
+                          <small>TU GRUPO</small>
+                          <h2>Cuéntanos quiénes asistirán</h2>
+                        </div>
+                      </div>
+
+                      <div className="rsvp-guest-count">
+                        <p>
+                          ¿Cuántas personas incluye esta
+                          confirmación?
+                        </p>
+
+                        <div>
+                          {['1', '2', '3', '4'].map(
+                            (guestCount) => (
+                              <button
+                                type="button"
+                                key={guestCount}
+                                className={
+                                  rsvpForm.guestCount ===
+                                  guestCount
+                                    ? 'selected'
+                                    : ''
+                                }
+                                onClick={() =>
+                                  updateGuestCount(guestCount)
+                                }
+                              >
+                                {guestCount}
+                              </button>
+                            )
+                          )}
+                        </div>
+                      </div>
+
+                      {Number(rsvpForm.guestCount) > 1 && (
+                        <div className="rsvp-companions">
+                          <p>
+                            Nombre de tus acompañantes
+                          </p>
+
+                          <div className="rsvp-companion-grid">
+                            {rsvpForm.guestNames.map(
+                              (guestName, index) => (
+                                <label
+                                  className="rsvp-field"
+                                  key={`guest-${index + 1}`}
+                                >
+                                  <span>
+                                    Acompañante {index + 1} *
+                                  </span>
+
+                                  <input
+                                    type="text"
+                                    value={guestName}
+                                    onChange={(event) =>
+                                      updateGuestName(
+                                        index,
+                                        event.target.value
+                                      )
+                                    }
+                                    placeholder="Nombre completo"
+                                  />
+                                </label>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                    </section>
+                  )}
+
+                  {rsvpForm.attendance && (
+                    <section className="rsvp-form-section rsvp-reveal">
+
+                      <div className="rsvp-step-heading">
+                        <span>
+                          {rsvpForm.attendance === 'yes'
+                            ? '04'
+                            : '03'}
+                        </span>
+
+                        <div>
+                          <small>UN MENSAJE PARA NOSOTROS</small>
+                          <h2>Nos encantará leerte</h2>
+                        </div>
+                      </div>
+
+                      <label className="rsvp-field rsvp-message-field">
+                        <span>Mensaje opcional</span>
+
+                        <textarea
+                          name="message"
+                          value={rsvpForm.message}
+                          onChange={(event) =>
+                            updateRsvpField(
+                              'message',
+                              event.target.value
+                            )
+                          }
+                          placeholder="Déjanos unas palabras bonitas..."
+                          rows="5"
+                        />
+                      </label>
+
+                    </section>
+                  )}
+
+                  <div className="rsvp-submit-area">
+
+                    <p>
+                      Cada confirmación nos acerca un poco
+                      más al gran día.
+                    </p>
+
+                    {rsvpStatus.state === 'error' && (
+                      <div
+                        className="rsvp-error"
+                        role="alert"
+                      >
+                        {rsvpStatus.message}
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      className="rsvp-submit-button"
+                      disabled={
+                        rsvpStatus.state === 'submitting'
+                      }
+                    >
+                      {rsvpStatus.state === 'submitting'
+                        ? 'ENVIANDO...'
+                        : 'CONFIRMAR ASISTENCIA'}
+
+                      <span>
+                        {rsvpStatus.state === 'submitting'
+                          ? '◌'
+                          : '→'}
+                      </span>
+                    </button>
+
+                  </div>
+
+                </form>
+              </>
+            )}
 
           </section>
         )}
@@ -2538,12 +3115,8 @@ function App() {
 
       <footer className="footer">
 
-        <span className="footer-monogram-wrap">
-          <img
-            src={monogramGold}
-            alt="Luis y Melanie"
-            className="footer-monogram"
-          />
+        <span className="footer-names">
+          Luis & Melanie
         </span>
 
         <span>

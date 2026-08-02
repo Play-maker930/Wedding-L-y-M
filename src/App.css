@@ -1420,15 +1420,19 @@ button:focus {
   width: 52px;
   height: 52px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+
+  padding: 1px 0 0;
 
   border: 1px solid rgba(185, 164, 134, 0.7);
   border-radius: 50%;
 
   font-family: 'Cormorant Garamond', serif;
   font-size: 21px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  text-align: center;
 
   color: var(--champagne-dark);
 }
@@ -3681,61 +3685,502 @@ button:focus {
 .rsvp-page {
   min-height: calc(100vh - 82px);
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  padding: 60px 25px;
+  padding-bottom: 110px;
 
   background:
     linear-gradient(
-      135deg,
-      #f7f4ee,
-      #ebe3d7
+      180deg,
+      #f7f4ee 0%,
+      #f1ebe1 48%,
+      #f7f4ee 100%
     );
 }
 
-.rsvp-page h2 {
-  margin: 30px 0;
+.rsvp-hero {
+  min-height: 520px;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 70px;
+  align-items: center;
+
+  padding: 95px 9vw 80px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.rsvp-hero-copy {
+  max-width: 760px;
+}
+
+.rsvp-hero-copy h1 {
+  margin: 24px 0 25px;
 
   font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(70px, 8vw, 112px);
   font-weight: 300;
-
-  font-size: clamp(70px, 8vw, 120px);
-  line-height: 0.78;
+  line-height: 0.82;
 }
 
-.rsvp-page h2 em {
-  font-style: italic;
+.rsvp-hero-copy h1 em {
+  display: block;
+
+  font-weight: 300;
 }
 
-.rsvp-page > p:not(.eyebrow) {
+.rsvp-hero-copy > p:last-child {
+  max-width: 590px;
+
+  margin: 0;
+
   color: var(--gray);
 
-  font-size: 11px;
-  line-height: 1.8;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  line-height: 1.55;
 }
 
-.rsvp-main-button {
-  margin-top: 35px;
+.rsvp-hero-copy strong {
+  color: var(--black);
+  font-weight: 500;
+}
 
-  padding: 17px 32px;
+.rsvp-hero-monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rsvp-hero-monogram img {
+  width: min(100%, 340px);
+  height: auto;
+
+  opacity: 0.86;
+}
+
+.rsvp-form {
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  padding: 95px 40px 0;
+}
+
+.rsvp-form-section {
+  padding: 0 0 75px;
+  margin-bottom: 75px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.rsvp-step-heading {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 24px;
+  align-items: center;
+
+  margin-bottom: 42px;
+}
+
+.rsvp-step-heading > span {
+  width: 60px;
+  height: 60px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--champagne-dark);
+  border-radius: 50%;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+
+  color: var(--champagne-dark);
+}
+
+.rsvp-step-heading small {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 7px;
+  letter-spacing: 2.5px;
+
+  color: var(--champagne-dark);
+}
+
+.rsvp-step-heading h2 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.rsvp-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+
+.rsvp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.rsvp-field > span {
+  font-size: 8px;
+  letter-spacing: 1.8px;
+
+  color: var(--gray);
+}
+
+.rsvp-field input,
+.rsvp-field textarea {
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid rgba(28, 27, 25, 0.28);
+
+  background: transparent;
+
+  color: var(--black);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  line-height: 1.4;
+
+  outline: none;
+
+  transition: border-color 0.3s ease;
+}
+
+.rsvp-field input {
+  min-height: 54px;
+}
+
+.rsvp-field textarea {
+  padding: 14px 0;
+
+  resize: vertical;
+}
+
+.rsvp-field input::placeholder,
+.rsvp-field textarea::placeholder {
+  color: rgba(119, 115, 108, 0.62);
+}
+
+.rsvp-field input:focus,
+.rsvp-field textarea:focus {
+  border-color: var(--champagne-dark);
+}
+
+.rsvp-attendance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.rsvp-choice {
+  min-height: 185px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 35px;
+
+  border: 1px solid rgba(28, 27, 25, 0.14);
+
+  background: rgba(255, 255, 255, 0.42);
+
+  color: var(--black);
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.rsvp-choice:hover {
+  transform: translateY(-3px);
+}
+
+.rsvp-choice.selected {
+  border-color: var(--champagne-dark);
+
+  background: #eee8de;
+}
+
+.rsvp-choice-mark {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 25px;
+
+  border: 1px solid var(--champagne-dark);
+  border-radius: 50%;
+
+  color: var(--champagne-dark);
+}
+
+.rsvp-choice strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.rsvp-choice small {
+  margin-top: 10px;
+
+  color: var(--gray);
+
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.rsvp-reveal {
+  animation: rsvpReveal 0.45s ease both;
+}
+
+@keyframes rsvpReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rsvp-guest-count > p,
+.rsvp-companions > p {
+  margin: 0 0 20px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+}
+
+.rsvp-guest-count > div {
+  display: flex;
+  gap: 12px;
+}
+
+.rsvp-guest-count button {
+  width: 54px;
+  height: 54px;
+
+  border: 1px solid rgba(28, 27, 25, 0.18);
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: var(--black);
+
+  cursor: pointer;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.rsvp-guest-count button.selected {
+  border-color: var(--black);
+
+  background: var(--black);
+
+  color: #ffffff;
+}
+
+.rsvp-companions {
+  margin-top: 45px;
+}
+
+.rsvp-companion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+
+.rsvp-message-field {
+  max-width: 760px;
+}
+
+.rsvp-submit-area {
+  text-align: center;
+}
+
+.rsvp-submit-area > p {
+  margin: 0 0 22px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+
+  color: var(--gray);
+}
+
+.rsvp-error {
+  max-width: 650px;
+
+  margin: 0 auto 20px;
+  padding: 15px 18px;
+
+  border: 1px solid rgba(130, 73, 60, 0.35);
+
+  background: rgba(130, 73, 60, 0.08);
+
+  color: #82503f;
+
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.rsvp-submit-button,
+.rsvp-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  min-width: 260px;
+
+  padding: 18px 28px;
 
   border: 1px solid var(--black);
 
   background: var(--black);
 
-  color: white;
+  color: #ffffff;
 
   cursor: pointer;
 
   font-size: 8px;
-  letter-spacing: 3px;
+  letter-spacing: 2.4px;
 
-  transition: all 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.rsvp-submit-button:hover,
+.rsvp-secondary-button:hover {
+  transform: translateY(-3px);
+}
+
+.rsvp-submit-button:disabled {
+  cursor: wait;
+
+  opacity: 0.65;
+}
+
+.rsvp-submit-button span {
+  font-size: 16px;
+}
+
+.rsvp-success {
+  min-height: calc(100vh - 82px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 90px 25px;
+
+  text-align: center;
+}
+
+.rsvp-success-monogram {
+  width: min(280px, 58vw);
+  height: auto;
+
+  margin-bottom: 15px;
+
+  opacity: 0;
+
+  animation: rsvpMonogramIn 1.2s ease 0.15s forwards;
+}
+
+@keyframes rsvpMonogramIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 0.86;
+    transform: scale(1);
+  }
+}
+
+.rsvp-success-heart {
+  margin-bottom: 18px;
+
+  color: var(--champagne-dark);
+
+  font-size: 28px;
+}
+
+.rsvp-success h2 {
+  margin: 24px 0 20px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(66px, 8vw, 108px);
+  font-weight: 300;
+  line-height: 0.82;
+}
+
+.rsvp-success h2 em {
+  display: block;
+  font-weight: 300;
+}
+
+.rsvp-success > p:not(.eyebrow) {
+  max-width: 570px;
+
+  margin: 0;
+
+  color: var(--gray);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.rsvp-success > strong {
+  margin-top: 25px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 29px;
+  font-weight: 400;
+}
+
+.rsvp-secondary-button {
+  margin-top: 35px;
+
+  min-width: 225px;
+
+  border-color: var(--black);
+
+  background: transparent;
+
+  color: var(--black);
 }
 
 /* =================================
@@ -3762,19 +4207,16 @@ button:focus {
    FOOTER
 ================================= */
 
-.footer-monogram-wrap {
-  width: 48px;
-  height: 28px;
-
-  display: flex;
+.footer-names {
+  display: inline-flex;
   align-items: center;
-}
 
-.footer-monogram {
-  width: 36px;
-  height: auto;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+  font-weight: 400;
+  letter-spacing: 0.8px;
 
-  display: block;
+  color: var(--black);
 }
 
 .footer {
@@ -4191,7 +4633,10 @@ button:focus {
     width: 44px;
     height: 44px;
 
+    padding-top: 1px;
+
     font-size: 18px;
+    line-height: 1;
   }
 
   .info-icon {
@@ -4741,24 +5186,91 @@ button:focus {
   .rsvp-page {
     min-height: calc(100vh - 68px);
 
-    padding: 60px 25px;
+    padding-bottom: 85px;
   }
 
-  .rsvp-page h2 {
-    margin: 25px 0;
+  .rsvp-hero {
+    min-height: auto;
 
-    font-size: clamp(65px, 18vw, 100px);
+    grid-template-columns: 1fr;
+    gap: 45px;
+
+    padding: 70px 24px 60px;
   }
 
-  .rsvp-page > p:not(.eyebrow) {
-    font-size: 11px;
+  .rsvp-hero-copy h1 {
+    font-size: 66px;
   }
 
-  .rsvp-main-button {
+  .rsvp-hero-copy > p:last-child {
+    font-size: 18px;
+  }
+
+  .rsvp-hero-monogram img {
+    width: 220px;
+  }
+
+  .rsvp-form {
+    padding: 70px 20px 0;
+  }
+
+  .rsvp-form-section {
+    padding-bottom: 55px;
+    margin-bottom: 55px;
+  }
+
+  .rsvp-step-heading {
+    grid-template-columns: 52px 1fr;
+    gap: 16px;
+
+    margin-bottom: 34px;
+  }
+
+  .rsvp-step-heading > span {
+    width: 48px;
+    height: 48px;
+
+    font-size: 20px;
+  }
+
+  .rsvp-step-heading h2 {
+    font-size: 35px;
+  }
+
+  .rsvp-fields-grid,
+  .rsvp-attendance-grid,
+  .rsvp-companion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-choice {
+    min-height: 165px;
+
+    padding: 28px;
+  }
+
+  .rsvp-guest-count > div {
+    flex-wrap: wrap;
+  }
+
+  .rsvp-submit-button,
+  .rsvp-secondary-button {
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
+  }
 
-    padding: 18px 20px;
+  .rsvp-success {
+    min-height: calc(100vh - 68px);
+
+    padding: 75px 24px;
+  }
+
+  .rsvp-success h2 {
+    font-size: 65px;
+  }
+
+  .rsvp-success > p:not(.eyebrow) {
+    font-size: 19px;
   }
 
   /* FOOTER */
@@ -4848,12 +5360,11 @@ button:focus {
     display: none;
   }
 
-  .footer-monogram-wrap {
+  .footer-names {
     justify-content: center;
-  }
 
-  .footer-monogram {
-    width: 38px;
+    font-size: 20px;
+    letter-spacing: 0.6px;
   }
 
   /* INFORMATION + VUELOS SMALL PHONE */
@@ -5002,6 +5513,39 @@ button:focus {
 
   .medellin-cta h2 {
     font-size: 54px;
+  }
+
+  /* RSVP SMALL PHONE */
+
+  .rsvp-hero {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .rsvp-hero-copy h1 {
+    font-size: 57px;
+  }
+
+  .rsvp-form {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .rsvp-step-heading h2 {
+    font-size: 31px;
+  }
+
+  .rsvp-field input,
+  .rsvp-field textarea {
+    font-size: 20px;
+  }
+
+  .rsvp-choice strong {
+    font-size: 26px;
+  }
+
+  .rsvp-success h2 {
+    font-size: 56px;
   }
 
   /* WEDDING SMALL PHONE */
