@@ -6,25 +6,20 @@ function InvitationEnvelope({
   onStartMusic,
   onOpen,
 }) {
-  const [isAnimating, setIsAnimating] = useState(false)
+  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false)
   const [isLeaving, setIsLeaving] = useState(false)
 
   useEffect(() => {
     if (!isVisible) {
-      setIsAnimating(false)
+      setIsEnvelopeOpen(false)
       setIsLeaving(false)
       return undefined
     }
-
-    const timer = window.setTimeout(() => {
-      setIsAnimating(true)
-    }, 350)
 
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
 
     return () => {
-      window.clearTimeout(timer)
       document.body.style.overflow = previousOverflow
     }
   }, [isVisible])
@@ -33,7 +28,15 @@ function InvitationEnvelope({
     return null
   }
 
-  const handleOpen = () => {
+  const handleEnvelopeOpen = () => {
+    if (isEnvelopeOpen) {
+      return
+    }
+
+    setIsEnvelopeOpen(true)
+  }
+
+  const handleEnterInvitation = () => {
     onStartMusic()
     setIsLeaving(true)
 
@@ -57,14 +60,14 @@ function InvitationEnvelope({
 
       <div
         className={
-          isAnimating
+          isEnvelopeOpen
             ? 'invitation-envelope is-open'
-            : 'invitation-envelope'
+            : 'invitation-envelope is-closed'
         }
       >
         <div className="invitation-envelope-back"></div>
 
-        <div className="invitation-card">
+        <div className="invitation-card invitation-card-folding">
           <img
             src={monogram}
             alt=""
@@ -86,9 +89,9 @@ function InvitationEnvelope({
 
           <button
             type="button"
-            onClick={handleOpen}
+            onClick={handleEnterInvitation}
           >
-            ABRIR INVITACIÓN
+            ENTRAR A LA INVITACIÓN
             <span>→</span>
           </button>
         </div>
@@ -96,11 +99,24 @@ function InvitationEnvelope({
         <div className="invitation-envelope-front"></div>
 
         <div className="invitation-envelope-flap">
-          <img
-            src={monogram}
-            alt=""
-            aria-hidden="true"
-          />
+          <button
+            type="button"
+            className="invitation-seal-button"
+            onClick={handleEnvelopeOpen}
+            aria-label="Abrir la invitación"
+          >
+            <span className="invitation-seal-halo"></span>
+
+            <img
+              src={monogram}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <small>
+              TOCA PARA ABRIR
+            </small>
+          </button>
         </div>
       </div>
 

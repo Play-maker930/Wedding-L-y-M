@@ -6,6 +6,7 @@ import parroquiaImg from './assets/parroquia.jpg'
 import dressCodeFormal from './assets/dress-code-formal.png'
 import monogramGold from './assets/monogram_gold.png'
 import menuBackground from './assets/menu-background.jpg'
+import confirmationPhoto from './assets/foto-confirmacion.jpg'
 import informationPhoto from './assets/information-photo.jpg'
 import gallery01 from './assets/gallery-01.jpg'
 import gallery02 from './assets/gallery-02.jpg'
@@ -251,6 +252,7 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
 function App() {
   const [showInvitation, setShowInvitation] = useState(true)
   const musicRef = useRef(null)
+  const homeImageRef = useRef(null)
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
 
   const [activePage, setActivePage] = useState('inicio')
@@ -476,10 +478,10 @@ function App() {
         { id: '4wtr-2', name: 'Roberto Heilbron' },
       ],
     },
-    'ZNAW': {
+    'ADM1': {
       guests: [
-        { id: 'znaw-1', name: 'Melanie' },
-        { id: 'znaw-2', name: 'Luis' },
+        { id: 'adm1-1', name: 'Melanie' },
+        { id: 'adm1-2', name: 'Luis' },
       ],
     },
     '34H3': {
@@ -887,6 +889,58 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (activePage !== 'inicio') {
+      return undefined
+    }
+
+    let animationFrameId = null
+
+    const updateHomeParallax = () => {
+      const image = homeImageRef.current
+
+      if (!image) {
+        return
+      }
+
+      const scrollOffset = Math.min(
+        window.scrollY * 0.08,
+        34
+      )
+
+      image.style.setProperty(
+        '--home-parallax',
+        `${scrollOffset}px`
+      )
+    }
+
+    const handleHomeScroll = () => {
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId)
+      }
+
+      animationFrameId = window.requestAnimationFrame(
+        updateHomeParallax
+      )
+    }
+
+    updateHomeParallax()
+    window.addEventListener('scroll', handleHomeScroll, {
+      passive: true,
+    })
+
+    return () => {
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId)
+      }
+
+      window.removeEventListener(
+        'scroll',
+        handleHomeScroll
+      )
+    }
+  }, [activePage])
+
+  useEffect(() => {
     if (
       activePage !== 'hospedaje' ||
       carouselPaused ||
@@ -1287,7 +1341,7 @@ function App() {
       }
 
       setRsvpStatus({
-        state: 'success',
+        state: 'sending-animation',
         message: '',
       })
 
@@ -1295,6 +1349,13 @@ function App() {
         top: 0,
         behavior: 'smooth',
       })
+
+      window.setTimeout(() => {
+        setRsvpStatus({
+          state: 'success',
+          message: '',
+        })
+      }, 1800)
     } catch (error) {
       setRsvpStatus({
         state: 'error',
@@ -1342,8 +1403,104 @@ function App() {
               : 'Reproducir música'
           }
         >
-          <span className="music-control-icon">
-            {isMusicPlaying ? '♫' : '♪'}
+          <span
+            className="music-control-icon violin-icon"
+            aria-hidden="true"
+          >
+            <svg
+              viewBox="0 0 72 72"
+              role="presentation"
+            >
+              <g className="violin-body">
+                <path
+                  className="violin-silhouette"
+                  d="M30.5 7.5
+                     C27.8 10.2 28.2 14.8 30.8 18.2
+                     L33.4 21.5
+                     C31.2 23.4 29.4 25.6 28.2 28.2
+                     C26.6 31.7 26.8 34.5 28.7 37
+                     C26.3 38.3 24.2 40.4 23.1 43
+                     C20.8 48.4 23.7 54.3 29 56.4
+                     C34.3 58.5 40.2 55.6 42.3 50.3
+                     C43.5 47.4 43.2 44.5 41.8 42
+                     C44.7 41.4 47 39.5 48.2 36.6
+                     C49.9 32.7 48.4 28.5 44.9 26.4
+                     C42.3 24.8 39.7 24.7 37.3 25.4
+                     L34.8 21.2
+                     C33.1 18.2 32.6 15.4 33.5 12.7
+                     C34.2 10.6 33.3 8.4 30.5 7.5Z"
+                />
+
+                <path
+                  className="violin-neck"
+                  d="M33.5 12.7 43.8 3.6"
+                />
+                <path
+                  className="violin-scroll"
+                  d="M43.8 3.6
+                     C46.4 1.6 49.7 3.4 49 6.4
+                     C48.5 8.4 46.2 9.2 44.6 8.1"
+                />
+
+                <path
+                  className="violin-fingerboard"
+                  d="M34.8 21.2 40.7 31.2"
+                />
+                <path
+                  className="violin-tailpiece"
+                  d="M31.6 48.2 35.9 55.3 39.9 49.4Z"
+                />
+                <path
+                  className="violin-bridge"
+                  d="M31.9 40.3
+                     C34.2 41.1 36.6 41 39.1 39.9"
+                />
+
+                <path
+                  className="violin-string"
+                  d="M43.9 6.2 33.6 22.3 35 53.8"
+                />
+                <path
+                  className="violin-string"
+                  d="M46 6.9 35.1 22.8 37.2 53.1"
+                />
+
+                <path
+                  className="violin-f-hole"
+                  d="M28.2 33.2
+                     C26.7 35.2 27 37.2 28.7 38.7
+                     C30.1 39.8 30.3 41.4 29.3 43"
+                />
+                <path
+                  className="violin-f-hole"
+                  d="M42.5 30.9
+                     C44.1 32.5 44 34.6 42.5 36
+                     C41.3 37.2 41.3 38.8 42.4 40.2"
+                />
+
+                <circle cx="44.7" cy="7.1" r="0.7" />
+                <circle cx="47.1" cy="5.4" r="0.7" />
+              </g>
+
+              <g className="violin-bow">
+                <path
+                  className="violin-bow-stick"
+                  d="M57.6 8.2 25.6 61.8"
+                />
+                <path
+                  className="violin-bow-hair"
+                  d="M61.2 10.1 29.4 63.7"
+                />
+                <path
+                  className="violin-bow-tip"
+                  d="M57.6 8.2 61.2 10.1"
+                />
+                <path
+                  className="violin-bow-frog"
+                  d="M25.6 61.8 29.4 63.7 31.2 60.8 27.4 58.9Z"
+                />
+              </g>
+            </svg>
           </span>
 
           <span className="music-control-label">
@@ -1493,6 +1650,7 @@ function App() {
 
             <div className="home-image">
               <img
+                ref={homeImageRef}
                 src={portadaImg}
                 alt="Luis y Melanie"
               />
@@ -3142,8 +3300,72 @@ function App() {
         {activePage === 'rsvp' && (
           <section className="rsvp-code-page page-transition">
 
+            {rsvpStatus.state === 'sending-animation' && (
+              <div
+                className="rsvp-send-animation"
+                role="status"
+                aria-live="polite"
+              >
+                <div className="rsvp-paper-scene">
+
+                  <div
+                    className="rsvp-paper-sheet"
+                    aria-hidden="true"
+                  >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                  <svg
+                    className="rsvp-paper-plane"
+                    viewBox="0 0 120 90"
+                    aria-hidden="true"
+                  >
+                    <path
+                      className="rsvp-plane-outline"
+                      d="M8 42 109 8 77 81 53 55 8 42Z"
+                    />
+                    <path
+                      className="rsvp-plane-fold"
+                      d="M53 55 109 8 65 63 77 81"
+                    />
+                    <path
+                      className="rsvp-plane-fold"
+                      d="M53 55 50 76 65 63"
+                    />
+                  </svg>
+
+                  <div
+                    className="rsvp-plane-trail"
+                    aria-hidden="true"
+                  ></div>
+
+                </div>
+
+                <p>ENVIANDO CONFIRMACIÓN</p>
+
+                <h2>
+                  Tu respuesta está
+                  <em> en camino</em>
+                </h2>
+              </div>
+            )}
+
             {rsvpStatus.state === 'success' && (
               <div className="rsvp-code-success">
+
+                <div
+                  className="rsvp-confirmation-photo"
+                  aria-hidden="true"
+                >
+                  <img
+                    src={confirmationPhoto}
+                    alt=""
+                  />
+                </div>
+
+                <div className="rsvp-code-success-content">
 
                 <div className="rsvp-success-heart">
                   ♡
@@ -3175,10 +3397,15 @@ function App() {
                   INGRESAR OTRO CÓDIGO
                 </button>
 
+                </div>
+
               </div>
             )}
 
-            {rsvpStatus.state !== 'success' && (
+            {![
+              'success',
+              'sending-animation',
+            ].includes(rsvpStatus.state) && (
               <>
                 <header className="rsvp-code-hero">
 
