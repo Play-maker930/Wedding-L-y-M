@@ -5,6 +5,17 @@ import bodaFondoImg from './assets/la boda.jpg'
 import parroquiaImg from './assets/parroquia.jpg'
 import dressCodeFormal from './assets/dress-code-formal.png'
 import monogramGold from './assets/monogram_gold.png'
+import menuBackground from './assets/menu-background.jpg'
+import informationPhoto from './assets/information-photo.jpg'
+import gallery01 from './assets/gallery-01.jpg'
+import gallery02 from './assets/gallery-02.jpg'
+import gallery03 from './assets/gallery-03.jpg'
+import gallery04 from './assets/gallery-04.jpg'
+import gallery05 from './assets/gallery-05.jpg'
+import gallery06 from './assets/gallery-06.jpg'
+import gallery07 from './assets/gallery-07.jpg'
+import gallery08 from './assets/gallery-08.jpg'
+import gallery09 from './assets/gallery-09.jpg'
 import weddingMusic from './assets/wedding-music.m4a'
 import InvitationEnvelope from './InvitationEnvelope'
 
@@ -119,6 +130,26 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
     phone: (
       <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7A2 2 0 0 1 22 16.9Z" />
     ),
+    church: (
+      <>
+        <path d="M12 2v5M9.5 4.5h5" />
+        <path d="M6 22V10l6-4 6 4v12" />
+        <path d="M9 22v-6h6v6" />
+        <path d="M4 22h16" />
+      </>
+    ),
+    location: (
+      <>
+        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </>
+    ),
+    info: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 10v6M12 7h.01" />
+      </>
+    ),
     hotel: (
       <>
         <path d="M4 21V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v16" />
@@ -224,23 +255,67 @@ function App() {
 
   const [activePage, setActivePage] = useState('inicio')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeGalleryImage, setActiveGalleryImage] = useState(null)
   const [hotelSlide, setHotelSlide] = useState(0)
   const [carouselPaused, setCarouselPaused] = useState(false)
   const [touchStartX, setTouchStartX] = useState(null)
 
-  const [rsvpForm, setRsvpForm] = useState({
-    name: '',
-    email: '',
-    attendance: '',
-    guestCount: '1',
-    guestNames: [''],
-    message: '',
-  })
-
+  const [rsvpCode, setRsvpCode] = useState('')
+  const [rsvpGroup, setRsvpGroup] = useState(null)
+  const [rsvpResponses, setRsvpResponses] = useState({})
+  const [rsvpMessage, setRsvpMessage] = useState('')
   const [rsvpStatus, setRsvpStatus] = useState({
     state: 'idle',
     message: '',
   })
+
+  const galleryPhotos = [
+    {
+      src: gallery01,
+      alt: 'Luis y Melanie en uno de sus momentos favoritos',
+      className: 'gallery-editorial-item gallery-editorial-hero',
+    },
+    {
+      src: gallery02,
+      alt: 'Retrato de Luis y Melanie',
+      className: 'gallery-editorial-item gallery-editorial-portrait',
+    },
+    {
+      src: gallery03,
+      alt: 'Luis y Melanie durante uno de sus viajes',
+      className: 'gallery-editorial-item gallery-editorial-square',
+    },
+    {
+      src: gallery04,
+      alt: 'Detalle especial de la historia de Luis y Melanie',
+      className: 'gallery-editorial-item gallery-editorial-detail',
+    },
+    {
+      src: gallery05,
+      alt: 'Momento espontáneo de Luis y Melanie',
+      className: 'gallery-editorial-item gallery-editorial-square',
+    },
+    {
+      src: gallery06,
+      alt: 'Luis y Melanie disfrutando un paisaje juntos',
+      className: 'gallery-editorial-item gallery-editorial-landscape',
+    },
+    {
+      src: gallery07,
+      alt: 'Momento romántico de Luis y Melanie',
+      className: 'gallery-editorial-item gallery-editorial-portrait',
+    },
+    {
+      src: gallery08,
+      alt: 'Recuerdo cotidiano de Luis y Melanie',
+      className: 'gallery-editorial-item gallery-editorial-square',
+    },
+    {
+      src: gallery09,
+      alt: 'Luis y Melanie celebrando el comienzo de una nueva etapa',
+      className: 'gallery-editorial-item gallery-editorial-final',
+    },
+  ]
 
   const hotelPhotos = [
     'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/4d45af49.jpg?impolicy=resizecrop&rw=1200&ra=fit',
@@ -251,6 +326,510 @@ function App() {
     'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/1a3f5742.jpg?impolicy=resizecrop&rw=1200&ra=fit',
     'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/0adc0142.jpg?impolicy=resizecrop&rw=1200&ra=fit',
   ]
+
+  const invitationGroups = {
+    'RJDP': {
+      guests: [
+        { id: 'rjdp-1', name: 'Manuel S. Paz R.' },
+        { id: 'rjdp-2', name: 'Dania Castillo' },
+      ],
+    },
+    'DSVR': {
+      guests: [
+        { id: 'dsvr-1', name: 'Patricia Lagos' },
+        { id: 'dsvr-2', name: 'Bryan Lagos' },
+      ],
+    },
+    '28NA': {
+      guests: [
+        { id: '28na-1', name: 'Stefen Lagos' },
+      ],
+    },
+    'NFFF': {
+      guests: [
+        { id: 'nfff-1', name: 'Sophia Lagos' },
+        { id: 'nfff-2', name: 'Joshua Wassermann' },
+      ],
+    },
+    '4KCN': {
+      guests: [
+        { id: '4kcn-1', name: 'Lourdes Presnell' },
+        { id: '4kcn-2', name: 'Clark Presnell' },
+      ],
+    },
+    'WXKG': {
+      guests: [
+        { id: 'wxkg-1', name: 'Kyle Presnell' },
+        { id: 'wxkg-2', name: 'Olivia Dato' },
+      ],
+    },
+    'VUWY': {
+      guests: [
+        { id: 'vuwy-1', name: 'Natalie Presnell' },
+        { id: 'vuwy-2', name: 'Matt Nicholson' },
+      ],
+    },
+    '47BH': {
+      guests: [
+        { id: '47bh-1', name: 'Anais Hanson' },
+        { id: '47bh-2', name: 'Bob Hanson' },
+      ],
+    },
+    '6YU7': {
+      guests: [
+        { id: '6yu7-1', name: 'Roberto Rivera' },
+        { id: '6yu7-2', name: 'Angelita Dalvis Tello' },
+        { id: '6yu7-3', name: 'Isabella Rivera' },
+      ],
+    },
+    'VJ95': {
+      guests: [
+        { id: 'vj95-1', name: 'Jose Antonio Salerno' },
+        { id: 'vj95-2', name: 'Lesbia Chong' },
+        { id: 'vj95-3', name: 'Alison Salerno' },
+        { id: 'vj95-4', name: 'Ivan Antonio Salerno' },
+      ],
+    },
+    'V3LK': {
+      guests: [
+        { id: 'v3lk-1', name: 'Anais Rodriguez de Rivera' },
+        { id: 'v3lk-2', name: 'Ricardo Rivera' },
+      ],
+    },
+    'VEUB': {
+      guests: [
+        { id: 'veub-1', name: 'Jorge Icaza' },
+      ],
+    },
+    '36UA': {
+      guests: [
+        { id: '36ua-1', name: 'Mirna Castillo' },
+        { id: '36ua-2', name: 'Emmanuel Noriega' },
+      ],
+    },
+    'BVYE': {
+      guests: [
+        { id: 'bvye-1', name: 'Puppy Noriega' },
+        { id: 'bvye-2', name: 'Andrea Pacheco' },
+      ],
+    },
+    'Z5DX': {
+      guests: [
+        { id: 'z5dx-1', name: 'Elena Noriega' },
+        { id: 'z5dx-2', name: 'Anxo Vasquez' },
+      ],
+    },
+    'YVFZ': {
+      guests: [
+        { id: 'yvfz-1', name: 'Anabella Noriega' },
+        { id: 'yvfz-2', name: 'David Lu' },
+      ],
+    },
+    'FMAE': {
+      guests: [
+        { id: 'fmae-1', name: 'Sheryll Castillo' },
+      ],
+    },
+    'PG2L': {
+      guests: [
+        { id: 'pg2l-1', name: 'Dominic Rios' },
+        { id: 'pg2l-2', name: 'Monalisa Arias' },
+      ],
+    },
+    'GVX8': {
+      guests: [
+        { id: 'gvx8-1', name: 'Boris Castillo' },
+        { id: 'gvx8-2', name: 'Marlene Morais' },
+      ],
+    },
+    'JHWP': {
+      guests: [
+        { id: 'jhwp-1', name: 'Andrea Castillo' },
+      ],
+    },
+    'XJ5B': {
+      guests: [
+        { id: 'xj5b-1', name: 'Liliana Sandino' },
+        { id: 'xj5b-2', name: 'Karnail Luis Gonzalez' },
+      ],
+    },
+    'ZUJZ': {
+      guests: [
+        { id: 'zujz-1', name: 'Ana Lorena Ortega' },
+        { id: 'zujz-2', name: 'Luis +1 Tía Anita' },
+      ],
+    },
+    'AXHT': {
+      guests: [
+        { id: 'axht-1', name: 'Lisi Chen' },
+        { id: 'axht-2', name: 'Gary Lau' },
+      ],
+    },
+    'TJMT': {
+      guests: [
+        { id: 'tjmt-1', name: 'Olga Lobato' },
+      ],
+    },
+    '4WTR': {
+      guests: [
+        { id: '4wtr-1', name: 'Argelis Heilbron' },
+        { id: '4wtr-2', name: 'Roberto Heilbron' },
+      ],
+    },
+    'ZNAW': {
+      guests: [
+        { id: 'znaw-1', name: 'Melanie' },
+        { id: 'znaw-2', name: 'Luis' },
+      ],
+    },
+    '34H3': {
+      guests: [
+        { id: '34h3-1', name: 'Manuel A. Paz C' },
+        { id: '34h3-2', name: 'Carmen Pagoaga' },
+      ],
+    },
+    '6RUS': {
+      guests: [
+        { id: '6rus-1', name: 'Ana Paola Quiroz' },
+        { id: '6rus-2', name: 'Angel Tinoco' },
+      ],
+    },
+    'EKJ6': {
+      guests: [
+        { id: 'ekj6-1', name: 'Estefania Robles' },
+        { id: 'ekj6-2', name: 'Kadim Issa' },
+      ],
+    },
+    'TAS6': {
+      guests: [
+        { id: 'tas6-1', name: 'Giselle Martinez' },
+        { id: 'tas6-2', name: 'Joseramon Harari' },
+      ],
+    },
+    'MX9T': {
+      guests: [
+        { id: 'mx9t-1', name: 'Diana Jaen' },
+        { id: 'mx9t-2', name: 'Lorenzo Olivero' },
+      ],
+    },
+    'DDGF': {
+      guests: [
+        { id: 'ddgf-1', name: 'Christine Lau' },
+        { id: 'ddgf-2', name: 'Christiane Cachafeiro' },
+      ],
+    },
+    'D7NK': {
+      guests: [
+        { id: 'd7nk-1', name: 'Adriana Pimentel' },
+        { id: 'd7nk-2', name: 'Celso Rodriguez' },
+      ],
+    },
+    'LMAP': {
+      guests: [
+        { id: 'lmap-1', name: 'Jennifer Urriola' },
+        { id: 'lmap-2', name: 'Giandomenico Iannicelli' },
+      ],
+    },
+    'S53Z': {
+      guests: [
+        { id: 's53z-1', name: 'Melanie Arjona' },
+        { id: 's53z-2', name: 'Jules Floquet Chenut' },
+      ],
+    },
+    'AGTS': {
+      guests: [
+        { id: 'agts-1', name: 'Jonathan Sinclair' },
+        { id: 'agts-2', name: 'Nicole Moran' },
+      ],
+    },
+    'EPE4': {
+      guests: [
+        { id: 'epe4-1', name: 'Jose Gomez' },
+      ],
+    },
+    'HVFR': {
+      guests: [
+        { id: 'hvfr-1', name: 'Andrea de la Rosa' },
+      ],
+    },
+    '8G9A': {
+      guests: [
+        { id: '8g9a-1', name: 'Jessica Bernal' },
+      ],
+    },
+    '8X72': {
+      guests: [
+        { id: '8x72-1', name: 'Maria Carla Muñoz' },
+        { id: '8x72-2', name: 'Ian Tuñon' },
+      ],
+    },
+    'U6CQ': {
+      guests: [
+        { id: 'u6cq-1', name: 'Bertha Carolina Morales' },
+        { id: 'u6cq-2', name: 'Lucas Valdes' },
+      ],
+    },
+    'DUW3': {
+      guests: [
+        { id: 'duw3-1', name: 'Ana Lucia Carrizo' },
+      ],
+    },
+    '8AH4': {
+      guests: [
+        { id: '8ah4-1', name: 'Katherine Pinto' },
+      ],
+    },
+    '5FJS': {
+      guests: [
+        { id: '5fjs-1', name: 'Anthony Echevers' },
+        { id: '5fjs-2', name: 'Hannah Aguilar' },
+      ],
+    },
+    'LQWS': {
+      guests: [
+        { id: 'lqws-1', name: 'Diego Marin' },
+        { id: 'lqws-2', name: 'Susana Fuentes' },
+      ],
+    },
+    'K6MV': {
+      guests: [
+        { id: 'k6mv-1', name: 'Pedro Flores' },
+        { id: 'k6mv-2', name: 'Enith Vargas' },
+      ],
+    },
+    'NE34': {
+      guests: [
+        { id: 'ne34-1', name: 'Nelson Gonzalez' },
+        { id: 'ne34-2', name: 'Mónica Meléndez' },
+      ],
+    },
+    'MLKK': {
+      guests: [
+        { id: 'mlkk-1', name: 'Javier Grant' },
+      ],
+    },
+    '2KJF': {
+      guests: [
+        { id: '2kjf-1', name: 'Eduardo Alvarez' },
+        { id: '2kjf-2', name: 'Eduardo +1' },
+      ],
+    },
+    'FC27': {
+      guests: [
+        { id: 'fc27-1', name: 'Fernando Correa' },
+        { id: 'fc27-2', name: 'Fer +1' },
+      ],
+    },
+    'TSJV': {
+      guests: [
+        { id: 'tsjv-1', name: 'Jose Luis Castillo' },
+      ],
+    },
+    '68CU': {
+      guests: [
+        { id: '68cu-1', name: 'Andres Marin' },
+      ],
+    },
+    '92DB': {
+      guests: [
+        { id: '92db-1', name: 'Rodolfo De León' },
+        { id: '92db-2', name: 'Akys Justiniani' },
+      ],
+    },
+    '39FS': {
+      guests: [
+        { id: '39fs-1', name: 'Ana Carolina De León' },
+        { id: '39fs-2', name: 'Joseph Stanziola' },
+      ],
+    },
+    'UTUQ': {
+      guests: [
+        { id: 'utuq-1', name: 'Moises Pinto' },
+        { id: 'utuq-2', name: 'Velkis Miranda de Pinto' },
+      ],
+    },
+    '9TX2': {
+      guests: [
+        { id: '9tx2-1', name: 'Miriam Pinto' },
+        { id: '9tx2-2', name: 'Luigi' },
+        { id: '9tx2-3', name: 'Ana Patricia' },
+      ],
+    },
+    'CQWG': {
+      guests: [
+        { id: 'cqwg-1', name: 'Enilsa Pinto' },
+        { id: 'cqwg-2', name: 'Luis Alberto Osborne' },
+        { id: 'cqwg-3', name: 'Antonio Osborne' },
+      ],
+    },
+    'DXGJ': {
+      guests: [
+        { id: 'dxgj-1', name: 'Luis Alfonso Pinto' },
+        { id: 'dxgj-2', name: 'Esposa' },
+      ],
+    },
+    'PNMA': {
+      guests: [
+        { id: 'pnma-1', name: 'Enilsa Ríos' },
+      ],
+    },
+    '2RV8': {
+      guests: [
+        { id: '2rv8-1', name: 'Maximo Pinto' },
+        { id: '2rv8-2', name: 'Genika' },
+        { id: '2rv8-3', name: 'Andres Pinto' },
+      ],
+    },
+    '626M': {
+      guests: [
+        { id: '626m-1', name: 'Mario Pinto' },
+        { id: '626m-2', name: 'Diobelis' },
+        { id: '626m-3', name: 'Nicole Pinto' },
+      ],
+    },
+    '84LA': {
+      guests: [
+        { id: '84la-1', name: 'Fabrizzio Pinto' },
+      ],
+    },
+    'M9DH': {
+      guests: [
+        { id: 'm9dh-1', name: 'Giovanni Hidrogo' },
+        { id: 'm9dh-2', name: 'Elsy Miranda' },
+      ],
+    },
+    'L4ZT': {
+      guests: [
+        { id: 'l4zt-1', name: 'Amir Hidrogo' },
+        { id: 'l4zt-2', name: 'Amir +1' },
+      ],
+    },
+    'XVTV': {
+      guests: [
+        { id: 'xvtv-1', name: 'Leonel Hidrogo' },
+        { id: 'xvtv-2', name: 'Leonel +1' },
+      ],
+    },
+    '3QG8': {
+      guests: [
+        { id: '3qg8-1', name: 'Jorge' },
+      ],
+    },
+    'FY6K': {
+      guests: [
+        { id: 'fy6k-1', name: 'Guillermo Rodriguez' },
+        { id: 'fy6k-2', name: 'Yesica Aguirre' },
+      ],
+    },
+    '26DL': {
+      guests: [
+        { id: '26dl-1', name: 'Boris Castillo M.' },
+      ],
+    },
+    'U8Z2': {
+      guests: [
+        { id: 'u8z2-1', name: 'Johana Gutierrez' },
+      ],
+    },
+    'ARBP': {
+      guests: [
+        { id: 'arbp-1', name: 'María Lourdes Muñoz' },
+      ],
+    },
+    '226W': {
+      guests: [
+        { id: '226w-1', name: 'María Yanguez' },
+      ],
+    },
+    'X8C7': {
+      guests: [
+        { id: 'x8c7-1', name: 'Edwin Vega' },
+        { id: 'x8c7-2', name: 'Veronica Aleman' },
+      ],
+    },
+    'KJAA': {
+      guests: [
+        { id: 'kjaa-1', name: 'Even Vasquez' },
+      ],
+    },
+    'WHZE': {
+      guests: [
+        { id: 'whze-1', name: 'Jhonatan Lopez' },
+      ],
+    },
+    'HJYK': {
+      guests: [
+        { id: 'hjyk-1', name: 'JoseAntonio Jimenez' },
+      ],
+    },
+    '3FKF': {
+      guests: [
+        { id: '3fkf-1', name: 'Hector Bustavino' },
+      ],
+    },
+    '7FX5': {
+      guests: [
+        { id: '7fx5-1', name: 'Angie Yanis' },
+      ],
+    },
+    'YZXX': {
+      guests: [
+        { id: 'yzxx-1', name: 'Joel Soriano' },
+      ],
+    },
+    '9JBX': {
+      guests: [
+        { id: '9jbx-1', name: 'Samuel Barria' },
+      ],
+    },
+    'YVQJ': {
+      guests: [
+        { id: 'yvqj-1', name: 'Miguel Valzania' },
+      ],
+    },
+    'ELVR': {
+      guests: [
+        { id: 'elvr-1', name: 'Ivana Jimenez' },
+      ],
+    },
+    'RJFB': {
+      guests: [
+        { id: 'rjfb-1', name: 'Constantino Peralta' },
+        { id: 'rjfb-2', name: 'Thelma Bodden' },
+      ],
+    },
+    '2MU5': {
+      guests: [
+        { id: '2mu5-1', name: 'Raysa Gonzalez' },
+      ],
+    },
+    'YNCD': {
+      guests: [
+        { id: 'yncd-1', name: 'Raul Sandoval' },
+      ],
+    },
+    'GGZ8': {
+      guests: [
+        { id: 'ggz8-1', name: 'Ana Lorena Fernandez' },
+      ],
+    },
+    'WEJ6': {
+      guests: [
+        { id: 'wej6-1', name: 'Raul Gañan' },
+      ],
+    },
+    'C2BK': {
+      guests: [
+        { id: 'c2bk-1', name: 'Eduardo Miranda' },
+        { id: 'c2bk-2', name: 'Belkis' },
+      ],
+    },
+    'ZBKT': {
+      guests: [
+        { id: 'zbkt-1', name: 'Lenora Klappe' },
+      ],
+    },
+  }
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -324,6 +903,64 @@ function App() {
 
     return () => clearInterval(carouselTimer)
   }, [activePage, carouselPaused, hotelPhotos.length])
+
+  const openGalleryImage = (index) => {
+    setActiveGalleryImage(index)
+  }
+
+  const closeGalleryImage = () => {
+    setActiveGalleryImage(null)
+  }
+
+  const showPreviousGalleryImage = () => {
+    setActiveGalleryImage((currentIndex) =>
+      currentIndex === null
+        ? null
+        : (currentIndex - 1 + galleryPhotos.length) %
+          galleryPhotos.length
+    )
+  }
+
+  const showNextGalleryImage = () => {
+    setActiveGalleryImage((currentIndex) =>
+      currentIndex === null
+        ? null
+        : (currentIndex + 1) % galleryPhotos.length
+    )
+  }
+
+  useEffect(() => {
+    if (activeGalleryImage === null) {
+      return undefined
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const handleGalleryKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeGalleryImage()
+      }
+
+      if (event.key === 'ArrowLeft') {
+        showPreviousGalleryImage()
+      }
+
+      if (event.key === 'ArrowRight') {
+        showNextGalleryImage()
+      }
+    }
+
+    window.addEventListener('keydown', handleGalleryKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener(
+        'keydown',
+        handleGalleryKeyDown
+      )
+    }
+  }, [activeGalleryImage])
 
   const showPreviousHotelPhoto = () => {
     setHotelSlide((currentSlide) =>
@@ -436,7 +1073,6 @@ function App() {
 
   const pages = [
     { id: 'inicio', label: 'Inicio' },
-    { id: 'historia', label: 'Nuestra historia' },
     { id: 'boda', label: 'La boda' },
     { id: 'informacion', label: 'Información' },
     { id: 'galeria', label: 'Galería' },
@@ -503,104 +1139,105 @@ function App() {
     setShowInvitation(false)
   }
 
-  const updateRsvpField = (field, value) => {
-    setRsvpForm((currentForm) => ({
-      ...currentForm,
-      [field]: value,
+  const normalizeInvitationCode = (value) =>
+    value
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '')
+      .slice(0, 4)
+
+  const verifyRsvpCode = (event) => {
+    event.preventDefault()
+
+    const normalizedCode = normalizeInvitationCode(rsvpCode)
+    const matchedGroup = invitationGroups[normalizedCode]
+
+    if (!matchedGroup) {
+      setRsvpStatus({
+        state: 'error',
+        message:
+          'No encontramos ese código. Verifica que esté escrito correctamente.',
+      })
+      return
+    }
+
+    setRsvpCode(normalizedCode)
+    setRsvpGroup(matchedGroup)
+
+    setRsvpResponses(
+      matchedGroup.guests.reduce(
+        (responses, guest) => ({
+          ...responses,
+          [guest.id]: '',
+        }),
+        {}
+      )
+    )
+
+    setRsvpStatus({
+      state: 'verified',
+      message: '',
+    })
+
+    window.setTimeout(() => {
+      setRsvpStatus({
+        state: 'selecting',
+        message: '',
+      })
+    }, 700)
+  }
+
+  const updateGuestResponse = (guestId, response) => {
+    setRsvpResponses((currentResponses) => ({
+      ...currentResponses,
+      [guestId]: response,
     }))
 
-    if (rsvpStatus.state !== 'idle') {
+    if (rsvpStatus.state === 'error') {
       setRsvpStatus({
-        state: 'idle',
+        state: 'selecting',
         message: '',
       })
     }
   }
 
-  const selectAttendance = (attendance) => {
-    setRsvpForm((currentForm) => ({
-      ...currentForm,
-      attendance,
-      guestCount:
-        attendance === 'no'
-          ? '1'
-          : currentForm.guestCount,
-      guestNames:
-        attendance === 'no'
-          ? ['']
-          : currentForm.guestNames,
-    }))
-
+  const resetRsvp = () => {
+    setRsvpCode('')
+    setRsvpGroup(null)
+    setRsvpResponses({})
+    setRsvpMessage('')
     setRsvpStatus({
       state: 'idle',
       message: '',
     })
   }
 
-  const updateGuestCount = (guestCount) => {
-    const totalGuests = Number(guestCount)
-
-    setRsvpForm((currentForm) => ({
-      ...currentForm,
-      guestCount,
-      guestNames: Array.from(
-        { length: Math.max(totalGuests - 1, 0) },
-        (_, index) => currentForm.guestNames[index] || ''
-      ),
-    }))
-  }
-
-  const updateGuestName = (index, value) => {
-    setRsvpForm((currentForm) => ({
-      ...currentForm,
-      guestNames: currentForm.guestNames.map(
-        (guestName, guestIndex) =>
-          guestIndex === index ? value : guestName
-      ),
-    }))
-  }
-
   const submitRsvp = async (event) => {
     event.preventDefault()
 
-    if (!rsvpForm.name.trim()) {
-      setRsvpStatus({
-        state: 'error',
-        message: 'Por favor, escribe tu nombre y apellido.',
-      })
+    if (!rsvpGroup) {
       return
     }
 
-    if (!rsvpForm.email.trim()) {
-      setRsvpStatus({
-        state: 'error',
-        message: 'Por favor, escribe tu correo electrónico.',
-      })
-      return
-    }
+    const hasPendingResponses = rsvpGroup.guests.some(
+      (guest) => !rsvpResponses[guest.id]
+    )
 
-    if (!rsvpForm.attendance) {
-      setRsvpStatus({
-        state: 'error',
-        message: 'Por favor, indícanos si podrás acompañarnos.',
-      })
-      return
-    }
-
-    if (
-      rsvpForm.attendance === 'yes' &&
-      Number(rsvpForm.guestCount) > 1 &&
-      rsvpForm.guestNames.some(
-        (guestName) => !guestName.trim()
-      )
-    ) {
+    if (hasPendingResponses) {
       setRsvpStatus({
         state: 'error',
         message:
-          'Por favor, completa el nombre de cada acompañante.',
+          'Indica si cada invitado asistirá o no antes de enviar la confirmación.',
       })
       return
     }
+
+    const attendingGuests = rsvpGroup.guests.filter(
+      (guest) => rsvpResponses[guest.id] === 'yes'
+    )
+
+    const decliningGuests = rsvpGroup.guests.filter(
+      (guest) => rsvpResponses[guest.id] === 'no'
+    )
 
     const formspreeEndpoint =
       import.meta.env.VITE_FORMSPREE_ENDPOINT
@@ -620,26 +1257,18 @@ function App() {
     })
 
     const payload = {
-      nombre: rsvpForm.name.trim(),
-      correo: rsvpForm.email.trim(),
-      asistencia:
-        rsvpForm.attendance === 'yes'
-          ? 'Sí, asistiré'
-          : 'No podré asistir',
-      cantidad_de_personas:
-        rsvpForm.attendance === 'yes'
-          ? rsvpForm.guestCount
-          : '0',
-      acompañantes:
-        rsvpForm.attendance === 'yes' &&
-        rsvpForm.guestNames.length
-          ? rsvpForm.guestNames
-              .map((guestName) => guestName.trim())
-              .join(', ')
-          : 'No aplica',
+      codigo_de_invitacion: rsvpCode,
+      confirmados:
+        attendingGuests.length > 0
+          ? attendingGuests.map((guest) => guest.name).join(', ')
+          : 'Ninguno',
+      no_asisten:
+        decliningGuests.length > 0
+          ? decliningGuests.map((guest) => guest.name).join(', ')
+          : 'Ninguno',
+      total_confirmados: attendingGuests.length,
       mensaje:
-        rsvpForm.message.trim() ||
-        'Sin mensaje adicional',
+        rsvpMessage.trim() || 'Sin mensaje adicional',
       boda: 'Luis & Melanie · 15 de enero de 2027',
     }
 
@@ -658,10 +1287,7 @@ function App() {
       }
 
       setRsvpStatus({
-        state:
-          rsvpForm.attendance === 'yes'
-            ? 'success-yes'
-            : 'success-no',
+        state: 'success',
         message: '',
       })
 
@@ -676,22 +1302,6 @@ function App() {
           'No pudimos enviar tu confirmación. Inténtalo nuevamente en unos minutos.',
       })
     }
-  }
-
-  const resetRsvp = () => {
-    setRsvpForm({
-      name: '',
-      email: '',
-      attendance: '',
-      guestCount: '1',
-      guestNames: [''],
-      message: '',
-    })
-
-    setRsvpStatus({
-      state: 'idle',
-      message: '',
-    })
   }
 
   return (
@@ -804,6 +1414,16 @@ function App() {
         }
       >
 
+        <div
+          className="mobile-menu-photo"
+          aria-hidden="true"
+        >
+          <img
+            src={menuBackground}
+            alt=""
+          />
+        </div>
+
         <div className="mobile-menu-header">
           <button
             className="mobile-menu-brand"
@@ -834,6 +1454,11 @@ function App() {
                 activePage === page.id
                   ? 'mobile-nav-link selected'
                   : 'mobile-nav-link'
+              }
+              aria-current={
+                activePage === page.id
+                  ? 'page'
+                  : undefined
               }
             >
               <span>
@@ -961,67 +1586,6 @@ function App() {
                   DESCUBRE LA BODA
                   <span>→</span>
                 </button>
-
-              </div>
-
-            </div>
-
-          </section>
-        )}
-
-        {/* ================================
-            HISTORIA
-        ================================= */}
-
-        {activePage === 'historia' && (
-          <section className="inner-page page-transition">
-
-            <div className="inner-heading">
-              <p className="eyebrow">
-                NOSOTROS
-              </p>
-
-              <h2>
-                Nuestra <em>historia</em>
-              </h2>
-            </div>
-
-            <div className="story-grid">
-
-              <div className="story-image">
-                <span>FOTOGRAFÍA</span>
-              </div>
-
-              <div className="story-text">
-
-                <span className="number">
-                  01
-                </span>
-
-                <h3>
-                  El comienzo
-                </h3>
-
-                <p>
-                  Aquí contaremos cómo comenzó nuestra
-                  historia, ese primer encuentro y todos
-                  esos momentos que nos trajeron hasta
-                  este día.
-                </p>
-
-                <span className="number second">
-                  02
-                </span>
-
-                <h3>
-                  El siguiente capítulo
-                </h3>
-
-                <p>
-                  Una historia que sigue creciendo y que
-                  estamos felices de compartir con las
-                  personas que más queremos.
-                </p>
 
               </div>
 
@@ -1361,6 +1925,14 @@ function App() {
                 cada momento con tranquilidad.
               </p>
 
+              <figure className="information-photo">
+                <img
+                  src={informationPhoto}
+                  alt="Luis y Melanie"
+                  loading="lazy"
+                />
+              </figure>
+
             </div>
 
             <div className="info-grid">
@@ -1386,7 +1958,10 @@ function App() {
               </button>
 
 
-              <button className="info-card">
+              <button
+                className="info-card"
+                onClick={() => navigate('transporte')}
+              >
                 <span className="info-number">02</span>
 
                 <span className="info-icon">
@@ -1968,6 +2543,179 @@ function App() {
         )}
 
         {/* ================================
+            TRANSPORTE
+        ================================= */}
+
+        {activePage === 'transporte' && (
+          <section className="transport-page page-transition">
+
+            <button
+              type="button"
+              className="transport-back-button"
+              onClick={() => navigate('informacion')}
+            >
+              <LineIcon name="arrowLeft" size={18} />
+              VOLVER A INFORMACIÓN
+            </button>
+
+            <section className="transport-hero">
+
+              <div className="transport-hero-overlay"></div>
+
+              <div className="transport-hero-content">
+
+                <p className="section-kicker">
+                  EL DÍA DE LA BODA
+                </p>
+
+                <h1>
+                  <span className="transport-title-line">
+                    Solo tienes que
+                  </span>
+                  <em>disfrutar</em>
+                </h1>
+
+                <p>
+                  Hemos organizado transporte privado para los
+                  invitados hospedados en Movich Las Lomas, para
+                  que puedan disfrutar cada momento del día sin
+                  preocuparse por los traslados.
+                </p>
+
+              </div>
+
+            </section>
+
+            <section className="transport-route-section">
+
+              <div className="transport-section-heading">
+
+                <p className="section-kicker">
+                  TU RECORRIDO
+                </p>
+
+                <h2>
+                  Nosotros nos encargamos
+                  <em> de cada traslado</em>
+                </h2>
+
+                <p>
+                  Desde la salida del hotel hasta el regreso al
+                  finalizar la celebración, nosotros nos
+                  encargaremos de cada traslado.
+                </p>
+
+              </div>
+
+              <div className="transport-route">
+
+                <div
+                  className="transport-route-line"
+                  aria-hidden="true"
+                ></div>
+
+                <article className="transport-stop">
+                  <div className="transport-stop-icon">
+                    <LineIcon name="hotel" size={30} />
+                  </div>
+
+                  <h3>Hotel sede</h3>
+
+                  <p>
+                    Punto de encuentro y salida desde
+                    Movich Las Lomas.
+                  </p>
+                </article>
+
+                <article className="transport-stop">
+                  <div className="transport-stop-icon">
+                    <LineIcon name="church" size={30} />
+                  </div>
+
+                  <h3>Ceremonia</h3>
+
+                  <p>
+                    Traslado a la Parroquia María Madre
+                    de Dios.
+                  </p>
+                </article>
+
+                <article className="transport-stop">
+                  <div className="transport-stop-icon">
+                    <LineIcon name="location" size={30} />
+                  </div>
+
+                  <h3>Recepción</h3>
+
+                  <p>
+                    Traslado al Centro de Eventos
+                    Villa Celeste.
+                  </p>
+                </article>
+
+                <article className="transport-stop">
+                  <div className="transport-stop-icon">
+                    <LineIcon name="bus" size={30} />
+                  </div>
+
+                  <h3>Regreso al hotel</h3>
+
+                  <p>
+                    Al finalizar la celebración, el transporte
+                    regresará a Movich Las Lomas.
+                  </p>
+                </article>
+
+              </div>
+
+            </section>
+
+            <section className="transport-note-section">
+
+              <div className="transport-note">
+
+                <div className="transport-note-icon">
+                  <LineIcon name="info" size={26} />
+                </div>
+
+                <div>
+                  <span>IMPORTANTE</span>
+
+                  <p>
+                    Los espacios para el transporte son limitados.
+                    Para garantizar una mejor experiencia, tendrán
+                    prioridad los invitados hospedados en el hotel
+                    sede.
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="transport-schedule">
+
+                <p className="section-kicker">
+                  HORARIOS
+                </p>
+
+                <h2>
+                  Los detalles se compartirán
+                  <em> más cerca de la fecha</em>
+                </h2>
+
+                <p>
+                  Informaremos los horarios exactos de salida,
+                  los puntos de encuentro y las opciones de
+                  regreso antes del día de la boda.
+                </p>
+
+              </div>
+
+            </section>
+
+          </section>
+        )}
+
+        {/* ================================
             MEDELLÍN
         ================================= */}
 
@@ -1976,7 +2724,7 @@ function App() {
 
             <button
               type="button"
-              className="subpage-back-button"
+              className="medellin-back-button"
               onClick={() => navigate('informacion')}
             >
               <LineIcon name="arrowLeft" size={18} />
@@ -1994,7 +2742,6 @@ function App() {
 
                 <h1>
                   Medellín
-                  <em> y Rionegro</em>
                 </h1>
 
                 <p>
@@ -2005,31 +2752,9 @@ function App() {
               </div>
 
             </section>
-
-            <section className="medellin-stay-note-section">
-
-              <div className="medellin-important-note">
-                <div>
-                  <LineIcon name="warning" size={26} />
-                </div>
-
-                <p>
-                  <strong>Para el fin de semana de la boda,</strong>
-                  recomendamos hospedarse en Rionegro. Así estarán
-                  cerca del aeropuerto, el hotel sede y los lugares
-                  de la celebración.
-                </p>
-              </div>
-
-            </section>
-
             <section className="medellin-weather">
 
               <div className="medellin-weather-heading">
-                <p className="section-kicker">
-                  CLIMA Y MALETA
-                </p>
-
                 <h2>
                   La eterna primavera
                 </h2>
@@ -2104,8 +2829,8 @@ function App() {
 
                 <article className="medellin-attraction-card large">
                   <img
-                    src="https://images.pexels.com/photos/12638911/pexels-photo-12638911.jpeg?auto=compress&dpr=1&h=900&w=1400"
-                    alt="Vista de Comuna 13 en Medellín"
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/%27Medellin_es_una_Chimba%27_-_Comuna_13_-_Medell%C3%ADn_-_Colombia_2024_%282%29.jpg?width=1800"
+                    alt="Arte urbano y color en la Comuna 13 de Medellín"
                   />
 
                   <div className="medellin-attraction-overlay">
@@ -2120,8 +2845,8 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://images.unsplash.com/photo-1590598016835-83cf3357ebc5?auto=format&fit=crop&w=1200&q=85"
-                    alt="Vista panorámica de Medellín"
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Provenza_-_Carrera_35_-_Medell%C3%ADn_-_Colombia_2024.jpg?width=1600"
+                    alt="Calle arbolada y restaurantes de Provenza en Medellín"
                   />
 
                   <div className="medellin-attraction-overlay">
@@ -2136,8 +2861,8 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://images.unsplash.com/photo-1512250431446-d0b4b57b27ec?auto=format&fit=crop&w=1200&q=85"
-                    alt="Medellín de noche"
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Medell%C3%ADn%2C_Plaza_Botero%2C_2023-07_CN-01.jpg?width=1600"
+                    alt="Esculturas y arquitectura de Plaza Botero en Medellín"
                   />
 
                   <div className="medellin-attraction-overlay">
@@ -2152,8 +2877,8 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://images.unsplash.com/photo-1590598016835-83cf3357ebc5?auto=format&fit=crop&w=1200&q=85"
-                    alt="Paisaje urbano de Medellín"
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Jard%C3%ADn_Bot%C3%A1nico_de_Medell%C3%ADn.jpg?width=1600"
+                    alt="Vegetación y senderos del Jardín Botánico de Medellín"
                   />
 
                   <div className="medellin-attraction-overlay">
@@ -2168,8 +2893,8 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://images.unsplash.com/photo-1512250431446-d0b4b57b27ec?auto=format&fit=crop&w=1200&q=85"
-                    alt="Vista nocturna de Medellín"
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Estaci%C3%B3n_Arv%C3%AD_%28Metro_de_Medell%C3%ADn%29.jpg?width=1600"
+                    alt="Naturaleza y estación del Parque Arví en Medellín"
                   />
 
                   <div className="medellin-attraction-overlay">
@@ -2202,8 +2927,8 @@ function App() {
 
                 <article className="medellin-escape-feature">
                   <img
-                    src="https://images.unsplash.com/photo-1639534448069-a47cf42d7cb9?auto=format&fit=crop&w=1500&q=85"
-                    alt="Paisaje de Guatapé"
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Vista_desde_la_piedra_El_Pe%C3%B1ol._Guatap%C3%A9%2C_Colombia._20091114.JPG?width=1800"
+                    alt="Vista panorámica del embalse de Guatapé desde la Piedra del Peñol"
                   />
 
                   <div>
@@ -2215,29 +2940,7 @@ function App() {
                     </p>
                   </div>
                 </article>
-
-                <div className="medellin-escape-list">
-
-                  <article>
-                    <span>01</span>
-                    <h3>Santa Elena</h3>
-                    <p>
-                      Naturaleza, flores y tradición silletera.
-                    </p>
-                  </article>
-
-                  <article>
-                    <span>02</span>
-                    <h3>Llanogrande</h3>
-                    <p>
-                      Restaurantes, cafés y ambiente campestre
-                      muy cerca de Rionegro.
-                    </p>
-                  </article>
-
-                </div>
-
-              </div>
+</div>
 
             </section>
 
@@ -2298,43 +3001,136 @@ function App() {
         ================================= */}
 
         {activePage === 'galeria' && (
-          <section className="inner-page gallery-page page-transition">
+          <section className="gallery-editorial-page page-transition">
 
-            <div className="inner-heading">
+            <header className="gallery-editorial-heading">
 
               <p className="eyebrow">
                 MOMENTOS
               </p>
 
+              <h1>
+                Nuestra
+                <em> galería</em>
+              </h1>
+
+              <p>
+                Una colección de recuerdos, viajes y momentos
+                que han hecho nuestra historia tan especial.
+              </p>
+
+            </header>
+
+            <div className="gallery-editorial-grid">
+
+              {galleryPhotos.map((photo, index) => (
+                <button
+                  type="button"
+                  key={photo.src}
+                  className={photo.className}
+                  onClick={() => openGalleryImage(index)}
+                  aria-label={`Abrir fotografía ${index + 1} de ${galleryPhotos.length}`}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading={index < 2 ? 'eager' : 'lazy'}
+                  />
+
+                  <span className="gallery-editorial-number">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+
+                  {index === 2 && (
+                    <span className="gallery-editorial-caption">
+                      OUR FAVORITE ADVENTURES
+                    </span>
+                  )}
+
+                  {index === 5 && (
+                    <span className="gallery-editorial-caption">
+                      LUIS & MELANIE · THROUGH THE YEARS
+                    </span>
+                  )}
+                </button>
+              ))}
+
+            </div>
+
+            <footer className="gallery-editorial-ending">
+
+              <span>♡</span>
+
               <h2>
-                Nuestra <em>galería</em>
+                Cada recuerdo nos trajo hasta aquí.
               </h2>
 
-            </div>
+              <p>
+                Lo mejor está por comenzar.
+              </p>
 
-            <div className="gallery-grid">
+            </footer>
 
-              <div className="gallery-photo large">
-                01
+            {activeGalleryImage !== null && (
+              <div
+                className="gallery-lightbox"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Fotografía ampliada"
+                onClick={closeGalleryImage}
+              >
+
+                <button
+                  type="button"
+                  className="gallery-lightbox-close"
+                  onClick={closeGalleryImage}
+                  aria-label="Cerrar fotografía"
+                >
+                  ×
+                </button>
+
+                <button
+                  type="button"
+                  className="gallery-lightbox-arrow previous"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    showPreviousGalleryImage()
+                  }}
+                  aria-label="Ver fotografía anterior"
+                >
+                  <LineIcon name="chevronLeft" size={34} />
+                </button>
+
+                <figure
+                  className="gallery-lightbox-content"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <img
+                    src={galleryPhotos[activeGalleryImage].src}
+                    alt={galleryPhotos[activeGalleryImage].alt}
+                  />
+
+                  <figcaption>
+                    {String(activeGalleryImage + 1).padStart(2, '0')}
+                    <span>/</span>
+                    {String(galleryPhotos.length).padStart(2, '0')}
+                  </figcaption>
+                </figure>
+
+                <button
+                  type="button"
+                  className="gallery-lightbox-arrow next"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    showNextGalleryImage()
+                  }}
+                  aria-label="Ver fotografía siguiente"
+                >
+                  <LineIcon name="chevronRight" size={34} />
+                </button>
+
               </div>
-
-              <div className="gallery-photo">
-                02
-              </div>
-
-              <div className="gallery-photo">
-                03
-              </div>
-
-              <div className="gallery-photo">
-                04
-              </div>
-
-              <div className="gallery-photo large">
-                05
-              </div>
-
-            </div>
+            )}
 
           </section>
         )}
@@ -2344,10 +3140,10 @@ function App() {
         ================================= */}
 
         {activePage === 'rsvp' && (
-          <section className="rsvp-page page-transition">
+          <section className="rsvp-code-page page-transition">
 
-            {rsvpStatus.state === 'success-yes' && (
-              <div className="rsvp-success">
+            {rsvpStatus.state === 'success' && (
+              <div className="rsvp-code-success">
 
                 <div className="rsvp-success-heart">
                   ♡
@@ -2359,12 +3155,12 @@ function App() {
 
                 <h2>
                   Gracias por
-                  <em> confirmar.</em>
+                  <em> responder.</em>
                 </h2>
 
                 <p>
-                  Estamos muy felices de celebrar este
-                  momento contigo.
+                  Hemos registrado la respuesta de todos
+                  los invitados incluidos en este código.
                 </p>
 
                 <strong>
@@ -2376,314 +3172,63 @@ function App() {
                   className="rsvp-secondary-button"
                   onClick={resetRsvp}
                 >
-                  ENVIAR OTRA RESPUESTA
+                  INGRESAR OTRO CÓDIGO
                 </button>
+
               </div>
             )}
 
-            {rsvpStatus.state === 'success-no' && (
-              <div className="rsvp-success">
-
-                <div className="rsvp-success-heart">
-                  ♡
-                </div>
-
-                <p className="eyebrow">
-                  RESPUESTA RECIBIDA
-                </p>
-
-                <h2>
-                  Gracias por
-                  <em> avisarnos.</em>
-                </h2>
-
-                <p>
-                  Aunque no puedas acompañarnos, agradecemos
-                  muchísimo que formes parte de nuestra historia.
-                </p>
-
-                <strong>
-                  Luis & Melanie
-                </strong>
-
-                <button
-                  type="button"
-                  className="rsvp-secondary-button"
-                  onClick={resetRsvp}
-                >
-                  CAMBIAR MI RESPUESTA
-                </button>
-              </div>
-            )}
-
-            {!rsvpStatus.state.startsWith('success') && (
+            {rsvpStatus.state !== 'success' && (
               <>
-                <header className="rsvp-hero">
+                <header className="rsvp-code-hero">
 
-                  <div className="rsvp-hero-copy">
-                    <p className="eyebrow">
-                      RSVP · 15 · 01 · 2027
-                    </p>
+                  <p className="eyebrow">
+                    RSVP · 15 · 01 · 2027
+                  </p>
 
-                    <h1>
-                      Nos encantará
-                      <em> compartir este día contigo</em>
-                    </h1>
+                  <h1>
+                    Confirma tu
+                    <em> asistencia</em>
+                  </h1>
 
-                    <p>
-                      Tu presencia será el mejor regalo.
-                      Agradecemos confirmar tu asistencia antes
-                      del <strong>15 de noviembre de 2026</strong>.
-                    </p>
-                  </div>
-
+                  <p>
+                    Ingresa el código que encontrarás en tu
+                    invitación para ver las personas incluidas.
+                  </p>
 
                 </header>
 
-                <form
-                  className="rsvp-form"
-                  onSubmit={submitRsvp}
-                  noValidate
-                >
+                {!rsvpGroup && (
+                  <form
+                    className="rsvp-code-entry"
+                    onSubmit={verifyRsvpCode}
+                    noValidate
+                  >
 
-                  <section className="rsvp-form-section">
+                    <label htmlFor="invitation-code">
+                      CÓDIGO DE INVITACIÓN
+                    </label>
 
-                    <div className="rsvp-step-heading">
-                      <span>01</span>
+                    <input
+                      id="invitation-code"
+                      type="text"
+                      inputMode="text"
+                      autoComplete="off"
+                      maxLength="4"
+                      value={rsvpCode}
+                      onChange={(event) =>
+                        setRsvpCode(
+                          normalizeInvitationCode(
+                            event.target.value
+                          )
+                        )
+                      }
+                      placeholder="A7M2"
+                      aria-describedby="rsvp-code-help"
+                    />
 
-                      <div>
-                        <small>TUS DATOS</small>
-                        <h2>Queremos saber de ti</h2>
-                      </div>
-                    </div>
-
-                    <div className="rsvp-fields-grid">
-
-                      <label className="rsvp-field">
-                        <span>Nombre y apellido *</span>
-
-                        <input
-                          type="text"
-                          name="name"
-                          autoComplete="name"
-                          value={rsvpForm.name}
-                          onChange={(event) =>
-                            updateRsvpField(
-                              'name',
-                              event.target.value
-                            )
-                          }
-                          placeholder="Escribe tu nombre completo"
-                        />
-                      </label>
-
-                      <label className="rsvp-field">
-                        <span>Correo electrónico *</span>
-
-                        <input
-                          type="email"
-                          name="email"
-                          autoComplete="email"
-                          value={rsvpForm.email}
-                          onChange={(event) =>
-                            updateRsvpField(
-                              'email',
-                              event.target.value
-                            )
-                          }
-                          placeholder="nombre@correo.com"
-                        />
-                      </label>
-
-                    </div>
-
-                  </section>
-
-                  <section className="rsvp-form-section">
-
-                    <div className="rsvp-step-heading">
-                      <span>02</span>
-
-                      <div>
-                        <small>TU RESPUESTA</small>
-                        <h2>¿Podrás acompañarnos?</h2>
-                      </div>
-                    </div>
-
-                    <div className="rsvp-attendance-grid">
-
-                      <button
-                        type="button"
-                        className={
-                          rsvpForm.attendance === 'yes'
-                            ? 'rsvp-choice selected'
-                            : 'rsvp-choice'
-                        }
-                        onClick={() =>
-                          selectAttendance('yes')
-                        }
-                      >
-                        <span className="rsvp-choice-mark">
-                          ✓
-                        </span>
-
-                        <strong>
-                          Sí, con mucha ilusión
-                        </strong>
-
-                        <small>
-                          Estaré allí para celebrar con ustedes.
-                        </small>
-                      </button>
-
-                      <button
-                        type="button"
-                        className={
-                          rsvpForm.attendance === 'no'
-                            ? 'rsvp-choice selected'
-                            : 'rsvp-choice'
-                        }
-                        onClick={() =>
-                          selectAttendance('no')
-                        }
-                      >
-                        <span className="rsvp-choice-mark">
-                          —
-                        </span>
-
-                        <strong>
-                          No podré asistir
-                        </strong>
-
-                        <small>
-                          Gracias por hacérnoslo saber.
-                        </small>
-                      </button>
-
-                    </div>
-
-                  </section>
-
-                  {rsvpForm.attendance === 'yes' && (
-                    <section className="rsvp-form-section rsvp-reveal">
-
-                      <div className="rsvp-step-heading">
-                        <span>03</span>
-
-                        <div>
-                          <small>TU GRUPO</small>
-                          <h2>Cuéntanos quiénes asistirán</h2>
-                        </div>
-                      </div>
-
-                      <div className="rsvp-guest-count">
-                        <p>
-                          ¿Cuántas personas incluye esta
-                          confirmación?
-                        </p>
-
-                        <div>
-                          {['1', '2', '3', '4'].map(
-                            (guestCount) => (
-                              <button
-                                type="button"
-                                key={guestCount}
-                                className={
-                                  rsvpForm.guestCount ===
-                                  guestCount
-                                    ? 'selected'
-                                    : ''
-                                }
-                                onClick={() =>
-                                  updateGuestCount(guestCount)
-                                }
-                              >
-                                {guestCount}
-                              </button>
-                            )
-                          )}
-                        </div>
-                      </div>
-
-                      {Number(rsvpForm.guestCount) > 1 && (
-                        <div className="rsvp-companions">
-                          <p>
-                            Nombre de tus acompañantes
-                          </p>
-
-                          <div className="rsvp-companion-grid">
-                            {rsvpForm.guestNames.map(
-                              (guestName, index) => (
-                                <label
-                                  className="rsvp-field"
-                                  key={`guest-${index + 1}`}
-                                >
-                                  <span>
-                                    Acompañante {index + 1} *
-                                  </span>
-
-                                  <input
-                                    type="text"
-                                    value={guestName}
-                                    onChange={(event) =>
-                                      updateGuestName(
-                                        index,
-                                        event.target.value
-                                      )
-                                    }
-                                    placeholder="Nombre completo"
-                                  />
-                                </label>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      )}
-
-                    </section>
-                  )}
-
-                  {rsvpForm.attendance && (
-                    <section className="rsvp-form-section rsvp-reveal">
-
-                      <div className="rsvp-step-heading">
-                        <span>
-                          {rsvpForm.attendance === 'yes'
-                            ? '04'
-                            : '03'}
-                        </span>
-
-                        <div>
-                          <small>UN MENSAJE PARA NOSOTROS</small>
-                          <h2>Nos encantará leerte</h2>
-                        </div>
-                      </div>
-
-                      <label className="rsvp-field rsvp-message-field">
-                        <span>Mensaje opcional</span>
-
-                        <textarea
-                          name="message"
-                          value={rsvpForm.message}
-                          onChange={(event) =>
-                            updateRsvpField(
-                              'message',
-                              event.target.value
-                            )
-                          }
-                          placeholder="Déjanos unas palabras bonitas..."
-                          rows="5"
-                        />
-                      </label>
-
-                    </section>
-                  )}
-
-                  <div className="rsvp-submit-area">
-
-                    <p>
-                      Cada confirmación nos acerca un poco
-                      más al gran día.
+                    <p id="rsvp-code-help">
+                      El código contiene cuatro caracteres.
                     </p>
 
                     {rsvpStatus.state === 'error' && (
@@ -2698,24 +3243,192 @@ function App() {
                     <button
                       type="submit"
                       className="rsvp-submit-button"
-                      disabled={
-                        rsvpStatus.state === 'submitting'
-                      }
+                      disabled={rsvpCode.length !== 4}
                     >
-                      {rsvpStatus.state === 'submitting'
-                        ? 'ENVIANDO...'
-                        : 'CONFIRMAR ASISTENCIA'}
-
-                      <span>
-                        {rsvpStatus.state === 'submitting'
-                          ? '◌'
-                          : '→'}
-                      </span>
+                      CONTINUAR
+                      <span>→</span>
                     </button>
 
-                  </div>
+                  </form>
+                )}
 
-                </form>
+                {rsvpGroup &&
+                  rsvpStatus.state === 'verified' && (
+                    <div className="rsvp-code-verified">
+
+                      <span>✓</span>
+
+                      <h2>
+                        Código verificado
+                      </h2>
+
+                    </div>
+                  )}
+
+                {rsvpGroup &&
+                  rsvpStatus.state !== 'verified' && (
+                    <form
+                      className="rsvp-guest-confirmation"
+                      onSubmit={submitRsvp}
+                      noValidate
+                    >
+
+                      <div className="rsvp-guest-heading">
+
+                        <p className="eyebrow">
+                          NOS ALEGRA QUE ESTÉS AQUÍ
+                        </p>
+
+                        <h2>
+                          Selecciona quiénes
+                          <em> asistirán</em>
+                        </h2>
+
+                        <p>
+                          Indica la respuesta de cada persona
+                          incluida en este código.
+                        </p>
+
+                      </div>
+
+                      <div className="rsvp-guest-list">
+
+                        {rsvpGroup.guests.map((guest) => (
+                          <article
+                            className="rsvp-guest-card"
+                            key={guest.id}
+                          >
+
+                            <h3>
+                              {guest.name}
+                            </h3>
+
+                            <div className="rsvp-guest-options">
+
+                              <button
+                                type="button"
+                                className={
+                                  rsvpResponses[guest.id] === 'yes'
+                                    ? 'selected'
+                                    : ''
+                                }
+                                onClick={() =>
+                                  updateGuestResponse(
+                                    guest.id,
+                                    'yes'
+                                  )
+                                }
+                              >
+                                <span>✓</span>
+                                ASISTIRÉ
+                              </button>
+
+                              <button
+                                type="button"
+                                className={
+                                  rsvpResponses[guest.id] === 'no'
+                                    ? 'selected'
+                                    : ''
+                                }
+                                onClick={() =>
+                                  updateGuestResponse(
+                                    guest.id,
+                                    'no'
+                                  )
+                                }
+                              >
+                                <span>—</span>
+                                NO ASISTIRÉ
+                              </button>
+
+                            </div>
+
+                          </article>
+                        ))}
+
+                      </div>
+
+                      <section className="rsvp-code-message">
+
+                        <label htmlFor="rsvp-message">
+                          UN MENSAJE PARA NOSOTROS
+                        </label>
+
+                        <textarea
+                          id="rsvp-message"
+                          rows="5"
+                          value={rsvpMessage}
+                          onChange={(event) =>
+                            setRsvpMessage(event.target.value)
+                          }
+                          placeholder="Déjanos unas palabras si así lo deseas..."
+                        />
+
+                      </section>
+
+                      <div className="rsvp-code-summary">
+
+                        <strong>
+                          {
+                            Object.values(rsvpResponses).filter(
+                              (response) => response === 'yes'
+                            ).length
+                          }
+                        </strong>
+
+                        <span>
+                          {
+                            Object.values(rsvpResponses).filter(
+                              (response) => response === 'yes'
+                            ).length === 1
+                              ? 'INVITADO CONFIRMADO'
+                              : 'INVITADOS CONFIRMADOS'
+                          }
+                        </span>
+
+                      </div>
+
+                      {rsvpStatus.state === 'error' && (
+                        <div
+                          className="rsvp-error"
+                          role="alert"
+                        >
+                          {rsvpStatus.message}
+                        </div>
+                      )}
+
+                      <div className="rsvp-code-actions">
+
+                        <button
+                          type="button"
+                          className="rsvp-code-back"
+                          onClick={resetRsvp}
+                        >
+                          CAMBIAR CÓDIGO
+                        </button>
+
+                        <button
+                          type="submit"
+                          className="rsvp-submit-button"
+                          disabled={
+                            rsvpStatus.state === 'submitting'
+                          }
+                        >
+                          {rsvpStatus.state === 'submitting'
+                            ? 'ENVIANDO...'
+                            : 'ENVIAR CONFIRMACIÓN'}
+
+                          <span>
+                            {rsvpStatus.state === 'submitting'
+                              ? '◌'
+                              : '→'}
+                          </span>
+                        </button>
+
+                      </div>
+
+                    </form>
+                  )}
               </>
             )}
 
