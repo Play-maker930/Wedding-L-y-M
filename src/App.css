@@ -12946,3 +12946,31 @@ button:focus {
     font-size: 10px;
   }
 }
+
+
+/* =================================
+   V65 — HOME / TEXTOS COLOR CHOCOLATE
+   Unifica todo el contenido textual del Inicio
+   con el tono chocolate del monograma.
+================================= */
+
+.home-page,
+.home-page p,
+.home-page span,
+.home-page small,
+.home-page strong,
+.home-page h1,
+.home-page h2,
+.home-page h3,
+.home-page h4,
+.home-page h5,
+.home-page h6,
+.home-page a,
+.home-page button,
+.home-page .eyebrow,
+.home-page .home-date,
+.home-page .home-location,
+.home-page .countdown-number,
+.home-page .countdown-label {
+  color: #5b4636;
+}
