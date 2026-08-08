@@ -3,7 +3,6 @@ import './App.css'
 import portadaImg from './assets/Portada.jpg'
 import bodaFondoImg from './assets/la boda.jpg'
 import parroquiaImg from './assets/parroquia.jpg'
-import dressCodeFormal from './assets/dress-code-formal.png'
 import monogramGold from './assets/monogram_gold.png'
 import menuBackground from './assets/menu-background.jpg'
 import confirmationPhoto from './assets/foto-confirmacion.jpg'
@@ -1127,7 +1126,7 @@ function App() {
 
   const pages = [
     { id: 'inicio', label: 'Inicio' },
-    { id: 'boda', label: 'La boda' },
+    { id: 'boda', label: 'El Gran Día' },
     { id: 'informacion', label: 'Información' },
     { id: 'galeria', label: 'Galería' },
     { id: 'rsvp', label: 'RSVP' },
@@ -1726,7 +1725,7 @@ function App() {
               </div>
 
               <p className="home-location">
-                MEDELLÍN · VILLA CELESTE
+                MEDELLÍN · COLOMBIA
               </p>
 
               <div className="home-bottom">
@@ -1776,7 +1775,7 @@ function App() {
               </p>
 
               <h1>
-                La boda
+                Nuestra Boda
               </h1>
 
               <div className="decorative-line">
@@ -1791,7 +1790,13 @@ function App() {
               </p>
 
               <div className="date-display">
-                <span>15</span>
+                <span className="date-weekday">
+                  VIERNES
+                </span>
+
+                <span className="date-day">
+                  15
+                </span>
 
                 <div>
                   <strong>ENERO</strong>
@@ -1812,7 +1817,7 @@ function App() {
               <div className="section-heading">
 
                 <p className="section-kicker">
-                  UBICACIONES
+                  DETALLES DEL EVENTO
                 </p>
 
                 <h2>
@@ -1850,13 +1855,18 @@ function App() {
                       Parroquia María Madre de Dios
                     </h3>
 
+                    <p className="venue-time">
+                      4:00 PM
+                    </p>
+
                     <p className="venue-city">
                       Rionegro, Medellín
                     </p>
 
                     <p className="venue-description">
-                      Comenzamos nuestro día más especial
-                      rodeados de quienes más queremos.
+                      Comenzamos nuestro día más especial con Dios
+                      en el centro, recibiendo Su bendición y
+                      celebrando nuestro amor junto a quienes más queremos.
                     </p>
 
                     <div className="venue-actions">
@@ -1920,6 +1930,10 @@ function App() {
                       Centro de Eventos Villa Celeste
                     </h3>
 
+                    <p className="venue-time">
+                      5:30 PM
+                    </p>
+
                     <p className="venue-city">
                       Rionegro, Medellín
                     </p>
@@ -1978,22 +1992,14 @@ function App() {
                   DRESS CODE
                 </p>
 
-                <h2>
-                  Elegancia para
-                  <em> una noche inolvidable</em>
+                <h2 className="dress-code-formal-title">
+                  FORMAL
                 </h2>
 
                 <p>
                   Queremos que todos se sientan cómodos y
-                  elegantes mientras celebramos con nosotros.
+                  elegantes mientras celebran con nosotros.
                 </p>
-              </div>
-
-              <div className="dress-code-visual">
-                <img
-                  src={dressCodeFormal}
-                  alt="Código de vestimenta formal para mujeres y caballeros"
-                />
               </div>
 
               <div className="dress-code-details">
@@ -2047,8 +2053,7 @@ function App() {
                   </h3>
 
                   <p>
-                    Recomendamos traje en tonos oscuros,
-                    camisa de vestir y zapatos formales.
+                    Traje formal y corbata.
                   </p>
                 </div>
 
@@ -2080,7 +2085,7 @@ function App() {
               <p className="information-intro">
                 Hemos reunido aquí los detalles más importantes
                 para que puedas organizar tu viaje y disfrutar
-                cada momento con tranquilidad.
+                cada momento.
               </p>
 
               <figure className="information-photo">
@@ -2421,24 +2426,10 @@ function App() {
                     <div className="stay-icon-wrap">
                       <LineIcon name="breakfast" size={27} />
                     </div>
-                    <h3>Desayuno incluido</h3>
+                    <h3>Desayuno</h3>
                   </div>
                   <p>
-                    Incluido para los huéspedes registrados
-                    en la reserva.
-                  </p>
-                </article>
-
-                <article>
-                  <div className="stay-included-title">
-                    <div className="stay-icon-wrap">
-                      <LineIcon name="priceTag" size={27} />
-                    </div>
-                    <h3>Tarifa especial</h3>
-                  </div>
-                  <p>
-                    COP 445.000 por noche para habitación
-                    doble.
+                    Para los huéspedes registrados en la reserva.
                   </p>
                 </article>
 
@@ -2450,8 +2441,7 @@ function App() {
                     <h3>Exención de IVA</h3>
                   </div>
                   <p>
-                    Aplicable según las condiciones
-                    establecidas por el hotel.
+                    Aplicable para los extranjeros.
                   </p>
                 </article>
 
@@ -2485,10 +2475,6 @@ function App() {
 
                   <div>
                     <h3>Habitación doble</h3>
-                    <p>
-                      Hasta dos huéspedes. La tarifa es de
-                      COP 445.000 por noche e incluye desayuno.
-                    </p>
                   </div>
 
                   <strong className="stay-room-rate">
@@ -2514,7 +2500,7 @@ function App() {
 
                   <strong className="stay-room-rate">
                     + COP 135.000
-                    <small>POR NOCHE · DESAYUNO INCLUIDO</small>
+                    <small>Por persona adicional por noche + Desayuno incluido</small>
                   </strong>
                 </article>
 
@@ -2758,9 +2744,10 @@ function App() {
                 </h2>
 
                 <p>
-                  Desde la salida del hotel hasta el regreso al
-                  finalizar la celebración, nosotros nos
-                  encargaremos de cada traslado.
+                  Para que disfrutes el día sin preocuparte por los
+                  traslados, hemos organizado el recorrido completo:
+                  desde la salida del hotel hasta el regreso al finalizar
+                  la celebración.
                 </p>
 
               </div>
@@ -2940,7 +2927,7 @@ function App() {
                   <h3>Noches frescas</h3>
                   <p>
                     Lleva un abrigo ligero para las noches
-                    en Rionegro.
+                    en Medellín.
                   </p>
                 </article>
 
@@ -3672,14 +3659,6 @@ function App() {
 
         <span className="footer-names">
           Luis & Melanie
-        </span>
-
-        <span>
-          MEDELLÍN · COLOMBIA
-        </span>
-
-        <span>
-          2027
         </span>
 
       </footer>

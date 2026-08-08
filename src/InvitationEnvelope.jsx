@@ -67,7 +67,7 @@ function InvitationEnvelope({
       >
         <div className="invitation-envelope-back"></div>
 
-        <div className="invitation-card invitation-card-folding">
+        <div className="invitation-card">
           <img
             src={monogram}
             alt=""
@@ -98,31 +98,28 @@ function InvitationEnvelope({
 
         <div className="invitation-envelope-front"></div>
 
-        <div className="invitation-envelope-flap">
-          <button
-            type="button"
-            className="invitation-seal-button"
-            onClick={handleEnvelopeOpen}
-            aria-label="Abrir la invitación"
-          >
-            <span className="invitation-seal-halo"></span>
+        <div className="invitation-envelope-flap"></div>
 
-            <img
-              src={monogram}
-              alt=""
-              aria-hidden="true"
-            />
+        <button
+          type="button"
+          className="invitation-seal-button"
+          onClick={handleEnvelopeOpen}
+          aria-label="Abrir la invitación"
+        >
+          <span className="invitation-seal-halo"></span>
 
-            <small>
-              TOCA PARA ABRIR
-            </small>
-          </button>
-        </div>
+          <img
+            src={monogram}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <small>
+            TOCA PARA ABRIR
+          </small>
+        </button>
       </div>
 
-      <p className="invitation-intro-caption">
-        RIONEGRO · COLOMBIA
-      </p>
     </div>
   )
 }

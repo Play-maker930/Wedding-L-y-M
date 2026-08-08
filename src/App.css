@@ -9737,3 +9737,2016 @@ button:focus {
       );
   }
 }
+
+/* =================================
+   V46 — REFINAMIENTO GENERAL
+================================= */
+
+/* -------------------------------
+   Navegación: monograma centrado
+-------------------------------- */
+
+.navigation {
+  position: relative;
+}
+
+.navigation .brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 3;
+}
+
+.desktop-nav {
+  padding-right: 92px;
+}
+
+.date-small {
+  margin-left: auto;
+}
+
+/* -------------------------------
+   EL GRAN DÍA
+-------------------------------- */
+
+.date-display {
+  display: inline-flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.date-weekday {
+  padding-right: 17px;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.42);
+
+  font-size: 8px !important;
+  letter-spacing: 2.4px;
+}
+
+.date-day {
+  font-size: inherit;
+}
+
+.venue-time {
+  margin: 10px 0 2px;
+
+  color: var(--champagne-dark);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+}
+
+/* -------------------------------
+   Transiciones más suaves
+-------------------------------- */
+
+.page-transition {
+  animation:
+    pageElegantIn 0.72s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+@keyframes pageElegantIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.info-card,
+.venue-card,
+.dress-code-detail-block,
+.transport-stop,
+.gallery-editorial-item,
+.rsvp-guest-card,
+.text-button,
+.map-button,
+.calendar-button,
+.rsvp-submit-button {
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.38s ease,
+    background 0.38s ease,
+    border-color 0.38s ease,
+    box-shadow 0.38s ease,
+    color 0.38s ease;
+}
+
+/* -------------------------------
+   Sobre cerrado: forma clara
+-------------------------------- */
+
+.invitation-envelope {
+  position: relative;
+
+  overflow: visible;
+
+  perspective: 1200px;
+}
+
+/* Base del sobre */
+.invitation-envelope-back {
+  background: #f4ecdf !important;
+
+  border: 1px solid rgba(185, 164, 134, 0.46) !important;
+
+  box-shadow:
+    0 28px 68px rgba(28, 27, 25, 0.16) !important;
+}
+
+/*
+  Frente del sobre: dos paneles triangulares limpios.
+  Esto crea una silueta inequívoca de sobre cerrado.
+*/
+.invitation-envelope-front {
+  z-index: 6 !important;
+
+  overflow: hidden;
+
+  background: transparent !important;
+}
+
+.invitation-envelope-front::before,
+.invitation-envelope-front::after {
+  bottom: 0 !important;
+
+  width: 72% !important;
+  height: 74% !important;
+
+  background: #efe5d6 !important;
+
+  border-top: 1px solid rgba(185, 164, 134, 0.18) !important;
+}
+
+.invitation-envelope-front::before {
+  left: -8% !important;
+
+  clip-path:
+    polygon(0 0, 100% 100%, 0 100%) !important;
+}
+
+.invitation-envelope-front::after {
+  right: -8% !important;
+
+  clip-path:
+    polygon(100% 0, 100% 100%, 0 100%) !important;
+}
+
+/*
+  Solapa real: termina exactamente en el centro
+  donde queda el sello.
+*/
+.invitation-envelope-flap {
+  position: absolute;
+  inset: 0 0 auto;
+
+  z-index: 8 !important;
+
+  height: 59%;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8f1e6 0%,
+      #eee3d3 100%
+    ) !important;
+
+  border:
+    1px solid rgba(185, 164, 134, 0.34) !important;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    ) !important;
+
+  transform-origin: top center;
+
+  backface-visibility: hidden;
+
+  transition:
+    transform 1.05s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    z-index 0s linear 0.54s;
+}
+
+.invitation-envelope.is-open
+.invitation-envelope-flap {
+  z-index: 2 !important;
+
+  transform: rotateX(-180deg);
+}
+
+/*
+  Sello exactamente en el punto de cierre.
+*/
+.invitation-seal-button {
+  position: absolute !important;
+
+  left: 50%;
+  top: 57%;
+
+  z-index: 10 !important;
+
+  width: 112px;
+  height: 112px;
+
+  margin: 0 !important;
+
+  transform:
+    translate(-50%, -50%);
+
+  background:
+    radial-gradient(
+      circle at 40% 34%,
+      #f8f1e4 0%,
+      #e5d7c2 62%,
+      #cdb892 100%
+    ) !important;
+
+  border:
+    1px solid rgba(166, 144, 105, 0.48) !important;
+
+  box-shadow:
+    0 10px 25px rgba(28, 27, 25, 0.16),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.22);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.invitation-seal-button:hover {
+  transform:
+    translate(-50%, -50%)
+    scale(1.045);
+}
+
+.invitation-seal-button img {
+  width: 62px;
+}
+
+.invitation-seal-button small {
+  font-size: 5px;
+  letter-spacing: 1.55px;
+}
+
+.invitation-envelope.is-open
+.invitation-seal-button {
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.88);
+}
+
+/*
+  Papel interior:
+  cerrado = totalmente dentro del sobre.
+  abierto = emerge desde el centro del sobre hacia arriba.
+*/
+.invitation-card {
+  left: 8% !important;
+  right: 8% !important;
+  bottom: 6% !important;
+
+  z-index: 4 !important;
+
+  min-height: 88% !important;
+  max-height: none !important;
+
+  visibility: visible !important;
+
+  opacity: 0;
+
+  clip-path: inset(53% 0 0 0);
+
+  transform:
+    translateY(31%)
+    scaleY(0.54);
+
+  transform-origin: bottom center;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.30s ease 0.42s,
+    clip-path 0.78s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      0.42s,
+    transform 1.08s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      0.45s;
+}
+
+.invitation-envelope.is-closed
+.invitation-card {
+  opacity: 0 !important;
+
+  transform:
+    translateY(31%)
+    scaleY(0.54) !important;
+}
+
+.invitation-envelope.is-open
+.invitation-card {
+  opacity: 1 !important;
+
+  clip-path: inset(0 0 0 0);
+
+  transform:
+    translateY(-38%)
+    scaleY(1) !important;
+
+  pointer-events: auto;
+}
+
+/* contenido del papel aparece después del despliegue */
+.invitation-card > * {
+  opacity: 0;
+}
+
+.invitation-envelope.is-open
+.invitation-card > * {
+  opacity: 1;
+
+  transition:
+    opacity 0.42s ease 0.92s;
+}
+
+.invitation-envelope.is-open
+.invitation-card button {
+  transition:
+    opacity 0.42s ease 1.16s,
+    transform 0.42s ease 1.16s,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* -------------------------------
+   Ángeles violinistas del Home
+-------------------------------- */
+
+.home-page {
+  position: relative;
+}
+
+.home-violin-angels {
+  position: absolute;
+  inset: 0;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.8s ease;
+}
+
+.home-violin-angels.is-visible {
+  opacity: 0.46;
+}
+
+.violin-angel {
+  position: absolute;
+
+  width: 76px;
+  height: 92px;
+
+  color: rgba(255, 248, 237, 0.82);
+
+  filter:
+    drop-shadow(
+      0 4px 9px
+      rgba(28, 27, 25, 0.12)
+    );
+
+  animation:
+    angelFloat 5.8s
+    ease-in-out
+    infinite;
+}
+
+.angel-left {
+  left: 5.2%;
+  top: 19%;
+}
+
+.angel-right {
+  right: 5.2%;
+  top: 24%;
+
+  transform: scaleX(-1);
+
+  animation-delay: -2.4s;
+}
+
+.angel-head {
+  position: absolute;
+
+  left: 29px;
+  top: 2px;
+
+  width: 18px;
+  height: 18px;
+
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+
+.angel-head::before {
+  content: '';
+
+  position: absolute;
+
+  left: 2px;
+  top: -7px;
+
+  width: 12px;
+  height: 5px;
+
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.angel-body {
+  position: absolute;
+
+  left: 28px;
+  top: 22px;
+
+  width: 20px;
+  height: 42px;
+
+  border-left: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+
+  border-radius: 46% 46% 54% 54%;
+}
+
+.angel-wing {
+  position: absolute;
+
+  top: 25px;
+
+  width: 31px;
+  height: 39px;
+
+  border: 1.4px solid currentColor;
+  border-radius: 65% 35% 70% 30%;
+}
+
+.wing-left {
+  left: 4px;
+
+  transform: rotate(-29deg);
+}
+
+.wing-right {
+  right: 4px;
+
+  transform:
+    scaleX(-1)
+    rotate(-29deg);
+}
+
+.angel-violin {
+  position: absolute;
+
+  left: 34px;
+  top: 37px;
+
+  width: 19px;
+  height: 25px;
+
+  border: 1.4px solid currentColor;
+  border-radius:
+    45% 55% 48% 52%;
+
+  transform: rotate(-30deg);
+}
+
+.angel-violin::after {
+  content: '';
+
+  position: absolute;
+
+  left: 8px;
+  top: -16px;
+
+  width: 1px;
+  height: 18px;
+
+  background: currentColor;
+}
+
+.angel-bow {
+  position: absolute;
+
+  left: 42px;
+  top: 30px;
+
+  width: 1px;
+  height: 44px;
+
+  background: currentColor;
+
+  transform-origin: center;
+
+  animation:
+    angelBowPlay 1.05s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+@keyframes angelFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes angelBowPlay {
+  from {
+    transform:
+      rotate(38deg)
+      translateX(-3px);
+  }
+
+  to {
+    transform:
+      rotate(55deg)
+      translateX(3px);
+  }
+}
+
+/* Right angel keeps mirrored while floating */
+.angel-right {
+  animation-name: angelFloatMirrored;
+}
+
+@keyframes angelFloatMirrored {
+  0%,
+  100% {
+    transform:
+      scaleX(-1)
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      scaleX(-1)
+      translateY(-8px);
+  }
+}
+
+/* -------------------------------
+   Responsive
+-------------------------------- */
+
+@media (max-width: 900px) {
+  .navigation .brand {
+    left: 50%;
+  }
+
+  .date-small {
+    display: none;
+  }
+
+  .desktop-nav {
+    padding-right: 0;
+  }
+
+  .date-display {
+    gap: 12px;
+  }
+
+  .date-weekday {
+    padding-right: 12px;
+  }
+
+  .home-violin-angels.is-visible {
+    opacity: 0.34;
+  }
+
+  .violin-angel {
+    width: 58px;
+    height: 72px;
+
+    transform: scale(0.82);
+  }
+
+  .angel-left {
+    left: 1.5%;
+    top: 16%;
+  }
+
+  .angel-right {
+    right: 1.5%;
+    top: 20%;
+  }
+}
+
+@media (max-width: 650px) {
+  .invitation-seal-button {
+    width: 94px;
+    height: 94px;
+
+    top: 57%;
+  }
+
+  .invitation-seal-button img {
+    width: 52px;
+  }
+
+  .invitation-card {
+    left: 7% !important;
+    right: 7% !important;
+
+    min-height: 86% !important;
+
+    transform:
+      translateY(30%)
+      scaleY(0.52);
+  }
+
+  .invitation-envelope.is-open
+  .invitation-card {
+    transform:
+      translateY(-32%)
+      scaleY(1) !important;
+  }
+
+  .home-violin-angels {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition,
+  .violin-angel,
+  .angel-bow,
+  .invitation-envelope.is-closed,
+  .invitation-seal-halo {
+    animation: none !important;
+  }
+
+  .invitation-card,
+  .invitation-envelope-flap {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =================================
+   V47 — ÁNGELES VIOLINISTAS VISIBLES
+================================= */
+
+.home-violin-angels {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+
+  display: block !important;
+
+  pointer-events: none;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.9s ease,
+    visibility 0s linear 0.9s;
+}
+
+.home-violin-angels.is-visible {
+  opacity: 0.78;
+  visibility: visible;
+
+  transition:
+    opacity 0.9s ease,
+    visibility 0s linear 0s;
+}
+
+.violin-angel {
+  width: 92px;
+  height: 112px;
+
+  color: rgba(255, 250, 240, 0.94);
+
+  filter:
+    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.18));
+
+  animation:
+    angelFloat 5.6s
+    ease-in-out
+    infinite;
+}
+
+.angel-left {
+  left: 4%;
+  top: 20%;
+}
+
+.angel-right {
+  right: 4%;
+  top: 25%;
+
+  animation-name: angelFloatMirrored;
+  animation-delay: -2.3s;
+}
+
+/* Halo muy sutil detrás del ángel para que no se pierda sobre la foto */
+
+.violin-angel::before {
+  content: '';
+
+  position: absolute;
+  left: 50%;
+  top: 48%;
+
+  width: 108px;
+  height: 108px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(247, 238, 219, 0.17) 0%,
+      rgba(247, 238, 219, 0.07) 48%,
+      transparent 72%
+    );
+
+  transform: translate(-50%, -50%);
+
+  filter: blur(2px);
+}
+
+/* Un poco más de definición en las líneas */
+
+.angel-head,
+.angel-body,
+.angel-wing,
+.angel-violin {
+  border-width: 1.7px;
+}
+
+.angel-bow {
+  width: 1.4px;
+}
+
+/* Desktop amplio */
+
+@media (min-width: 1200px) {
+  .violin-angel {
+    width: 104px;
+    height: 126px;
+  }
+
+  .angel-left {
+    left: 6%;
+    top: 19%;
+  }
+
+  .angel-right {
+    right: 6%;
+    top: 24%;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .home-violin-angels.is-visible {
+    opacity: 0.72;
+  }
+
+  .violin-angel {
+    width: 76px;
+    height: 94px;
+  }
+
+  .angel-left {
+    left: 3%;
+    top: 18%;
+  }
+
+  .angel-right {
+    right: 3%;
+    top: 23%;
+  }
+}
+
+/*
+  V46 los ocultaba en mobile.
+  En V47 los mantenemos visibles, pero más pequeños.
+*/
+
+@media (max-width: 650px) {
+  .home-violin-angels {
+    display: block !important;
+  }
+
+  .home-violin-angels.is-visible {
+    opacity: 0.67;
+  }
+
+  .violin-angel {
+    width: 61px;
+    height: 78px;
+  }
+
+  .violin-angel::before {
+    width: 76px;
+    height: 76px;
+  }
+
+  .angel-left {
+    left: 1%;
+    top: 16%;
+  }
+
+  .angel-right {
+    right: 1%;
+    top: 21%;
+  }
+
+  .angel-head {
+    transform: scale(0.82);
+    transform-origin: center;
+  }
+
+  .angel-body,
+  .angel-wing,
+  .angel-violin,
+  .angel-bow {
+    transform-origin: center;
+  }
+}
+
+@media (max-width: 390px) {
+  .home-violin-angels.is-visible {
+    opacity: 0.62;
+  }
+
+  .violin-angel {
+    transform: scale(0.82);
+  }
+
+  .angel-left {
+    left: -4px;
+    top: 15%;
+  }
+
+  .angel-right {
+    right: -4px;
+    top: 20%;
+  }
+}
+
+/* =================================
+   V48 — HOME RESTAURADO / SIN ÁNGELES
+================================= */
+
+/* Eliminar completamente los ángeles */
+
+.home-violin-angels,
+.violin-angel,
+.angel-head,
+.angel-body,
+.angel-wing,
+.angel-violin,
+.angel-bow {
+  display: none !important;
+}
+
+/*
+  Restaurar el header a fixed.
+  En V46 se había cambiado a position: relative para centrar
+  el monograma y eso hacía que el header ocupara espacio físico
+  + el padding superior de .page, generando el espacio vacío.
+*/
+
+.navigation {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+
+  width: 100% !important;
+
+  z-index: 100 !important;
+}
+
+/* Mantener el monograma centrado sin afectar el flujo del header */
+
+.navigation .brand {
+  position: absolute !important;
+
+  left: 50% !important;
+  top: 50% !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  z-index: 3;
+}
+
+/*
+  Restaurar el Home a su geometría original.
+  La imagen comienza inmediatamente después del header,
+  sin ningún espacio adicional.
+*/
+
+.page {
+  padding-top: 82px;
+}
+
+.home-page {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.home-image {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.home-image img {
+  margin: 0 !important;
+}
+
+/* Mobile: misma lógica con header de 68px */
+
+@media (max-width: 900px) {
+  .navigation {
+    position: fixed !important;
+  }
+
+  .page {
+    padding-top: 68px;
+  }
+
+  .navigation .brand {
+    left: 50% !important;
+    top: 50% !important;
+  }
+
+  .home-page,
+  .home-image {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
+/* =================================
+   V49 — SOBRE SELLADO MÁS REALISTA
+================================= */
+
+/* Centrar el sobre en la pantalla sin caption inferior */
+.invitation-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.invitation-envelope {
+  width: min(760px, 88vw);
+  aspect-ratio: 1.52 / 1;
+
+  position: relative;
+  overflow: visible;
+
+  transform-style: preserve-3d;
+  perspective: 1400px;
+}
+
+/* Base del sobre */
+.invitation-envelope-back {
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid rgba(185, 164, 134, 0.30);
+  border-radius: 2px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8f2e9 0%,
+      #f1e8db 100%
+    );
+
+  box-shadow:
+    0 24px 60px rgba(28, 27, 25, 0.16);
+}
+
+/*
+  Frente del sobre:
+  laterales triangulares + base inferior limpia.
+*/
+.invitation-envelope-front {
+  position: absolute;
+  inset: 0;
+
+  z-index: 6;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* panel izquierdo */
+.invitation-envelope-front::before {
+  content: '';
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 58%;
+  height: 66%;
+
+  background: #f2e8da;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 100%,
+      0 100%
+    );
+
+  border-top:
+    1px solid rgba(185, 164, 134, 0.15);
+}
+
+/* panel derecho */
+.invitation-envelope-front::after {
+  content: '';
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 58%;
+  height: 66%;
+
+  background: #f2e8da;
+
+  clip-path:
+    polygon(
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+
+  border-top:
+    1px solid rgba(185, 164, 134, 0.15);
+}
+
+/*
+  Solapa superior:
+  más corta y ancha, como un sobre real.
+*/
+.invitation-envelope-flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  z-index: 8;
+
+  height: 55%;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fbf6ef 0%,
+      #f0e5d6 100%
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+
+  transform-origin: top center;
+
+  backface-visibility: hidden;
+
+  border-top:
+    1px solid rgba(185, 164, 134, 0.22);
+
+  transition:
+    transform 1.02s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    z-index 0s linear 0.5s;
+}
+
+/* línea de pliegue muy sutil */
+.invitation-envelope-flap::after {
+  content: '';
+
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+
+  width: 1px;
+  height: 1px;
+
+  background: rgba(185, 164, 134, 0.18);
+
+  box-shadow:
+    -250px -85px 0 rgba(185, 164, 134, 0.10),
+    250px -85px 0 rgba(185, 164, 134, 0.10);
+}
+
+/*
+  Sello exactamente en el punto de cierre.
+*/
+.invitation-seal-button {
+  position: absolute !important;
+
+  left: 50% !important;
+  top: 55% !important;
+
+  z-index: 10 !important;
+
+  width: 108px;
+  height: 108px;
+
+  margin: 0 !important;
+
+  transform:
+    translate(-50%, -50%);
+
+  border:
+    1px solid rgba(166, 144, 105, 0.46) !important;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 38% 32%,
+      #fbf5ec 0%,
+      #e7d9c5 64%,
+      #cbb68f 100%
+    ) !important;
+
+  box-shadow:
+    0 9px 22px rgba(28, 27, 25, 0.15),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.23);
+
+  transition:
+    opacity 0.32s ease,
+    transform 0.32s ease,
+    box-shadow 0.32s ease;
+}
+
+.invitation-seal-button:hover {
+  transform:
+    translate(-50%, -50%)
+    scale(1.04);
+}
+
+.invitation-seal-button img {
+  width: 60px;
+}
+
+.invitation-seal-button small {
+  margin-top: 2px;
+
+  font-size: 5px;
+  letter-spacing: 1.35px;
+}
+
+/* Estado cerrado */
+.invitation-envelope.is-closed
+.invitation-card {
+  opacity: 0 !important;
+
+  visibility: hidden !important;
+
+  transform:
+    translateY(30%)
+    scaleY(0.50) !important;
+}
+
+/* Apertura de la solapa */
+.invitation-envelope.is-open
+.invitation-envelope-flap {
+  z-index: 2;
+
+  transform:
+    rotateX(-180deg);
+}
+
+/* Ocultar sello cuando se abre */
+.invitation-envelope.is-open
+.invitation-seal-button {
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.88);
+}
+
+/*
+  La tarjeta emerge desde dentro del sobre.
+  Parte desde el centro y sube, no desde abajo.
+*/
+.invitation-card {
+  left: 8% !important;
+  right: 8% !important;
+  bottom: 7% !important;
+
+  z-index: 4 !important;
+
+  min-height: 88% !important;
+
+  opacity: 0;
+
+  visibility: visible !important;
+
+  clip-path: inset(48% 0 0 0);
+
+  transform:
+    translateY(25%)
+    scaleY(0.58);
+
+  transform-origin: bottom center;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.28s ease 0.38s,
+    clip-path 0.76s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      0.38s,
+    transform 1.02s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      0.42s;
+}
+
+.invitation-envelope.is-open
+.invitation-card {
+  opacity: 1 !important;
+
+  clip-path: inset(0 0 0 0);
+
+  transform:
+    translateY(-36%)
+    scaleY(1) !important;
+
+  pointer-events: auto;
+}
+
+/* Contenido aparece cuando la tarjeta ya está saliendo */
+.invitation-card > * {
+  opacity: 0;
+}
+
+.invitation-envelope.is-open
+.invitation-card > * {
+  opacity: 1;
+
+  transition:
+    opacity 0.40s ease 0.88s;
+}
+
+.invitation-envelope.is-open
+.invitation-card button {
+  transition:
+    opacity 0.40s ease 1.08s,
+    transform 0.40s ease 1.08s,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .invitation-intro {
+    padding: 18px;
+  }
+
+  .invitation-envelope {
+    width: min(92vw, 560px);
+    aspect-ratio: 1.46 / 1;
+  }
+
+  .invitation-envelope-flap {
+    height: 54%;
+  }
+
+  .invitation-seal-button {
+    top: 54% !important;
+
+    width: 92px;
+    height: 92px;
+  }
+
+  .invitation-seal-button img {
+    width: 50px;
+  }
+
+  .invitation-card {
+    left: 7% !important;
+    right: 7% !important;
+
+    min-height: 86% !important;
+  }
+
+  .invitation-envelope.is-open
+  .invitation-card {
+    transform:
+      translateY(-31%)
+      scaleY(1) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .invitation-envelope {
+    width: 94vw;
+  }
+
+  .invitation-seal-button {
+    width: 86px;
+    height: 86px;
+  }
+
+  .invitation-seal-button small {
+    font-size: 4.6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invitation-envelope-flap,
+  .invitation-card,
+  .invitation-seal-button {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =================================
+   V50 — SOBRE UNIFORME + FOOTER + HOME
+================================= */
+
+/* ---------------------------------
+   SOBRE: un solo tono de papel
+--------------------------------- */
+
+/*
+  Todas las caras visibles del sobre cerrado usan exactamente
+  el mismo tono. La forma se define únicamente por líneas de
+  pliegue y sombras, no por cambios de color.
+*/
+
+.invitation-envelope.is-closed
+.invitation-envelope-back,
+.invitation-envelope.is-closed
+.invitation-envelope-front::before,
+.invitation-envelope.is-closed
+.invitation-envelope-front::after,
+.invitation-envelope.is-closed
+.invitation-envelope-flap {
+  background: #f4ecdf !important;
+}
+
+.invitation-envelope.is-closed
+.invitation-envelope-back {
+  border-color:
+    rgba(185, 164, 134, 0.30) !important;
+}
+
+.invitation-envelope.is-closed
+.invitation-envelope-front::before,
+.invitation-envelope.is-closed
+.invitation-envelope-front::after {
+  border-top:
+    1px solid rgba(166, 144, 105, 0.14) !important;
+}
+
+.invitation-envelope.is-closed
+.invitation-envelope-flap {
+  border-top:
+    1px solid rgba(166, 144, 105, 0.14) !important;
+
+  box-shadow:
+    0 7px 14px rgba(28, 27, 25, 0.035);
+}
+
+/*
+  Añadir solo líneas de pliegue muy discretas desde las
+  esquinas inferiores al punto del sello.
+*/
+
+.invitation-envelope.is-closed
+.invitation-envelope-front {
+  background:
+    linear-gradient(
+      34deg,
+      transparent 49.8%,
+      rgba(166, 144, 105, 0.10) 50%,
+      transparent 50.2%
+    ),
+    linear-gradient(
+      -34deg,
+      transparent 49.8%,
+      rgba(166, 144, 105, 0.10) 50%,
+      transparent 50.2%
+    ) !important;
+}
+
+/* ---------------------------------
+   FOOTER: solo nombres centrados
+--------------------------------- */
+
+.footer {
+  justify-content: center !important;
+  align-items: center;
+
+  text-align: center;
+
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+.footer-names {
+  display: block;
+
+  width: 100%;
+
+  text-align: center;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.7px;
+
+  color: var(--black);
+}
+
+/* ---------------------------------
+   HOME: mostrar más de la foto
+--------------------------------- */
+
+/*
+  Damos un poco más de espacio horizontal a la fotografía
+  y reducimos el zoom del efecto cinematográfico para que
+  se corte menos.
+*/
+
+.home-page {
+  grid-template-columns:
+    57% 43%;
+}
+
+.home-image img {
+  object-position:
+    center 42% !important;
+}
+
+@keyframes homeCinematicApproach {
+  from {
+    transform:
+      translate3d(
+        0,
+        calc(var(--home-parallax) * -0.72),
+        0
+      )
+      scale(1.002);
+  }
+
+  to {
+    transform:
+      translate3d(
+        0,
+        calc(var(--home-parallax) * -0.72 - 6px),
+        0
+      )
+      scale(1.035);
+  }
+}
+
+@media (max-width: 850px) {
+  /*
+    En móvil la foto gana altura para sentirse más vertical
+    y permitir ver más del encuadre original.
+  */
+
+  .home-image {
+    height: 52vh !important;
+    min-height: 340px !important;
+  }
+
+  .home-content {
+    min-height: 48vh;
+  }
+
+  .home-image img {
+    object-position:
+      center 38% !important;
+  }
+
+  @keyframes homeCinematicApproach {
+    from {
+      transform:
+        translate3d(
+          0,
+          calc(var(--home-parallax) * -0.35),
+          0
+        )
+        scale(1.002);
+    }
+
+    to {
+      transform:
+        translate3d(
+          0,
+          calc(var(--home-parallax) * -0.35 - 4px),
+          0
+        )
+        scale(1.025);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home-image {
+    height: 50vh !important;
+    min-height: 320px !important;
+  }
+
+  .home-content {
+    min-height: 50vh;
+  }
+}
+
+/* =================================
+   V51 — SOLAPA REMARCADA + HOME MÁS VERTICAL
+================================= */
+
+/* ---------------------------------
+   SOBRE: remarcar claramente la solapa
+--------------------------------- */
+
+/*
+  Dibujamos las dos líneas diagonales de cierre desde
+  las esquinas superiores hasta el punto del sello.
+  El tono usa el mismo champagne oscuro del borde,
+  con suficiente contraste para que se lea la forma
+  sin verse negro fuerte.
+*/
+
+.invitation-envelope.is-closed
+.invitation-envelope-flap::before,
+.invitation-envelope.is-closed
+.invitation-envelope-flap::after {
+  content: '';
+
+  position: absolute;
+  top: 0;
+
+  width: 63%;
+  height: 1.4px;
+
+  background:
+    rgba(112, 99, 80, 0.52);
+
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.26);
+
+  pointer-events: none;
+}
+
+.invitation-envelope.is-closed
+.invitation-envelope-flap::before {
+  left: 0;
+  right: auto;
+  bottom: auto;
+
+  transform-origin: left center;
+  transform: rotate(36deg);
+}
+
+.invitation-envelope.is-closed
+.invitation-envelope-flap::after {
+  left: auto;
+  right: 0;
+  bottom: auto;
+
+  transform-origin: right center;
+  transform: rotate(-36deg);
+}
+
+/*
+  Quitamos cualquier sombra o línea anterior que pudiera
+  competir con estas dos diagonales.
+*/
+
+.invitation-envelope.is-closed
+.invitation-envelope-flap {
+  box-shadow:
+    0 5px 12px rgba(28, 27, 25, 0.025);
+
+  border-top:
+    1px solid rgba(112, 99, 80, 0.26) !important;
+}
+
+/* Mantener el sello justo sobre el vértice visual */
+
+.invitation-envelope.is-closed
+.invitation-seal-button {
+  top: 55% !important;
+}
+
+/* ---------------------------------
+   HOME: más altura para la fotografía
+--------------------------------- */
+
+/*
+  En desktop damos un poco más de presencia vertical a la foto
+  y reducimos todavía más el zoom para evitar cortes.
+*/
+
+.home-page {
+  min-height: calc(100svh - 82px);
+}
+
+.home-image {
+  min-height:
+    calc(100svh - 82px) !important;
+}
+
+.home-image img {
+  object-position:
+    center 36% !important;
+}
+
+/* Zoom aún más sutil */
+@keyframes homeCinematicApproach {
+  from {
+    transform:
+      translate3d(
+        0,
+        calc(var(--home-parallax) * -0.55),
+        0
+      )
+      scale(1);
+  }
+
+  to {
+    transform:
+      translate3d(
+        0,
+        calc(var(--home-parallax) * -0.55 - 4px),
+        0
+      )
+      scale(1.022);
+  }
+}
+
+/*
+  Mobile: la fotografía ocupa bastante más espacio vertical,
+  para mostrar más del encuadre hacia abajo.
+*/
+
+@media (max-width: 850px) {
+  .home-page {
+    min-height:
+      calc(100svh - 68px);
+  }
+
+  .home-image {
+    height: 64vh !important;
+    min-height: 430px !important;
+  }
+
+  .home-content {
+    min-height: 36vh !important;
+  }
+
+  .home-image img {
+    object-position:
+      center 32% !important;
+  }
+
+  @keyframes homeCinematicApproach {
+    from {
+      transform:
+        translate3d(
+          0,
+          calc(var(--home-parallax) * -0.22),
+          0
+        )
+        scale(1);
+    }
+
+    to {
+      transform:
+        translate3d(
+          0,
+          calc(var(--home-parallax) * -0.22 - 3px),
+          0
+        )
+        scale(1.016);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home-image {
+    height: 66vh !important;
+    min-height: 445px !important;
+  }
+
+  .home-content {
+    min-height: 34vh !important;
+  }
+
+  .home-image img {
+    object-position:
+      center 30% !important;
+  }
+}
+
+
+/* =================================
+   V54 — HOJA REALMENTE DENTRO DEL SOBRE
+================================= */
+
+/*
+  La tarjeta comienza completamente dentro de las dimensiones
+  del sobre. El frente del sobre la oculta y, al abrirse,
+  la tarjeta asciende desde la abertura sin aparecer por debajo.
+*/
+.invitation-card {
+  clip-path: none !important;
+
+  transform:
+    translateY(0)
+    scaleY(1) !important;
+
+  transform-origin: center center;
+
+  transition:
+    opacity 0.18s ease 0.50s,
+    transform 1.05s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      0.50s !important;
+}
+
+.invitation-envelope.is-closed
+.invitation-card {
+  opacity: 0 !important;
+
+  transform:
+    translateY(0)
+    scaleY(1) !important;
+}
+
+.invitation-envelope.is-open
+.invitation-card {
+  opacity: 1 !important;
+
+  clip-path: none !important;
+
+  transform:
+    translateY(-36%)
+    scaleY(1) !important;
+}
+
+/*
+  El frente queda siempre por encima de la tarjeta para ocultar
+  toda la parte que todavía permanece dentro del sobre.
+*/
+.invitation-envelope-front {
+  z-index: 6 !important;
+}
+
+.invitation-card {
+  z-index: 4 !important;
+}
+
+@media (max-width: 650px) {
+  .invitation-card,
+  .invitation-envelope.is-closed
+  .invitation-card {
+    transform:
+      translateY(0)
+      scaleY(1) !important;
+  }
+
+  .invitation-envelope.is-open
+  .invitation-card {
+    transform:
+      translateY(-31%)
+      scaleY(1) !important;
+  }
+}
+
+/* =================================
+   V55 — AJUSTES GENERALES SOLICITADOS
+================================= */
+
+/* EL GRAN DÍA — viernes más pequeño, legible y equilibrado junto al 15 */
+.date-display .date-weekday {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px !important;
+  font-weight: 300;
+  line-height: 0.7;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* DRESS CODE — diseño sin imagen, con FORMAL como protagonista */
+.dress-code-section {
+  padding-top: 54px;
+}
+
+.dress-code-heading {
+  margin-bottom: 42px;
+}
+
+.dress-code-heading .dress-code-formal-title {
+  margin: 18px 0 18px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(68px, 8vw, 108px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: 2px;
+}
+
+/* HOSPEDAJE — hero, código e información incluida */
+.stay-hero {
+  background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/67386810.jpg?k=3aacafa9952fb1be84353dc4d595a1aa544d370a05bfdea4b0745db240da549e&o=');
+}
+
+.stay-code strong {
+  color: var(--black);
+}
+
+.stay-included {
+  padding-top: 46px;
+  padding-bottom: 46px;
+}
+
+.stay-included-grid {
+  max-width: 820px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 24px;
+}
+
+.stay-included-grid article {
+  min-height: 160px;
+  padding: 26px 32px;
+}
+
+.stay-included-title {
+  margin-bottom: 12px;
+}
+
+/* HOSPEDAJE — pasos más compactos */
+.stay-section-heading.compact {
+  max-width: 900px;
+}
+
+.stay-section-heading.compact h2 {
+  white-space: nowrap;
+  font-size: clamp(44px, 5vw, 68px);
+}
+
+.stay-steps {
+  padding-top: 58px;
+  padding-bottom: 58px;
+}
+
+.stay-steps-grid {
+  margin-top: 26px;
+  gap: 16px;
+}
+
+.stay-steps-grid article {
+  min-height: 185px;
+  padding: 28px 26px;
+}
+
+.stay-step-title {
+  margin-bottom: 15px;
+}
+
+.stay-steps-grid p {
+  line-height: 1.65;
+}
+
+/* TRANSPORTE — nueva imagen */
+.transport-hero {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(28, 27, 25, 0.18),
+      rgba(28, 27, 25, 0.72)
+    ),
+    url('https://www.pmitour.com/wp-content/uploads/2020/11/transporte-privado-vip-business-transfers-2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 900px) {
+  .date-display .date-weekday {
+    font-size: 36px !important;
+  }
+
+  .dress-code-heading {
+    margin-bottom: 34px;
+  }
+
+  .dress-code-heading .dress-code-formal-title {
+    font-size: 72px;
+  }
+
+  .stay-included {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .stay-included-grid {
+    grid-template-columns: 1fr;
+    max-width: 620px;
+  }
+
+  .stay-included-grid article {
+    min-height: auto;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    border-right: none;
+    border-bottom: 1px solid rgba(28, 27, 25, 0.16);
+  }
+
+  .stay-included-grid article:last-child {
+    border-bottom: none;
+  }
+
+  .stay-section-heading.compact h2 {
+    font-size: 50px;
+    white-space: nowrap;
+  }
+
+  .stay-steps {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .stay-steps-grid article {
+    min-height: auto;
+    padding: 24px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-display .date-weekday {
+    font-size: 30px !important;
+  }
+
+  .date-display {
+    gap: 9px;
+  }
+
+  .date-display .date-weekday {
+    padding-right: 9px;
+  }
+
+  .dress-code-heading .dress-code-formal-title {
+    font-size: 62px;
+  }
+
+  .stay-section-heading.compact h2 {
+    font-size: 42px;
+    letter-spacing: -0.6px;
+  }
+}
