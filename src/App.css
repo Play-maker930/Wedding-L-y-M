@@ -4,7 +4,7 @@
   --ivory: #f7f4ee;
   --champagne: #d8c8ae;
   --champagne-dark: #b9a486;
-  --black: #1c1b19;
+  --black: #5b4636;
   --gray: #77736c;
   --line: rgba(28, 27, 25, 0.16);
 
@@ -12760,9 +12760,6 @@ button:focus {
 }
 
 /* El arco debe verse nítidamente encima del cuerpo */
-.violin-bow-stick,
-.violin-bow-hair,
-.violin-bow-tip,
 /* Movimiento un poco más corto en mobile */
 @media (max-width: 650px) {
   @keyframes violinBowAcrossStrings {
@@ -12973,4 +12970,103 @@ button:focus {
 .home-page .countdown-number,
 .home-page .countdown-label {
   color: #5b4636;
+}
+
+
+/* =================================
+   V66 — COLOR CHOCOLATE GLOBAL
+================================= */
+
+/*
+  --black ahora usa el mismo chocolate del monograma.
+  Se preservan blancos, grises, champagne y otros acentos.
+*/
+body,
+button,
+input,
+textarea,
+select {
+  color: var(--black);
+}
+
+/* =================================
+   V66 — EL GRAN DÍA / VIERNES SOBRE 15
+================================= */
+
+.date-display {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    "weekday month"
+    "day month";
+  column-gap: 18px;
+  row-gap: 2px;
+  align-items: center;
+}
+
+.date-display .date-weekday {
+  grid-area: weekday;
+
+  padding: 0 !important;
+  margin: 0 0 2px;
+
+  border: 0 !important;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px !important;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 2.4px;
+  text-align: center;
+}
+
+.date-display .date-day {
+  grid-area: day;
+
+  display: block;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 76px !important;
+  font-weight: 300;
+  line-height: 0.72;
+  text-align: center;
+}
+
+.date-display > div {
+  grid-area: month;
+
+  align-self: center;
+
+  border-left: 1px solid var(--champagne);
+  padding-left: 18px;
+}
+
+@media (max-width: 850px) {
+  .date-display .date-weekday {
+    font-size: 10px !important;
+    letter-spacing: 2.1px;
+  }
+
+  .date-display .date-day {
+    font-size: 64px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-display {
+    column-gap: 14px;
+  }
+
+  .date-display .date-weekday {
+    font-size: 9px !important;
+    letter-spacing: 1.8px;
+  }
+
+  .date-display .date-day {
+    font-size: 58px !important;
+  }
+
+  .date-display > div {
+    padding-left: 14px;
+  }
 }

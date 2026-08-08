@@ -123,7 +123,7 @@ function InvitationEnvelope({
             </div>
 
             <div className="invitation-card-place">
-              RIONEGRO · COLOMBIA
+              MEDELLÍN · COLOMBIA
             </div>
 
             <button

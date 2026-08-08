@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import portadaImg from './assets/Portada.jpg'
 import bodaFondoImg from './assets/la boda.jpg'
-import parroquiaImg from './assets/parroquia.jpg'
+import parroquiaImg from './assets/parroquia.png'
 import monogramGold from './assets/monogram_gold.png'
 import menuBackground from './assets/menu-background.jpg'
 import confirmationPhoto from './assets/foto-confirmacion.jpg'
@@ -16,7 +16,7 @@ import gallery06 from './assets/gallery-06.jpg'
 import gallery07 from './assets/gallery-07.jpg'
 import gallery08 from './assets/gallery-08.jpg'
 import gallery09 from './assets/gallery-09.jpg'
-import weddingMusic from './assets/wedding-music.m4a'
+import weddingMusic from './assets/Aleluya.mp3'
 import InvitationEnvelope from './InvitationEnvelope'
 
 
@@ -1919,7 +1919,7 @@ function App() {
               </div>
 
               <p className="city">
-                RIONEGRO, MEDELLÍN
+                MEDELLÍN, COLOMBIA
               </p>
 
             </section>
@@ -2163,7 +2163,7 @@ function App() {
                   <span>CABALLEROS</span>
 
                   <h3>
-                    Traje formal completo
+                    Traje formal
                   </h3>
 
                   <p>
@@ -2338,7 +2338,7 @@ function App() {
                 </h1>
 
                 <p className="stay-hero-location">
-                  RIONEGRO · COLOMBIA
+                  MEDELLÍN · COLOMBIA
                 </p>
 
                 <p className="stay-hero-copy">
@@ -2531,7 +2531,7 @@ function App() {
 
                     <p>
                       Al momento de reservar, selecciona
-                      <strong> Movich Las Lomas — Rionegro</strong>.
+                      <strong> Movich Las Lomas — Rionegro, Medellín</strong>.
                       Existe otro hotel Movich en Medellín.
                     </p>
                   </div>
@@ -3033,7 +3033,7 @@ function App() {
 
                 <p>
                   Medellín suele tener temperaturas agradables
-                  durante el día. Rionegro puede sentirse más
+                  durante el día. Medellín puede sentirse más
                   fresco, especialmente en la noche.
                 </p>
               </div>
@@ -3227,13 +3227,13 @@ function App() {
               <div className="medellin-guide-item">
                 <LineIcon name="plane" size={27} />
                 <span>AEROPUERTO</span>
-                <strong>MDE · Rionegro</strong>
+                <strong>MDE · Medellín</strong>
               </div>
 
               <div className="medellin-guide-item">
                 <LineIcon name="hotel" size={27} />
                 <span>ZONA DE LA BODA</span>
-                <strong>Rionegro</strong>
+                <strong>Medellín, Colombia</strong>
               </div>
 
               <div className="medellin-guide-item">
