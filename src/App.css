@@ -11750,3 +11750,409 @@ button:focus {
     letter-spacing: -0.6px;
   }
 }
+
+/* =================================
+   V57 — PAPELERÍA DE INVITACIÓN PREMIUM
+================================= */
+
+/* Papel con textura visual muy sutil */
+.invitation-card {
+  isolation: isolate;
+  overflow: hidden;
+
+  padding: 38px 38px 34px !important;
+
+  border: 1px solid rgba(138, 133, 96, 0.40) !important;
+
+  background:
+    radial-gradient(
+      circle at 18% 15%,
+      rgba(138, 133, 96, 0.035),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 82% 84%,
+      rgba(185, 164, 134, 0.045),
+      transparent 30%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.025) 0,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(
+      180deg,
+      #fffdf8 0%,
+      #fbf7ef 100%
+    ) !important;
+
+  box-shadow:
+    0 24px 60px rgba(28, 27, 25, 0.14),
+    0 7px 18px rgba(28, 27, 25, 0.07) !important;
+}
+
+.invitation-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(rgba(111, 101, 83, 0.075) 0.45px, transparent 0.55px);
+  background-size: 5px 5px;
+  opacity: 0.13;
+  mix-blend-mode: multiply;
+}
+
+/* Segundo marco, como papelería impresa */
+.invitation-card-inner-border {
+  position: absolute;
+  inset: 12px;
+  z-index: 1;
+
+  border: 1px solid rgba(138, 133, 96, 0.24);
+
+  pointer-events: none;
+}
+
+.invitation-card-content {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botanical line art casi grabado */
+.invitation-card-botanical {
+  position: absolute;
+  z-index: 2;
+
+  width: 82px;
+  height: 82px;
+
+  fill: none;
+  stroke: rgba(138, 133, 96, 0.35);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  pointer-events: none;
+}
+
+.invitation-card-botanical.top-left {
+  top: 16px;
+  left: 16px;
+}
+
+.invitation-card-botanical.top-right {
+  top: 16px;
+  right: 16px;
+  transform: scaleX(-1);
+}
+
+.invitation-card-botanical.bottom-left {
+  bottom: 16px;
+  left: 16px;
+  transform: scaleY(-1);
+}
+
+.invitation-card-botanical.bottom-right {
+  right: 16px;
+  bottom: 16px;
+  transform: scale(-1);
+}
+
+/* Monograma más fino y ceremonial */
+.invitation-card-monogram {
+  width: 76px !important;
+  margin: 0 0 10px !important;
+
+  opacity: 0.90;
+}
+
+.invitation-card-rule {
+  width: min(180px, 60%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin: 0 0 13px;
+
+  color: rgba(138, 133, 96, 0.65);
+}
+
+.invitation-card-rule span {
+  flex: 1;
+  height: 1px;
+  background: rgba(138, 133, 96, 0.28);
+}
+
+.invitation-card-rule i {
+  font-size: 5px;
+  font-style: normal;
+  line-height: 1;
+}
+
+.invitation-card-kicker {
+  margin: 0 0 12px !important;
+
+  color: #8a8560 !important;
+
+  font-size: 6.5px !important;
+  font-weight: 500;
+  letter-spacing: 3px !important;
+}
+
+.invitation-card h1 {
+  font-size: clamp(45px, 6.3vw, 66px) !important;
+  line-height: 0.72 !important;
+  letter-spacing: -1.2px;
+}
+
+.invitation-card h1 span {
+  margin: 10px 0 8px !important;
+
+  color: #8a8560 !important;
+
+  font-size: 24px !important;
+  font-weight: 300;
+}
+
+.invitation-card-date {
+  margin-top: 18px !important;
+
+  color: var(--black) !important;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px !important;
+  font-weight: 400;
+  letter-spacing: 3px !important;
+}
+
+.invitation-card-place {
+  margin-top: 8px;
+
+  color: #8a8560;
+
+  font-size: 6.5px;
+  letter-spacing: 2.4px;
+}
+
+/* Botón discreto: sigue siendo funcional sin competir con la papelería */
+.invitation-card button {
+  margin-top: 22px !important;
+  padding: 10px 4px 8px !important;
+
+  border: none !important;
+  border-bottom: 1px solid rgba(138, 133, 96, 0.48) !important;
+
+  background: transparent !important;
+  color: var(--black) !important;
+
+  font-size: 6px !important;
+  letter-spacing: 2px !important;
+}
+
+.invitation-card button:hover {
+  color: #8a8560 !important;
+  background: transparent !important;
+}
+
+.invitation-card button span {
+  color: #8a8560;
+}
+
+/* Entrada progresiva del contenido al salir la hoja */
+.invitation-envelope.is-closed .invitation-card-content,
+.invitation-envelope.is-closed .invitation-card-botanical,
+.invitation-envelope.is-closed .invitation-card-inner-border {
+  opacity: 0;
+}
+
+.invitation-envelope.is-open .invitation-card-inner-border {
+  opacity: 1;
+  transition: opacity 0.45s ease 0.68s;
+}
+
+.invitation-envelope.is-open .invitation-card-botanical {
+  opacity: 1;
+  transition: opacity 0.65s ease 0.82s;
+}
+
+.invitation-envelope.is-open .invitation-card-content {
+  opacity: 1;
+  transition: opacity 0.55s ease 0.76s;
+}
+
+.invitation-envelope.is-open .invitation-card-monogram {
+  animation: invitationPaperMonogramReveal 0.62s ease 0.72s both;
+}
+
+.invitation-envelope.is-open .invitation-card-rule,
+.invitation-envelope.is-open .invitation-card-kicker {
+  animation: invitationPaperDetailReveal 0.58s ease 0.90s both;
+}
+
+.invitation-envelope.is-open .invitation-card h1 {
+  animation: invitationPaperNamesReveal 0.68s ease 1.00s both;
+}
+
+.invitation-envelope.is-open .invitation-card-date,
+.invitation-envelope.is-open .invitation-card-place {
+  animation: invitationPaperDetailReveal 0.58s ease 1.16s both;
+}
+
+@keyframes invitationPaperMonogramReveal {
+  from {
+    opacity: 0;
+    transform: translateY(7px) scale(0.96);
+  }
+
+  to {
+    opacity: 0.90;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes invitationPaperNamesReveal {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes invitationPaperDetailReveal {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 650px) {
+  .invitation-card {
+    padding: 29px 27px 27px !important;
+  }
+
+  .invitation-card-inner-border {
+    inset: 9px;
+  }
+
+  .invitation-card-botanical {
+    width: 61px;
+    height: 61px;
+  }
+
+  .invitation-card-botanical.top-left,
+  .invitation-card-botanical.top-right {
+    top: 11px;
+  }
+
+  .invitation-card-botanical.bottom-left,
+  .invitation-card-botanical.bottom-right {
+    bottom: 11px;
+  }
+
+  .invitation-card-botanical.top-left,
+  .invitation-card-botanical.bottom-left {
+    left: 11px;
+  }
+
+  .invitation-card-botanical.top-right,
+  .invitation-card-botanical.bottom-right {
+    right: 11px;
+  }
+
+  .invitation-card-monogram {
+    width: 60px !important;
+    margin-bottom: 7px !important;
+  }
+
+  .invitation-card-rule {
+    margin-bottom: 10px;
+  }
+
+  .invitation-card-kicker {
+    margin-bottom: 9px !important;
+    font-size: 5.7px !important;
+    letter-spacing: 2.3px !important;
+  }
+
+  .invitation-card h1 {
+    font-size: 43px !important;
+  }
+
+  .invitation-card h1 span {
+    margin: 7px 0 6px !important;
+    font-size: 20px !important;
+  }
+
+  .invitation-card-date {
+    margin-top: 13px !important;
+    font-size: 14px !important;
+  }
+
+  .invitation-card-place {
+    margin-top: 6px;
+    font-size: 5.5px;
+  }
+
+  .invitation-card button {
+    margin-top: 16px !important;
+    font-size: 5.4px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .invitation-card {
+    padding: 24px 22px 22px !important;
+  }
+
+  .invitation-card-botanical {
+    width: 53px;
+    height: 53px;
+  }
+
+  .invitation-card-monogram {
+    width: 54px !important;
+  }
+
+  .invitation-card h1 {
+    font-size: 39px !important;
+  }
+
+  .invitation-card-date {
+    font-size: 13px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invitation-card-monogram,
+  .invitation-card-rule,
+  .invitation-card-kicker,
+  .invitation-card h1,
+  .invitation-card-date,
+  .invitation-card-place {
+    animation: none !important;
+  }
+}
