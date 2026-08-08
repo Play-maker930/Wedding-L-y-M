@@ -252,6 +252,7 @@ function App() {
   const [showInvitation, setShowInvitation] = useState(true)
   const musicRef = useRef(null)
   const homeImageRef = useRef(null)
+  const galleryTouchStartXRef = useRef(null)
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
 
   const [activePage, setActivePage] = useState('inicio')
@@ -957,6 +958,86 @@ function App() {
     return () => clearInterval(carouselTimer)
   }, [activePage, carouselPaused, hotelPhotos.length])
 
+  useEffect(() => {
+    const revealSelectors = [
+      '.section-heading',
+      '.dress-code-heading',
+      '.dress-code-details',
+      '.info-card',
+      '.stay-intro-title',
+      '.stay-gallery',
+      '.stay-intro-copy',
+      '.stay-included-grid article',
+      '.stay-section-heading',
+      '.stay-room-row',
+      '.stay-airport',
+      '.stay-steps-grid article',
+      '.transport-section-heading',
+      '.transport-route',
+      '.transport-stop',
+      '.transport-note',
+      '.transport-schedule',
+      '.medellin-weather-heading',
+      '.medellin-weather-grid article',
+      '.medellin-section-heading',
+      '.medellin-attraction-card',
+      '.medellin-escape-feature',
+      '.medellin-guide-item',
+      '.gallery-editorial-heading',
+      '.gallery-editorial-ending',
+      '.rsvp-code-hero',
+      '.rsvp-code-entry',
+      '.rsvp-guest-heading',
+      '.rsvp-guest-card',
+      '.rsvp-code-message',
+      '.rsvp-code-summary',
+    ]
+
+    const revealItems = Array.from(
+      document.querySelectorAll(revealSelectors.join(','))
+    )
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+
+    revealItems.forEach((item, index) => {
+      item.classList.add('scroll-reveal')
+      item.style.setProperty(
+        '--reveal-delay',
+        `${Math.min((index % 4) * 70, 210)}ms`
+      )
+    })
+
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      revealItems.forEach((item) =>
+        item.classList.add('scroll-reveal-visible')
+      )
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return
+          }
+
+          entry.target.classList.add('scroll-reveal-visible')
+          observer.unobserve(entry.target)
+        })
+      },
+      {
+        threshold: 0.14,
+        rootMargin: '0px 0px -6% 0px',
+      }
+    )
+
+    revealItems.forEach((item) => observer.observe(item))
+
+    return () => observer.disconnect()
+  }, [activePage, rsvpGroup, rsvpStatus.state])
+
   const openGalleryImage = (index) => {
     setActiveGalleryImage(index)
   }
@@ -1014,6 +1095,29 @@ function App() {
       )
     }
   }, [activeGalleryImage])
+
+  const handleGalleryTouchStart = (event) => {
+    galleryTouchStartXRef.current = event.touches[0].clientX
+  }
+
+  const handleGalleryTouchEnd = (event) => {
+    if (galleryTouchStartXRef.current === null) {
+      return
+    }
+
+    const touchEndX = event.changedTouches[0].clientX
+    const swipeDistance = galleryTouchStartXRef.current - touchEndX
+
+    if (Math.abs(swipeDistance) > 50) {
+      if (swipeDistance > 0) {
+        showNextGalleryImage()
+      } else {
+        showPreviousGalleryImage()
+      }
+    }
+
+    galleryTouchStartXRef.current = null
+  }
 
   const showPreviousHotelPhoto = () => {
     setHotelSlide((currentSlide) =>
@@ -1133,13 +1237,25 @@ function App() {
   ]
 
   const navigate = (page) => {
-    setActivePage(page)
-    setMenuOpen(false)
+    const performNavigation = () => {
+      setActivePage(page)
+      setMenuOpen(false)
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    }
+
+    if (
+      page !== activePage &&
+      typeof document.startViewTransition === 'function'
+    ) {
+      document.startViewTransition(performNavigation)
+      return
+    }
+
+    performNavigation()
   }
 
 
@@ -1413,90 +1529,88 @@ function App() {
               <g className="violin-body">
                 <path
                   className="violin-silhouette"
-                  d="M30.5 7.5
-                     C27.8 10.2 28.2 14.8 30.8 18.2
-                     L33.4 21.5
-                     C31.2 23.4 29.4 25.6 28.2 28.2
-                     C26.6 31.7 26.8 34.5 28.7 37
-                     C26.3 38.3 24.2 40.4 23.1 43
-                     C20.8 48.4 23.7 54.3 29 56.4
-                     C34.3 58.5 40.2 55.6 42.3 50.3
-                     C43.5 47.4 43.2 44.5 41.8 42
-                     C44.7 41.4 47 39.5 48.2 36.6
-                     C49.9 32.7 48.4 28.5 44.9 26.4
-                     C42.3 24.8 39.7 24.7 37.3 25.4
-                     L34.8 21.2
-                     C33.1 18.2 32.6 15.4 33.5 12.7
-                     C34.2 10.6 33.3 8.4 30.5 7.5Z"
+                  d="M30 21
+                     C25.4 21 22 23.8 22 28
+                     C22 31.1 23.8 33 27 34.3
+                     C24.1 35.5 22 37.6 20.8 40.6
+                     C18.9 45.4 20.1 51.4 23.2 55.4
+                     C25.2 58.1 27.5 59.7 30 59.7
+                     C32.5 59.7 34.8 58.1 36.8 55.4
+                     C39.9 51.4 41.1 45.4 39.2 40.6
+                     C38 37.6 35.9 35.5 33 34.3
+                     C36.2 33 38 31.1 38 28
+                     C38 23.8 34.6 21 30 21Z"
                 />
 
                 <path
                   className="violin-neck"
-                  d="M33.5 12.7 43.8 3.6"
+                  d="M28.8 21 29.5 10.5M31.2 21 30.5 10.5"
                 />
+
                 <path
                   className="violin-scroll"
-                  d="M43.8 3.6
-                     C46.4 1.6 49.7 3.4 49 6.4
-                     C48.5 8.4 46.2 9.2 44.6 8.1"
+                  d="M30 10.5
+                     C27.4 9.3 27.3 6.2 29.5 4.9
+                     C31.8 3.5 34.2 5.1 33.7 7.4
+                     C33.3 9.2 31.5 9.7 30.4 8.8"
+                />
+
+                <path
+                  className="violin-peg"
+                  d="M28.8 11.8 25.7 10.3M31.2 13.7 34.4 12.2"
                 />
 
                 <path
                   className="violin-fingerboard"
-                  d="M34.8 21.2 40.7 31.2"
+                  d="M30 11.2 30 39.5"
                 />
-                <path
-                  className="violin-tailpiece"
-                  d="M31.6 48.2 35.9 55.3 39.9 49.4Z"
-                />
+
                 <path
                   className="violin-bridge"
-                  d="M31.9 40.3
-                     C34.2 41.1 36.6 41 39.1 39.9"
+                  d="M25.6 42.1
+                     C27.8 41.1 32.2 41.1 34.4 42.1"
+                />
+
+                <path
+                  className="violin-tailpiece"
+                  d="M27.1 48.5 30 57 32.9 48.5Z"
                 />
 
                 <path
                   className="violin-string"
-                  d="M43.9 6.2 33.6 22.3 35 53.8"
-                />
-                <path
-                  className="violin-string"
-                  d="M46 6.9 35.1 22.8 37.2 53.1"
+                  d="M29.35 9.5 29.15 55.3M30.65 9.5 30.85 55.3"
                 />
 
                 <path
                   className="violin-f-hole"
-                  d="M28.2 33.2
-                     C26.7 35.2 27 37.2 28.7 38.7
-                     C30.1 39.8 30.3 41.4 29.3 43"
+                  d="M24.9 35.7
+                     C23.5 37.4 23.7 39.3 25 40.6
+                     C26.2 41.8 26.1 43.2 24.9 44.5"
                 />
                 <path
                   className="violin-f-hole"
-                  d="M42.5 30.9
-                     C44.1 32.5 44 34.6 42.5 36
-                     C41.3 37.2 41.3 38.8 42.4 40.2"
+                  d="M35.1 35.7
+                     C36.5 37.4 36.3 39.3 35 40.6
+                     C33.8 41.8 33.9 43.2 35.1 44.5"
                 />
-
-                <circle cx="44.7" cy="7.1" r="0.7" />
-                <circle cx="47.1" cy="5.4" r="0.7" />
               </g>
 
               <g className="violin-bow">
                 <path
                   className="violin-bow-stick"
-                  d="M57.6 8.2 25.6 61.8"
+                  d="M55.5 11.5 36.2 61.5"
                 />
                 <path
                   className="violin-bow-hair"
-                  d="M61.2 10.1 29.4 63.7"
+                  d="M59 12.8 39.7 62.8"
                 />
                 <path
                   className="violin-bow-tip"
-                  d="M57.6 8.2 61.2 10.1"
+                  d="M55.5 11.5 59 12.8"
                 />
                 <path
                   className="violin-bow-frog"
-                  d="M25.6 61.8 29.4 63.7 31.2 60.8 27.4 58.9Z"
+                  d="M36.2 61.5 39.7 62.8 41.1 59.3 37.6 58Z"
                 />
               </g>
             </svg>
@@ -1689,14 +1803,14 @@ function App() {
                 <div className="countdown-values">
 
                   <div>
-                    <strong>{timeLeft.days}</strong>
+                    <strong key={timeLeft.days}>{timeLeft.days}</strong>
                     <span>DÍAS</span>
                   </div>
 
                   <i>:</i>
 
                   <div>
-                    <strong>
+                    <strong key={timeLeft.hours}>
                       {String(timeLeft.hours).padStart(2, '0')}
                     </strong>
                     <span>HORAS</span>
@@ -1705,7 +1819,7 @@ function App() {
                   <i>:</i>
 
                   <div>
-                    <strong>
+                    <strong key={timeLeft.minutes}>
                       {String(timeLeft.minutes).padStart(2, '0')}
                     </strong>
                     <span>MINUTOS</span>
@@ -1714,7 +1828,7 @@ function App() {
                   <i>:</i>
 
                   <div>
-                    <strong>
+                    <strong key={timeLeft.seconds}>
                       {String(timeLeft.seconds).padStart(2, '0')}
                     </strong>
                     <span>SEGUNDOS</span>
@@ -3223,6 +3337,8 @@ function App() {
                 aria-modal="true"
                 aria-label="Fotografía ampliada"
                 onClick={closeGalleryImage}
+                onTouchStart={handleGalleryTouchStart}
+                onTouchEnd={handleGalleryTouchEnd}
               >
 
                 <button
