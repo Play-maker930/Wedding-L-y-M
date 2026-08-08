@@ -12708,3 +12708,241 @@ button:focus {
     transform: none;
   }
 }
+
+
+/* =================================
+   V60 — ARCO TOCANDO SOBRE EL VIOLÍN
+================================= */
+
+/* El instrumento permanece fijo y estable */
+.music-control .violin-body {
+  transform: none !important;
+  animation: none !important;
+}
+
+/*
+  El arco se coloca visualmente por encima del instrumento
+  y cruza la zona del puente/cuerdas.
+*/
+.music-control .violin-bow {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+/* Pausado: arco apoyado cerca de las cuerdas, sin movimiento */
+.music-control:not(.is-playing) .violin-bow {
+  transform:
+    translate(-1px, 1px)
+    rotate(-2deg) !important;
+}
+
+/* Reproduciendo: recorrido corto de ida y vuelta sobre las cuerdas */
+.music-control.is-playing .violin-bow {
+  animation:
+    violinBowAcrossStrings 0.82s
+    ease-in-out
+    infinite
+    alternate !important;
+}
+
+@keyframes violinBowAcrossStrings {
+  from {
+    transform:
+      translate(-6px, 4px)
+      rotate(-4deg);
+  }
+
+  to {
+    transform:
+      translate(6px, -4px)
+      rotate(4deg);
+  }
+}
+
+/* El arco debe verse nítidamente encima del cuerpo */
+.violin-bow-stick,
+.violin-bow-hair,
+.violin-bow-tip,
+/* Movimiento un poco más corto en mobile */
+@media (max-width: 650px) {
+  @keyframes violinBowAcrossStrings {
+    from {
+      transform:
+        translate(-4px, 3px)
+        rotate(-3deg);
+    }
+
+    to {
+      transform:
+        translate(4px, -3px)
+        rotate(3deg);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-control.is-playing .violin-bow {
+    animation: none !important;
+
+    transform:
+      translate(0, 0)
+      rotate(0deg) !important;
+  }
+}
+
+
+/* =================================
+   V62 — ARCO TRANSVERSAL REAL SOBRE LAS CUERDAS
+================================= */
+
+/*
+  El arco ya está dibujado transversalmente en el SVG,
+  cruzando físicamente las cuerdas cerca del puente.
+  La animación solo lo desliza a lo largo de esa misma línea.
+*/
+
+.music-control .violin-body {
+  transform: none !important;
+  animation: none !important;
+}
+
+.music-control .violin-bow {
+  transform-box: view-box;
+  transform-origin: 30px 41px;
+}
+
+/* Pausado: queda apoyado sobre las cuerdas */
+.music-control:not(.is-playing) .violin-bow {
+  transform: translate(0, 0) !important;
+}
+
+/* Tocando: movimiento lateral corto, manteniendo contacto */
+.music-control.is-playing .violin-bow {
+  animation:
+    violinBowStrokeV62 0.78s
+    cubic-bezier(0.45, 0, 0.55, 1)
+    infinite
+    alternate !important;
+}
+
+@keyframes violinBowStrokeV62 {
+  from {
+    transform: translate(-5px, 1px);
+  }
+
+  to {
+    transform: translate(5px, -1px);
+  }
+}
+
+/* El arco se renderiza sobre el cuerpo por estar después en el SVG */
+.violin-bow {
+  opacity: 0.98;
+}
+
+.violin-bow-stick {
+  stroke-width: 1.55;
+}
+
+.violin-bow-hair {
+  stroke-width: 0.85;
+  opacity: 0.72;
+}
+
+.violin-bow-frog {
+  fill: rgba(185, 164, 134, 0.12);
+  stroke-width: 1.15;
+}
+
+@media (max-width: 650px) {
+  @keyframes violinBowStrokeV62 {
+    from {
+      transform: translate(-4px, 0.8px);
+    }
+
+    to {
+      transform: translate(4px, -0.8px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-control.is-playing .violin-bow {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* =================================
+   V64 — PINTEREST / DRESS CODE
+================================= */
+
+.dress-code-inspiration {
+  display: flex;
+  justify-content: center;
+  margin-top: 38px;
+}
+
+.dress-code-pinterest-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 12px 24px;
+  border: 1px solid rgba(138, 133, 96, 0.58);
+  border-radius: 999px;
+  background: transparent;
+  color: #5f5a43;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color 260ms ease,
+    color 260ms ease,
+    border-color 260ms ease,
+    transform 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.dress-code-pinterest-button span {
+  display: inline-block;
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 260ms ease;
+}
+
+@media (hover: hover) {
+  .dress-code-pinterest-button:hover {
+    transform: translateY(-2px);
+    background: #8a8560;
+    border-color: #8a8560;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(91, 84, 55, 0.12);
+  }
+
+  .dress-code-pinterest-button:hover span {
+    transform: translate(2px, -2px);
+  }
+}
+
+.dress-code-pinterest-button:focus-visible {
+  outline: 2px solid rgba(138, 133, 96, 0.5);
+  outline-offset: 4px;
+}
+
+@media (max-width: 650px) {
+  .dress-code-inspiration {
+    margin-top: 30px;
+  }
+
+  .dress-code-pinterest-button {
+    min-height: 44px;
+    padding: 11px 21px;
+    font-size: 10px;
+  }
+}

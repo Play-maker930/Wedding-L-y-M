@@ -1598,19 +1598,19 @@ function App() {
               <g className="violin-bow">
                 <path
                   className="violin-bow-stick"
-                  d="M55.5 11.5 36.2 61.5"
+                  d="M9 44.5 L60 34.5"
                 />
                 <path
                   className="violin-bow-hair"
-                  d="M59 12.8 39.7 62.8"
+                  d="M10 47.6 L61 37.6"
                 />
                 <path
                   className="violin-bow-tip"
-                  d="M55.5 11.5 59 12.8"
+                  d="M60 34.5 L61 37.6"
                 />
                 <path
                   className="violin-bow-frog"
-                  d="M36.2 61.5 39.7 62.8 41.1 59.3 37.6 58Z"
+                  d="M9 44.5 L10 47.6 L15.5 46.5 L14.5 43.4 Z"
                 />
               </g>
             </svg>
@@ -2171,6 +2171,19 @@ function App() {
                   </p>
                 </div>
 
+              </div>
+
+              <div className="dress-code-inspiration">
+                <a
+                  className="dress-code-pinterest-button"
+                  href="https://pin.it/7JebbN5V5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Ver inspiración de dress code en Pinterest"
+                >
+                  VER INSPIRACIÓN
+                  <span aria-hidden="true">↗</span>
+                </a>
               </div>
 
             </section>
