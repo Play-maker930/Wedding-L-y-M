@@ -2,13 +2,21 @@ import { useState, useEffect, useRef } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import './App.css'
-import portadaImg from './assets/Portada.jpg'
-import bodaFondoImg from './assets/la boda.jpg'
-import parroquiaImg from './assets/parroquia.png'
+import portadaImg from './assets/Portada.webp'
+import bodaFondoImg from './assets/la-boda.webp'
+import parroquiaImg from './assets/parroquia.webp'
 import monogramGold from './assets/monogram_gold.png'
 import menuBackground from './assets/menu-background.jpg'
 import confirmationPhoto from './assets/foto-confirmacion.jpg'
-import informationPhoto from './assets/information-photo.jpg'
+import informationPhoto from './assets/information-photo.webp'
+import storyVideo1 from './assets/video-1.webp'
+import storyVideo2 from './assets/video-2.webp'
+import storyVideo3 from './assets/video-3.webp'
+import storyVideo4 from './assets/video-4.webp'
+import storyVideo5 from './assets/video-5.webp'
+import storyVideo6 from './assets/video-6.webp'
+import storyVideo7 from './assets/video-7.webp'
+import storyVideo8 from './assets/video-8.webp'
 import gallery01 from './assets/gallery-01.jpg'
 import gallery02 from './assets/gallery-02.jpg'
 import gallery03 from './assets/gallery-03.jpg'
@@ -22,27 +30,19 @@ import weddingMusic from './assets/Aleluya.mp3'
 import InvitationEnvelope from './InvitationEnvelope'
 
 
-const storyAssetModules = import.meta.glob(
-  './assets/video *.*',
-  {
-    eager: true,
-    import: 'default',
-  }
-)
 
-const getStoryAsset = (number) => {
-  const matcher = new RegExp(
-    `/video ${number}\\.[^/]+$`,
-    'i'
-  )
+const preloadImage = (src) => {
+  if (!src) return Promise.resolve()
 
-  const matchingPath = Object.keys(
-    storyAssetModules
-  ).find((path) => matcher.test(path))
+  return new Promise((resolve) => {
+    const image = new Image()
+    image.decoding = 'async'
+    image.onload = resolve
+    image.onerror = resolve
+    image.src = src
 
-  return matchingPath
-    ? storyAssetModules[matchingPath]
-    : ''
+    if (image.complete) resolve()
+  })
 }
 
 
@@ -278,43 +278,43 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
 const STORY_FILM_SLIDES = [
   {
     title: 'Donde comenzó nuestra historia.',
-    image: getStoryAsset(1),
+    image: storyVideo1,
     position: 'center',
   },
   {
     title: 'Aprendimos a elegirnos cada día.',
-    image: getStoryAsset(2),
+    image: storyVideo2,
     position: 'center',
   },
   {
     title: 'Y a convertir lo cotidiano en recuerdos.',
-    image: getStoryAsset(3),
+    image: storyVideo3,
     position: 'center',
   },
   {
     title: 'Juntos, cada lugar empezó a sentirse como hogar.',
-    image: getStoryAsset(4),
+    image: storyVideo4,
     position: 'center',
   },
   {
     title: 'Nuestros sueños empezaron a sentirse cada vez más nuestros.',
-    image: getStoryAsset(5),
+    image: storyVideo5,
     position: 'center',
   },
   {
     title: 'Hasta que llegó el sí que cambió todo.',
-    image: getStoryAsset(6),
+    image: storyVideo6,
     position: 'center',
     moment: 'yes',
   },
   {
     title: 'Y empezamos a imaginar el día que tanto esperábamos.',
-    image: getStoryAsset(7),
+    image: storyVideo7,
     position: 'center',
   },
   {
     title: 'Ahora estamos a punto de comenzar nuestro siguiente capítulo.',
-    image: getStoryAsset(8),
+    image: storyVideo8,
     position: 'center',
   },
 ]
@@ -337,7 +337,27 @@ function StoryFilm({ onFinish }) {
   }, [])
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
+    if (showFinale) {
+      preloadImage(portadaImg)
+      return
+    }
+
+    const nextImages = [
+      STORY_FILM_SLIDES[index + 1]?.image,
+      STORY_FILM_SLIDES[index + 2]?.image,
+    ].filter(Boolean)
+
+    nextImages.forEach((src) => {
+      preloadImage(src)
+    })
+
+    if (index >= 5) {
+      preloadImage(portadaImg)
+    }
+  }, [index, showFinale])
+
+  useEffect(() => {
+    const timer = window.setTimeout(async () => {
       if (showFinale) {
         onFinishRef.current()
         return
@@ -347,6 +367,11 @@ function StoryFilm({ onFinish }) {
         setShowFinale(true)
         return
       }
+
+      const nextImage =
+        STORY_FILM_SLIDES[index + 1]?.image
+
+      await preloadImage(nextImage)
 
       setIndex((current) => current + 1)
     }, showFinale ? 8000 : 4700)
@@ -386,6 +411,8 @@ function StoryFilm({ onFinish }) {
               src={STORY_FILM_SLIDES[index].image}
               alt=""
               className="story-film-image"
+              decoding="async"
+              fetchPriority={index === 0 ? 'high' : 'auto'}
               style={{
                 objectPosition:
                   STORY_FILM_SLIDES[index].position,
@@ -455,6 +482,11 @@ function App() {
   const [hotelSlide, setHotelSlide] = useState(0)
   const [carouselPaused, setCarouselPaused] = useState(false)
   const [touchStartX, setTouchStartX] = useState(null)
+
+  useEffect(() => {
+    preloadImage(storyVideo1)
+    preloadImage(storyVideo2)
+  }, [])
 
   const [rsvpCode, setRsvpCode] = useState('')
   const [rsvpGroup, setRsvpGroup] = useState(null)
@@ -1712,7 +1744,7 @@ function App() {
       <audio
         ref={musicRef}
         src={weddingMusic}
-        preload="auto"
+        preload="metadata"
         onPlay={() => setIsMusicPlaying(true)}
         onPause={() => setIsMusicPlaying(false)}
         onEnded={() => setIsMusicPlaying(false)}
@@ -1924,6 +1956,8 @@ function App() {
           <img
             src={menuBackground}
             alt=""
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -1999,6 +2033,11 @@ function App() {
                 ref={homeImageRef}
                 src={portadaImg}
                 alt="Luis y Melanie"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                width="1200"
+                height="1800"
               />
             </div>
 
@@ -2144,7 +2183,7 @@ function App() {
               </div>
 
               <p className="city">
-                MEDELLÍN, COLOMBIA
+                MEDELLÍN · COLOMBIA
               </p>
 
             </section>
@@ -2160,8 +2199,7 @@ function App() {
                 </p>
 
                 <h2>
-                  El escenario de
-                  <em>nuestra historia</em>
+                  El escenario de nuestra historia
                 </h2>
 
               </div>
@@ -2177,6 +2215,9 @@ function App() {
                       src={parroquiaImg}
                       alt="Parroquia María Madre de Dios"
                       loading="lazy"
+                      decoding="async"
+                      width="1402"
+                      height="1122"
                     />
                   </div>
 
@@ -2247,6 +2288,8 @@ function App() {
                     <img
                       src="https://images.pixieset.com/47662229/51c69cd63d50919fcd4655c2833839fd-xxlarge.jpg"
                       alt="Centro de Eventos Villa Celeste"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
@@ -2338,7 +2381,7 @@ function App() {
                   <span>MUJERES</span>
 
                   <h3>
-                    Vestido largo
+                    Vestido formal largo
                   </h3>
 
                   <div className="dress-code-avoid">
@@ -2367,7 +2410,7 @@ function App() {
                     </div>
 
                     <p>
-                      Agradecemos reservar el blanco y sus tonalidades,
+                      Agradecemos evitar el blanco y sus tonalidades,
                       así como el verde oliva, para este día tan especial.
                     </p>
                   </div>
@@ -2379,12 +2422,8 @@ function App() {
                   <span>CABALLEROS</span>
 
                   <h3>
-                    Traje formal
+                    Traje formal y corbata
                   </h3>
-
-                  <p>
-                    Traje formal y corbata.
-                  </p>
                 </div>
 
               </div>
@@ -2436,6 +2475,9 @@ function App() {
                   src={informationPhoto}
                   alt="Luis y Melanie"
                   loading="lazy"
+                  decoding="async"
+                  width="1133"
+                  height="1700"
                 />
               </figure>
 
@@ -2672,6 +2714,8 @@ function App() {
                           src={photo}
                           alt={`Movich Las Lomas — fotografía ${index + 1}`}
                           loading={index === 0 ? 'eager' : 'lazy'}
+                          decoding="async"
+                          fetchPriority={index === 0 ? 'high' : 'low'}
                         />
                       </figure>
                     ))}
@@ -3076,20 +3120,10 @@ function App() {
 
               <div className="transport-section-heading">
 
-                <p className="section-kicker">
-                  TU RECORRIDO
-                </p>
-
                 <h2>
                   Nosotros nos encargamos
                   <em> de cada traslado</em>
                 </h2>
-
-                <p>
-                  El servicio de transporte requiere reserva previa y
-                  cuenta con cupos limitados. Los huéspedes alojados
-                  en el hotel sede tendrán prioridad.
-                </p>
 
               </div>
 
@@ -3229,9 +3263,7 @@ function App() {
                   Medellín
                 </h1>
 
-                <p>
-                  Medellín nos recibe con días agradables y noches frescas, un clima perfecto para recorrer y disfrutar la ciudad.
-                </p>
+
               </div>
 
             </section>
@@ -3243,9 +3275,8 @@ function App() {
                 </h2>
 
                 <p>
-                  Medellín suele tener temperaturas agradables
-                  durante el día. Medellín puede sentirse más
-                  fresco, especialmente en la noche.
+                  Medellín nos recibe con días agradables y noches frescas,
+                  un clima perfecto para recorrer y disfrutar la ciudad.
                 </p>
               </div>
 
@@ -3314,7 +3345,9 @@ function App() {
                   <img
                     src="https://commons.wikimedia.org/wiki/Special:Redirect/file/%27Medellin_es_una_Chimba%27_-_Comuna_13_-_Medell%C3%ADn_-_Colombia_2024_%282%29.jpg?width=1800"
                     alt="Arte urbano y color en la Comuna 13 de Medellín"
-                  />
+                      loading="lazy"
+                      decoding="async"
+                    />
 
                   <div className="medellin-attraction-overlay">
                     <span>01</span>
@@ -3330,7 +3363,9 @@ function App() {
                   <img
                     src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Provenza_-_Carrera_35_-_Medell%C3%ADn_-_Colombia_2024.jpg?width=1600"
                     alt="Calle arbolada y restaurantes de Provenza en Medellín"
-                  />
+                      loading="lazy"
+                      decoding="async"
+                    />
 
                   <div className="medellin-attraction-overlay">
                     <span>02</span>
@@ -3346,7 +3381,9 @@ function App() {
                   <img
                     src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Medell%C3%ADn%2C_Plaza_Botero%2C_2023-07_CN-01.jpg?width=1600"
                     alt="Esculturas y arquitectura de Plaza Botero en Medellín"
-                  />
+                      loading="lazy"
+                      decoding="async"
+                    />
 
                   <div className="medellin-attraction-overlay">
                     <span>03</span>
@@ -3362,7 +3399,9 @@ function App() {
                   <img
                     src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Jard%C3%ADn_Bot%C3%A1nico_de_Medell%C3%ADn.jpg?width=1600"
                     alt="Vegetación y senderos del Jardín Botánico de Medellín"
-                  />
+                      loading="lazy"
+                      decoding="async"
+                    />
 
                   <div className="medellin-attraction-overlay">
                     <span>04</span>
@@ -3378,7 +3417,9 @@ function App() {
                   <img
                     src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Estaci%C3%B3n_Arv%C3%AD_%28Metro_de_Medell%C3%ADn%29.jpg?width=1600"
                     alt="Naturaleza y estación del Parque Arví en Medellín"
-                  />
+                      loading="lazy"
+                      decoding="async"
+                    />
 
                   <div className="medellin-attraction-overlay">
                     <span>05</span>
@@ -3412,7 +3453,9 @@ function App() {
                   <img
                     src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Vista_desde_la_piedra_El_Pe%C3%B1ol._Guatap%C3%A9%2C_Colombia._20091114.JPG?width=1800"
                     alt="Vista panorámica del embalse de Guatapé desde la Piedra del Peñol"
-                  />
+                      loading="lazy"
+                      decoding="async"
+                    />
 
                   <div>
                     <span>DÍA COMPLETO</span>
@@ -3517,7 +3560,9 @@ function App() {
                   <img
                     src={photo.src}
                     alt={photo.alt}
-                    loading={index < 2 ? 'eager' : 'lazy'}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    fetchPriority={index === 0 ? 'high' : 'low'}
                   />
 
                   <span className="gallery-editorial-number">
@@ -3593,6 +3638,7 @@ function App() {
                   <img
                     src={galleryPhotos[activeGalleryImage].src}
                     alt={galleryPhotos[activeGalleryImage].alt}
+                    decoding="async"
                   />
 
                   <figcaption>
@@ -3689,6 +3735,8 @@ function App() {
                   <img
                     src={confirmationPhoto}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 

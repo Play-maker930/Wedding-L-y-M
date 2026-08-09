@@ -13764,3 +13764,131 @@ select {
     transition: none;
   }
 }
+
+
+/* =================================
+   V78 — PERFORMANCE
+================================= */
+
+/* Las escenas cinematográficas se limitan a transform/opacity */
+.story-film-scene,
+.story-film-image,
+.site-home-reveal {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.story-film-image {
+  will-change: transform, opacity;
+}
+
+/* El resto de la página no necesita reservar GPU permanentemente */
+.story-film-finale,
+.home-image img {
+  backface-visibility: hidden;
+}
+
+/* Contención de secciones largas para reducir trabajo fuera de viewport */
+.information-page,
+.stay-page,
+.transport-page,
+.medellin-page,
+.gallery-page,
+.rsvp-page {
+  contain: layout style paint;
+}
+
+/* Reserva estable del espacio de fotografías */
+.venue-image img,
+.info-feature-image img,
+.gallery-editorial-item img,
+.medellin-attraction-card img,
+.medellin-feature-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* En conexiones lentas evitamos un flash vacío durante el decode */
+.story-film-image {
+  background: #211712;
+}
+
+
+/* =================================
+   V79 — POLISH DE TEXTOS Y LAYOUT
+================================= */
+
+/* Historia — texto de las fotos un poco más pequeño */
+.story-film-copy p {
+  font-size: clamp(34px, 4.5vw, 64px);
+  line-height: 1.02;
+}
+
+/* Final — "SIETE AÑOS DESPUÉS" más visible */
+.story-film-finale-copy > p {
+  font-size: 10px;
+  letter-spacing: 4.2px;
+}
+
+/* EL GRAN DÍA — subir solo textos superiores */
+.event-hero .eyebrow,
+.event-hero h1 {
+  transform: translateY(-12px);
+}
+
+/* PM más pequeño que la hora */
+.venue-time {
+  font-variant-numeric: lining-nums;
+}
+
+.venue-time .ampm,
+.venue-time small {
+  font-size: 0.62em;
+  letter-spacing: 0.08em;
+  vertical-align: 0.08em;
+}
+
+/* Transporte — reducir espacio tras eliminar kicker y copy */
+.transport-section-heading {
+  margin-bottom: 24px;
+}
+
+.transport-route-section {
+  padding-top: 56px;
+}
+
+@media (max-width: 850px) {
+  .transport-route-section {
+    padding-top: 38px;
+  }
+
+  .transport-section-heading {
+    margin-bottom: 18px;
+  }
+}
+
+/* Medellín — mantener hero más limpio al quitar copy */
+.medellin-hero-content {
+  padding-bottom: 16px;
+}
+
+/* Dress code: bloques más compactos al dejar solo título en hombres */
+.dress-code-detail-block > h3 {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 650px) {
+  .story-film-copy p {
+    font-size: clamp(34px, 10vw, 48px);
+  }
+
+  .story-film-finale-copy > p {
+    font-size: 9px;
+  }
+
+  .event-hero .eyebrow,
+  .event-hero h1 {
+    transform: translateY(-8px);
+  }
+}
