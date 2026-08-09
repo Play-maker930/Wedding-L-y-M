@@ -554,6 +554,8 @@ function WeddingApp() {
   const [rsvpGroup, setRsvpGroup] = useState(null)
   const [rsvpResponses, setRsvpResponses] = useState({})
   const [rsvpMessage, setRsvpMessage] = useState('')
+  const [rsvpAdminData, setRsvpAdminData] = useState(null)
+  const [rsvpAdminOpenList, setRsvpAdminOpenList] = useState('attending')
   const [rsvpStatus, setRsvpStatus] = useState({
     state: 'idle',
     message: '',
@@ -1640,13 +1642,80 @@ function WeddingApp() {
     value
       .toUpperCase()
       .replace(/[^A-Z0-9]/g, '')
-      .slice(0, 4)
+      .slice(0, 32)
 
-  const verifyRsvpCode = (event) => {
+  const verifyRsvpCode = async (event) => {
     event.preventDefault()
 
-    const normalizedCode = normalizeInvitationCode(rsvpCode)
-    const matchedGroup = invitationGroups[normalizedCode]
+    const normalizedCode =
+      normalizeInvitationCode(rsvpCode)
+
+    if (normalizedCode.length < 4) {
+      setRsvpStatus({
+        state: 'error',
+        message:
+          'Ingresa un código válido para continuar.',
+      })
+      return
+    }
+
+    setRsvpStatus({
+      state: 'checking',
+      message: '',
+    })
+
+    try {
+      const adminResponse = await fetch(
+        '/api/rsvp-summary',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            adminCode: normalizedCode,
+          }),
+        }
+      )
+
+      if (adminResponse.ok) {
+        const adminData =
+          await adminResponse.json()
+
+        setRsvpCode(normalizedCode)
+        setRsvpGroup(null)
+        setRsvpAdminData(adminData)
+        setRsvpAdminOpenList('attending')
+        setRsvpStatus({
+          state: 'admin',
+          message: '',
+        })
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+
+        return
+      }
+    } catch (error) {
+      console.warn(
+        'No fue posible verificar el acceso administrativo.',
+        error
+      )
+    }
+
+    if (normalizedCode.length !== 4) {
+      setRsvpStatus({
+        state: 'error',
+        message:
+          'No encontramos ese código. Verifica que esté escrito correctamente.',
+      })
+      return
+    }
+
+    const matchedGroup =
+      invitationGroups[normalizedCode]
 
     if (!matchedGroup) {
       setRsvpStatus({
@@ -1659,6 +1728,7 @@ function WeddingApp() {
 
     setRsvpCode(normalizedCode)
     setRsvpGroup(matchedGroup)
+    setRsvpAdminData(null)
 
     setRsvpResponses(
       matchedGroup.guests.reduce(
@@ -1702,6 +1772,8 @@ function WeddingApp() {
     setRsvpGroup(null)
     setRsvpResponses({})
     setRsvpMessage('')
+    setRsvpAdminData(null)
+    setRsvpAdminOpenList('attending')
     setRsvpStatus({
       state: 'idle',
       message: '',
@@ -1770,17 +1842,58 @@ function WeddingApp() {
     }
 
     try {
-      const response = await fetch(formspreeEndpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
+      const saveResponse = await fetch(
+        '/api/rsvp-save',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            invitationCode: rsvpCode,
+            responses: rsvpGroup.guests.map(
+              (guest) => ({
+                guestId: guest.id,
+                guestName: guest.name,
+                attendance:
+                  rsvpResponses[guest.id],
+              })
+            ),
+            message: rsvpMessage.trim(),
+          }),
+        }
+      )
 
-      if (!response.ok) {
-        throw new Error('No fue posible enviar la respuesta.')
+      if (!saveResponse.ok) {
+        throw new Error(
+          'No fue posible guardar la confirmación.'
+        )
+      }
+
+      try {
+        const formspreeResponse = await fetch(
+          formspreeEndpoint,
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type':
+                'application/json',
+            },
+            body: JSON.stringify(payload),
+          }
+        )
+
+        if (!formspreeResponse.ok) {
+          console.warn(
+            'Formspree no confirmó el respaldo del RSVP.'
+          )
+        }
+      } catch (formspreeError) {
+        console.warn(
+          'El RSVP se guardó, pero Formspree no respondió.',
+          formspreeError
+        )
       }
 
       setRsvpStatus({
@@ -3887,9 +4000,176 @@ function WeddingApp() {
               </div>
             )}
 
+            {rsvpStatus.state === 'admin' &&
+              rsvpAdminData && (
+                <section className="rsvp-admin-dashboard">
+                  <header className="rsvp-admin-heading">
+                    <p className="eyebrow">
+                      PANEL PRIVADO
+                    </p>
+
+                    <h1>
+                      Resumen
+                      <em> RSVP</em>
+                    </h1>
+
+                    <p>
+                      Estado actual de las confirmaciones
+                      de tus invitados.
+                    </p>
+                  </header>
+
+                  <div className="rsvp-admin-stats">
+                    <article className="rsvp-admin-stat total">
+                      <strong>
+                        {rsvpAdminData.summary.total}
+                      </strong>
+                      <span>INVITADOS</span>
+                    </article>
+
+                    <article>
+                      <strong>
+                        {rsvpAdminData.summary.attending}
+                      </strong>
+                      <span>ASISTIRÁN</span>
+                    </article>
+
+                    <article>
+                      <strong>
+                        {rsvpAdminData.summary.notAttending}
+                      </strong>
+                      <span>NO ASISTIRÁN</span>
+                    </article>
+
+                    <article>
+                      <strong>
+                        {rsvpAdminData.summary.pending}
+                      </strong>
+                      <span>PENDIENTES</span>
+                    </article>
+                  </div>
+
+                  <div className="rsvp-admin-progress-wrap">
+                    <div className="rsvp-admin-progress-copy">
+                      <span>RESPUESTAS RECIBIDAS</span>
+                      <strong>
+                        {rsvpAdminData.summary.responseRate}%
+                      </strong>
+                    </div>
+
+                    <div
+                      className="rsvp-admin-progress"
+                      aria-label={`${rsvpAdminData.summary.responseRate}% de respuestas recibidas`}
+                    >
+                      <span
+                        style={{
+                          width: `${rsvpAdminData.summary.responseRate}%`,
+                        }}
+                      ></span>
+                    </div>
+
+                    <small>
+                      {rsvpAdminData.summary.responded} de{' '}
+                      {rsvpAdminData.summary.total} invitados
+                      han respondido.
+                    </small>
+                  </div>
+
+                  <div className="rsvp-admin-tabs">
+                    {[
+                      {
+                        id: 'attending',
+                        label: 'Asistirán',
+                        count:
+                          rsvpAdminData.summary.attending,
+                      },
+                      {
+                        id: 'notAttending',
+                        label: 'No asistirán',
+                        count:
+                          rsvpAdminData.summary.notAttending,
+                      },
+                      {
+                        id: 'pending',
+                        label: 'Pendientes',
+                        count:
+                          rsvpAdminData.summary.pending,
+                      },
+                    ].map((tab) => (
+                      <button
+                        type="button"
+                        key={tab.id}
+                        className={
+                          rsvpAdminOpenList === tab.id
+                            ? 'active'
+                            : ''
+                        }
+                        onClick={() =>
+                          setRsvpAdminOpenList(tab.id)
+                        }
+                      >
+                        <span>{tab.label}</span>
+                        <strong>{tab.count}</strong>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="rsvp-admin-list">
+                    {rsvpAdminData[
+                      rsvpAdminOpenList
+                    ].length === 0 ? (
+                      <p className="rsvp-admin-empty">
+                        No hay invitados en esta categoría.
+                      </p>
+                    ) : (
+                      rsvpAdminData[
+                        rsvpAdminOpenList
+                      ].map((guest) => (
+                        <article
+                          key={guest.guestId}
+                          className="rsvp-admin-guest"
+                        >
+                          <div>
+                            <strong>
+                              {guest.guestName}
+                            </strong>
+                            <span>
+                              Código {guest.invitationCode}
+                            </span>
+                          </div>
+
+                          {guest.submittedAt && (
+                            <time>
+                              {new Date(
+                                guest.submittedAt
+                              ).toLocaleDateString(
+                                'es-PA',
+                                {
+                                  day: '2-digit',
+                                  month: 'short',
+                                }
+                              )}
+                            </time>
+                          )}
+                        </article>
+                      ))
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    className="rsvp-secondary-button rsvp-admin-exit"
+                    onClick={resetRsvp}
+                  >
+                    CERRAR PANEL
+                  </button>
+                </section>
+              )}
+
             {![
               'success',
               'sending-animation',
+              'admin',
             ].includes(rsvpStatus.state) && (
               <>
                 <header className="rsvp-code-hero">
@@ -3926,7 +4206,7 @@ function WeddingApp() {
                       type="text"
                       inputMode="text"
                       autoComplete="off"
-                      maxLength="4"
+                      maxLength="32"
                       value={rsvpCode}
                       onChange={(event) =>
                         setRsvpCode(
@@ -3940,7 +4220,7 @@ function WeddingApp() {
                     />
 
                     <p id="rsvp-code-help">
-                      El código contiene cuatro caracteres.
+                      Ingresa el código incluido en tu invitación.
                     </p>
 
                     {rsvpStatus.state === 'error' && (
@@ -3955,10 +4235,19 @@ function WeddingApp() {
                     <button
                       type="submit"
                       className="rsvp-submit-button"
-                      disabled={rsvpCode.length !== 4}
+                      disabled={
+                        rsvpCode.length < 4 ||
+                        rsvpStatus.state === 'checking'
+                      }
                     >
-                      CONTINUAR
-                      <span>→</span>
+                      {rsvpStatus.state === 'checking'
+                        ? 'VERIFICANDO...'
+                        : 'CONTINUAR'}
+                      <span>
+                        {rsvpStatus.state === 'checking'
+                          ? '◌'
+                          : '→'}
+                      </span>
                     </button>
 
                   </form>

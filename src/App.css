@@ -13964,3 +13964,250 @@ select {
     animation-duration: 0s;
   }
 }
+
+
+/* =================================
+   V86 — RSVP DASHBOARD PRIVADO
+================================= */
+
+.rsvp-admin-dashboard {
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  padding: 78px 34px 90px;
+}
+
+.rsvp-admin-heading {
+  max-width: 620px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.rsvp-admin-heading h1 {
+  margin: 8px 0 18px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(58px, 7vw, 92px);
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+.rsvp-admin-heading h1 em {
+  display: block;
+  font-weight: 300;
+}
+
+.rsvp-admin-heading > p:last-child {
+  max-width: 490px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+.rsvp-admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rsvp-admin-stat {
+  min-height: 142px;
+  padding: 24px 18px;
+  border: 1px solid rgba(138, 133, 96, 0.22);
+  background: rgba(255, 255, 255, 0.42);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rsvp-admin-stat.total {
+  background: rgba(138, 133, 96, 0.09);
+}
+
+.rsvp-admin-stat strong {
+  color: var(--black);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.rsvp-admin-stat span {
+  margin-top: 10px;
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+}
+
+.rsvp-admin-progress-wrap {
+  margin: 18px 0 38px;
+  padding: 24px 26px;
+  border: 1px solid rgba(138, 133, 96, 0.16);
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.rsvp-admin-progress-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 18px;
+}
+
+.rsvp-admin-progress-copy span {
+  font-size: 7px;
+  letter-spacing: 1.8px;
+}
+
+.rsvp-admin-progress-copy strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.rsvp-admin-progress {
+  height: 3px;
+  margin: 14px 0 10px;
+  overflow: hidden;
+  background: rgba(138, 133, 96, 0.14);
+}
+
+.rsvp-admin-progress span {
+  display: block;
+  height: 100%;
+  background: #8a8560;
+  transition: width 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rsvp-admin-progress-wrap small {
+  color: var(--gray);
+  font-size: 9px;
+}
+
+.rsvp-admin-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(138, 133, 96, 0.18);
+}
+
+.rsvp-admin-tabs button {
+  min-height: 62px;
+  padding: 13px 18px;
+  border: 0;
+  border-right: 1px solid rgba(138, 133, 96, 0.18);
+  background: transparent;
+  color: var(--black);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition:
+    background 240ms ease,
+    color 240ms ease;
+}
+
+.rsvp-admin-tabs button:last-child {
+  border-right: 0;
+}
+
+.rsvp-admin-tabs button.active {
+  background: #8a8560;
+  color: #fff;
+}
+
+.rsvp-admin-tabs button span {
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.rsvp-admin-tabs button strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.rsvp-admin-list {
+  max-height: 510px;
+  overflow-y: auto;
+  border: 1px solid rgba(138, 133, 96, 0.18);
+  border-top: 0;
+}
+
+.rsvp-admin-guest {
+  min-height: 68px;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(138, 133, 96, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.rsvp-admin-guest:last-child {
+  border-bottom: 0;
+}
+
+.rsvp-admin-guest > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rsvp-admin-guest strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.rsvp-admin-guest span,
+.rsvp-admin-guest time {
+  color: var(--gray);
+  font-size: 8px;
+  letter-spacing: 0.6px;
+}
+
+.rsvp-admin-empty {
+  margin: 0;
+  padding: 42px 24px;
+  color: var(--gray);
+  text-align: center;
+}
+
+.rsvp-admin-exit {
+  margin: 30px auto 0;
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .rsvp-admin-dashboard {
+    padding: 56px 18px 72px;
+  }
+
+  .rsvp-admin-heading {
+    margin-bottom: 34px;
+  }
+
+  .rsvp-admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rsvp-admin-stat {
+    min-height: 120px;
+  }
+
+  .rsvp-admin-stat strong {
+    font-size: 42px;
+  }
+
+  .rsvp-admin-tabs button {
+    padding: 12px 8px;
+    gap: 5px;
+  }
+
+  .rsvp-admin-tabs button span {
+    font-size: 6px;
+  }
+
+  .rsvp-admin-progress-wrap {
+    padding: 20px 18px;
+  }
+}
