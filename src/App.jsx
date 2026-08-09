@@ -347,7 +347,7 @@ function StoryFilm({ onFinish }) {
       }
 
       setIndex((current) => current + 1)
-    }, showFinale ? 6000 : 4700)
+    }, showFinale ? 8000 : 4700)
 
     return () => window.clearTimeout(timer)
   }, [index, showFinale])
@@ -406,13 +406,31 @@ function StoryFilm({ onFinish }) {
         </div>
       ) : (
         <div className="story-film-finale">
-          <p>SIETE AÑOS DESPUÉS</p>
-          <h2>
-            El siguiente capítulo
-            <em> comienza aquí.</em>
-          </h2>
-          <strong>Luis & Melanie</strong>
-          <small>15 · 01 · 27</small>
+          <div
+            className="story-film-monogram-draw"
+            aria-hidden="true"
+          >
+            <div className="story-film-monogram-reveal">
+              <img
+                src={monogramGold}
+                alt=""
+              />
+            </div>
+
+            <span className="story-film-monogram-stroke"></span>
+          </div>
+
+          <div className="story-film-finale-copy">
+            <p>SIETE AÑOS DESPUÉS</p>
+
+            <h2>
+              El siguiente capítulo
+              <em> comienza aquí.</em>
+            </h2>
+
+            <strong>Luis & Melanie</strong>
+            <small>15 · 01 · 27</small>
+          </div>
         </div>
       )}
     </section>
@@ -2063,14 +2081,6 @@ function App() {
                   este día tan especial contigo.
                 </p>
 
-                <button
-                  onClick={() => navigate('boda')}
-                  className="text-button"
-                >
-                  DESCUBRE LA BODA
-                  <span>→</span>
-                </button>
-
               </div>
 
             </div>
@@ -2160,10 +2170,6 @@ function App() {
 
                 <article className="venue-card">
 
-                  <div className="venue-number">
-                    01
-                  </div>
-
                   <div className="venue-image">
                     <img
                       src={parroquiaImg}
@@ -2234,10 +2240,6 @@ function App() {
                 {/* VILLA CELESTE */}
 
                 <article className="venue-card featured">
-
-                  <div className="venue-number">
-                    02
-                  </div>
 
                   <div className="venue-image">
                     <img
@@ -3226,9 +3228,7 @@ function App() {
                 </h1>
 
                 <p>
-                  Una ciudad vibrante, rodeada de montañas,
-                  naturaleza, cultura y una gastronomía que
-                  vale la pena descubrir.
+                  Medellín nos recibe con días agradables y noches frescas, un clima perfecto para recorrer y disfrutar la ciudad.
                 </p>
               </div>
 

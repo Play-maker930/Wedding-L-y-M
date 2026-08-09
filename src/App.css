@@ -13380,3 +13380,341 @@ select {
     animation: none;
   }
 }
+
+
+/* =================================
+   V75 — AJUSTES FINALES SOLICITADOS
+================================= */
+
+/* Recuperar el fondo ivory original detrás del sobre */
+.invitation-intro {
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(216, 200, 174, 0.28),
+      transparent 32%
+    ),
+    #f7f4ee !important;
+}
+
+/* La película conserva su fondo chocolate */
+.story-film {
+  background-color: #211712;
+}
+
+/* EL GRAN DÍA — VIERNES alineado visualmente con ENERO */
+.date-display .date-weekday {
+  align-self: end;
+  margin: 0 0 7px !important;
+  line-height: 1 !important;
+}
+
+.date-display > div {
+  align-self: center;
+}
+
+/* Ocultar cualquier numeración residual de los venues */
+.venue-number {
+  display: none !important;
+}
+
+/* Medellín — títulos del clima en una sola línea */
+.medellin-weather-grid h3 {
+  white-space: nowrap;
+  font-size: 25px;
+  letter-spacing: -0.2px;
+}
+
+@media (max-width: 1050px) and (min-width: 851px) {
+  .medellin-weather-grid h3 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 850px) {
+  .date-display .date-weekday {
+    margin-bottom: 6px !important;
+  }
+
+  .medellin-weather-grid h3 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-display .date-weekday {
+    margin-bottom: 5px !important;
+  }
+
+  .medellin-weather-grid h3 {
+    font-size: 20px;
+    letter-spacing: -0.35px;
+  }
+}
+
+@media (max-width: 390px) {
+  .medellin-weather-grid h3 {
+    font-size: 18px;
+  }
+}
+
+
+/* =================================
+   V76 — FINAL IVORY + MONOGRAMA DIBUJÁNDOSE
+================================= */
+
+/* La pantalla final deja el chocolate y vuelve al lenguaje visual de la web */
+.story-film-finale {
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(216, 200, 174, 0.30),
+      transparent 31%
+    ),
+    #f7f4ee !important;
+
+  color: var(--black);
+}
+
+/* Contenedor del monograma */
+.story-film-monogram-draw {
+  position: relative;
+
+  width: 142px;
+  height: 122px;
+
+  margin-bottom: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+  El monograma real se revela progresivamente.
+  Se usa el asset original para mantener exactamente
+  la identidad visual que ya tenemos.
+*/
+.story-film-monogram-reveal {
+  position: relative;
+
+  width: 118px;
+  height: 108px;
+
+  overflow: hidden;
+}
+
+.story-film-monogram-reveal img {
+  width: 118px;
+  height: auto;
+
+  display: block;
+
+  opacity: 0;
+
+  transform: translateY(3px);
+
+  clip-path: inset(0 100% 0 0);
+
+  filter:
+    drop-shadow(
+      0 2px 5px
+      rgba(91, 70, 54, 0.08)
+    );
+
+  animation:
+    storyMonogramDrawV76 2.7s
+    cubic-bezier(0.65, 0, 0.35, 1)
+    0.25s
+    forwards;
+}
+
+/*
+  Pequeño "trazo" que acompaña el borde de revelado.
+  Da la sensación de tinta/pluma recorriendo el monograma.
+*/
+.story-film-monogram-stroke {
+  position: absolute;
+
+  top: 9px;
+  left: 12px;
+
+  width: 1px;
+  height: 100px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(138, 133, 96, 0.22) 18%,
+      rgba(138, 133, 96, 0.92) 50%,
+      rgba(138, 133, 96, 0.22) 82%,
+      transparent 100%
+    );
+
+  opacity: 0;
+
+  box-shadow:
+    0 0 8px rgba(138, 133, 96, 0.20);
+
+  animation:
+    storyMonogramPenV76 2.7s
+    cubic-bezier(0.65, 0, 0.35, 1)
+    0.25s
+    forwards;
+}
+
+.story-film-finale-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  opacity: 0;
+  transform: translateY(14px);
+
+  animation:
+    storyFinalCopyV76 1.15s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    2.75s
+    forwards;
+}
+
+.story-film-finale-copy > p {
+  margin: 0 0 22px;
+
+  color: var(--champagne-dark);
+
+  font-size: 8px;
+  letter-spacing: 4px;
+}
+
+.story-film-finale-copy h2 {
+  margin: 0;
+
+  max-width: 850px;
+
+  color: var(--black) !important;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(58px, 8vw, 108px);
+  font-weight: 300;
+  line-height: 0.88;
+}
+
+.story-film-finale-copy h2 em {
+  display: block;
+
+  margin-top: 8px;
+
+  color: var(--black) !important;
+  font-weight: 300;
+}
+
+.story-film-finale-copy strong {
+  margin-top: 34px;
+
+  color: var(--black);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.story-film-finale-copy small {
+  margin-top: 10px;
+
+  color: var(--gray);
+
+  font-size: 8px;
+  letter-spacing: 3px;
+}
+
+@keyframes storyMonogramDrawV76 {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(3px);
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes storyMonogramPenV76 {
+  0% {
+    left: 12px;
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.82;
+  }
+
+  88% {
+    opacity: 0.72;
+  }
+
+  100% {
+    left: 128px;
+    opacity: 0;
+  }
+}
+
+@keyframes storyFinalCopyV76 {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 650px) {
+  .story-film-monogram-draw {
+    width: 126px;
+    height: 108px;
+
+    margin-bottom: 20px;
+  }
+
+  .story-film-monogram-reveal,
+  .story-film-monogram-reveal img {
+    width: 104px;
+  }
+
+  .story-film-monogram-reveal {
+    height: 96px;
+  }
+
+  .story-film-monogram-stroke {
+    height: 88px;
+  }
+
+  .story-film-finale-copy h2 {
+    font-size: 58px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-film-monogram-reveal img,
+  .story-film-monogram-stroke,
+  .story-film-finale-copy {
+    animation: none;
+  }
+
+  .story-film-monogram-reveal img,
+  .story-film-finale-copy {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+
+  .story-film-monogram-stroke {
+    display: none;
+  }
+}
