@@ -426,6 +426,10 @@ function StoryFilm({ onFinish }) {
               ? 'story-film-scene story-film-scene-yes'
               : 'story-film-scene'
           }
+          style={{
+            '--story-background':
+              `url("${STORY_FILM_SLIDES[index].image}")`,
+          }}
         >
           {STORY_FILM_SLIDES[index].image ? (
             <img
@@ -497,6 +501,7 @@ const PAGE_PATHS = {
   transporte: '/transporte',
   medellin: '/medellin',
   galeria: '/galeria',
+  regalos: '/regalos',
   rsvp: '/rsvp',
 }
 
@@ -2149,10 +2154,6 @@ function WeddingApp() {
           ))}
         </nav>
 
-        <div className="date-small">
-          15 · 01 · 2027
-        </div>
-
         <button
           className="menu-button"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -2772,7 +2773,10 @@ function WeddingApp() {
                 <span className="info-arrow">→</span>
               </button>
 
-              <button className="info-card">
+              <button
+                className="info-card"
+                onClick={() => navigate('regalos')}
+              >
                 <span className="info-number">04</span>
 
                 <span className="info-icon">
@@ -3008,22 +3012,6 @@ function WeddingApp() {
                     <strong> 14 al 16 de enero de 2027</strong> e
                     incluye desayuno.
                   </p>
-                </div>
-
-                <div className="stay-notice">
-                  <div className="stay-notice-icon">
-                    <LineIcon name="warning" size={24} />
-                  </div>
-
-                  <div>
-                    <span>IMPORTANTE</span>
-
-                    <p>
-                      Al momento de reservar, selecciona
-                      <strong> Movich Las Lomas — Rionegro, Medellín</strong>.
-                      Existe otro hotel Movich en Medellín.
-                    </p>
-                  </div>
                 </div>
               </div>
 
@@ -3584,14 +3572,32 @@ function WeddingApp() {
 
                 <article className="medellin-attraction-card large">
                   <img
-                    src={comuna13Img}
-                    alt="Arte urbano y color en la Comuna 13 de Medellín"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    src={plazaBoteroImg}
+                    alt="City Tour por Medellín"
+                    loading="lazy"
+                    decoding="async"
+                  />
 
                   <div className="medellin-attraction-overlay">
                     <span>01</span>
+                    <h3>City Tour</h3>
+                    <p>
+                      Una primera mirada a Medellín entre sus lugares
+                      más emblemáticos, cultura e historia.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src={comuna13Img}
+                    alt="Arte urbano y color en la Comuna 13 de Medellín"
+                    loading="lazy"
+                    decoding="async"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>02</span>
                     <h3>Comuna 13</h3>
                     <p>
                       Arte urbano, historia, transformación
@@ -3603,13 +3609,13 @@ function WeddingApp() {
                 <article className="medellin-attraction-card">
                   <img
                     src={provenzaImg}
-                    alt="Calle arbolada y restaurantes de Provenza en Medellín"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    alt="Provenza en Medellín"
+                    loading="lazy"
+                    decoding="async"
+                  />
 
                   <div className="medellin-attraction-overlay">
-                    <span>02</span>
+                    <span>03</span>
                     <h3>El Poblado y Provenza</h3>
                     <p>
                       Restaurantes, cafés y una de las zonas
@@ -3620,29 +3626,11 @@ function WeddingApp() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src={plazaBoteroImg}
-                    alt="Esculturas y arquitectura de Plaza Botero en Medellín"
-                      loading="lazy"
-                      decoding="async"
-                    />
-
-                  <div className="medellin-attraction-overlay">
-                    <span>03</span>
-                    <h3>Plaza Botero</h3>
-                    <p>
-                      Arte, arquitectura y cultura en el
-                      corazón de la ciudad.
-                    </p>
-                  </div>
-                </article>
-
-                <article className="medellin-attraction-card">
-                  <img
                     src={jardinBotanicoImg}
                     alt="Vegetación y senderos del Jardín Botánico de Medellín"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    loading="lazy"
+                    decoding="async"
+                  />
 
                   <div className="medellin-attraction-overlay">
                     <span>04</span>
@@ -3656,24 +3644,6 @@ function WeddingApp() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src={parqueArviImg}
-                    alt="Naturaleza y estación del Parque Arví en Medellín"
-                      loading="lazy"
-                      decoding="async"
-                    />
-
-                  <div className="medellin-attraction-overlay">
-                    <span>05</span>
-                    <h3>Parque Arví</h3>
-                    <p>
-                      Naturaleza, senderos y aire fresco
-                      en las montañas.
-                    </p>
-                  </div>
-                </article>
-
-                <article className="medellin-attraction-card">
-                  <img
                     src={pueblitoPaisaImg}
                     alt="Pueblito Paisa en Medellín"
                     loading="lazy"
@@ -3681,7 +3651,7 @@ function WeddingApp() {
                   />
 
                   <div className="medellin-attraction-overlay">
-                    <span>06</span>
+                    <span>05</span>
                     <h3>Pueblito Paisa</h3>
                     <p>
                       Tradición paisa, arquitectura típica y una
@@ -3699,11 +3669,29 @@ function WeddingApp() {
                   />
 
                   <div className="medellin-attraction-overlay">
-                    <span>07</span>
+                    <span>06</span>
                     <h3>Museo El Castillo</h3>
                     <p>
                       Arte, historia y jardines en un castillo inspirado
                       en la arquitectura europea.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src={parqueArviImg}
+                    alt="Naturaleza y estación del Parque Arví en Medellín"
+                    loading="lazy"
+                    decoding="async"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>07</span>
+                    <h3>Parque Arví</h3>
+                    <p>
+                      Naturaleza, senderos y aire fresco
+                      en las montañas.
                     </p>
                   </div>
                 </article>
@@ -3792,6 +3780,65 @@ function WeddingApp() {
         {/* ================================
             GALERÍA
         ================================= */}
+
+
+        {/* ================================
+            REGALOS
+        ================================= */}
+
+        {activePage === 'regalos' && (
+          <section className="gifts-page page-transition">
+
+            <button
+              type="button"
+              className="gifts-back-button"
+              onClick={() => navigate('informacion')}
+            >
+              <LineIcon name="arrowLeft" size={18} />
+              VOLVER A INFORMACIÓN
+            </button>
+
+            <div className="gifts-hero">
+              <div className="gifts-photo-wrap">
+                <img
+                  src={confirmationPhoto}
+                  alt="Luis y Melanie"
+                  className="gifts-photo"
+                  decoding="async"
+                />
+              </div>
+
+              <div className="gifts-copy">
+                <p className="section-kicker">REGALOS</p>
+
+                <p className="gifts-message">
+                  Su presencia en nuestra boda significa muchísimo para
+                  nosotros. Para quienes deseen tener un detalle adicional,
+                  hemos habilitado la opción de hacerlo a través de una
+                  transferencia bancaria.
+                </p>
+
+                <div className="gifts-divider" />
+
+                <div className="gifts-bank-card">
+                  <span className="gifts-bank-label">
+                    DATOS PARA REGALOS
+                  </span>
+
+                  <p className="gifts-bank-coming">
+                    Próximamente compartiremos aquí los datos bancarios.
+                  </p>
+                </div>
+
+                <p className="gifts-signature">
+                  Con cariño,
+                  <span>Luis &amp; Melanie</span>
+                </p>
+              </div>
+            </div>
+
+          </section>
+        )}
 
         {activePage === 'galeria' && (
           <section className="gallery-editorial-page page-transition">

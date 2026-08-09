@@ -14222,3 +14222,1477 @@ select {
   Esta versión prioriza el flujo de invitados:
   Formspree confirma el RSVP y Supabase funciona como respaldo.
 */
+
+
+/* =================================
+   V89 — REGALOS
+================================= */
+
+.gifts-page {
+  min-height: 100vh;
+  padding: 34px clamp(22px, 5vw, 76px) 80px;
+  background: #f5f0e7;
+}
+
+.gifts-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0 0 34px;
+  color: #5a4032;
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+}
+
+.gifts-hero {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(42px, 7vw, 96px);
+}
+
+.gifts-photo-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+
+.gifts-photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.gifts-copy {
+  max-width: 560px;
+  color: #5a4032;
+}
+
+.gifts-copy .section-kicker {
+  margin-bottom: 18px;
+}
+
+.gifts-copy h1 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.gifts-copy h1 em {
+  display: block;
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+.gifts-message {
+  max-width: 500px;
+  margin: 30px 0 0;
+  font-size: clamp(16px, 1.45vw, 19px);
+  line-height: 1.8;
+}
+
+.gifts-divider {
+  width: 48px;
+  height: 1px;
+  margin: 34px 0;
+  background: rgba(138, 133, 96, 0.55);
+}
+
+.gifts-bank-card {
+  padding: 25px 28px;
+  border: 1px solid rgba(138, 133, 96, 0.38);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.gifts-bank-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: #8a8560;
+}
+
+.gifts-bank-coming {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.gifts-signature {
+  margin: 30px 0 0;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.gifts-signature span {
+  display: block;
+  margin-top: 6px;
+  font-size: 22px;
+}
+
+@media (max-width: 760px) {
+  .gifts-page {
+    padding: 26px 20px 64px;
+  }
+
+  .gifts-hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .gifts-photo-wrap {
+    aspect-ratio: 4 / 4.8;
+  }
+
+  .gifts-copy {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .gifts-copy h1 {
+    font-size: clamp(40px, 12vw, 58px);
+  }
+
+  .gifts-message {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gifts-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gifts-bank-card {
+    text-align: center;
+  }
+}
+
+
+/* =========================================================
+   V90 — RESPONSIVE FINAL
+   Mobile (<=650px) se conserva.
+   Tablet y desktop se recalibran para mantener la misma
+   estética, proporciones y jerarquía visual del mobile.
+========================================================= */
+
+@media (min-width: 651px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Evita que títulos editoriales crezcan hasta solaparse */
+  .wedding-intro h1,
+  .section-heading h2,
+  .dress-code-heading h2,
+  .stay-intro-title h2,
+  .stay-section-heading h2,
+  .transport-section-heading h2,
+  .medellin-section-heading h2,
+  .medellin-weather-heading h2,
+  .gallery-editorial-heading h1,
+  .rsvp-code-hero h1,
+  .rsvp-admin-heading h1 {
+    text-wrap: balance;
+    overflow-wrap: normal;
+  }
+
+  /* =========================
+     HOME
+  ========================= */
+
+  .home-page {
+    min-height: 0 !important;
+  }
+
+  .home-image {
+    overflow: hidden;
+  }
+
+  .home-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 31% !important;
+  }
+
+  .home-content {
+    min-height: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .home-content h1 {
+    line-height: 0.9;
+  }
+
+  /* =========================
+     EL GRAN DÍA
+  ========================= */
+
+  .wedding-intro {
+    min-height: 0;
+    box-sizing: border-box;
+    background-position: center 45%;
+  }
+
+  .wedding-intro h1 {
+    font-size: clamp(66px, 8vw, 96px);
+    line-height: 0.88;
+  }
+
+  .wedding-intro .intro-text {
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .date-display {
+    flex-shrink: 0;
+  }
+
+  .venue-grid {
+    width: min(100%, 1060px);
+  }
+
+  .venue-card {
+    min-width: 0;
+  }
+
+  .venue-image {
+    height: auto !important;
+    aspect-ratio: 16 / 10;
+  }
+
+  .venue-image img {
+    transform: none !important;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .venue-info {
+    box-sizing: border-box;
+  }
+
+  .venue-info h3 {
+    text-wrap: balance;
+  }
+
+  .venue-time {
+    line-height: 1;
+  }
+
+  .dress-code-heading,
+  .dress-code-details,
+  .dress-code-inspiration {
+    width: min(100%, 920px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .dress-code-detail-block h3,
+  .dress-code-detail-block p {
+    text-wrap: balance;
+  }
+
+  /* =========================
+     INFORMACIÓN
+  ========================= */
+
+  .information-page {
+    overflow: hidden;
+  }
+
+  .information-photo {
+    height: auto !important;
+    max-height: none !important;
+    overflow: hidden;
+  }
+
+  .information-photo img {
+    object-fit: cover;
+    object-position: center 36%;
+  }
+
+  .info-card {
+    min-width: 0;
+  }
+
+  .info-card-copy {
+    min-width: 0;
+  }
+
+  /* =========================
+     HOSPEDAJE
+  ========================= */
+
+  .stay-hero-content,
+  .stay-summary-wrap,
+  .stay-intro,
+  .stay-included,
+  .stay-rooms,
+  .stay-steps,
+  .stay-airport,
+  .stay-contact,
+  .stay-cta {
+    box-sizing: border-box;
+  }
+
+  .stay-hero-content {
+    width: min(100%, 760px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stay-gallery {
+    width: min(100%, 1080px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stay-gallery-viewport {
+    height: auto !important;
+    overflow: hidden;
+  }
+
+  .stay-gallery-slide img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .stay-room-row,
+  .stay-summary-item {
+    min-width: 0;
+  }
+
+  /* =========================
+     TRANSPORTE
+  ========================= */
+
+  .transport-hero-content {
+    width: min(100%, 760px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .transport-route-section,
+  .transport-note-section,
+  .transport-schedule {
+    box-sizing: border-box;
+  }
+
+  .transport-section-heading h2,
+  .transport-schedule h2 {
+    text-wrap: balance;
+  }
+
+  /* =========================
+     MEDELLÍN
+  ========================= */
+
+  .medellin-hero-content {
+    width: min(100%, 760px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .medellin-weather-heading,
+  .medellin-section-heading,
+  .medellin-cta {
+    box-sizing: border-box;
+  }
+
+  .medellin-attraction-card,
+  .medellin-escape-feature {
+    min-width: 0;
+  }
+
+  .medellin-attraction-card img,
+  .medellin-escape-feature img {
+    object-position: center;
+  }
+
+  .medellin-attraction-overlay h3,
+  .medellin-attraction-overlay p,
+  .medellin-escape-feature h3,
+  .medellin-escape-feature p {
+    text-wrap: balance;
+  }
+
+  /* =========================
+     GALERÍA
+  ========================= */
+
+  .gallery-editorial-page {
+    overflow: hidden;
+  }
+
+  .gallery-editorial-grid {
+    width: min(100%, 1120px);
+  }
+
+  .gallery-editorial-item {
+    min-width: 0;
+  }
+
+  .gallery-editorial-item img {
+    object-position: center;
+  }
+
+  .gallery-lightbox-content {
+    max-width: min(88vw, 1100px);
+    max-height: 82vh;
+  }
+
+  .gallery-lightbox-content img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* =========================
+     RSVP
+  ========================= */
+
+  .rsvp-code-hero,
+  .rsvp-code-entry,
+  .rsvp-guest-confirmation,
+  .rsvp-admin-dashboard {
+    box-sizing: border-box;
+  }
+
+  .rsvp-guest-card {
+    min-width: 0;
+  }
+
+  /* =========================
+     REGALOS
+  ========================= */
+
+  .gifts-copy {
+    min-width: 0;
+  }
+
+  .gifts-message {
+    margin-top: 8px;
+  }
+
+  .gifts-photo {
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+
+/* =========================================================
+   TABLET — 651px a 1100px
+   Se acerca deliberadamente al layout mobile:
+   una columna, imágenes contenidas y textos sin solaparse.
+========================================================= */
+
+@media (min-width: 651px) and (max-width: 1100px) {
+  /* HOME: misma lectura vertical que mobile */
+  .home-page {
+    width: min(100%, 820px);
+    margin: 0 auto;
+    display: flex !important;
+    flex-direction: column;
+    padding: 28px 28px 64px;
+    box-sizing: border-box;
+  }
+
+  .home-image {
+    width: min(100%, 690px);
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 4 / 5;
+    margin: 0 auto;
+  }
+
+  .home-content {
+    width: min(100%, 690px);
+    margin: 0 auto;
+    padding: 52px 34px 28px;
+    text-align: center;
+  }
+
+  .home-content h1 {
+    font-size: clamp(66px, 10vw, 88px);
+  }
+
+  /* EL GRAN DÍA */
+  .wedding-intro {
+    min-height: 620px !important;
+    padding: 86px 28px 72px;
+  }
+
+  .wedding-intro h1 {
+    font-size: clamp(68px, 10vw, 88px);
+  }
+
+  .venues-section,
+  .dress-code-section {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .venue-grid {
+    max-width: 760px;
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+
+  .venue-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .venue-info {
+    padding: 34px 34px 38px;
+  }
+
+  .dress-code-details {
+    max-width: 760px;
+    grid-template-columns: 1fr !important;
+    gap: 30px;
+  }
+
+  .dress-code-detail-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  /* INFORMACIÓN */
+  .information-page {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .information-photo {
+    width: min(100%, 760px) !important;
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  .info-grid {
+    width: min(100%, 760px) !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* HOSPEDAJE */
+  .stay-hero {
+    min-height: 500px !important;
+    padding: 90px 34px 62px;
+  }
+
+  .stay-summary-wrap,
+  .stay-intro,
+  .stay-included,
+  .stay-rooms,
+  .stay-steps,
+  .stay-airport,
+  .stay-contact,
+  .stay-cta {
+    width: min(100%, 820px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stay-gallery {
+    width: min(calc(100% - 56px), 820px);
+  }
+
+  .stay-gallery-viewport {
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  .stay-included-grid,
+  .stay-steps-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* TRANSPORTE */
+  .transport-hero {
+    min-height: 470px;
+  }
+
+  .transport-route-section,
+  .transport-note-section,
+  .transport-schedule {
+    width: min(100%, 800px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  /* MEDELLÍN */
+  .medellin-hero {
+    min-height: 460px;
+  }
+
+  .medellin-weather,
+  .medellin-attractions,
+  .medellin-escapes,
+  .medellin-cta {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .medellin-weather-heading,
+  .medellin-section-heading,
+  .medellin-weather-grid,
+  .medellin-attractions-grid,
+  .medellin-escape-grid,
+  .medellin-cta {
+    width: min(100%, 800px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .medellin-weather-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .medellin-attractions-grid,
+  .medellin-escape-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px;
+  }
+
+  .medellin-attraction-card {
+    min-height: 0 !important;
+    aspect-ratio: 16 / 10;
+  }
+
+  .medellin-escape-feature {
+    min-height: 0 !important;
+    aspect-ratio: 16 / 10;
+  }
+
+  /* GALERÍA: editorial pero contenida */
+  .gallery-editorial-page {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .gallery-editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-rows: auto !important;
+    gap: 10px;
+  }
+
+  .gallery-editorial-item,
+  .gallery-editorial-hero,
+  .gallery-editorial-portrait,
+  .gallery-editorial-landscape,
+  .gallery-editorial-square,
+  .gallery-editorial-detail,
+  .gallery-editorial-final {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    aspect-ratio: 4 / 5;
+  }
+
+  .gallery-editorial-hero,
+  .gallery-editorial-landscape,
+  .gallery-editorial-final {
+    grid-column: 1 / -1 !important;
+    aspect-ratio: 16 / 10;
+  }
+
+  /* RSVP */
+  .rsvp-code-page {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .rsvp-code-entry,
+  .rsvp-guest-confirmation,
+  .rsvp-admin-dashboard {
+    width: min(100%, 780px);
+  }
+
+  /* REGALOS: stack como mobile */
+  .gifts-page {
+    padding: 34px 28px 74px;
+  }
+
+  .gifts-hero {
+    width: min(100%, 760px);
+    grid-template-columns: 1fr !important;
+    gap: 38px;
+  }
+
+  .gifts-photo-wrap {
+    width: min(100%, 620px);
+    margin: 0 auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .gifts-copy {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .gifts-message {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gifts-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP — 1101px+
+   Mantiene composición editorial, pero evita imágenes
+   gigantes y limita todos los bloques a un ancho legible.
+========================================================= */
+
+@media (min-width: 1101px) {
+  /* HOME */
+  .home-page {
+    width: min(calc(100% - 64px), 1360px);
+    min-height: 0 !important;
+    margin: 34px auto 60px;
+    grid-template-columns: minmax(440px, 0.92fr) minmax(440px, 1.08fr) !important;
+    align-items: center;
+    gap: clamp(44px, 6vw, 90px);
+  }
+
+  .home-image {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: 760px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .home-content {
+    padding: 54px 40px;
+    min-height: 0 !important;
+  }
+
+  .home-content h1 {
+    font-size: clamp(72px, 6.4vw, 104px);
+  }
+
+  /* EL GRAN DÍA */
+  .wedding-intro {
+    min-height: 660px !important;
+    max-height: 780px;
+    padding: 88px 32px 78px;
+  }
+
+  .venues-section,
+  .dress-code-section {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
+
+  .venue-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .venue-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .venue-info {
+    padding: 34px 34px 40px;
+  }
+
+  .venue-info h3 {
+    font-size: clamp(30px, 2.3vw, 40px);
+  }
+
+  /* INFORMATION */
+  .information-photo {
+    width: min(100%, 940px) !important;
+    aspect-ratio: 3 / 2 !important;
+  }
+
+  .info-grid {
+    width: min(100%, 980px);
+  }
+
+  /* HOSPEDAJE */
+  .stay-hero {
+    min-height: 520px !important;
+    max-height: 650px;
+  }
+
+  .stay-summary-wrap,
+  .stay-intro,
+  .stay-included,
+  .stay-rooms,
+  .stay-steps,
+  .stay-airport,
+  .stay-contact,
+  .stay-cta {
+    width: min(100%, 1080px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stay-gallery {
+    width: min(calc(100% - 80px), 1080px);
+  }
+
+  .stay-gallery-viewport {
+    aspect-ratio: 16 / 9 !important;
+    max-height: 610px;
+  }
+
+  /* TRANSPORTE */
+  .transport-hero {
+    min-height: 500px;
+    max-height: 620px;
+  }
+
+  .transport-route-section,
+  .transport-note-section,
+  .transport-schedule {
+    width: min(100%, 980px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* MEDELLÍN */
+  .medellin-hero {
+    min-height: 500px;
+    max-height: 620px;
+  }
+
+  .medellin-weather-heading,
+  .medellin-section-heading,
+  .medellin-weather-grid,
+  .medellin-attractions-grid,
+  .medellin-escape-grid,
+  .medellin-cta {
+    width: min(100%, 1120px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .medellin-attractions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .medellin-attraction-card {
+    min-height: 0 !important;
+    aspect-ratio: 16 / 10;
+  }
+
+  .medellin-attraction-card.large {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 7.5;
+  }
+
+  .medellin-escape-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .medellin-escape-feature {
+    min-height: 0 !important;
+    aspect-ratio: 16 / 10;
+  }
+
+  /* GALERÍA */
+  .gallery-editorial-page {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
+
+  .gallery-editorial-grid {
+    max-width: 1160px;
+    grid-auto-rows: 60px;
+    gap: 12px;
+  }
+
+  .gallery-editorial-hero,
+  .gallery-editorial-final {
+    grid-row: span 6;
+  }
+
+  .gallery-editorial-portrait {
+    grid-row: span 7;
+  }
+
+  .gallery-editorial-landscape {
+    grid-row: span 5;
+  }
+
+  .gallery-editorial-square,
+  .gallery-editorial-detail {
+    grid-row: span 4;
+  }
+
+  /* RSVP */
+  .rsvp-code-page {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
+
+  .rsvp-code-entry,
+  .rsvp-guest-confirmation,
+  .rsvp-admin-dashboard {
+    width: min(100%, 980px);
+  }
+
+  /* REGALOS */
+  .gifts-page {
+    padding-left: 42px;
+    padding-right: 42px;
+  }
+
+  .gifts-hero {
+    width: min(100%, 1080px);
+    grid-template-columns: minmax(360px, 0.88fr) minmax(420px, 1.12fr);
+    gap: clamp(52px, 6vw, 86px);
+  }
+
+  .gifts-photo-wrap {
+    width: 100%;
+    max-width: 500px;
+    justify-self: end;
+    aspect-ratio: 4 / 5;
+  }
+
+  .gifts-copy {
+    max-width: 540px;
+  }
+}
+
+
+/* =========================================================
+   V91 — TABLET + DESKTOP FINAL FIX
+   IMPORTANTE: Todo este bloque empieza en 651px.
+   Mobile <= 650px queda exactamente como estaba.
+========================================================= */
+
+@media (min-width: 651px) {
+
+  /* =====================================================
+     1. HISTORIA INICIAL
+     Fotos verticales completas sobre fondo cinematográfico.
+     Nunca hacemos zoom para obligarlas a llenar 16:9.
+  ===================================================== */
+
+  .story-film {
+    background: #17110e;
+  }
+
+  .story-film-scene {
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    background: #17110e;
+  }
+
+  .story-film-scene::before {
+    content: '';
+    position: absolute;
+    inset: -4%;
+    z-index: -2;
+
+    background-image:
+      linear-gradient(
+        rgba(20, 14, 11, 0.26),
+        rgba(20, 14, 11, 0.42)
+      ),
+      var(--story-background);
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    filter: blur(22px) saturate(0.86);
+    transform: scale(1.08);
+    opacity: 0.72;
+  }
+
+  .story-film-scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(16, 11, 9, 0.28) 0%,
+        rgba(16, 11, 9, 0.03) 34%,
+        rgba(16, 11, 9, 0.03) 66%,
+        rgba(16, 11, 9, 0.22) 100%
+      );
+  }
+
+  .story-film-image {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100svh;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    background: transparent !important;
+
+    /*
+      El Ken Burns original aumenta demasiado las imágenes
+      verticales en desktop. La animación queda más sutil.
+    */
+    animation:
+      storyDesktopImageV91 5.2s
+      ease-out
+      both !important;
+  }
+
+  @keyframes storyDesktopImageV91 {
+    0% {
+      opacity: 0;
+      transform: scale(1.015);
+    }
+
+    13% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      transform: scale(1.035);
+    }
+  }
+
+  .story-film-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(15, 10, 8, 0.04) 0%,
+        rgba(15, 10, 8, 0.04) 48%,
+        rgba(15, 10, 8, 0.58) 100%
+      );
+  }
+
+  .story-film-copy {
+    left: clamp(42px, 6vw, 96px);
+    bottom: clamp(54px, 8vh, 86px);
+    width: min(620px, calc(100vw - 84px));
+  }
+
+  .story-film-copy p {
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .story-film-skip {
+    top: 26px;
+    right: 34px;
+  }
+
+
+  /* =====================================================
+     2. HOME
+  ===================================================== */
+
+  /* La fecha se conserva solo en mobile. */
+  .home-date {
+    display: none !important;
+  }
+
+  .home-content {
+    text-align: center !important;
+  }
+
+  .home-bottom {
+    width: 100%;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .home-bottom p {
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+
+  .home-location {
+    text-align: center;
+  }
+
+  .countdown {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  /* =====================================================
+     3. INFORMACIÓN
+     La fotografía se muestra COMPLETA, no como crop 16:9.
+  ===================================================== */
+
+  .information-photo {
+    width: min(52vw, 610px) !important;
+    height: auto !important;
+    max-height: 720px !important;
+
+    aspect-ratio: 2 / 3 !important;
+
+    margin: 38px auto 0 !important;
+
+    background: #eee8de;
+    border: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .information-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    transform: none !important;
+  }
+
+  /*
+    Patrón 2x2 correcto:
+    01 Hospedaje | 02 Transporte
+    03 Medellín  | 04 Regalos
+  */
+  .info-grid {
+    width: min(calc(100% - 56px), 980px) !important;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr))
+      !important;
+  }
+
+  .info-card,
+  .info-card:nth-child(even),
+  .info-card:last-child {
+    grid-column: auto !important;
+    min-width: 0;
+
+    border-bottom:
+      1px solid var(--line);
+  }
+
+  .info-card:nth-child(odd) {
+    border-right:
+      1px solid var(--line) !important;
+  }
+
+  .info-card:nth-child(even) {
+    border-right: 0 !important;
+  }
+
+  .info-card:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .info-card:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .info-card:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .info-card:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+
+  /* =====================================================
+     4. GLOBAL — protección contra solapamientos.
+  ===================================================== */
+
+  .home-content,
+  .venue-info,
+  .dress-code-detail-block,
+  .info-card-copy,
+  .stay-hero-content,
+  .stay-summary-copy,
+  .stay-intro-copy,
+  .transport-hero-content,
+  .transport-stop,
+  .medellin-hero-content,
+  .medellin-attraction-overlay,
+  .gallery-editorial-heading,
+  .rsvp-code-hero,
+  .rsvp-guest-card,
+  .gifts-copy {
+    min-width: 0;
+  }
+
+  .home-content h1,
+  .venue-info h3,
+  .dress-code-detail-block h3,
+  .stay-hero-content h1,
+  .stay-intro-title,
+  .transport-hero-content h1,
+  .transport-section-heading h2,
+  .medellin-hero-content h1,
+  .medellin-section-heading h2,
+  .gallery-editorial-heading h1,
+  .rsvp-code-hero h1 {
+    max-width: 100%;
+    text-wrap: balance;
+    overflow-wrap: normal;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+
+  /* =====================================================
+     5. EVENTO — imágenes de venues más naturales.
+  ===================================================== */
+
+  .venue-image {
+    height: auto !important;
+    max-height: 420px;
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .venue-image img {
+    object-fit: cover;
+    transform: none !important;
+  }
+
+
+  /* =====================================================
+     6. HOSPEDAJE
+  ===================================================== */
+
+  .stay-gallery-viewport {
+    height: auto !important;
+    max-height: 620px;
+  }
+
+  .stay-gallery-slide img {
+    object-fit: cover;
+    transform: none !important;
+  }
+
+
+  /* =====================================================
+     7. MEDELLÍN
+     Ninguna card supera una altura desproporcionada.
+  ===================================================== */
+
+  .medellin-attraction-card,
+  .medellin-escape-feature {
+    height: auto !important;
+    max-height: 520px;
+  }
+
+  .medellin-attraction-card img,
+  .medellin-escape-feature img {
+    transform: none;
+  }
+
+
+  /* =====================================================
+     8. GALERÍA / LIGHTBOX
+  ===================================================== */
+
+  .gallery-editorial-item {
+    max-height: 620px;
+  }
+
+  .gallery-lightbox-content {
+    width: auto;
+    max-width: min(90vw, 1180px);
+    max-height: 84svh;
+  }
+
+  .gallery-lightbox-content img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 90vw !important;
+    max-height: 78svh !important;
+
+    object-fit: contain !important;
+  }
+
+
+  /* =====================================================
+     9. RSVP
+  ===================================================== */
+
+  .rsvp-code-page {
+    overflow-x: hidden;
+  }
+
+  .rsvp-guest-options {
+    min-width: 0;
+  }
+
+
+  /* =====================================================
+     10. REGALOS
+  ===================================================== */
+
+  .gifts-photo-wrap {
+    overflow: hidden;
+  }
+
+  .gifts-photo {
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   TABLET 651–1100
+========================================================= */
+
+@media (min-width: 651px) and (max-width: 1100px) {
+
+  .story-film-image {
+    /*
+      Tablet horizontal o vertical:
+      conservar siempre la fotografía completa.
+    */
+    object-fit: contain !important;
+  }
+
+  .information-photo {
+    width: min(72vw, 560px) !important;
+    max-height: 700px !important;
+  }
+
+  /*
+    En tablet conservamos 2 columnas para mantener
+    Regalos directamente debajo de Transporte.
+  */
+  .info-grid {
+    width: min(calc(100% - 40px), 820px) !important;
+  }
+
+  .info-card,
+  .info-card:nth-child(even),
+  .info-card:last-child {
+    min-height: 150px;
+    padding:
+      24px 18px !important;
+
+    grid-template-columns:
+      42px
+      38px
+      minmax(0, 1fr)
+      18px
+      !important;
+
+    column-gap: 10px !important;
+  }
+
+  .info-card-copy strong {
+    font-size: clamp(23px, 3.4vw, 31px);
+  }
+
+  .info-card-copy small {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  .venue-grid {
+    max-width: 760px;
+  }
+
+  .venue-image {
+    max-height: none;
+    aspect-ratio: 16 / 10 !important;
+  }
+
+  .gallery-editorial-item {
+    max-height: none;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP 1101+
+========================================================= */
+
+@media (min-width: 1101px) {
+
+  .story-film-image {
+    max-width: 100vw;
+    max-height: 100svh;
+  }
+
+  .information-page .inner-heading {
+    max-width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .information-photo {
+    width: min(43vw, 590px) !important;
+  }
+
+  .info-grid {
+    margin-top: 54px;
+  }
+
+  .info-card {
+    min-height: 188px;
+  }
+
+  .home-page {
+    max-width: 1280px;
+  }
+
+  .home-image {
+    max-height: 690px;
+  }
+
+  .stay-gallery {
+    max-width: 1040px;
+  }
+
+  .medellin-attractions-grid,
+  .medellin-escape-grid {
+    max-width: 1080px;
+  }
+
+  .gallery-editorial-grid {
+    max-width: 1100px;
+  }
+}
