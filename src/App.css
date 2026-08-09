@@ -14211,3 +14211,14 @@ select {
     padding: 20px 18px;
   }
 }
+
+
+/* =================================
+   V87 — RSVP INVITADOS / ESTABILIDAD
+================================= */
+
+/*
+  Sin cambios visuales.
+  Esta versión prioriza el flujo de invitados:
+  Formspree confirma el RSVP y Supabase funciona como respaldo.
+*/

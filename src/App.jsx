@@ -1659,6 +1659,52 @@ function WeddingApp() {
       return
     }
 
+    /*
+      IMPORTANTE:
+      Los códigos de invitados tienen prioridad absoluta.
+      Si el código existe en invitationGroups (por ejemplo ADM1),
+      nunca se intenta validar como código administrador.
+    */
+    if (
+      normalizedCode.length === 4 &&
+      invitationGroups[normalizedCode]
+    ) {
+      const matchedGroup =
+        invitationGroups[normalizedCode]
+
+      setRsvpCode(normalizedCode)
+      setRsvpGroup(matchedGroup)
+      setRsvpAdminData(null)
+
+      setRsvpResponses(
+        matchedGroup.guests.reduce(
+          (responses, guest) => ({
+            ...responses,
+            [guest.id]: '',
+          }),
+          {}
+        )
+      )
+
+      setRsvpStatus({
+        state: 'verified',
+        message: '',
+      })
+
+      window.setTimeout(() => {
+        setRsvpStatus({
+          state: 'selecting',
+          message: '',
+        })
+      }, 700)
+
+      return
+    }
+
+    /*
+      Solo los códigos que NO corresponden a invitados
+      se verifican contra el acceso administrativo.
+    */
     setRsvpStatus({
       state: 'checking',
       message: '',
@@ -1705,52 +1751,11 @@ function WeddingApp() {
       )
     }
 
-    if (normalizedCode.length !== 4) {
-      setRsvpStatus({
-        state: 'error',
-        message:
-          'No encontramos ese código. Verifica que esté escrito correctamente.',
-      })
-      return
-    }
-
-    const matchedGroup =
-      invitationGroups[normalizedCode]
-
-    if (!matchedGroup) {
-      setRsvpStatus({
-        state: 'error',
-        message:
-          'No encontramos ese código. Verifica que esté escrito correctamente.',
-      })
-      return
-    }
-
-    setRsvpCode(normalizedCode)
-    setRsvpGroup(matchedGroup)
-    setRsvpAdminData(null)
-
-    setRsvpResponses(
-      matchedGroup.guests.reduce(
-        (responses, guest) => ({
-          ...responses,
-          [guest.id]: '',
-        }),
-        {}
-      )
-    )
-
     setRsvpStatus({
-      state: 'verified',
-      message: '',
+      state: 'error',
+      message:
+        'No encontramos ese código. Verifica que esté escrito correctamente.',
     })
-
-    window.setTimeout(() => {
-      setRsvpStatus({
-        state: 'selecting',
-        message: '',
-      })
-    }, 700)
   }
 
   const updateGuestResponse = (guestId, response) => {
@@ -1842,57 +1847,66 @@ function WeddingApp() {
     }
 
     try {
-      const saveResponse = await fetch(
-        '/api/rsvp-save',
+      /*
+        Primero enviamos a Formspree, que ya sabemos que
+        funciona correctamente en producción.
+      */
+      const formspreeResponse = await fetch(
+        formspreeEndpoint,
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'Content-Type':
+              'application/json',
           },
-          body: JSON.stringify({
-            invitationCode: rsvpCode,
-            responses: rsvpGroup.guests.map(
-              (guest) => ({
-                guestId: guest.id,
-                guestName: guest.name,
-                attendance:
-                  rsvpResponses[guest.id],
-              })
-            ),
-            message: rsvpMessage.trim(),
-          }),
+          body: JSON.stringify(payload),
         }
       )
 
-      if (!saveResponse.ok) {
+      if (!formspreeResponse.ok) {
         throw new Error(
-          'No fue posible guardar la confirmación.'
+          'No fue posible enviar la respuesta.'
         )
       }
 
+      /*
+        Después intentamos guardar en Supabase.
+        Si esta llamada falla, NO bloqueamos la confirmación
+        del invitado porque Formspree ya recibió su RSVP.
+      */
       try {
-        const formspreeResponse = await fetch(
-          formspreeEndpoint,
+        const saveResponse = await fetch(
+          '/api/rsvp-save',
           {
             method: 'POST',
             headers: {
-              Accept: 'application/json',
-              'Content-Type':
-                'application/json',
+              'Content-Type': 'application/json',
             },
-            body: JSON.stringify(payload),
+            body: JSON.stringify({
+              invitationCode: rsvpCode,
+              responses: rsvpGroup.guests.map(
+                (guest) => ({
+                  guestId: guest.id,
+                  guestName: guest.name,
+                  attendance:
+                    rsvpResponses[guest.id],
+                })
+              ),
+              message: rsvpMessage.trim(),
+            }),
           }
         )
 
-        if (!formspreeResponse.ok) {
+        if (!saveResponse.ok) {
           console.warn(
-            'Formspree no confirmó el respaldo del RSVP.'
+            'Formspree recibió el RSVP, pero Supabase no pudo guardarlo.'
           )
         }
-      } catch (formspreeError) {
+      } catch (supabaseError) {
         console.warn(
-          'El RSVP se guardó, pero Formspree no respondió.',
-          formspreeError
+          'Formspree recibió el RSVP, pero la copia en Supabase falló.',
+          supabaseError
         )
       }
 
