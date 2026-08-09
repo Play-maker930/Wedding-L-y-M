@@ -1724,10 +1724,15 @@ function WeddingApp() {
         }
       )
 
-      if (adminResponse.ok) {
-        const adminData =
-          await adminResponse.json()
+      let adminData = null
 
+      try {
+        adminData = await adminResponse.json()
+      } catch {
+        adminData = null
+      }
+
+      if (adminResponse.ok && adminData?.success) {
         setRsvpCode(normalizedCode)
         setRsvpGroup(null)
         setRsvpAdminData(adminData)
@@ -1744,18 +1749,43 @@ function WeddingApp() {
 
         return
       }
+
+      if (adminResponse.status === 401) {
+        setRsvpStatus({
+          state: 'error',
+          message:
+            'El código administrador no coincide con el configurado en Vercel.',
+        })
+        return
+      }
+
+      if (adminResponse.status === 503) {
+        setRsvpStatus({
+          state: 'error',
+          message:
+            'El dashboard todavía no está conectado correctamente. Revisa las variables de Supabase en Vercel.',
+        })
+        return
+      }
+
+      setRsvpStatus({
+        state: 'error',
+        message:
+          adminData?.error ||
+          'No pudimos abrir el dashboard. Revisa la Function rsvp-summary en Vercel.',
+      })
     } catch (error) {
       console.warn(
         'No fue posible verificar el acceso administrativo.',
         error
       )
-    }
 
-    setRsvpStatus({
-      state: 'error',
-      message:
-        'No encontramos ese código. Verifica que esté escrito correctamente.',
-    })
+      setRsvpStatus({
+        state: 'error',
+        message:
+          'No pudimos conectar con el dashboard. Revisa que /api/rsvp-summary esté desplegado en Vercel.',
+      })
+    }
   }
 
   const updateGuestResponse = (guestId, response) => {
