@@ -13947,3 +13947,20 @@ select {
 .transport-hero-overlay {
   z-index: 1;
 }
+
+
+/* =================================
+   V85 — RUTAS REALES / REACT ROUTER
+================================= */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 320ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0s;
+  }
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { BrowserRouter, useLocation, useNavigate } from 'react-router'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import './App.css'
@@ -487,8 +488,35 @@ function StoryFilm({ onFinish }) {
 }
 
 
-function App() {
-  const [showInvitation, setShowInvitation] = useState(true)
+
+const PAGE_PATHS = {
+  inicio: '/',
+  boda: '/el-gran-dia',
+  informacion: '/informacion',
+  hospedaje: '/hospedaje',
+  transporte: '/transporte',
+  medellin: '/medellin',
+  galeria: '/galeria',
+  rsvp: '/rsvp',
+}
+
+const PATH_PAGES = Object.fromEntries(
+  Object.entries(PAGE_PATHS).map(([page, path]) => [
+    path,
+    page,
+  ])
+)
+
+function WeddingApp() {
+  const location = useLocation()
+  const routerNavigate = useNavigate()
+
+  const activePage =
+    PATH_PAGES[location.pathname] || 'inicio'
+
+  const [showInvitation, setShowInvitation] = useState(
+    () => location.pathname === '/'
+  )
   const [showStoryFilm, setShowStoryFilm] = useState(false)
   const [homeReveal, setHomeReveal] = useState(false)
   const musicRef = useRef(null)
@@ -496,7 +524,6 @@ function App() {
   const galleryTouchStartXRef = useRef(null)
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
 
-  const [activePage, setActivePage] = useState('inicio')
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeGalleryImage, setActiveGalleryImage] = useState(null)
   const [hotelSlide, setHotelSlide] = useState(0)
@@ -507,6 +534,21 @@ function App() {
     preloadImage(storyVideo1)
     preloadImage(storyVideo2)
   }, [])
+
+  useEffect(() => {
+    if (!PATH_PAGES[location.pathname]) {
+      routerNavigate('/', { replace: true })
+      return
+    }
+
+    setMenuOpen(false)
+    setActiveGalleryImage(null)
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    })
+  }, [location.pathname, routerNavigate])
 
   const [rsvpCode, setRsvpCode] = useState('')
   const [rsvpGroup, setRsvpGroup] = useState(null)
@@ -1475,16 +1517,23 @@ function App() {
   }
 
   const pages = [
-    { id: 'inicio', label: 'Inicio' },
-    { id: 'boda', label: 'El Gran Día' },
-    { id: 'informacion', label: 'Información' },
-    { id: 'galeria', label: 'Galería' },
-    { id: 'rsvp', label: 'RSVP' },
+    { id: 'inicio', label: 'Inicio', path: PAGE_PATHS.inicio },
+    { id: 'boda', label: 'El Gran Día', path: PAGE_PATHS.boda },
+    {
+      id: 'informacion',
+      label: 'Información',
+      path: PAGE_PATHS.informacion,
+    },
+    { id: 'galeria', label: 'Galería', path: PAGE_PATHS.galeria },
+    { id: 'rsvp', label: 'RSVP', path: PAGE_PATHS.rsvp },
   ]
 
   const navigate = (page) => {
+    const destination =
+      PAGE_PATHS[page] || PAGE_PATHS.inicio
+
     const performNavigation = () => {
-      setActivePage(page)
+      routerNavigate(destination)
       setMenuOpen(false)
 
       window.scrollTo({
@@ -1494,7 +1543,7 @@ function App() {
     }
 
     if (
-      page !== activePage &&
+      destination !== location.pathname &&
       typeof document.startViewTransition === 'function'
     ) {
       document.startViewTransition(performNavigation)
@@ -4118,6 +4167,16 @@ function App() {
       <Analytics />
       <SpeedInsights />
     </>
+  )
+}
+
+
+
+function App() {
+  return (
+    <BrowserRouter>
+      <WeddingApp />
+    </BrowserRouter>
   )
 }
 
