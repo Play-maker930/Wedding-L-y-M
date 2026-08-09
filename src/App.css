@@ -13718,3 +13718,49 @@ select {
     display: none;
   }
 }
+
+
+/* =================================
+   V77 — VERCEL + AJUSTES VISUALES
+================================= */
+
+/* Fondo oscuro/chocolate detrás del sobre */
+.invitation-intro {
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgba(138, 133, 96, 0.16),
+      transparent 34%
+    ),
+    #211712 !important;
+}
+
+/*
+  EL GRAN DÍA:
+  VIERNES conserva su composición sobre el 15,
+  pero baja para alinearse visualmente con ENERO.
+*/
+.date-display .date-weekday {
+  align-self: end !important;
+  margin: 0 0 -2px !important;
+  transform: translateY(10px);
+}
+
+@media (max-width: 850px) {
+  .date-display .date-weekday {
+    margin-bottom: -1px !important;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 480px) {
+  .date-display .date-weekday {
+    transform: translateY(7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .date-display .date-weekday {
+    transition: none;
+  }
+}
