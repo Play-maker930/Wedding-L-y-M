@@ -9,6 +9,26 @@ import monogramGold from './assets/monogram_gold.png'
 import menuBackground from './assets/menu-background.jpg'
 import confirmationPhoto from './assets/foto-confirmacion.jpg'
 import informationPhoto from './assets/information-photo.webp'
+import movichHero from './assets/movich-hero.webp'
+import movich1 from './assets/movich-1.webp'
+import movich2 from './assets/movich-2.webp'
+import movich3 from './assets/movich-3.webp'
+import movich4 from './assets/movich-4.webp'
+import movich5 from './assets/movich-5.webp'
+import movich6 from './assets/movich-6.webp'
+import movich7 from './assets/movich-7.webp'
+import villaCelesteImg from './assets/villa-celeste.webp'
+import comuna13Img from './assets/comuna-13.webp'
+import provenzaImg from './assets/provenza.webp'
+import plazaBoteroImg from './assets/plaza-botero.webp'
+import jardinBotanicoImg from './assets/jardin-botanico.webp'
+import parqueArviImg from './assets/parque-arvi.webp'
+import guatapeImg from './assets/guatape.webp'
+import pueblitoPaisaImg from './assets/pueblito-paisa.webp'
+import tourCafeteroImg from './assets/tour-cafetero.webp'
+import museoCastilloImg from './assets/museo-el-castillo.webp'
+import medellinHeroImg from './assets/medellin-hero.webp'
+import transportHeroImg from './assets/transport-hero.webp'
 import storyVideo1 from './assets/video-1.webp'
 import storyVideo2 from './assets/video-2.webp'
 import storyVideo3 from './assets/video-3.webp'
@@ -546,13 +566,13 @@ function App() {
   ]
 
   const hotelPhotos = [
-    'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/4d45af49.jpg?impolicy=resizecrop&rw=1200&ra=fit',
-    'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/bbe5ea80.jpg?impolicy=resizecrop&rw=1200&ra=fit',
-    'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/2c01acea.jpg?impolicy=resizecrop&rw=1200&ra=fit',
-    'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/c3c6205d.jpg?impolicy=resizecrop&rw=1200&ra=fit',
-    'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/832bf158.jpg?impolicy=resizecrop&rw=1200&ra=fit',
-    'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/1a3f5742.jpg?impolicy=resizecrop&rw=1200&ra=fit',
-    'https://images.trvl-media.com/lodging/1000000/520000/519900/519824/0adc0142.jpg?impolicy=resizecrop&rw=1200&ra=fit',
+    movich1,
+    movich2,
+    movich3,
+    movich4,
+    movich5,
+    movich6,
+    movich7,
   ]
 
   const invitationGroups = {
@@ -2286,7 +2306,7 @@ function App() {
 
                   <div className="venue-image">
                     <img
-                      src="https://images.pixieset.com/47662229/51c69cd63d50919fcd4655c2833839fd-xxlarge.jpg"
+                      src={villaCelesteImg}
                       alt="Centro de Eventos Villa Celeste"
                       loading="lazy"
                       decoding="async"
@@ -2584,7 +2604,10 @@ function App() {
               VOLVER A INFORMACIÓN
             </button>
 
-            <section className="stay-hero">
+            <section
+              className="stay-hero"
+              style={{ backgroundImage: `url(${movichHero})` }}
+            >
               <div className="stay-hero-overlay"></div>
 
               <div className="stay-hero-content">
@@ -3091,7 +3114,10 @@ function App() {
               VOLVER A INFORMACIÓN
             </button>
 
-            <section className="transport-hero">
+            <section
+              className="transport-hero"
+              style={{ backgroundImage: `url(${transportHeroImg})` }}
+            >
 
               <div className="transport-hero-overlay"></div>
 
@@ -3250,7 +3276,10 @@ function App() {
               VOLVER A INFORMACIÓN
             </button>
 
-            <section className="medellin-hero">
+            <section
+              className="medellin-hero"
+              style={{ backgroundImage: `url(${medellinHeroImg})` }}
+            >
 
               <div className="medellin-hero-overlay"></div>
 
@@ -3262,6 +3291,12 @@ function App() {
                 <h1>
                   Medellín
                 </h1>
+
+                <p>
+                  Una ciudad vibrante, rodeada de montañas,
+                  naturaleza, cultura y una gastronomía que
+                  vale la pena descubrir.
+                </p>
 
 
               </div>
@@ -3343,7 +3378,7 @@ function App() {
 
                 <article className="medellin-attraction-card large">
                   <img
-                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/%27Medellin_es_una_Chimba%27_-_Comuna_13_-_Medell%C3%ADn_-_Colombia_2024_%282%29.jpg?width=1800"
+                    src={comuna13Img}
                     alt="Arte urbano y color en la Comuna 13 de Medellín"
                       loading="lazy"
                       decoding="async"
@@ -3361,7 +3396,7 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Provenza_-_Carrera_35_-_Medell%C3%ADn_-_Colombia_2024.jpg?width=1600"
+                    src={provenzaImg}
                     alt="Calle arbolada y restaurantes de Provenza en Medellín"
                       loading="lazy"
                       decoding="async"
@@ -3379,7 +3414,7 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Medell%C3%ADn%2C_Plaza_Botero%2C_2023-07_CN-01.jpg?width=1600"
+                    src={plazaBoteroImg}
                     alt="Esculturas y arquitectura de Plaza Botero en Medellín"
                       loading="lazy"
                       decoding="async"
@@ -3397,7 +3432,7 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Jard%C3%ADn_Bot%C3%A1nico_de_Medell%C3%ADn.jpg?width=1600"
+                    src={jardinBotanicoImg}
                     alt="Vegetación y senderos del Jardín Botánico de Medellín"
                       loading="lazy"
                       decoding="async"
@@ -3415,7 +3450,7 @@ function App() {
 
                 <article className="medellin-attraction-card">
                   <img
-                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Estaci%C3%B3n_Arv%C3%AD_%28Metro_de_Medell%C3%ADn%29.jpg?width=1600"
+                    src={parqueArviImg}
                     alt="Naturaleza y estación del Parque Arví en Medellín"
                       loading="lazy"
                       decoding="async"
@@ -3427,6 +3462,42 @@ function App() {
                     <p>
                       Naturaleza, senderos y aire fresco
                       en las montañas.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src={pueblitoPaisaImg}
+                    alt="Pueblito Paisa en Medellín"
+                    loading="lazy"
+                    decoding="async"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>06</span>
+                    <h3>Pueblito Paisa</h3>
+                    <p>
+                      Tradición paisa, arquitectura típica y una
+                      vista privilegiada de Medellín.
+                    </p>
+                  </div>
+                </article>
+
+                <article className="medellin-attraction-card">
+                  <img
+                    src={museoCastilloImg}
+                    alt="Museo El Castillo en Medellín"
+                    loading="lazy"
+                    decoding="async"
+                  />
+
+                  <div className="medellin-attraction-overlay">
+                    <span>07</span>
+                    <h3>Museo El Castillo</h3>
+                    <p>
+                      Arte, historia y jardines en un castillo inspirado
+                      en la arquitectura europea.
                     </p>
                   </div>
                 </article>
@@ -3451,7 +3522,7 @@ function App() {
 
                 <article className="medellin-escape-feature">
                   <img
-                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Vista_desde_la_piedra_El_Pe%C3%B1ol._Guatap%C3%A9%2C_Colombia._20091114.JPG?width=1800"
+                    src={guatapeImg}
                     alt="Vista panorámica del embalse de Guatapé desde la Piedra del Peñol"
                       loading="lazy"
                       decoding="async"
@@ -3466,34 +3537,24 @@ function App() {
                     </p>
                   </div>
                 </article>
-</div>
 
-            </section>
+                <article className="medellin-escape-feature">
+                  <img
+                    src={tourCafeteroImg}
+                    alt="Experiencia de tour cafetero en Antioquia"
+                    loading="lazy"
+                    decoding="async"
+                  />
 
-            <section className="medellin-quick-guide">
-
-              <div className="medellin-guide-item">
-                <LineIcon name="wallet" size={27} />
-                <span>MONEDA</span>
-                <strong>Peso colombiano</strong>
-              </div>
-
-              <div className="medellin-guide-item">
-                <LineIcon name="plane" size={27} />
-                <span>AEROPUERTO</span>
-                <strong>MDE · Medellín</strong>
-              </div>
-
-              <div className="medellin-guide-item">
-                <LineIcon name="hotel" size={27} />
-                <span>ZONA DE LA BODA</span>
-                <strong>Medellín, Colombia</strong>
-              </div>
-
-              <div className="medellin-guide-item">
-                <LineIcon name="camera" size={27} />
-                <span>PARA TURISMO</span>
-                <strong>Medellín</strong>
+                  <div>
+                    <span>EXPERIENCIA</span>
+                    <h3>Tour cafetero</h3>
+                    <p>
+                      Del grano a la taza, entre cafetales,
+                      aromas y tradición antioqueña.
+                    </p>
+                  </div>
+                </article>
               </div>
 
             </section>

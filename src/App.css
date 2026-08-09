@@ -2433,8 +2433,7 @@ button:focus {
 
   padding: 100px 8vw 85px;
 
-  background:
-    url('https://wallpapercave.com/wp/wp3925541.jpg');
+  background-image: none;
 
   background-size: cover;
   background-position: center;
@@ -6671,13 +6670,7 @@ button:focus {
 
   overflow: hidden;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(28, 27, 25, 0.18),
-      rgba(28, 27, 25, 0.72)
-    ),
-    url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1800&q=88');
+  background-image: none;
 
   background-size: cover;
   background-position: center;
@@ -11665,13 +11658,7 @@ button:focus {
 
 /* TRANSPORTE — nueva imagen */
 .transport-hero {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(28, 27, 25, 0.18),
-      rgba(28, 27, 25, 0.72)
-    ),
-    url('https://www.pmitour.com/wp-content/uploads/2020/11/transporte-privado-vip-business-transfers-2.jpg');
+  background-image: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -13891,4 +13878,72 @@ select {
   .event-hero h1 {
     transform: translateY(-8px);
   }
+}
+
+
+/* =================================
+   V83 — IMÁGENES LOCALES + NUEVOS IMPERDIBLES
+================================= */
+
+.medellin-attractions-grid {
+  grid-auto-flow: dense;
+}
+
+.medellin-escape-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.medellin-escape-feature {
+  min-width: 0;
+}
+
+@media (max-width: 850px) {
+  .medellin-escape-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+
+/* =================================
+   V84 — HEROES LOCALES OPTIMIZADOS
+================================= */
+
+.medellin-hero,
+.transport-hero {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.medellin-hero {
+  background-position: center;
+}
+
+.transport-hero {
+  background-position: center;
+}
+
+/* El overlay existente conserva contraste del texto */
+.transport-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(28, 27, 25, 0.18),
+      rgba(28, 27, 25, 0.72)
+    );
+}
+
+.transport-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.transport-hero-overlay {
+  z-index: 1;
 }
