@@ -20,6 +20,30 @@ import weddingMusic from './assets/Aleluya.mp3'
 import InvitationEnvelope from './InvitationEnvelope'
 
 
+const storyAssetModules = import.meta.glob(
+  './assets/video *.*',
+  {
+    eager: true,
+    import: 'default',
+  }
+)
+
+const getStoryAsset = (number) => {
+  const matcher = new RegExp(
+    `/video ${number}\\.[^/]+$`,
+    'i'
+  )
+
+  const matchingPath = Object.keys(
+    storyAssetModules
+  ).find((path) => matcher.test(path))
+
+  return matchingPath
+    ? storyAssetModules[matchingPath]
+    : ''
+}
+
+
 function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
   const commonProps = {
     width: size,
@@ -248,8 +272,158 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
   )
 }
 
+
+const STORY_FILM_SLIDES = [
+  {
+    title: 'Donde comenzó nuestra historia.',
+    image: getStoryAsset(1),
+    position: 'center',
+  },
+  {
+    title: 'Aprendimos a elegirnos cada día.',
+    image: getStoryAsset(2),
+    position: 'center',
+  },
+  {
+    title: 'Y a convertir lo cotidiano en recuerdos.',
+    image: getStoryAsset(3),
+    position: 'center',
+  },
+  {
+    title: 'Juntos, cada lugar empezó a sentirse como hogar.',
+    image: getStoryAsset(4),
+    position: 'center',
+  },
+  {
+    title: 'Nuestros sueños empezaron a sentirse cada vez más nuestros.',
+    image: getStoryAsset(5),
+    position: 'center',
+  },
+  {
+    title: 'Hasta que llegó el sí que cambió todo.',
+    image: getStoryAsset(6),
+    position: 'center',
+    moment: 'yes',
+  },
+  {
+    title: 'Y empezamos a imaginar el día que tanto esperábamos.',
+    image: getStoryAsset(7),
+    position: 'center',
+  },
+  {
+    title: 'Ahora estamos a punto de comenzar nuestro siguiente capítulo.',
+    image: getStoryAsset(8),
+    position: 'center',
+  },
+]
+function StoryFilm({ onFinish }) {
+  const [index, setIndex] = useState(0)
+  const [showFinale, setShowFinale] = useState(false)
+  const onFinishRef = useRef(onFinish)
+
+  useEffect(() => {
+    onFinishRef.current = onFinish
+  }, [onFinish])
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [])
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      if (showFinale) {
+        onFinishRef.current()
+        return
+      }
+
+      if (index === STORY_FILM_SLIDES.length - 1) {
+        setShowFinale(true)
+        return
+      }
+
+      setIndex((current) => current + 1)
+    }, showFinale ? 6000 : 4700)
+
+    return () => window.clearTimeout(timer)
+  }, [index, showFinale])
+
+  const progress = showFinale
+    ? 100
+    : ((index + 1) / (STORY_FILM_SLIDES.length + 1)) * 100
+
+  return (
+    <section className="story-film" aria-label="Nuestra historia">
+      <button
+        type="button"
+        className="story-film-skip"
+        onClick={onFinish}
+      >
+        SALTAR <span>→</span>
+      </button>
+
+      <div className="story-film-progress" aria-hidden="true">
+        <span style={{ width: `${progress}%` }}></span>
+      </div>
+
+      {!showFinale ? (
+        <div
+          key={index}
+          className={
+            STORY_FILM_SLIDES[index].moment === 'yes'
+              ? 'story-film-scene story-film-scene-yes'
+              : 'story-film-scene'
+          }
+        >
+          {STORY_FILM_SLIDES[index].image ? (
+            <img
+              src={STORY_FILM_SLIDES[index].image}
+              alt=""
+              className="story-film-image"
+              style={{
+                objectPosition:
+                  STORY_FILM_SLIDES[index].position,
+              }}
+            />
+          ) : (
+            <div className="story-film-image-missing">
+              <span>
+                Falta agregar video {index + 1}
+                en src/assets
+              </span>
+            </div>
+          )}
+
+          <div className="story-film-overlay"></div>
+
+          <div className="story-film-copy">
+            <p>{STORY_FILM_SLIDES[index].title}</p>
+          </div>
+        </div>
+      ) : (
+        <div className="story-film-finale">
+          <p>SIETE AÑOS DESPUÉS</p>
+          <h2>
+            El siguiente capítulo
+            <em> comienza aquí.</em>
+          </h2>
+          <strong>Luis & Melanie</strong>
+          <small>15 · 01 · 27</small>
+        </div>
+      )}
+    </section>
+  )
+}
+
+
 function App() {
   const [showInvitation, setShowInvitation] = useState(true)
+  const [showStoryFilm, setShowStoryFilm] = useState(false)
+  const [homeReveal, setHomeReveal] = useState(false)
   const musicRef = useRef(null)
   const homeImageRef = useRef(null)
   const galleryTouchStartXRef = useRef(null)
@@ -1287,6 +1461,10 @@ function App() {
     }
 
     if (audio.paused) {
+      if (audio.currentTime >= 67) {
+        audio.currentTime = 0
+      }
+
       try {
         await audio.play()
         setIsMusicPlaying(true)
@@ -1304,8 +1482,37 @@ function App() {
     setIsMusicPlaying(false)
   }
 
+  const handleWeddingMusicTimeUpdate = () => {
+    const audio = musicRef.current
+
+    if (!audio) {
+      return
+    }
+
+    if (audio.currentTime >= 67) {
+      audio.pause()
+      audio.currentTime = 67
+      setIsMusicPlaying(false)
+    }
+  }
+
   const openInvitation = () => {
     setShowInvitation(false)
+    setShowStoryFilm(true)
+  }
+
+  const finishStoryFilm = () => {
+    setHomeReveal(true)
+    setShowStoryFilm(false)
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto',
+    })
+
+    window.setTimeout(() => {
+      setHomeReveal(false)
+    }, 1200)
   }
 
   const normalizeInvitationCode = (value) =>
@@ -1489,6 +1696,7 @@ function App() {
         onPlay={() => setIsMusicPlaying(true)}
         onPause={() => setIsMusicPlaying(false)}
         onEnded={() => setIsMusicPlaying(false)}
+        onTimeUpdate={handleWeddingMusicTimeUpdate}
       />
 
       <InvitationEnvelope
@@ -1498,7 +1706,11 @@ function App() {
         onOpen={openInvitation}
       />
 
-      {!showInvitation && (
+      {showStoryFilm && (
+        <StoryFilm onFinish={finishStoryFilm} />
+      )}
+
+      {!showInvitation && !showStoryFilm && (
         <button
           type="button"
           className={
@@ -1622,7 +1834,8 @@ function App() {
         </button>
       )}
 
-      <div className="site">
+      {!showInvitation && !showStoryFilm && (
+        <div className={homeReveal ? "site site-home-reveal" : "site"}>
 
       {/* ================================
           NAVEGACIÓN
@@ -1978,9 +2191,8 @@ function App() {
                     </p>
 
                     <p className="venue-description">
-                      Comenzamos nuestro día más especial con Dios
-                      en el centro, recibiendo Su bendición y
-                      celebrando nuestro amor junto a quienes más queremos.
+                      Nuestro día más especial comienza ante Dios,
+                      con Su bendición y nuestro sí para siempre.
                     </p>
 
                     <div className="venue-actions">
@@ -2151,8 +2363,8 @@ function App() {
                     </div>
 
                     <p>
-                      El verde oliva está reservado para
-                      nuestras damas de honor.
+                      Agradecemos reservar el blanco y sus tonalidades,
+                      así como el verde oliva, para este día tan especial.
                     </p>
                   </div>
                 </div>
@@ -2602,6 +2814,8 @@ function App() {
 
                   <div>
                     <h3>Habitación doble</h3>
+
+                  <p>Ideal para dos huéspedes</p>
                   </div>
 
                   <strong className="stay-room-rate">
@@ -2847,10 +3061,7 @@ function App() {
                 </h1>
 
                 <p>
-                  Hemos organizado transporte privado para los
-                  invitados hospedados en Movich Las Lomas, para
-                  que puedan disfrutar cada momento del día sin
-                  preocuparse por los traslados.
+                  
                 </p>
 
               </div>
@@ -2871,10 +3082,9 @@ function App() {
                 </h2>
 
                 <p>
-                  Para que disfrutes el día sin preocuparte por los
-                  traslados, hemos organizado el recorrido completo:
-                  desde la salida del hotel hasta el regreso al finalizar
-                  la celebración.
+                  El servicio de transporte requiere reserva previa y
+                  cuenta con cupos limitados. Los huéspedes alojados
+                  en el hotel sede tendrán prioridad.
                 </p>
 
               </div>
@@ -2954,10 +3164,9 @@ function App() {
                   <span>IMPORTANTE</span>
 
                   <p>
-                    Los espacios para el transporte son limitados.
-                    Para garantizar una mejor experiencia, tendrán
-                    prioridad los invitados hospedados en el hotel
-                    sede.
+                    El servicio de transporte requiere reserva previa y
+                    cuenta con cupos limitados. Los huéspedes alojados
+                    en el hotel sede tendrán prioridad.
                   </p>
                 </div>
 
@@ -3792,7 +4001,8 @@ function App() {
 
       </footer>
 
-      </div>
+        </div>
+      )}
     </>
   )
 }

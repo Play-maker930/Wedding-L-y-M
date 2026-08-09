@@ -13070,3 +13070,313 @@ select {
     padding-left: 14px;
   }
 }
+
+
+/* =================================
+   V71 — MINI PELÍCULA / NUESTRA HISTORIA
+================================= */
+
+.story-film {
+  position: fixed;
+  inset: 0;
+  z-index: 9900;
+  overflow: hidden;
+  background: #211712;
+  color: #fff;
+}
+
+.story-film-skip {
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.84);
+  cursor: pointer;
+  font-size: 7px;
+  letter-spacing: 2.4px;
+}
+
+.story-film-skip span {
+  color: var(--champagne);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+}
+
+.story-film-progress {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 11;
+  height: 2px;
+  background: rgba(255,255,255,.14);
+}
+
+.story-film-progress span {
+  display: block;
+  height: 100%;
+  background: rgba(216,200,174,.9);
+  transition: width .7s ease;
+}
+
+.story-film-scene {
+  position: absolute;
+  inset: 0;
+  animation: storySceneFade .9s ease both;
+}
+
+.story-film-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  animation: storyKenBurns 5.2s ease-out both;
+}
+
+.story-film-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20,12,9,.16), rgba(20,12,9,.08) 40%, rgba(20,12,9,.72)),
+    linear-gradient(90deg, rgba(20,12,9,.20), transparent 60%);
+}
+
+.story-film-copy {
+  position: absolute;
+  left: clamp(28px, 8vw, 120px);
+  bottom: clamp(56px, 10vh, 110px);
+  z-index: 3;
+  width: min(720px, calc(100vw - 64px));
+}
+
+.story-film-copy span {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--champagne);
+  font-size: 9px;
+  letter-spacing: 4px;
+}
+
+.story-film-copy p {
+  margin: 0;
+  color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5.5vw, 76px);
+  font-weight: 300;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.story-film-finale {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(138,133,96,.22), transparent 34%),
+    #211712;
+  animation: storySceneFade 1s ease both;
+}
+
+.story-film-finale > p {
+  margin: 0 0 24px;
+  color: var(--champagne);
+  font-size: 8px;
+  letter-spacing: 4px;
+}
+
+.story-film-finale h2 {
+  margin: 0;
+  max-width: 850px;
+  color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(58px, 8vw, 108px);
+  font-weight: 300;
+  line-height: .88;
+}
+
+.story-film-finale h2 em {
+  display: block;
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+.story-film-finale strong {
+  margin-top: 34px;
+  color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.story-film-finale small {
+  margin-top: 10px;
+  color: rgba(255,255,255,.66);
+  font-size: 8px;
+  letter-spacing: 3px;
+}
+
+@keyframes storySceneFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes storyKenBurns {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.08); }
+}
+
+@media (max-width: 650px) {
+  .story-film-skip {
+    top: 20px;
+    right: 20px;
+  }
+
+  .story-film-copy {
+    left: 22px;
+    bottom: 72px;
+    width: calc(100vw - 44px);
+  }
+
+  .story-film-copy p {
+    font-size: clamp(40px, 12vw, 56px);
+  }
+
+  .story-film-finale h2 {
+    font-size: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-film-scene,
+  .story-film-image,
+  .story-film-finale {
+    animation: none;
+  }
+
+  .story-film-progress span {
+    transition: none;
+  }
+}
+
+
+/* =================================
+   V73 — HISTORIA CON FOTOS REALES
+================================= */
+
+/* Sin años sobre cada fotografía */
+.story-film-copy {
+  bottom: clamp(58px, 10vh, 112px);
+}
+
+.story-film-copy p {
+  max-width: 760px;
+}
+
+/* Momento del "sí" — foto 6 */
+.story-film-scene-yes .story-film-overlay {
+  background:
+    radial-gradient(
+      circle at 50% 46%,
+      rgba(216, 200, 174, 0.08),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(20, 12, 9, 0.12),
+      rgba(20, 12, 9, 0.04) 42%,
+      rgba(20, 12, 9, 0.72)
+    );
+}
+
+.story-film-scene-yes .story-film-copy p {
+  font-size: clamp(44px, 6vw, 82px);
+  font-style: italic;
+}
+
+/* Fallback visible si alguna foto no está en assets */
+.story-film-image-missing {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(138, 133, 96, 0.18),
+      transparent 35%
+    ),
+    #211712;
+
+  color: rgba(255, 255, 255, 0.76);
+
+  text-align: center;
+}
+
+.story-film-image-missing span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/*
+  La página principal no se renderiza mientras
+  el sobre o la película estén visibles.
+*/
+.story-film,
+.invitation-intro {
+  background-color: #211712;
+}
+
+@media (max-width: 650px) {
+  .story-film-scene-yes .story-film-copy p {
+    font-size: clamp(42px, 13vw, 60px);
+  }
+}
+
+
+/* =================================
+   V74 — TRANSICIÓN PELÍCULA → HOME
+================================= */
+
+.site-home-reveal {
+  animation:
+    siteHomeRevealV74 1.05s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+@keyframes siteHomeRevealV74 {
+  0% {
+    opacity: 0;
+    transform: scale(1.012);
+    filter: blur(8px);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-home-reveal {
+    animation: none;
+  }
+}
