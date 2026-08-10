@@ -3340,114 +3340,155 @@ function WeddingApp() {
 
               <div className="transport-section-heading">
 
+                <p className="section-kicker">
+                  TRANSPORTE
+                </p>
+
                 <h2>
-                  Nosotros nos encargamos
-                  <em> de cada traslado</em>
+                  Nos encargamos
+                  <em> del camino</em>
                 </h2>
+
+                <p>
+                  Hemos organizado el transporte para que puedan
+                  disfrutar cada momento de la celebración con tranquilidad.
+                </p>
 
               </div>
 
-              <div className="transport-route">
+              <div className="transport-options">
 
-                <div
-                  className="transport-route-line"
-                  aria-hidden="true"
-                ></div>
+                <article className="transport-option-card featured">
 
-                <article className="transport-stop">
-                  <div className="transport-stop-icon">
-                    <LineIcon name="hotel" size={30} />
+                  <header className="transport-option-heading">
+                    <span>HUÉSPEDES DEL HOTEL SEDE</span>
+                    <h3>Movich Las Lomas</h3>
+                    <p>
+                      Para quienes se hospeden en el hotel sede,
+                      incluiremos todos los traslados del día.
+                    </p>
+                  </header>
+
+                  <div className="transport-option-route">
+
+                    <div className="transport-option-stop">
+                      <span className="transport-option-icon">
+                        <LineIcon name="hotel" size={28} />
+                      </span>
+                      <strong>Hotel sede</strong>
+                    </div>
+
+                    <span
+                      className="transport-option-arrow"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+
+                    <div className="transport-option-stop">
+                      <span className="transport-option-icon">
+                        <LineIcon name="church" size={28} />
+                      </span>
+                      <strong>Ceremonia</strong>
+                    </div>
+
+                    <span
+                      className="transport-option-arrow"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+
+                    <div className="transport-option-stop">
+                      <span className="transport-option-icon">
+                        <LineIcon name="location" size={28} />
+                      </span>
+                      <strong>Recepción</strong>
+                    </div>
+
+                    <span
+                      className="transport-option-arrow"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+
+                    <div className="transport-option-stop">
+                      <span className="transport-option-icon">
+                        <LineIcon name="hotel" size={28} />
+                      </span>
+                      <strong>Hotel sede</strong>
+                    </div>
+
                   </div>
 
-                  <h3>Hotel sede</h3>
+                  <div className="transport-option-badge">
+                    RECORRIDO COMPLETO INCLUIDO
+                  </div>
 
-                  <p>
-                    Punto de encuentro y salida desde
-                    Movich Las Lomas.
-                  </p>
                 </article>
 
-                <article className="transport-stop">
-                  <div className="transport-stop-icon">
-                    <LineIcon name="church" size={30} />
+                <article className="transport-option-card">
+
+                  <header className="transport-option-heading">
+                    <span>OTROS ALOJAMIENTOS</span>
+                    <h3>Traslado entre eventos</h3>
+                    <p>
+                      Si te hospedas en otro lugar, podrás acompañarnos
+                      en el traslado de la ceremonia a la recepción.
+                    </p>
+                  </header>
+
+                  <div className="transport-option-route compact">
+
+                    <div className="transport-option-stop">
+                      <span className="transport-option-icon">
+                        <LineIcon name="church" size={28} />
+                      </span>
+                      <strong>Ceremonia</strong>
+                    </div>
+
+                    <span
+                      className="transport-option-arrow"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+
+                    <div className="transport-option-stop">
+                      <span className="transport-option-icon">
+                        <LineIcon name="location" size={28} />
+                      </span>
+                      <strong>Recepción</strong>
+                    </div>
+
                   </div>
 
-                  <h3>Ceremonia</h3>
-
-                  <p>
-                    Traslado a la Parroquia María Madre
-                    de Dios.
-                  </p>
-                </article>
-
-                <article className="transport-stop">
-                  <div className="transport-stop-icon">
-                    <LineIcon name="location" size={30} />
+                  <div className="transport-option-badge subtle">
+                    TRASLADO CEREMONIA → RECEPCIÓN INCLUIDO
                   </div>
 
-                  <h3>Recepción</h3>
-
-                  <p>
-                    Traslado al Centro de Eventos
-                    Villa Celeste.
-                  </p>
-                </article>
-
-                <article className="transport-stop">
-                  <div className="transport-stop-icon">
-                    <LineIcon name="bus" size={30} />
-                  </div>
-
-                  <h3>Regreso al hotel</h3>
-
-                  <p>
-                    Al finalizar la celebración, el transporte
-                    regresará a Movich Las Lomas.
-                  </p>
                 </article>
 
               </div>
 
             </section>
 
-            <section className="transport-note-section">
+            <section className="transport-schedule transport-schedule-standalone">
 
-              <div className="transport-note">
+              <p className="section-kicker">
+                HORARIOS
+              </p>
 
-                <div className="transport-note-icon">
-                  <LineIcon name="info" size={26} />
-                </div>
+              <h2>
+                Los detalles se compartirán
+                <em> más cerca de la fecha</em>
+              </h2>
 
-                <div>
-                  <span>IMPORTANTE</span>
-
-                  <p>
-                    El servicio de transporte requiere reserva previa y
-                    cuenta con cupos limitados. Los huéspedes alojados
-                    en el hotel sede tendrán prioridad.
-                  </p>
-                </div>
-
-              </div>
-
-              <div className="transport-schedule">
-
-                <p className="section-kicker">
-                  HORARIOS
-                </p>
-
-                <h2>
-                  Los detalles se compartirán
-                  <em> más cerca de la fecha</em>
-                </h2>
-
-                <p>
-                  Informaremos los horarios exactos de salida,
-                  los puntos de encuentro y las opciones de
-                  regreso antes del día de la boda.
-                </p>
-
-              </div>
+              <p>
+                Compartiremos los horarios exactos y puntos de salida
+                antes del día de la boda.
+              </p>
 
             </section>
 
@@ -3812,10 +3853,9 @@ function WeddingApp() {
                 <p className="section-kicker">REGALOS</p>
 
                 <p className="gifts-message">
-                  Su presencia en nuestra boda significa muchísimo para
-                  nosotros. Para quienes deseen tener un detalle adicional,
-                  hemos habilitado la opción de hacerlo a través de una
-                  transferencia bancaria.
+                  Nos hace mucha ilusión celebrar este momento junto a ustedes.
+                  Si desean acompañarnos con un regalo en esta nueva etapa,
+                  hemos habilitado la siguiente cuenta bancaria.
                 </p>
 
                 <div className="gifts-divider" />
@@ -3825,9 +3865,22 @@ function WeddingApp() {
                     DATOS PARA REGALOS
                   </span>
 
-                  <p className="gifts-bank-coming">
-                    Próximamente compartiremos aquí los datos bancarios.
-                  </p>
+                  <div className="gifts-bank-details">
+                    <p>
+                      <span>BANCO</span>
+                      <strong>Banco General</strong>
+                    </p>
+
+                    <p>
+                      <span>TITULAR</span>
+                      <strong>Luis Eduardo Pinto Miranda</strong>
+                    </p>
+
+                    <p>
+                      <span>CUENTA</span>
+                      <strong>04-72-00-761201-08</strong>
+                    </p>
+                  </div>
                 </div>
 
                 <p className="gifts-signature">
