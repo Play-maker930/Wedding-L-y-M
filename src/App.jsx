@@ -9,6 +9,7 @@ import parroquiaImg from './assets/parroquia.webp'
 import monogramGold from './assets/monogram_gold.png'
 import menuBackground from './assets/menu-background.jpg'
 import confirmationPhoto from './assets/foto-confirmacion.jpg'
+import giftsPhoto from './assets/regalos.webp'
 import informationPhoto from './assets/information-photo.webp'
 import movichHero from './assets/movich-hero.webp'
 import movich1 from './assets/movich-1.webp'
@@ -38,15 +39,15 @@ import storyVideo5 from './assets/video-5.webp'
 import storyVideo6 from './assets/video-6.webp'
 import storyVideo7 from './assets/video-7.webp'
 import storyVideo8 from './assets/video-8.webp'
-import gallery01 from './assets/gallery-01.jpg'
-import gallery02 from './assets/gallery-02.jpg'
-import gallery03 from './assets/gallery-03.jpg'
-import gallery04 from './assets/gallery-04.jpg'
-import gallery05 from './assets/gallery-05.jpg'
-import gallery06 from './assets/gallery-06.jpg'
-import gallery07 from './assets/gallery-07.jpg'
-import gallery08 from './assets/gallery-08.jpg'
-import gallery09 from './assets/gallery-09.jpg'
+import galleryPre01 from './assets/gallery-preboda-01.webp'
+import galleryPre02 from './assets/gallery-preboda-02.webp'
+import galleryPre03 from './assets/gallery-preboda-03.webp'
+import galleryPre04 from './assets/gallery-preboda-04.webp'
+import galleryPre05 from './assets/gallery-preboda-05.webp'
+import galleryPre06 from './assets/gallery-preboda-06.webp'
+import galleryPre07 from './assets/gallery-preboda-07.webp'
+import galleryPre08 from './assets/gallery-preboda-08.webp'
+import galleryPre09 from './assets/gallery-preboda-09.webp'
 import weddingMusic from './assets/Aleluya.mp3'
 import InvitationEnvelope from './InvitationEnvelope'
 
@@ -568,49 +569,49 @@ function WeddingApp() {
 
   const galleryPhotos = [
     {
-      src: gallery01,
-      alt: 'Luis y Melanie en uno de sus momentos favoritos',
-      className: 'gallery-editorial-item gallery-editorial-hero',
+      src: galleryPre01,
+      alt: 'Luis y Melanie abrazados en el bosque',
+      className: 'gallery-preboda-item gallery-preboda-wide',
     },
     {
-      src: gallery02,
-      alt: 'Retrato de Luis y Melanie',
-      className: 'gallery-editorial-item gallery-editorial-portrait',
+      src: galleryPre02,
+      alt: 'Luis y Melanie durante su sesión preboda en las montañas',
+      className: 'gallery-preboda-item gallery-preboda-portrait',
     },
     {
-      src: gallery03,
-      alt: 'Luis y Melanie durante uno de sus viajes',
-      className: 'gallery-editorial-item gallery-editorial-square',
+      src: galleryPre03,
+      alt: 'Luis y Melanie junto a un árbol durante su sesión preboda',
+      className: 'gallery-preboda-item gallery-preboda-portrait',
     },
     {
-      src: gallery04,
-      alt: 'Detalle especial de la historia de Luis y Melanie',
-      className: 'gallery-editorial-item gallery-editorial-detail',
+      src: galleryPre04,
+      alt: 'Luis y Melanie tomados de la mano frente al paisaje',
+      className: 'gallery-preboda-item gallery-preboda-wide',
     },
     {
-      src: gallery05,
-      alt: 'Momento espontáneo de Luis y Melanie',
-      className: 'gallery-editorial-item gallery-editorial-square',
+      src: galleryPre05,
+      alt: 'Retrato de Luis y Melanie junto al agua',
+      className: 'gallery-preboda-item gallery-preboda-portrait',
     },
     {
-      src: gallery06,
-      alt: 'Luis y Melanie disfrutando un paisaje juntos',
-      className: 'gallery-editorial-item gallery-editorial-landscape',
+      src: galleryPre06,
+      alt: 'Luis y Melanie junto a un caballo en su sesión preboda',
+      className: 'gallery-preboda-item gallery-preboda-portrait',
     },
     {
-      src: gallery07,
-      alt: 'Momento romántico de Luis y Melanie',
-      className: 'gallery-editorial-item gallery-editorial-portrait',
+      src: galleryPre07,
+      alt: 'Luis besando a Melanie durante su sesión preboda',
+      className: 'gallery-preboda-item gallery-preboda-portrait',
     },
     {
-      src: gallery08,
-      alt: 'Recuerdo cotidiano de Luis y Melanie',
-      className: 'gallery-editorial-item gallery-editorial-square',
+      src: galleryPre08,
+      alt: 'Luis y Melanie con un caballo y las montañas al fondo',
+      className: 'gallery-preboda-item gallery-preboda-portrait',
     },
     {
-      src: gallery09,
-      alt: 'Luis y Melanie celebrando el comienzo de una nueva etapa',
-      className: 'gallery-editorial-item gallery-editorial-final',
+      src: galleryPre09,
+      alt: 'Luis y Melanie juntos junto a un gran árbol',
+      className: 'gallery-preboda-item gallery-preboda-portrait',
     },
   ]
 
@@ -625,505 +626,505 @@ function WeddingApp() {
   ]
 
   const invitationGroups = {
-    'RJDP': {
+    'MVD74': {
       guests: [
-        { id: 'rjdp-1', name: 'Manuel S. Paz R.' },
-        { id: 'rjdp-2', name: 'Dania Castillo' },
+        { id: 'mvd74-1', name: 'Manuel S. Paz R.' },
+        { id: 'mvd74-2', name: 'Dania Castillo' },
       ],
     },
-    'DSVR': {
+    'MCO42': {
       guests: [
-        { id: 'dsvr-1', name: 'Patricia Lagos' },
-        { id: 'dsvr-2', name: 'Bryan Lagos' },
+        { id: 'mco42-1', name: 'Patricia Lagos' },
+        { id: 'mco42-2', name: 'Bryan Lagos' },
       ],
     },
-    '28NA': {
+    'LAS63': {
       guests: [
-        { id: '28na-1', name: 'Stefen Lagos' },
+        { id: 'las63-1', name: 'Stefen Lagos' },
       ],
     },
-    'NFFF': {
+    'TPA03': {
       guests: [
-        { id: 'nfff-1', name: 'Sophia Lagos' },
-        { id: 'nfff-2', name: 'Joshua Wassermann' },
+        { id: 'tpa03-1', name: 'Sophia Lagos' },
+        { id: 'tpa03-2', name: 'Joshua Wassermann' },
       ],
     },
-    '4KCN': {
+    'IAD94': {
       guests: [
-        { id: '4kcn-1', name: 'Lourdes Presnell' },
-        { id: '4kcn-2', name: 'Clark Presnell' },
+        { id: 'iad94-1', name: 'Lourdes Presnell' },
+        { id: 'iad94-2', name: 'Clark Presnell' },
       ],
     },
-    'WXKG': {
+    'BAQ60': {
       guests: [
-        { id: 'wxkg-1', name: 'Kyle Presnell' },
-        { id: 'wxkg-2', name: 'Olivia Dato' },
+        { id: 'baq60-1', name: 'Kyle Presnell' },
+        { id: 'baq60-2', name: 'Olivia Dato' },
       ],
     },
-    'VUWY': {
+    'SCL13': {
       guests: [
-        { id: 'vuwy-1', name: 'Natalie Presnell' },
-        { id: 'vuwy-2', name: 'Matt Nicholson' },
+        { id: 'scl13-1', name: 'Natalie Presnell' },
+        { id: 'scl13-2', name: 'Matt Nicholson' },
       ],
     },
-    '47BH': {
+    'XPL77': {
       guests: [
-        { id: '47bh-1', name: 'Anais Hanson' },
-        { id: '47bh-2', name: 'Bob Hanson' },
+        { id: 'xpl77-1', name: 'Anais Hanson' },
+        { id: 'xpl77-2', name: 'Bob Hanson' },
       ],
     },
-    '6YU7': {
+    'COR42': {
       guests: [
-        { id: '6yu7-1', name: 'Roberto Rivera' },
-        { id: '6yu7-2', name: 'Angelita Dalvis Tello' },
-        { id: '6yu7-3', name: 'Isabella Rivera' },
+        { id: 'cor42-1', name: 'Roberto Rivera' },
+        { id: 'cor42-2', name: 'Angelita Dalvis Tello' },
+        { id: 'cor42-3', name: 'Isabella Rivera' },
       ],
     },
-    'VJ95': {
+    'CLO62': {
       guests: [
-        { id: 'vj95-1', name: 'Jose Antonio Salerno' },
-        { id: 'vj95-2', name: 'Lesbia Chong' },
-        { id: 'vj95-3', name: 'Alison Salerno' },
-        { id: 'vj95-4', name: 'Ivan Antonio Salerno' },
+        { id: 'clo62-1', name: 'Jose Antonio Salerno' },
+        { id: 'clo62-2', name: 'Lesbia Chong' },
+        { id: 'clo62-3', name: 'Allison Salerno' },
+        { id: 'clo62-4', name: 'Ivan Antonio Salerno' },
       ],
     },
-    'V3LK': {
+    'PVM37': {
       guests: [
-        { id: 'v3lk-1', name: 'Anais Rodriguez de Rivera' },
-        { id: 'v3lk-2', name: 'Ricardo Rivera' },
+        { id: 'pvm37-1', name: 'Anais Rodriguez de Rivera' },
+        { id: 'pvm37-2', name: 'Ricardo Rivera' },
       ],
     },
-    'VEUB': {
+    'BOG25': {
       guests: [
-        { id: 'veub-1', name: 'Jorge Icaza' },
+        { id: 'bog25-1', name: 'Jorge Icaza' },
       ],
     },
-    '36UA': {
+    'CNF33': {
       guests: [
-        { id: '36ua-1', name: 'Mirna Castillo' },
-        { id: '36ua-2', name: 'Emmanuel Noriega' },
+        { id: 'cnf33-1', name: 'Mirna Castillo' },
+        { id: 'cnf33-2', name: 'Emmanuel Noriega' },
       ],
     },
-    'BVYE': {
+    'STI88': {
       guests: [
-        { id: 'bvye-1', name: 'Puppy Noriega' },
-        { id: 'bvye-2', name: 'Andrea Pacheco' },
+        { id: 'sti88-1', name: 'Puppy Noriega' },
+        { id: 'sti88-2', name: 'Andrea Pacheco' },
       ],
     },
-    'Z5DX': {
+    'ROS87': {
       guests: [
-        { id: 'z5dx-1', name: 'Elena Noriega' },
-        { id: 'z5dx-2', name: 'Anxo Vasquez' },
+        { id: 'ros87-1', name: 'Elena Noriega' },
+        { id: 'ros87-2', name: 'Anxo Vasquez' },
       ],
     },
-    'YVFZ': {
+    'SAL39': {
       guests: [
-        { id: 'yvfz-1', name: 'Anabella Noriega' },
-        { id: 'yvfz-2', name: 'David Lu' },
+        { id: 'sal39-1', name: 'Anabella Noriega' },
+        { id: 'sal39-2', name: 'David Lu' },
       ],
     },
-    'FMAE': {
+    'ASU63': {
       guests: [
-        { id: 'fmae-1', name: 'Sheryll Castillo' },
+        { id: 'asu63-1', name: 'Sheryll Castillo' },
       ],
     },
-    'PG2L': {
+    'MDE20': {
       guests: [
-        { id: 'pg2l-1', name: 'Dominic Rios' },
-        { id: 'pg2l-2', name: 'Monalisa Arias' },
+        { id: 'mde20-1', name: 'Dominic Rios' },
+        { id: 'mde20-2', name: 'Monalisa Arias' },
       ],
     },
-    'GVX8': {
+    'CUN58': {
       guests: [
-        { id: 'gvx8-1', name: 'Boris Castillo' },
-        { id: 'gvx8-2', name: 'Marlene Morais' },
+        { id: 'cun58-1', name: 'Boris Castillo' },
+        { id: 'cun58-2', name: 'Marlene Morais' },
       ],
     },
-    'JHWP': {
+    'BSB00': {
       guests: [
-        { id: 'jhwp-1', name: 'Andrea Castillo' },
+        { id: 'bsb00-1', name: 'Andrea Castillo' },
       ],
     },
-    'XJ5B': {
+    'CCS20': {
       guests: [
-        { id: 'xj5b-1', name: 'Liliana Sandino' },
-        { id: 'xj5b-2', name: 'Karnail Luis Gonzalez' },
+        { id: 'ccs20-1', name: 'Liliana Sandino' },
+        { id: 'ccs20-2', name: 'Karnail Luis Gonzalez' },
       ],
     },
-    'ZUJZ': {
+    'AUA19': {
       guests: [
-        { id: 'zujz-1', name: 'Ana Lorena Ortega' },
-        { id: 'zujz-2', name: 'Luis +1 Tía Anita' },
+        { id: 'aua19-1', name: 'Ana Lorena Ortega' },
+        { id: 'aua19-2', name: 'Luis Rodriguez' },
       ],
     },
-    'AXHT': {
+    'PUJ99': {
       guests: [
-        { id: 'axht-1', name: 'Lisi Chen' },
-        { id: 'axht-2', name: 'Gary Lau' },
+        { id: 'puj99-1', name: 'Lisette Chen' },
+        { id: 'puj99-2', name: 'Edgardo Lau' },
       ],
     },
-    'TJMT': {
+    'SLA81': {
       guests: [
-        { id: 'tjmt-1', name: 'Olga Lobato' },
+        { id: 'sla81-1', name: 'Olga Lobato' },
       ],
     },
-    '4WTR': {
+    'RDU20': {
       guests: [
-        { id: '4wtr-1', name: 'Argelis Heilbron' },
-        { id: '4wtr-2', name: 'Roberto Heilbron' },
+        { id: 'rdu20-1', name: 'Argelis Heilbron' },
+        { id: 'rdu20-2', name: 'Roberto Heilbron' },
       ],
     },
-    'ADM1': {
+    'PTY46': {
       guests: [
-        { id: 'adm1-1', name: 'Melanie' },
-        { id: 'adm1-2', name: 'Luis' },
+        { id: 'pty46-1', name: 'Melanie Paz' },
+        { id: 'pty46-2', name: 'Luis' },
       ],
     },
-    '34H3': {
+    'SAP60': {
       guests: [
-        { id: '34h3-1', name: 'Manuel A. Paz C' },
-        { id: '34h3-2', name: 'Carmen Pagoaga' },
+        { id: 'sap60-1', name: 'Manuel A. Paz C' },
+        { id: 'sap60-2', name: 'Carmen Pagoaga' },
       ],
     },
-    '6RUS': {
+    'MAR03': {
       guests: [
-        { id: '6rus-1', name: 'Ana Paola Quiroz' },
-        { id: '6rus-2', name: 'Angel Tinoco' },
+        { id: 'mar03-1', name: 'Ana Paola Quiroz' },
+        { id: 'mar03-2', name: 'Angel Tinoco' },
       ],
     },
-    'EKJ6': {
+    'GDL10': {
       guests: [
-        { id: 'ekj6-1', name: 'Estefania Robles' },
-        { id: 'ekj6-2', name: 'Kadim Issa' },
+        { id: 'gdl10-1', name: 'Estefania Robles' },
+        { id: 'gdl10-2', name: 'Kadim Issa' },
       ],
     },
-    'TAS6': {
+    'KIN91': {
       guests: [
-        { id: 'tas6-1', name: 'Giselle Martinez' },
-        { id: 'tas6-2', name: 'Joseramon Harari' },
+        { id: 'kin91-1', name: 'Giselle Martinez' },
+        { id: 'kin91-2', name: 'Joseramon Harari' },
       ],
     },
-    'MX9T': {
+    'JFK76': {
       guests: [
-        { id: 'mx9t-1', name: 'Diana Jaen' },
-        { id: 'mx9t-2', name: 'Lorenzo Olivero' },
+        { id: 'jfk76-1', name: 'Diana Jaen' },
+        { id: 'jfk76-2', name: 'Lorenzo Olivero' },
       ],
     },
-    'DDGF': {
+    'FLN96': {
       guests: [
-        { id: 'ddgf-1', name: 'Christine Lau' },
-        { id: 'ddgf-2', name: 'Christiane Cachafeiro' },
+        { id: 'fln96-1', name: 'Christine Lau' },
+        { id: 'fln96-2', name: 'Christian Cachafeiro' },
       ],
     },
-    'D7NK': {
+    'EZE19': {
       guests: [
-        { id: 'd7nk-1', name: 'Adriana Pimentel' },
-        { id: 'd7nk-2', name: 'Celso Rodriguez' },
+        { id: 'eze19-1', name: 'Adriana Pimentel' },
+        { id: 'eze19-2', name: 'Celso Rodriguez' },
       ],
     },
-    'LMAP': {
+    'CUR53': {
       guests: [
-        { id: 'lmap-1', name: 'Jennifer Urriola' },
-        { id: 'lmap-2', name: 'Giandomenico Iannicelli' },
+        { id: 'cur53-1', name: 'Jennifer Urriola' },
+        { id: 'cur53-2', name: 'Giandomenico Iannicelli' },
       ],
     },
-    'S53Z': {
+    'FLL77': {
       guests: [
-        { id: 's53z-1', name: 'Melanie Arjona' },
-        { id: 's53z-2', name: 'Jules Floquet Chenut' },
+        { id: 'fll77-1', name: 'Melanie Arjona' },
+        { id: 'fll77-2', name: 'Jules Floquet Chenut' },
       ],
     },
-    'AGTS': {
+    'SXM16': {
       guests: [
-        { id: 'agts-1', name: 'Jonathan Sinclair' },
-        { id: 'agts-2', name: 'Nicole Moran' },
+        { id: 'sxm16-1', name: 'Jonathan Sinclair' },
+        { id: 'sxm16-2', name: 'Nicole Moran' },
       ],
     },
-    'EPE4': {
+    'BOS82': {
       guests: [
-        { id: 'epe4-1', name: 'Jose Gomez' },
+        { id: 'bos82-1', name: 'Jose Gomez' },
       ],
     },
-    'HVFR': {
+    'SDQ81': {
       guests: [
-        { id: 'hvfr-1', name: 'Andrea de la Rosa' },
+        { id: 'sdq81-1', name: 'Andrea de la Rosa' },
       ],
     },
-    '8G9A': {
+    'LIM51': {
       guests: [
-        { id: '8g9a-1', name: 'Jessica Bernal' },
+        { id: 'lim51-1', name: 'Jessica Bernal' },
       ],
     },
-    '8X72': {
+    'CUC31': {
       guests: [
-        { id: '8x72-1', name: 'Maria Carla Muñoz' },
-        { id: '8x72-2', name: 'Ian Tuñon' },
+        { id: 'cuc31-1', name: 'Maria Carla Muñoz' },
+        { id: 'cuc31-2', name: 'Ian Tuñon' },
       ],
     },
-    'U6CQ': {
+    'PBM82': {
       guests: [
-        { id: 'u6cq-1', name: 'Bertha Carolina Morales' },
-        { id: 'u6cq-2', name: 'Lucas Valdes' },
+        { id: 'pbm82-1', name: 'Bertha Carolina Morales' },
+        { id: 'pbm82-2', name: 'Lucas Valdes' },
       ],
     },
-    'DUW3': {
+    'TUC58': {
       guests: [
-        { id: 'duw3-1', name: 'Ana Lucia Carrizo' },
+        { id: 'tuc58-1', name: 'Ana Lucia Carrizo' },
       ],
     },
-    '8AH4': {
+    'MGA78': {
       guests: [
-        { id: '8ah4-1', name: 'Katherine Pinto' },
+        { id: 'mga78-1', name: 'Katherine Pinto' },
       ],
     },
-    '5FJS': {
+    'MBJ56': {
       guests: [
-        { id: '5fjs-1', name: 'Anthony Echevers' },
-        { id: '5fjs-2', name: 'Hannah Aguilar' },
+        { id: 'mbj56-1', name: 'Anthony Echevers' },
+        { id: 'mbj56-2', name: 'Hannah Aguilar' },
       ],
     },
-    'LQWS': {
+    'AUS62': {
       guests: [
-        { id: 'lqws-1', name: 'Diego Marin' },
-        { id: 'lqws-2', name: 'Susana Fuentes' },
+        { id: 'aus62-1', name: 'Diego Marin' },
+        { id: 'aus62-2', name: 'Susana Fuentes' },
       ],
     },
-    'K6MV': {
+    'POS61': {
       guests: [
-        { id: 'k6mv-1', name: 'Pedro Flores' },
-        { id: 'k6mv-2', name: 'Enith Vargas' },
+        { id: 'pos61-1', name: 'Pedro Flores' },
+        { id: 'pos61-2', name: 'Enith Vargas' },
       ],
     },
-    'NE34': {
+    'UIO00': {
       guests: [
-        { id: 'ne34-1', name: 'Nelson Gonzalez' },
-        { id: 'ne34-2', name: 'Mónica Meléndez' },
+        { id: 'uio00-1', name: 'Nelson Gonzalez' },
+        { id: 'uio00-2', name: 'Mónica Meléndez' },
       ],
     },
-    'MLKK': {
+    'BRM47': {
       guests: [
-        { id: 'mlkk-1', name: 'Javier Grant' },
+        { id: 'brm47-1', name: 'Javier Grant' },
       ],
     },
-    '2KJF': {
+    'MDZ87': {
       guests: [
-        { id: '2kjf-1', name: 'Eduardo Alvarez' },
-        { id: '2kjf-2', name: 'Eduardo +1' },
+        { id: 'mdz87-1', name: 'Eduardo Alvarez' },
+        { id: 'mdz87-2', name: 'Mariel Centeno' },
       ],
     },
-    'FC27': {
+    'BZE55': {
       guests: [
-        { id: 'fc27-1', name: 'Fernando Correa' },
-        { id: 'fc27-2', name: 'Fer +1' },
+        { id: 'bze55-1', name: 'Fernando Correa' },
+        { id: 'bze55-2', name: 'Nilsa Correa' },
       ],
     },
-    'TSJV': {
+    'HAV11': {
       guests: [
-        { id: 'tsjv-1', name: 'Jose Luis Castillo' },
+        { id: 'hav11-1', name: 'Jose Luis Castillo' },
       ],
     },
-    '68CU': {
+    'SSA05': {
       guests: [
-        { id: '68cu-1', name: 'Andres Marin' },
+        { id: 'ssa05-1', name: 'Andres Marin' },
       ],
     },
-    '92DB': {
+    'GEO04': {
       guests: [
-        { id: '92db-1', name: 'Rodolfo De León' },
-        { id: '92db-2', name: 'Akys Justiniani' },
+        { id: 'geo04-1', name: 'Rodolfo De León' },
+        { id: 'geo04-2', name: 'Akys Justiniani' },
       ],
     },
-    '39FS': {
+    'ADZ30': {
       guests: [
-        { id: '39fs-1', name: 'Ana Carolina De León' },
-        { id: '39fs-2', name: 'Joseph Stanziola' },
+        { id: 'adz30-1', name: 'Ana Carolina De León' },
+        { id: 'adz30-2', name: 'Joseph Stanziola' },
       ],
     },
-    'UTUQ': {
+    'SAN63': {
       guests: [
-        { id: 'utuq-1', name: 'Moises Pinto' },
-        { id: 'utuq-2', name: 'Velkis Miranda de Pinto' },
+        { id: 'san63-1', name: 'Moises Pinto' },
+        { id: 'san63-2', name: 'Velkis Miranda de Pinto' },
       ],
     },
-    '9TX2': {
+    'SJO42': {
       guests: [
-        { id: '9tx2-1', name: 'Miriam Pinto' },
-        { id: '9tx2-2', name: 'Luigi' },
-        { id: '9tx2-3', name: 'Ana Patricia' },
+        { id: 'sjo42-1', name: 'Miriam Pinto' },
+        { id: 'sjo42-2', name: 'Luis Luncancham' },
+        { id: 'sjo42-3', name: 'Ana Patricia Luncancham' },
       ],
     },
-    'CQWG': {
+    'BGI44': {
       guests: [
-        { id: 'cqwg-1', name: 'Enilsa Pinto' },
-        { id: 'cqwg-2', name: 'Luis Alberto Osborne' },
-        { id: 'cqwg-3', name: 'Antonio Osborne' },
+        { id: 'bgi44-1', name: 'Enilsa Pinto' },
+        { id: 'bgi44-2', name: 'Luis Alberto Osborne' },
+        { id: 'bgi44-3', name: 'Antonio Osborne' },
       ],
     },
-    'DXGJ': {
+    'YYZ01': {
       guests: [
-        { id: 'dxgj-1', name: 'Luis Alfonso Pinto' },
-        { id: 'dxgj-2', name: 'Esposa' },
+        { id: 'yyz01-1', name: 'Luis Alfonso Pinto' },
+        { id: 'yyz01-2', name: 'Tania Fearon' },
       ],
     },
-    'PNMA': {
+    'VVI13': {
       guests: [
-        { id: 'pnma-1', name: 'Enilsa Ríos' },
+        { id: 'vvi13-1', name: 'Enilsa Ríos' },
       ],
     },
-    '2RV8': {
+    'LAX40': {
       guests: [
-        { id: '2rv8-1', name: 'Maximo Pinto' },
-        { id: '2rv8-2', name: 'Genika' },
-        { id: '2rv8-3', name: 'Andres Pinto' },
+        { id: 'lax40-1', name: 'Maximo Pinto' },
+        { id: 'lax40-2', name: 'Genika Ryan' },
+        { id: 'lax40-3', name: 'Andres Pinto' },
       ],
     },
-    '626M': {
+    'GIG13': {
       guests: [
-        { id: '626m-1', name: 'Mario Pinto' },
-        { id: '626m-2', name: 'Diobelis' },
-        { id: '626m-3', name: 'Nicole Pinto' },
+        { id: 'gig13-1', name: 'Mario Pinto' },
+        { id: 'gig13-2', name: 'Diovelis Garibaldi' },
+        { id: 'gig13-3', name: 'Nicole Pinto' },
       ],
     },
-    '84LA': {
+    'VLN45': {
       guests: [
-        { id: '84la-1', name: 'Fabrizzio Pinto' },
+        { id: 'vln45-1', name: 'Fabrizzio Pinto' },
       ],
     },
-    'M9DH': {
+    'DAV88': {
       guests: [
-        { id: 'm9dh-1', name: 'Giovanni Hidrogo' },
-        { id: 'm9dh-2', name: 'Elsy Miranda' },
+        { id: 'dav88-1', name: 'Giovanni Hidrogo' },
+        { id: 'dav88-2', name: 'Elsy Miranda' },
       ],
     },
-    'L4ZT': {
+    'BLA64': {
       guests: [
-        { id: 'l4zt-1', name: 'Amir Hidrogo' },
-        { id: 'l4zt-2', name: 'Amir +1' },
+        { id: 'bla64-1', name: 'Amir Hidrogo' },
+        { id: 'bla64-2', name: 'Paola Batista' },
       ],
     },
-    'XVTV': {
+    'MEX02': {
       guests: [
-        { id: 'xvtv-1', name: 'Leonel Hidrogo' },
-        { id: 'xvtv-2', name: 'Leonel +1' },
+        { id: 'mex02-1', name: 'Leonel Hidrogo' },
+        { id: 'mex02-2', name: 'Arianis Russo' },
       ],
     },
-    '3QG8': {
+    'GUA24': {
       guests: [
-        { id: '3qg8-1', name: 'Jorge' },
+        { id: 'gua24-1', name: 'Jorge Tello' },
       ],
     },
-    'FY6K': {
+    'MEC22': {
       guests: [
-        { id: 'fy6k-1', name: 'Guillermo Rodriguez' },
-        { id: 'fy6k-2', name: 'Yesica Aguirre' },
+        { id: 'mec22-1', name: 'Guillermo Rodriguez' },
+        { id: 'mec22-2', name: 'Yesica Aguirre' },
       ],
     },
-    '26DL': {
+    'MIA18': {
       guests: [
-        { id: '26dl-1', name: 'Boris Castillo M.' },
+        { id: 'mia18-1', name: 'Boris Castillo M.' },
       ],
     },
-    'U8Z2': {
+    'NAS87': {
       guests: [
-        { id: 'u8z2-1', name: 'Johana Gutierrez' },
+        { id: 'nas87-1', name: 'Johana Gutierrez' },
       ],
     },
-    'ARBP': {
+    'CTG42': {
       guests: [
-        { id: 'arbp-1', name: 'María Lourdes Muñoz' },
+        { id: 'ctg42-1', name: 'María Lourdes Muñoz' },
       ],
     },
-    '226W': {
+    'GYE55': {
       guests: [
-        { id: '226w-1', name: 'María Yanguez' },
+        { id: 'gye55-1', name: 'María Yanguez' },
       ],
     },
-    'X8C7': {
+    'MAO16': {
       guests: [
-        { id: 'x8c7-1', name: 'Edwin Vega' },
-        { id: 'x8c7-2', name: 'Veronica Aleman' },
+        { id: 'mao16-1', name: 'Edwin Vega' },
+        { id: 'mao16-2', name: 'Veronica Aleman' },
       ],
     },
-    'KJAA': {
+    'POP01': {
       guests: [
-        { id: 'kjaa-1', name: 'Even Vasquez' },
+        { id: 'pop01-1', name: 'Even Vasquez' },
       ],
     },
-    'WHZE': {
+    'SMR67': {
       guests: [
-        { id: 'whze-1', name: 'Jhonatan Lopez' },
+        { id: 'smr67-1', name: 'Jhonatan Lopez' },
       ],
     },
-    'HJYK': {
+    'BWI29': {
       guests: [
-        { id: 'hjyk-1', name: 'JoseAntonio Jimenez' },
+        { id: 'bwi29-1', name: 'JoseAntonio Jimenez' },
       ],
     },
-    '3FKF': {
+    'GRU80': {
       guests: [
-        { id: '3fkf-1', name: 'Hector Bustavino' },
+        { id: 'gru80-1', name: 'Hector Bustavino' },
       ],
     },
-    '7FX5': {
+    'SFO11': {
       guests: [
-        { id: '7fx5-1', name: 'Angie Yanis' },
+        { id: 'sfo11-1', name: 'Angie Yanis' },
       ],
     },
-    'YZXX': {
+    'ORD22': {
       guests: [
-        { id: 'yzxx-1', name: 'Joel Soriano' },
+        { id: 'ord22-1', name: 'Joel Soriano' },
       ],
     },
-    '9JBX': {
+    'YUL09': {
       guests: [
-        { id: '9jbx-1', name: 'Samuel Barria' },
+        { id: 'yul09-1', name: 'Samuel Barria' },
       ],
     },
-    'YVQJ': {
+    'SJU34': {
       guests: [
-        { id: 'yvqj-1', name: 'Miguel Valzania' },
+        { id: 'sju34-1', name: 'Miguel Valzania' },
       ],
     },
-    'ELVR': {
+    'BGA89': {
       guests: [
-        { id: 'elvr-1', name: 'Ivana Jimenez' },
+        { id: 'bga89-1', name: 'Ivana Jimenez' },
       ],
     },
-    'RJFB': {
+    'ATL68': {
       guests: [
-        { id: 'rjfb-1', name: 'Constantino Peralta' },
-        { id: 'rjfb-2', name: 'Thelma Bodden' },
+        { id: 'atl68-1', name: 'Constantino Peralta' },
+        { id: 'atl68-2', name: 'Thelma Bodden' },
       ],
     },
-    '2MU5': {
+    'DEN62': {
       guests: [
-        { id: '2mu5-1', name: 'Raysa Gonzalez' },
+        { id: 'den62-1', name: 'Raysa Gonzalez' },
       ],
     },
-    'YNCD': {
+    'MTY69': {
       guests: [
-        { id: 'yncd-1', name: 'Raul Sandoval' },
+        { id: 'mty69-1', name: 'Raul Sandoval' },
       ],
     },
-    'GGZ8': {
+    'PEI01': {
       guests: [
-        { id: 'ggz8-1', name: 'Ana Lorena Fernandez' },
+        { id: 'pei01-1', name: 'Ana Lorena Fernandez' },
       ],
     },
-    'WEJ6': {
+    'SJD35': {
       guests: [
-        { id: 'wej6-1', name: 'Raul Gañan' },
+        { id: 'sjd35-1', name: 'Raul Gañan' },
       ],
     },
-    'C2BK': {
+    'CIX84': {
       guests: [
-        { id: 'c2bk-1', name: 'Eduardo Miranda' },
-        { id: 'c2bk-2', name: 'Belkis' },
+        { id: 'cix84-1', name: 'Eduardo Miranda' },
+        { id: 'cix84-2', name: 'Julie Burgos' },
       ],
     },
-    'ZBKT': {
+    'POA81': {
       guests: [
-        { id: 'zbkt-1', name: 'Lenora Klappe' },
+        { id: 'poa81-1', name: 'Lenora Klappe' },
       ],
     },
   }
@@ -1659,7 +1660,7 @@ function WeddingApp() {
       setRsvpStatus({
         state: 'error',
         message:
-          'Ingresa un código válido para continuar.',
+          'Este código no es válido. Verifica que esté escrito correctamente e inténtalo nuevamente.',
       })
       return
     }
@@ -1671,7 +1672,7 @@ function WeddingApp() {
       nunca se intenta validar como código administrador.
     */
     if (
-      normalizedCode.length === 4 &&
+      normalizedCode.length === 5 &&
       invitationGroups[normalizedCode]
     ) {
       const matchedGroup =
@@ -1759,7 +1760,7 @@ function WeddingApp() {
         setRsvpStatus({
           state: 'error',
           message:
-            'El código administrador no coincide con el configurado en Vercel.',
+            'Este código no es válido. Verifica que esté escrito correctamente e inténtalo nuevamente.',
         })
         return
       }
@@ -1768,7 +1769,7 @@ function WeddingApp() {
         setRsvpStatus({
           state: 'error',
           message:
-            'El dashboard todavía no está conectado correctamente. Revisa las variables de Supabase en Vercel.',
+            'Este código no es válido. Verifica que esté escrito correctamente e inténtalo nuevamente.',
         })
         return
       }
@@ -1776,8 +1777,7 @@ function WeddingApp() {
       setRsvpStatus({
         state: 'error',
         message:
-          adminData?.error ||
-          'No pudimos abrir el dashboard. Revisa la Function rsvp-summary en Vercel.',
+          'Este código no es válido. Verifica que esté escrito correctamente e inténtalo nuevamente.',
       })
     } catch (error) {
       console.warn(
@@ -1788,7 +1788,7 @@ function WeddingApp() {
       setRsvpStatus({
         state: 'error',
         message:
-          'No pudimos conectar con el dashboard. Revisa que /api/rsvp-summary esté desplegado en Vercel.',
+          'Este código no es válido. Verifica que esté escrito correctamente e inténtalo nuevamente.',
       })
     }
   }
@@ -3344,11 +3344,6 @@ function WeddingApp() {
                   TRANSPORTE
                 </p>
 
-                <h2>
-                  Nos encargamos
-                  <em> del camino</em>
-                </h2>
-
                 <p>
                   Hemos organizado el transporte para que puedan
                   disfrutar cada momento de la celebración con tranquilidad.
@@ -3364,8 +3359,8 @@ function WeddingApp() {
                     <span>HUÉSPEDES DEL HOTEL SEDE</span>
                     <h3>Movich Las Lomas</h3>
                     <p>
-                      Para quienes se hospeden en el hotel sede,
-                      incluiremos todos los traslados del día.
+                      Si te hospedas en nuestro hotel sede, tendrás transporte
+                      incluido durante toda la celebración.
                     </p>
                   </header>
 
@@ -3378,13 +3373,6 @@ function WeddingApp() {
                       <strong>Hotel sede</strong>
                     </div>
 
-                    <span
-                      className="transport-option-arrow"
-                      aria-hidden="true"
-                    >
-                      →
-                    </span>
-
                     <div className="transport-option-stop">
                       <span className="transport-option-icon">
                         <LineIcon name="church" size={28} />
@@ -3392,26 +3380,12 @@ function WeddingApp() {
                       <strong>Ceremonia</strong>
                     </div>
 
-                    <span
-                      className="transport-option-arrow"
-                      aria-hidden="true"
-                    >
-                      →
-                    </span>
-
                     <div className="transport-option-stop">
                       <span className="transport-option-icon">
                         <LineIcon name="location" size={28} />
                       </span>
                       <strong>Recepción</strong>
                     </div>
-
-                    <span
-                      className="transport-option-arrow"
-                      aria-hidden="true"
-                    >
-                      →
-                    </span>
 
                     <div className="transport-option-stop">
                       <span className="transport-option-icon">
@@ -3447,13 +3421,6 @@ function WeddingApp() {
                       </span>
                       <strong>Ceremonia</strong>
                     </div>
-
-                    <span
-                      className="transport-option-arrow"
-                      aria-hidden="true"
-                    >
-                      →
-                    </span>
 
                     <div className="transport-option-stop">
                       <span className="transport-option-icon">
@@ -3842,7 +3809,7 @@ function WeddingApp() {
             <div className="gifts-hero">
               <div className="gifts-photo-wrap">
                 <img
-                  src={confirmationPhoto}
+                  src={giftsPhoto}
                   alt="Luis y Melanie"
                   className="gifts-photo"
                   decoding="async"
@@ -3850,8 +3817,6 @@ function WeddingApp() {
               </div>
 
               <div className="gifts-copy">
-                <p className="section-kicker">REGALOS</p>
-
                 <p className="gifts-message">
                   Nos hace mucha ilusión celebrar este momento junto a ustedes.
                   Si desean acompañarnos con un regalo en esta nueva etapa,
@@ -3894,141 +3859,52 @@ function WeddingApp() {
         )}
 
         {activePage === 'galeria' && (
-          <section className="gallery-editorial-page page-transition">
+          <section className="gallery-preboda-page page-transition">
 
-            <header className="gallery-editorial-heading">
-
-              <p className="eyebrow">
-                MOMENTOS
-              </p>
+            <header className="gallery-preboda-heading">
 
               <h1>
-                Nuestra
-                <em> galería</em>
+                Un pedacito
+                <em> de nosotros</em>
               </h1>
 
               <p>
-                Una colección de recuerdos, viajes y momentos
-                que han hecho nuestra historia tan especial.
+                Una tarde entre montañas, naturaleza y momentos
+                que queremos guardar para siempre.
               </p>
 
             </header>
 
-            <div className="gallery-editorial-grid">
+            <div className="gallery-preboda-grid">
 
               {galleryPhotos.map((photo, index) => (
-                <button
-                  type="button"
+                <figure
                   key={photo.src}
                   className={photo.className}
-                  onClick={() => openGalleryImage(index)}
-                  aria-label={`Abrir fotografía ${index + 1} de ${galleryPhotos.length}`}
                 >
                   <img
                     src={photo.src}
                     alt={photo.alt}
-                    loading={index === 0 ? 'eager' : 'lazy'}
+                    loading={index < 2 ? 'eager' : 'lazy'}
                     decoding="async"
-                    fetchPriority={index === 0 ? 'high' : 'low'}
+                    fetchPriority={index === 0 ? 'high' : 'auto'}
                   />
-
-                  <span className="gallery-editorial-number">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-
-                  {index === 2 && (
-                    <span className="gallery-editorial-caption">
-                      OUR FAVORITE ADVENTURES
-                    </span>
-                  )}
-
-                  {index === 5 && (
-                    <span className="gallery-editorial-caption">
-                      LUIS & MELANIE · THROUGH THE YEARS
-                    </span>
-                  )}
-                </button>
+                </figure>
               ))}
 
             </div>
 
-            <footer className="gallery-editorial-ending">
-
-              <span>♡</span>
-
-              <h2>
-                Cada recuerdo nos trajo hasta aquí.
-              </h2>
+            <footer className="gallery-preboda-ending">
+              <span aria-hidden="true">♡</span>
 
               <p>
-                Lo mejor está por comenzar.
+                Luis & Melanie
               </p>
 
+              <small>
+                15 · 01 · 27
+              </small>
             </footer>
-
-            {activeGalleryImage !== null && (
-              <div
-                className="gallery-lightbox"
-                role="dialog"
-                aria-modal="true"
-                aria-label="Fotografía ampliada"
-                onClick={closeGalleryImage}
-                onTouchStart={handleGalleryTouchStart}
-                onTouchEnd={handleGalleryTouchEnd}
-              >
-
-                <button
-                  type="button"
-                  className="gallery-lightbox-close"
-                  onClick={closeGalleryImage}
-                  aria-label="Cerrar fotografía"
-                >
-                  ×
-                </button>
-
-                <button
-                  type="button"
-                  className="gallery-lightbox-arrow previous"
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    showPreviousGalleryImage()
-                  }}
-                  aria-label="Ver fotografía anterior"
-                >
-                  <LineIcon name="chevronLeft" size={34} />
-                </button>
-
-                <figure
-                  className="gallery-lightbox-content"
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  <img
-                    src={galleryPhotos[activeGalleryImage].src}
-                    alt={galleryPhotos[activeGalleryImage].alt}
-                    decoding="async"
-                  />
-
-                  <figcaption>
-                    {String(activeGalleryImage + 1).padStart(2, '0')}
-                    <span>/</span>
-                    {String(galleryPhotos.length).padStart(2, '0')}
-                  </figcaption>
-                </figure>
-
-                <button
-                  type="button"
-                  className="gallery-lightbox-arrow next"
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    showNextGalleryImage()
-                  }}
-                  aria-label="Ver fotografía siguiente"
-                >
-                  <LineIcon name="chevronRight" size={34} />
-                </button>
-
-              </div>
-            )}
 
           </section>
         )}
@@ -4359,7 +4235,7 @@ function WeddingApp() {
                           )
                         )
                       }
-                      placeholder="A7M2"
+                      placeholder="HOU67"
                       aria-describedby="rsvp-code-help"
                     />
 
