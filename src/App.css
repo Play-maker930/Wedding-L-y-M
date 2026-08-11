@@ -17489,3 +17489,96 @@ select {
     font-size: clamp(25px, 6.8vw, 29px) !important;
   }
 }
+
+
+/* =========================================================
+   V105 — HAIR & MAKEUP / REGALOS
+========================================================= */
+
+/* Hair & Makeup: sin título duplicado ni línea superior */
+.dress-code-hair-makeup {
+  width: min(calc(100% - 40px), 980px) !important;
+  margin: 58px auto 0 !important;
+  padding: 0 24px !important;
+
+  border-top: 0 !important;
+
+  text-align: center;
+}
+
+.dress-code-hair-makeup .section-kicker {
+  margin: 0 0 22px !important;
+}
+
+/* Mismo lenguaje visual que el copy de “Agradecemos evitar...” */
+.dress-code-hair-copy {
+  max-width: 350px !important;
+  margin: 0 auto !important;
+
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+
+  color: var(--black) !important;
+}
+
+.dress-code-hair-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 22px;
+  padding: 12px 18px;
+
+  border: 1px solid rgba(138, 133, 96, 0.38);
+
+  color: var(--black);
+
+  font-size: 7px;
+  letter-spacing: 1.8px;
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.dress-code-hair-whatsapp:hover {
+  background: var(--black);
+  border-color: var(--black);
+  color: #ffffff;
+}
+
+/* Titulares de Regalos */
+.gifts-bank-holders {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 3px !important;
+}
+
+.gifts-bank-holders small {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--gray);
+}
+
+@media (max-width: 650px) {
+  .dress-code-hair-makeup {
+    width: calc(100% - 36px) !important;
+    margin-top: 48px !important;
+    padding: 0 !important;
+  }
+
+  .dress-code-hair-copy {
+    max-width: 320px !important;
+    font-size: 16px !important;
+  }
+
+  .dress-code-hair-whatsapp {
+    margin-top: 20px;
+  }
+}

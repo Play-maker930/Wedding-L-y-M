@@ -2302,15 +2302,20 @@ function WeddingApp() {
                   HAIR &amp; MAKEUP
                 </p>
 
-                <h2 className="dress-code-formal-title">
-                  HAIR &amp; MAKEUP
-                </h2>
-
-                <p>
+                <p className="dress-code-hair-copy">
                   Si estás interesada en servicios de maquillaje y
                   peinado para el día de la boda, puedes contactar
                   directamente a la novia.
                 </p>
+
+                <a
+                  className="dress-code-hair-whatsapp"
+                  href="https://wa.me/50766790661"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CONTACTAR POR WHATSAPP
+                </a>
               </div>
 
             </section>
@@ -3458,8 +3463,7 @@ function WeddingApp() {
                 </h1>
 
                 <p>
-                  Gracias por acompañarnos en el comienzo
-                  de este nuevo capítulo.
+                  Gracias por acompañarnos en este día tan especial.
                 </p>
               </div>
             </section>
@@ -3493,9 +3497,11 @@ function WeddingApp() {
                       <strong>Banco General</strong>
                     </p>
 
-                    <p>
-                      <span>TITULAR</span>
+                    <p className="gifts-bank-holders">
+                      <span>TITULARES</span>
                       <strong>Luis Eduardo Pinto Miranda</strong>
+                      <small>o</small>
+                      <strong>Melanie Nicole Paz Castillo</strong>
                     </p>
 
                     <p>
