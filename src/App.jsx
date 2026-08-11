@@ -526,6 +526,7 @@ function WeddingApp() {
   const [homeReveal, setHomeReveal] = useState(false)
   const musicRef = useRef(null)
   const homeImageRef = useRef(null)
+  const trackedInvitationRef = useRef(null)
   const galleryTouchStartXRef = useRef(null)
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
 
@@ -538,6 +539,45 @@ function WeddingApp() {
   useEffect(() => {
     preloadImage(storyVideo1)
     preloadImage(storyVideo2)
+  }, [])
+
+  useEffect(() => {
+    const params = new URLSearchParams(
+      window.location.search
+    )
+
+    const invitationRef = String(
+      params.get('ref') || ''
+    )
+      .trim()
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '')
+      .slice(0, 6)
+
+    if (
+      invitationRef.length !== 6 ||
+      trackedInvitationRef.current === invitationRef
+    ) {
+      return
+    }
+
+    trackedInvitationRef.current = invitationRef
+
+    fetch('/api/track-visit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ref: invitationRef,
+      }),
+      keepalive: true,
+    }).catch((error) => {
+      console.warn(
+        'No fue posible registrar la apertura de la invitación.',
+        error
+      )
+    })
   }, [])
 
   useEffect(() => {
@@ -1032,7 +1072,14 @@ function WeddingApp() {
       PAGE_PATHS[page] || PAGE_PATHS.inicio
 
     const performNavigation = () => {
-      routerNavigate(destination)
+      const currentSearch =
+        window.location.search || ''
+
+      routerNavigate({
+        pathname: destination,
+        search: currentSearch,
+      })
+
       setMenuOpen(false)
 
       window.scrollTo({
