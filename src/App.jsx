@@ -4242,8 +4242,8 @@ function WeddingApp() {
                         </h2>
 
                         <p className="rsvp-deadline rsvp-deadline-after-code">
-                          Confirma tu asistencia antes del{' '}
-                          <strong>30 de octubre.</strong>
+                          Indica la respuesta de cada persona incluida
+                          en este código.
                         </p>
 
                       </div>
