@@ -17555,8 +17555,10 @@ select {
 .gifts-bank-holders {
   display: flex !important;
   flex-direction: column !important;
-  align-items: flex-start !important;
+  align-items: center !important;
+  text-align: center !important;
   gap: 3px !important;
+  width: 100% !important;
 }
 
 .gifts-bank-holders small {
