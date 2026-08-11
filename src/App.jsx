@@ -44,7 +44,6 @@ import galleryPre02 from './assets/gallery-preboda-02.webp'
 import galleryPre03 from './assets/gallery-preboda-03.webp'
 import galleryPre04 from './assets/gallery-preboda-04.webp'
 import galleryPre05 from './assets/gallery-preboda-05.webp'
-import galleryPre06 from './assets/gallery-preboda-06.webp'
 import galleryPre07 from './assets/gallery-preboda-07.webp'
 import galleryPre08 from './assets/gallery-preboda-08.webp'
 import galleryPre09 from './assets/gallery-preboda-09.webp'
@@ -591,11 +590,6 @@ function WeddingApp() {
     {
       src: galleryPre05,
       alt: 'Retrato de Luis y Melanie junto al agua',
-      className: 'gallery-preboda-item gallery-preboda-portrait',
-    },
-    {
-      src: galleryPre06,
-      alt: 'Luis y Melanie junto a un caballo en su sesión preboda',
       className: 'gallery-preboda-item gallery-preboda-portrait',
     },
     {
@@ -2196,6 +2190,12 @@ function WeddingApp() {
                       Agradecemos evitar el blanco y sus tonalidades,
                       así como el verde oliva, para este día tan especial.
                     </p>
+
+                    <p className="dress-code-beauty-note">
+                      Si estás interesada en servicios de maquillaje y
+                      peinado para el día de la boda, puedes contactar
+                      directamente a la novia.
+                    </p>
                   </div>
                 </div>
 
@@ -2220,7 +2220,6 @@ function WeddingApp() {
                   aria-label="Ver inspiración de dress code en Pinterest"
                 >
                   VER INSPIRACIÓN
-                  <span aria-hidden="true">↗</span>
                 </a>
               </div>
 
@@ -3362,22 +3361,43 @@ function WeddingApp() {
               VOLVER A INFORMACIÓN
             </button>
 
-            <div className="gifts-hero">
-              <div className="gifts-photo-wrap">
-                <img
-                  src={giftsPhoto}
-                  alt="Luis y Melanie"
-                  className="gifts-photo"
-                  decoding="async"
-                />
+            <section
+              className="gifts-entry-hero"
+              style={{ backgroundImage: `url(${giftsPhoto})` }}
+            >
+              <div className="gifts-entry-overlay"></div>
+
+              <div className="gifts-entry-content">
+                <p className="section-kicker">
+                  UN DETALLE CON CARIÑO
+                </p>
+
+                <h1>
+                  Regalos
+                </h1>
+
+                <p>
+                  Gracias por acompañarnos en el comienzo
+                  de este nuevo capítulo.
+                </p>
               </div>
+            </section>
+
+            <section className="gifts-content-section">
 
               <div className="gifts-copy">
-                <p className="gifts-message">
-                  Nos hace mucha ilusión celebrar este momento junto a ustedes.
-                  Si desean acompañarnos con un regalo en esta nueva etapa,
-                  hemos habilitado la siguiente cuenta bancaria.
-                </p>
+
+                <div className="gifts-message">
+                  <p>
+                    Su presencia es nuestro mejor regalo y nos hace
+                    muchísima ilusión celebrar este momento junto a ustedes.
+                  </p>
+
+                  <p>
+                    Para quienes quieran acompañarnos con un detalle
+                    en esta nueva etapa, lo recibiremos con muchísimo cariño.
+                  </p>
+                </div>
 
                 <div className="gifts-divider" />
 
@@ -3408,8 +3428,10 @@ function WeddingApp() {
                   Con cariño,
                   <span>Luis &amp; Melanie</span>
                 </p>
+
               </div>
-            </div>
+
+            </section>
 
           </section>
         )}
@@ -3748,23 +3770,30 @@ function WeddingApp() {
               'admin',
             ].includes(rsvpStatus.state) && (
               <>
-                <header className="rsvp-code-hero">
+                {!rsvpGroup && (
+                  <header className="rsvp-code-hero">
 
-                  <p className="eyebrow">
-                    RSVP · 15 · 01 · 2027
-                  </p>
+                    <p className="eyebrow">
+                      RSVP · 15 · 01 · 2027
+                    </p>
 
-                  <h1>
-                    Confirma tu
-                    <em> asistencia</em>
-                  </h1>
+                    <h1>
+                      Confirma tu
+                      <em> asistencia</em>
+                    </h1>
 
-                  <p>
-                    Ingresa el código que encontrarás en tu
-                    invitación para ver las personas incluidas.
-                  </p>
+                    <p>
+                      Ingresa el código que encontrarás en tu
+                      invitación para ver las personas incluidas.
+                    </p>
 
-                </header>
+                    <p className="rsvp-deadline">
+                      Por favor, confirma tu asistencia antes del{' '}
+                      <strong>15 de octubre.</strong>
+                    </p>
+
+                  </header>
+                )}
 
                 {!rsvpGroup && (
                   <form
@@ -3852,18 +3881,18 @@ function WeddingApp() {
 
                       <div className="rsvp-guest-heading">
 
-                        <p className="eyebrow">
-                          NOS ALEGRA QUE ESTÉS AQUÍ
-                        </p>
-
                         <h2>
-                          Selecciona quiénes
-                          <em> asistirán</em>
+                          Nos alegra que estés aquí
                         </h2>
 
                         <p>
                           Indica la respuesta de cada persona
                           incluida en este código.
+                        </p>
+
+                        <p className="rsvp-deadline rsvp-deadline-after-code">
+                          Por favor, confirma tu asistencia antes del{' '}
+                          <strong>15 de octubre.</strong>
                         </p>
 
                       </div>
