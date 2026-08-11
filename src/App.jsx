@@ -601,6 +601,7 @@ function WeddingApp() {
   const [rsvpMessage, setRsvpMessage] = useState('')
   const [rsvpAdminData, setRsvpAdminData] = useState(null)
   const [rsvpAdminOpenList, setRsvpAdminOpenList] = useState('attending')
+  const [rsvpAdminSection, setRsvpAdminSection] = useState('rsvp')
   const [rsvpStatus, setRsvpStatus] = useState({
     state: 'idle',
     message: '',
@@ -1342,10 +1343,45 @@ function WeddingApp() {
         adminResponse.ok &&
         adminData?.success
       ) {
+        let visitsData = null
+
+        try {
+          const visitsResponse = await fetch(
+            '/api/invitation-visits-summary',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                adminCode: normalizedCode,
+              }),
+            }
+          )
+
+          if (visitsResponse.ok) {
+            const parsedVisits =
+              await visitsResponse.json()
+
+            if (parsedVisits?.success) {
+              visitsData = parsedVisits
+            }
+          }
+        } catch (visitsError) {
+          console.warn(
+            'No fue posible cargar el resumen de aperturas.',
+            visitsError
+          )
+        }
+
         setRsvpCode(normalizedCode)
         setRsvpGroup(null)
-        setRsvpAdminData(adminData)
+        setRsvpAdminData({
+          ...adminData,
+          invitationVisits: visitsData,
+        })
         setRsvpAdminOpenList('attending')
+        setRsvpAdminSection('rsvp')
 
         setRsvpStatus({
           state: 'admin',
@@ -1411,6 +1447,7 @@ function WeddingApp() {
     setRsvpMessage('')
     setRsvpAdminData(null)
     setRsvpAdminOpenList('attending')
+    setRsvpAdminSection('rsvp')
     setRsvpStatus({
       state: 'idle',
       message: '',
@@ -2193,10 +2230,17 @@ function WeddingApp() {
                   FORMAL
                 </h2>
 
-                <p>
-                  Queremos que todos se sientan cómodos y
-                  elegantes mientras celebran con nosotros.
-                </p>
+                <div className="dress-code-inspiration dress-code-inspiration-heading">
+                  <a
+                    className="dress-code-pinterest-button"
+                    href="https://pin.it/7JebbN5V5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Ver inspiración de dress code en Pinterest"
+                  >
+                    VER INSPIRACIÓN
+                  </a>
+                </div>
               </div>
 
               <div className="dress-code-details">
@@ -2238,11 +2282,6 @@ function WeddingApp() {
                       así como el verde oliva, para este día tan especial.
                     </p>
 
-                    <p className="dress-code-beauty-note">
-                      Si estás interesada en servicios de maquillaje y
-                      peinado para el día de la boda, puedes contactar
-                      directamente a la novia.
-                    </p>
                   </div>
                 </div>
 
@@ -2258,16 +2297,20 @@ function WeddingApp() {
 
               </div>
 
-              <div className="dress-code-inspiration">
-                <a
-                  className="dress-code-pinterest-button"
-                  href="https://pin.it/7JebbN5V5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Ver inspiración de dress code en Pinterest"
-                >
-                  VER INSPIRACIÓN
-                </a>
+              <div className="dress-code-hair-makeup">
+                <p className="section-kicker">
+                  HAIR &amp; MAKEUP
+                </p>
+
+                <h2 className="dress-code-formal-title">
+                  HAIR &amp; MAKEUP
+                </h2>
+
+                <p>
+                  Si estás interesada en servicios de maquillaje y
+                  peinado para el día de la boda, puedes contactar
+                  directamente a la novia.
+                </p>
               </div>
 
             </section>
@@ -2492,7 +2535,6 @@ function WeddingApp() {
                     className="stay-button primary"
                   >
                     RESERVAR HABITACIÓN
-                    <span>↗</span>
                   </a>
 
                   <a
@@ -2502,7 +2544,6 @@ function WeddingApp() {
                     className="stay-button secondary"
                   >
                     RESERVAR POR WHATSAPP
-                    <span>↗</span>
                   </a>
                 </div>
 
@@ -2779,7 +2820,6 @@ function WeddingApp() {
                   className="stay-airport-button"
                 >
                   COORDINAR TRANSPORTE
-                  <span>↗</span>
                 </a>
               </div>
 
@@ -2860,7 +2900,6 @@ function WeddingApp() {
                     className="stay-button light"
                   >
                     RESERVAR ONLINE
-                    <span>↗</span>
                   </a>
 
                   <a
@@ -2870,7 +2909,6 @@ function WeddingApp() {
                     className="stay-button outline-light"
                   >
                     WHATSAPP
-                    <span>↗</span>
                   </a>
                 </div>
 
@@ -3415,10 +3453,6 @@ function WeddingApp() {
               <div className="gifts-entry-overlay"></div>
 
               <div className="gifts-entry-content">
-                <p className="section-kicker">
-                  UN DETALLE CON CARIÑO
-                </p>
-
                 <h1>
                   Regalos
                 </h1>
@@ -3470,11 +3504,6 @@ function WeddingApp() {
                     </p>
                   </div>
                 </div>
-
-                <p className="gifts-signature">
-                  Con cariño,
-                  <span>Luis &amp; Melanie</span>
-                </p>
 
               </div>
 
@@ -3655,151 +3684,425 @@ function WeddingApp() {
 
                     <h1>
                       Resumen
-                      <em> RSVP</em>
+                      <em> de la boda</em>
                     </h1>
 
                     <p>
-                      Estado actual de las confirmaciones
-                      de tus invitados.
+                      Confirmaciones y aperturas de las invitaciones,
+                      todo en un solo lugar.
                     </p>
                   </header>
 
-                  <div className="rsvp-admin-stats">
-                    <article className="rsvp-admin-stat total">
-                      <strong>
-                        {rsvpAdminData.summary.total}
-                      </strong>
-                      <span>INVITADOS</span>
-                    </article>
-
-                    <article>
-                      <strong>
-                        {rsvpAdminData.summary.attending}
-                      </strong>
-                      <span>ASISTIRÁN</span>
-                    </article>
-
-                    <article>
-                      <strong>
-                        {rsvpAdminData.summary.notAttending}
-                      </strong>
-                      <span>NO ASISTIRÁN</span>
-                    </article>
-
-                    <article>
-                      <strong>
-                        {rsvpAdminData.summary.pending}
-                      </strong>
-                      <span>PENDIENTES</span>
-                    </article>
-                  </div>
-
-                  <div className="rsvp-admin-progress-wrap">
-                    <div className="rsvp-admin-progress-copy">
-                      <span>RESPUESTAS RECIBIDAS</span>
-                      <strong>
-                        {rsvpAdminData.summary.responseRate}%
-                      </strong>
-                    </div>
-
-                    <div
-                      className="rsvp-admin-progress"
-                      aria-label={`${rsvpAdminData.summary.responseRate}% de respuestas recibidas`}
+                  <div className="rsvp-admin-main-tabs">
+                    <button
+                      type="button"
+                      className={
+                        rsvpAdminSection === 'rsvp'
+                          ? 'active'
+                          : ''
+                      }
+                      onClick={() =>
+                        setRsvpAdminSection('rsvp')
+                      }
                     >
-                      <span
-                        style={{
-                          width: `${rsvpAdminData.summary.responseRate}%`,
-                        }}
-                      ></span>
-                    </div>
+                      RSVP
+                    </button>
 
-                    <small>
-                      {rsvpAdminData.summary.responded} de{' '}
-                      {rsvpAdminData.summary.total} invitados
-                      han respondido.
-                    </small>
+                    <button
+                      type="button"
+                      className={
+                        rsvpAdminSection === 'visits'
+                          ? 'active'
+                          : ''
+                      }
+                      onClick={() =>
+                        setRsvpAdminSection('visits')
+                      }
+                    >
+                      APERTURAS
+                    </button>
                   </div>
 
-                  <div className="rsvp-admin-tabs">
-                    {[
-                      {
-                        id: 'attending',
-                        label: 'Asistirán',
-                        count:
-                          rsvpAdminData.summary.attending,
-                      },
-                      {
-                        id: 'notAttending',
-                        label: 'No asistirán',
-                        count:
-                          rsvpAdminData.summary.notAttending,
-                      },
-                      {
-                        id: 'pending',
-                        label: 'Pendientes',
-                        count:
-                          rsvpAdminData.summary.pending,
-                      },
-                    ].map((tab) => (
-                      <button
-                        type="button"
-                        key={tab.id}
-                        className={
-                          rsvpAdminOpenList === tab.id
-                            ? 'active'
-                            : ''
-                        }
-                        onClick={() =>
-                          setRsvpAdminOpenList(tab.id)
-                        }
-                      >
-                        <span>{tab.label}</span>
-                        <strong>{tab.count}</strong>
-                      </button>
-                    ))}
-                  </div>
+                  {rsvpAdminSection === 'rsvp' && (
+                    <>
+                      <div className="rsvp-admin-stats">
+                        <article className="rsvp-admin-stat total">
+                          <strong>
+                            {rsvpAdminData.summary.total}
+                          </strong>
+                          <span>INVITADOS</span>
+                        </article>
 
-                  <div className="rsvp-admin-list">
-                    {rsvpAdminData[
-                      rsvpAdminOpenList
-                    ].length === 0 ? (
-                      <p className="rsvp-admin-empty">
-                        No hay invitados en esta categoría.
-                      </p>
-                    ) : (
-                      rsvpAdminData[
-                        rsvpAdminOpenList
-                      ].map((guest) => (
-                        <article
-                          key={guest.guestId}
-                          className="rsvp-admin-guest"
+                        <article>
+                          <strong>
+                            {rsvpAdminData.summary.attending}
+                          </strong>
+                          <span>ASISTIRÁN</span>
+                        </article>
+
+                        <article>
+                          <strong>
+                            {rsvpAdminData.summary.notAttending}
+                          </strong>
+                          <span>NO ASISTIRÁN</span>
+                        </article>
+
+                        <article>
+                          <strong>
+                            {rsvpAdminData.summary.pending}
+                          </strong>
+                          <span>PENDIENTES</span>
+                        </article>
+                      </div>
+
+                      <div className="rsvp-admin-progress-wrap">
+                        <div className="rsvp-admin-progress-copy">
+                          <span>RESPUESTAS RECIBIDAS</span>
+                          <strong>
+                            {rsvpAdminData.summary.responseRate}%
+                          </strong>
+                        </div>
+
+                        <div
+                          className="rsvp-admin-progress"
+                          aria-label={`${rsvpAdminData.summary.responseRate}% de respuestas recibidas`}
                         >
-                          <div>
-                            <strong>
-                              {guest.guestName}
-                            </strong>
-                            <span>
-                              Código {guest.invitationCode}
-                            </span>
+                          <span
+                            style={{
+                              width: `${rsvpAdminData.summary.responseRate}%`,
+                            }}
+                          ></span>
+                        </div>
+
+                        <small>
+                          {rsvpAdminData.summary.responded} de{' '}
+                          {rsvpAdminData.summary.total} invitados
+                          han respondido.
+                        </small>
+                      </div>
+
+                      <div className="rsvp-admin-tabs">
+                        {[
+                          {
+                            id: 'attending',
+                            label: 'Asistirán',
+                            count:
+                              rsvpAdminData.summary.attending,
+                          },
+                          {
+                            id: 'notAttending',
+                            label: 'No asistirán',
+                            count:
+                              rsvpAdminData.summary.notAttending,
+                          },
+                          {
+                            id: 'pending',
+                            label: 'Pendientes',
+                            count:
+                              rsvpAdminData.summary.pending,
+                          },
+                        ].map((tab) => (
+                          <button
+                            type="button"
+                            key={tab.id}
+                            className={
+                              rsvpAdminOpenList === tab.id
+                                ? 'active'
+                                : ''
+                            }
+                            onClick={() =>
+                              setRsvpAdminOpenList(tab.id)
+                            }
+                          >
+                            <span>{tab.label}</span>
+                            <strong>{tab.count}</strong>
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="rsvp-admin-list">
+                        {rsvpAdminData[
+                          rsvpAdminOpenList
+                        ].length === 0 ? (
+                          <p className="rsvp-admin-empty">
+                            No hay invitados en esta categoría.
+                          </p>
+                        ) : (
+                          rsvpAdminData[
+                            rsvpAdminOpenList
+                          ].map((guest) => (
+                            <article
+                              key={guest.guestId}
+                              className="rsvp-admin-guest"
+                            >
+                              <div>
+                                <strong>
+                                  {guest.guestName}
+                                </strong>
+                                <span>
+                                  Código {guest.invitationCode}
+                                </span>
+                              </div>
+
+                              {guest.submittedAt && (
+                                <time>
+                                  {new Date(
+                                    guest.submittedAt
+                                  ).toLocaleDateString(
+                                    'es-PA',
+                                    {
+                                      day: '2-digit',
+                                      month: 'short',
+                                    }
+                                  )}
+                                </time>
+                              )}
+                            </article>
+                          ))
+                        )}
+                      </div>
+                    </>
+                  )}
+
+                  {rsvpAdminSection === 'visits' && (
+                    <>
+                      {!rsvpAdminData.invitationVisits ? (
+                        <div className="rsvp-admin-visits-unavailable">
+                          <p>
+                            No pudimos cargar las aperturas en este momento.
+                          </p>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="rsvp-admin-stats rsvp-admin-visit-stats">
+                            <article className="rsvp-admin-stat total">
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .summary.totalGroups
+                                }
+                              </strong>
+                              <span>INVITACIONES</span>
+                            </article>
+
+                            <article>
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .summary.openedGroups
+                                }
+                              </strong>
+                              <span>ABIERTAS</span>
+                            </article>
+
+                            <article>
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .summary.unopenedGroups
+                                }
+                              </strong>
+                              <span>SIN ABRIR</span>
+                            </article>
+
+                            <article>
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .summary.totalVisits
+                                }
+                              </strong>
+                              <span>APERTURAS TOTALES</span>
+                            </article>
                           </div>
 
-                          {guest.submittedAt && (
-                            <time>
-                              {new Date(
-                                guest.submittedAt
-                              ).toLocaleDateString(
-                                'es-PA',
+                          <div className="rsvp-admin-progress-wrap">
+                            <div className="rsvp-admin-progress-copy">
+                              <span>INVITACIONES ABIERTAS</span>
+                              <strong>
                                 {
-                                  day: '2-digit',
-                                  month: 'short',
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .summary.openRate
+                                }%
+                              </strong>
+                            </div>
+
+                            <div
+                              className="rsvp-admin-progress"
+                              aria-label={`${rsvpAdminData.invitationVisits.summary.openRate}% de invitaciones abiertas`}
+                            >
+                              <span
+                                style={{
+                                  width: `${
+                                    rsvpAdminData
+                                      .invitationVisits
+                                      .summary.openRate
+                                  }%`,
+                                }}
+                              ></span>
+                            </div>
+
+                            <small>
+                              {
+                                rsvpAdminData
+                                  .invitationVisits
+                                  .summary.openedGroups
+                              } de{' '}
+                              {
+                                rsvpAdminData
+                                  .invitationVisits
+                                  .summary.totalGroups
+                              } grupos han abierto su invitación.
+                            </small>
+                          </div>
+
+                          <div className="rsvp-admin-visit-section">
+                            <div className="rsvp-admin-visit-heading">
+                              <div>
+                                <span>INVITACIONES ABIERTAS</span>
+                                <h2>
+                                  Quiénes han
+                                  <em> entrado</em>
+                                </h2>
+                              </div>
+
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .opened.length
                                 }
-                              )}
-                            </time>
-                          )}
-                        </article>
-                      ))
-                    )}
-                  </div>
+                              </strong>
+                            </div>
+
+                            <div className="rsvp-admin-visit-list">
+                              {
+                                rsvpAdminData
+                                  .invitationVisits
+                                  .opened
+                                  .map((visit) => (
+                                    <article
+                                      className="rsvp-admin-visit-card"
+                                      key={visit.refCode}
+                                    >
+                                      <div className="rsvp-admin-visit-main">
+                                        <strong>
+                                          {visit.label}
+                                        </strong>
+
+                                        <span>
+                                          {visit.groupName}
+                                          {' · '}
+                                          Código {visit.rsvpCode}
+                                        </span>
+                                      </div>
+
+                                      <div className="rsvp-admin-visit-meta">
+                                        <span>
+                                          PRIMERA APERTURA
+                                          <strong>
+                                            {new Date(
+                                              visit.firstVisit
+                                            ).toLocaleString(
+                                              'es-PA',
+                                              {
+                                                day: '2-digit',
+                                                month: 'short',
+                                                hour: 'numeric',
+                                                minute: '2-digit',
+                                              }
+                                            )}
+                                          </strong>
+                                        </span>
+
+                                        <span>
+                                          ÚLTIMA APERTURA
+                                          <strong>
+                                            {new Date(
+                                              visit.lastVisit
+                                            ).toLocaleString(
+                                              'es-PA',
+                                              {
+                                                day: '2-digit',
+                                                month: 'short',
+                                                hour: 'numeric',
+                                                minute: '2-digit',
+                                              }
+                                            )}
+                                          </strong>
+                                        </span>
+
+                                        <span>
+                                          VECES
+                                          <strong>
+                                            {visit.visitCount}
+                                          </strong>
+                                        </span>
+                                      </div>
+                                    </article>
+                                  ))
+                              }
+                            </div>
+                          </div>
+
+                          <div className="rsvp-admin-visit-section unopened">
+                            <div className="rsvp-admin-visit-heading">
+                              <div>
+                                <span>PENDIENTES DE APERTURA</span>
+                                <h2>
+                                  Aún no han
+                                  <em> abierto</em>
+                                </h2>
+                              </div>
+
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .unopened.length
+                                }
+                              </strong>
+                            </div>
+
+                            <div className="rsvp-admin-unopened-grid">
+                              {
+                                rsvpAdminData
+                                  .invitationVisits
+                                  .unopened
+                                  .map((visit) => (
+                                    <article
+                                      key={visit.refCode}
+                                      className="rsvp-admin-unopened-card"
+                                    >
+                                      <strong>
+                                        {visit.label}
+                                      </strong>
+
+                                      <span>
+                                        {visit.groupName}
+                                        {' · '}
+                                        Código {visit.rsvpCode}
+                                      </span>
+                                    </article>
+                                  ))
+                              }
+                            </div>
+                          </div>
+
+                          <p className="rsvp-admin-tracking-note">
+                            “Abrió” significa que se abrió el enlace
+                            asignado a ese grupo. No identifica cuál
+                            persona del grupo utilizó físicamente el link.
+                          </p>
+                        </>
+                      )}
+                    </>
+                  )}
 
                   <button
                     type="button"
@@ -3836,7 +4139,7 @@ function WeddingApp() {
 
                     <p className="rsvp-deadline">
                       Por favor, confirma tu asistencia antes del{' '}
-                      <strong>15 de octubre.</strong>
+                      <strong>30 de octubre.</strong>
                     </p>
 
                   </header>
@@ -3867,7 +4170,7 @@ function WeddingApp() {
                           )
                         )
                       }
-                      placeholder="HOU67"
+                      placeholder="LMP15"
                       aria-describedby="rsvp-code-help"
                     />
 
@@ -3932,14 +4235,9 @@ function WeddingApp() {
                           Nos alegra que estés aquí
                         </h2>
 
-                        <p>
-                          Indica la respuesta de cada persona
-                          incluida en este código.
-                        </p>
-
                         <p className="rsvp-deadline rsvp-deadline-after-code">
-                          Por favor, confirma tu asistencia antes del{' '}
-                          <strong>15 de octubre.</strong>
+                          Confirma tu asistencia antes del{' '}
+                          <strong>30 de octubre.</strong>
                         </p>
 
                       </div>
