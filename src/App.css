@@ -17102,3 +17102,29 @@ select {
     letter-spacing: 3.2px !important;
   }
 }
+
+
+/* =========================================================
+   V101 — RSVP DEADLINE EN UNA SOLA LÍNEA
+========================================================= */
+
+.rsvp-deadline,
+.rsvp-deadline-after-code {
+  max-width: none !important;
+  width: max-content !important;
+  white-space: nowrap !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* En teléfonos muy estrechos reducimos ligeramente el tamaño
+   antes de permitir que el texto se salga del viewport. */
+@media (max-width: 480px) {
+  .rsvp-deadline,
+  .rsvp-deadline-after-code {
+    max-width: calc(100vw - 32px) !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    font-size: clamp(13px, 3.65vw, 16px) !important;
+  }
+}
