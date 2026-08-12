@@ -18201,3 +18201,105 @@ select {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =========================================================
+   V113 — NUEVA GALERÍA EDITORIAL
+   Orden estricto 1–9 · sin recortes
+========================================================= */
+
+.gallery-preboda-grid {
+  width: min(100%, 1160px) !important;
+  margin: 0 auto !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(12px, 1.7vw, 20px) !important;
+  align-items: start !important;
+}
+
+.gallery-preboda-item {
+  margin: 0 !important;
+  min-width: 0 !important;
+
+  overflow: hidden !important;
+  background: #e8e1d6 !important;
+}
+
+.gallery-preboda-item img {
+  width: 100% !important;
+  height: auto !important;
+
+  display: block !important;
+
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* Horizontales: todo el ancho, conservando su proporción real */
+.gallery-layout-wide {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+}
+
+/* GALERÍA 4 + 5: pareja vertical */
+.gallery-layout-portrait {
+  grid-column: span 1 !important;
+  width: 100% !important;
+}
+
+/*
+  Verticales individuales 2, 6 y 8:
+  ocupan una fila completa pero la fotografía se mantiene
+  más estrecha y centrada. Así no queda un vacío lateral
+  accidental ni se fuerza un crop.
+*/
+.gallery-layout-portrait-solo {
+  grid-column: 1 / -1 !important;
+
+  width: min(56%, 540px) !important;
+  justify-self: center !important;
+}
+
+/* Tablet */
+@media (min-width: 651px) and (max-width: 1000px) {
+  .gallery-preboda-grid {
+    width: min(100%, 780px) !important;
+    gap: 12px !important;
+  }
+
+  .gallery-layout-wide {
+    grid-column: 1 / -1 !important;
+  }
+
+  .gallery-layout-portrait {
+    grid-column: span 1 !important;
+  }
+
+  .gallery-layout-portrait-solo {
+    grid-column: 1 / -1 !important;
+
+    width: min(62%, 470px) !important;
+    justify-self: center !important;
+  }
+}
+
+/* Mobile: una fotografía a la vez y siempre completa */
+@media (max-width: 650px) {
+  .gallery-preboda-grid {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .gallery-layout-wide,
+  .gallery-layout-portrait,
+  .gallery-layout-portrait-solo {
+    width: 100% !important;
+    margin: 0 0 10px !important;
+  }
+
+  .gallery-preboda-item img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}

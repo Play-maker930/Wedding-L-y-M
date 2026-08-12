@@ -39,14 +39,15 @@ import storyVideo5 from './assets/video-5.webp'
 import storyVideo6 from './assets/video-6.webp'
 import storyVideo7 from './assets/video-7.webp'
 import storyVideo8 from './assets/video-8.webp'
-import galleryPre01 from './assets/gallery-preboda-01.webp'
-import galleryPre02 from './assets/gallery-preboda-02.webp'
-import galleryPre03 from './assets/gallery-preboda-03.webp'
-import galleryPre04 from './assets/gallery-preboda-04.webp'
-import galleryPre05 from './assets/gallery-preboda-05.webp'
-import galleryPre07 from './assets/gallery-preboda-07.webp'
-import galleryPre08 from './assets/gallery-preboda-08.webp'
-import galleryPre09 from './assets/gallery-preboda-09.webp'
+import gallery01 from './assets/gallery-01.webp'
+import gallery02 from './assets/gallery-02.webp'
+import gallery03 from './assets/gallery-03.webp'
+import gallery04 from './assets/gallery-04.webp'
+import gallery05 from './assets/gallery-05.webp'
+import gallery06 from './assets/gallery-06.webp'
+import gallery07 from './assets/gallery-07.webp'
+import gallery08 from './assets/gallery-08.webp'
+import gallery09 from './assets/gallery-09.webp'
 import weddingMusic from './assets/Aleluya.mp3'
 import InvitationEnvelope from './InvitationEnvelope'
 
@@ -736,44 +737,49 @@ function WeddingApp() {
 
   const galleryPhotos = [
     {
-      src: galleryPre01,
-      alt: 'Luis y Melanie abrazados en el bosque',
-      className: 'gallery-preboda-item gallery-preboda-wide',
+      src: gallery01,
+      alt: 'Luis y Melanie caminando juntos entre los pinos',
+      className: 'gallery-preboda-item gallery-layout-wide',
     },
     {
-      src: galleryPre02,
-      alt: 'Luis y Melanie durante su sesión preboda en las montañas',
-      className: 'gallery-preboda-item gallery-preboda-portrait',
+      src: gallery02,
+      alt: 'Luis y Melanie durante un viaje juntos',
+      className: 'gallery-preboda-item gallery-layout-portrait-solo',
     },
     {
-      src: galleryPre03,
-      alt: 'Luis y Melanie junto a un árbol durante su sesión preboda',
-      className: 'gallery-preboda-item gallery-preboda-portrait',
+      src: gallery03,
+      alt: 'Luis y Melanie frente a molinos durante uno de sus viajes',
+      className: 'gallery-preboda-item gallery-layout-wide',
     },
     {
-      src: galleryPre04,
-      alt: 'Luis y Melanie tomados de la mano frente al paisaje',
-      className: 'gallery-preboda-item gallery-preboda-wide',
+      src: gallery04,
+      alt: 'Luis y Melanie juntos durante un viaje',
+      className: 'gallery-preboda-item gallery-layout-portrait',
     },
     {
-      src: galleryPre05,
-      alt: 'Retrato de Luis y Melanie junto al agua',
-      className: 'gallery-preboda-item gallery-preboda-portrait',
+      src: gallery05,
+      alt: 'Luis y Melanie sonriendo durante uno de sus viajes',
+      className: 'gallery-preboda-item gallery-layout-portrait',
     },
     {
-      src: galleryPre07,
-      alt: 'Luis besando a Melanie durante su sesión preboda',
-      className: 'gallery-preboda-item gallery-preboda-portrait',
+      src: gallery06,
+      alt: 'Luis y Melanie juntos durante una experiencia en el agua',
+      className: 'gallery-preboda-item gallery-layout-portrait-solo',
     },
     {
-      src: galleryPre08,
-      alt: 'Luis y Melanie con un caballo y las montañas al fondo',
-      className: 'gallery-preboda-item gallery-preboda-portrait',
+      src: gallery07,
+      alt: 'Luis y Melanie juntos durante uno de sus viajes',
+      className: 'gallery-preboda-item gallery-layout-wide',
     },
     {
-      src: galleryPre09,
-      alt: 'Luis y Melanie juntos junto a un gran árbol',
-      className: 'gallery-preboda-item gallery-preboda-portrait',
+      src: gallery08,
+      alt: 'Luis y Melanie durante su sesión preboda con un caballo',
+      className: 'gallery-preboda-item gallery-layout-portrait-solo',
+    },
+    {
+      src: gallery09,
+      alt: 'Luis y Melanie abrazados entre montañas y naturaleza',
+      className: 'gallery-preboda-item gallery-layout-wide',
     },
   ]
 
