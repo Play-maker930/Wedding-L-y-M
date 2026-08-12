@@ -17926,3 +17926,278 @@ select {
     letter-spacing: 2.2px !important;
   }
 }
+
+
+/* =========================================================
+   V112 — DASHBOARD MÉTRICAS + MENSAJES + VISITAS SIN REF
+========================================================= */
+
+.rsvp-admin-main-tabs {
+  max-width: 760px !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+
+.rsvp-admin-section-checks > span {
+  position: relative;
+}
+
+.rsvp-admin-section-checks > span > span {
+  color: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+}
+
+.rsvp-admin-section-checks > span > b {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background: rgba(138, 133, 96, 0.14);
+
+  color: var(--black);
+
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.rsvp-admin-anonymous,
+.rsvp-admin-messages {
+  margin-top: 46px;
+}
+
+.rsvp-admin-anonymous > header,
+.rsvp-admin-messages > header {
+  margin-bottom: 24px;
+}
+
+.rsvp-admin-anonymous > header > span,
+.rsvp-admin-messages > header > span {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--champagne-dark);
+
+  font-size: 7px;
+  letter-spacing: 2px;
+}
+
+.rsvp-admin-anonymous h2,
+.rsvp-admin-messages h2 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 300;
+  line-height: 0.95;
+}
+
+.rsvp-admin-anonymous h2 em,
+.rsvp-admin-messages h2 em {
+  font-weight: 300;
+}
+
+.rsvp-admin-anonymous header p,
+.rsvp-admin-messages header p {
+  max-width: 590px;
+  margin: 15px 0 0;
+
+  color: var(--gray);
+
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.rsvp-admin-anonymous {
+  padding: 32px;
+
+  border: 1px solid rgba(138, 133, 96, 0.22);
+  background: rgba(138, 133, 96, 0.045);
+}
+
+.rsvp-admin-anonymous-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+
+  background: rgba(138, 133, 96, 0.14);
+}
+
+.rsvp-admin-anonymous-stats article {
+  padding: 20px 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  background: var(--ivory);
+}
+
+.rsvp-admin-anonymous-stats strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.rsvp-admin-anonymous-stats span {
+  color: var(--gray);
+  font-size: 6px;
+  letter-spacing: 1.2px;
+}
+
+.rsvp-admin-anonymous-sections {
+  margin-top: 16px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.rsvp-admin-anonymous-sections > span {
+  padding: 8px 10px;
+
+  border: 1px solid rgba(138, 133, 96, 0.16);
+
+  color: var(--gray);
+
+  font-size: 6px;
+  letter-spacing: 0.8px;
+}
+
+.rsvp-admin-anonymous-sections strong {
+  margin-left: 7px;
+
+  color: var(--black);
+  font-size: 8px;
+}
+
+.rsvp-admin-message-count {
+  width: fit-content;
+  margin-bottom: 22px;
+
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.rsvp-admin-message-count strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 400;
+}
+
+.rsvp-admin-message-count span {
+  color: var(--champagne-dark);
+  font-size: 7px;
+  letter-spacing: 1.5px;
+}
+
+.rsvp-admin-message-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rsvp-admin-message-grid article {
+  position: relative;
+
+  min-height: 210px;
+  padding: 32px 28px 24px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid rgba(138, 133, 96, 0.18);
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.rsvp-admin-message-quote {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+
+  color: rgba(138, 133, 96, 0.26);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.rsvp-admin-message-grid article > p {
+  position: relative;
+  z-index: 1;
+
+  margin: 14px 0 28px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.rsvp-admin-message-grid footer {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rsvp-admin-message-grid footer strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.rsvp-admin-message-grid footer span,
+.rsvp-admin-message-grid footer small {
+  color: var(--gray);
+
+  font-size: 7px;
+  line-height: 1.4;
+}
+
+.rsvp-admin-empty-messages {
+  padding: 40px 24px;
+
+  border: 1px solid var(--line);
+
+  color: var(--gray);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Ya no existe el eyebrow RSVP · fecha */
+.rsvp-main-eyebrow {
+  display: none !important;
+}
+
+@media (max-width: 650px) {
+  .rsvp-admin-main-tabs {
+    overflow-x: auto;
+    grid-template-columns: repeat(4, minmax(88px, 1fr)) !important;
+  }
+
+  .rsvp-admin-anonymous {
+    padding: 24px 18px;
+  }
+
+  .rsvp-admin-anonymous-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-admin-message-grid {
+    grid-template-columns: 1fr;
+  }
+}

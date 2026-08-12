@@ -184,6 +184,63 @@ export async function POST(request) {
     const pageViews =
       await pageViewsResponse.json()
 
+    const anonymousVisits =
+      visits.filter((row) =>
+        String(row.ref_code || '').startsWith('ANON_')
+      )
+
+    const anonymousPageViews =
+      pageViews.filter((row) =>
+        String(row.ref_code || '').startsWith('ANON_')
+      )
+
+    const anonymousVisitorIds =
+      new Set(
+        anonymousVisits.map((row) => row.ref_code)
+      )
+
+    const anonymousSectionMetrics =
+      sectionDefinitions.map((definition) => {
+        const matchingRows =
+          anonymousPageViews.filter(
+            (row) =>
+              row.section_name === definition.id
+          )
+
+        return {
+          id: definition.id,
+          label: definition.label,
+          visitors:
+            new Set(
+              matchingRows.map((row) => row.ref_code)
+            ).size,
+          visits:
+            matchingRows.reduce(
+              (sum, row) =>
+                sum + Number(row.visit_count || 0),
+              0
+            ),
+        }
+      })
+
+    const anonymousSummary = {
+      uniqueVisitors: anonymousVisitorIds.size,
+      totalVisits:
+        anonymousVisits.reduce(
+          (sum, row) =>
+            sum + Number(row.visit_count || 0),
+          0
+        ),
+      totalSectionVisits:
+        anonymousPageViews.reduce(
+          (sum, row) =>
+            sum + Number(row.visit_count || 0),
+          0
+        ),
+      sectionMetrics:
+        anonymousSectionMetrics,
+    }
+
     const visitsByRef =
       new Map(
         visits.map((row) => [
@@ -469,6 +526,8 @@ export async function POST(request) {
 
       opened,
       unopened,
+
+      anonymous: anonymousSummary,
 
       activity: {
         summary: {

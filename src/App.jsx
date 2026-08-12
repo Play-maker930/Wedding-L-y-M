@@ -512,6 +512,53 @@ const PATH_PAGES = Object.fromEntries(
   ])
 )
 
+
+const getOrCreateAnonymousVisitorId = () => {
+  try {
+    const storageKey = 'ml_wedding_visitor_id'
+    const existing = window.localStorage.getItem(storageKey)
+
+    if (
+      existing &&
+      /^ANON_[A-Z0-9]{12}$/.test(existing)
+    ) {
+      return existing
+    }
+
+    const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+    let randomPart = ''
+
+    if (window.crypto?.getRandomValues) {
+      const bytes = new Uint8Array(12)
+      window.crypto.getRandomValues(bytes)
+
+      randomPart = Array.from(bytes)
+        .map((byte) => alphabet[byte % alphabet.length])
+        .join('')
+    } else {
+      randomPart = Array.from({ length: 12 })
+        .map(
+          () =>
+            alphabet[
+              Math.floor(Math.random() * alphabet.length)
+            ]
+        )
+        .join('')
+    }
+
+    const visitorId = `ANON_${randomPart}`
+
+    window.localStorage.setItem(
+      storageKey,
+      visitorId
+    )
+
+    return visitorId
+  } catch {
+    return ''
+  }
+}
+
 function WeddingApp() {
   const location = useLocation()
   const routerNavigate = useNavigate()
@@ -555,14 +602,25 @@ function WeddingApp() {
       .replace(/[^A-Z0-9]/g, '')
       .slice(0, 6)
 
+    const anonymousVisitorId =
+      invitationRef.length === 6
+        ? ''
+        : getOrCreateAnonymousVisitorId()
+
+    const visitorTrackingId =
+      invitationRef.length === 6
+        ? invitationRef
+        : anonymousVisitorId
+
     if (
-      invitationRef.length !== 6 ||
-      trackedInvitationRef.current === invitationRef
+      !visitorTrackingId ||
+      trackedInvitationRef.current === visitorTrackingId
     ) {
       return
     }
 
-    trackedInvitationRef.current = invitationRef
+    trackedInvitationRef.current =
+      visitorTrackingId
 
     fetch('/api/track-visit', {
       method: 'POST',
@@ -570,7 +628,14 @@ function WeddingApp() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ref: invitationRef,
+        ref:
+          invitationRef.length === 6
+            ? invitationRef
+            : '',
+        visitorId:
+          invitationRef.length === 6
+            ? ''
+            : anonymousVisitorId,
       }),
       keepalive: true,
     }).catch((error) => {
@@ -599,7 +664,17 @@ function WeddingApp() {
   useEffect(() => {
     const invitationRef = getInvitationRef()
 
-    if (invitationRef.length !== 6) {
+    const anonymousVisitorId =
+      invitationRef.length === 6
+        ? ''
+        : getOrCreateAnonymousVisitorId()
+
+    const visitorTrackingId =
+      invitationRef.length === 6
+        ? invitationRef
+        : anonymousVisitorId
+
+    if (!visitorTrackingId) {
       return
     }
 
@@ -608,7 +683,7 @@ function WeddingApp() {
       'inicio'
 
     const sessionKey =
-      `${invitationRef}:${sectionName}`
+      `${visitorTrackingId}:${sectionName}`
 
     if (
       trackedSectionsRef.current.has(
@@ -628,7 +703,14 @@ function WeddingApp() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ref: invitationRef,
+        ref:
+          invitationRef.length === 6
+            ? invitationRef
+            : '',
+        visitorId:
+          invitationRef.length === 6
+            ? ''
+            : anonymousVisitorId,
         section: sectionName,
       }),
       keepalive: true,
@@ -1683,6 +1765,50 @@ function WeddingApp() {
           group.rsvpCode
         )
     )
+
+  const adminMessages = Array.from(
+    new Map(
+      [
+        ...(rsvpAdminData?.attending || []),
+        ...(rsvpAdminData?.notAttending || []),
+      ]
+        .filter(
+          (guest) =>
+            String(guest.message || '').trim()
+        )
+        .map((guest) => [
+          `${guest.invitationCode}:${String(
+            guest.message || ''
+          ).trim()}`,
+          {
+            invitationCode:
+              guest.invitationCode,
+            message:
+              String(
+                guest.message || ''
+              ).trim(),
+            submittedAt:
+              guest.submittedAt || null,
+            guestNames: [
+              ...(rsvpAdminData?.attending || []),
+              ...(rsvpAdminData?.notAttending || []),
+            ]
+              .filter(
+                (item) =>
+                  item.invitationCode ===
+                    guest.invitationCode &&
+                  String(item.message || '').trim() ===
+                    String(guest.message || '').trim()
+              )
+              .map((item) => item.guestName),
+          },
+        ])
+    ).values()
+  ).sort(
+    (a, b) =>
+      new Date(b.submittedAt || 0) -
+      new Date(a.submittedAt || 0)
+  )
 
 
   return (
@@ -3822,6 +3948,20 @@ function WeddingApp() {
                     >
                       ACTIVIDAD
                     </button>
+
+                    <button
+                      type="button"
+                      className={
+                        rsvpAdminSection === 'messages'
+                          ? 'active'
+                          : ''
+                      }
+                      onClick={() =>
+                        setRsvpAdminSection('messages')
+                      }
+                    >
+                      MENSAJES
+                    </button>
                   </div>
 
                   {rsvpAdminSection === 'rsvp' && (
@@ -4235,6 +4375,18 @@ function WeddingApp() {
                                 {
                                   rsvpAdminData
                                     .invitationVisits
+                                    .anonymous
+                                    ?.uniqueVisitors || 0
+                                }
+                              </strong>
+                              <span>SIN REF</span>
+                            </article>
+
+                            <article>
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
                                     .activity
                                     .summary.rsvpGroups
                                 }
@@ -4321,6 +4473,81 @@ function WeddingApp() {
                               }
                             </div>
                           </div>
+
+
+                          {rsvpAdminData.invitationVisits?.anonymous
+                            ?.uniqueVisitors > 0 && (
+                            <section className="rsvp-admin-anonymous">
+                              <header>
+                                <span>TRÁFICO SIN IDENTIFICAR</span>
+                                <h2>
+                                  Visitas
+                                  <em> sin ref</em>
+                                </h2>
+                                <p>
+                                  Son navegadores que abrieron el link
+                                  general sin un código ref. No podemos
+                                  saber quiénes son, pero sí medir su
+                                  actividad de forma anónima.
+                                </p>
+                              </header>
+
+                              <div className="rsvp-admin-anonymous-stats">
+                                <article>
+                                  <strong>
+                                    {
+                                      rsvpAdminData
+                                        .invitationVisits
+                                        .anonymous
+                                        .uniqueVisitors
+                                    }
+                                  </strong>
+                                  <span>NAVEGADORES ÚNICOS</span>
+                                </article>
+
+                                <article>
+                                  <strong>
+                                    {
+                                      rsvpAdminData
+                                        .invitationVisits
+                                        .anonymous
+                                        .totalVisits
+                                    }
+                                  </strong>
+                                  <span>APERTURAS</span>
+                                </article>
+
+                                <article>
+                                  <strong>
+                                    {
+                                      rsvpAdminData
+                                        .invitationVisits
+                                        .anonymous
+                                        .totalSectionVisits
+                                    }
+                                  </strong>
+                                  <span>VISITAS A SECCIONES</span>
+                                </article>
+                              </div>
+
+                              <div className="rsvp-admin-anonymous-sections">
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .anonymous
+                                    .sectionMetrics
+                                    .map((metric) => (
+                                      <span key={metric.id}>
+                                        {metric.label}
+                                        <strong>
+                                          {metric.visitors}
+                                        </strong>
+                                      </span>
+                                    ))
+                                }
+                              </div>
+                            </section>
+                          )}
 
                           {adminOpenedNoResponse.length > 0 && (
                             <section className="rsvp-admin-followup">
@@ -4435,7 +4662,16 @@ function WeddingApp() {
                                                 ? '✓'
                                                 : '—'}
                                             </i>
-                                            {section.shortLabel}
+
+                                            <span>
+                                              {section.shortLabel}
+                                            </span>
+
+                                            {section.visited && (
+                                              <b>
+                                                {section.visitCount}
+                                              </b>
+                                            )}
                                           </span>
                                         )
                                       )}
@@ -4485,6 +4721,87 @@ function WeddingApp() {
                     </>
                   )}
 
+
+                  {rsvpAdminSection === 'messages' && (
+                    <section className="rsvp-admin-messages">
+                      <header>
+                        <span>MENSAJES DE LOS INVITADOS</span>
+
+                        <h2>
+                          Palabras para
+                          <em> nosotros</em>
+                        </h2>
+
+                        <p>
+                          Aquí aparecen únicamente los RSVP que
+                          incluyeron un mensaje.
+                        </p>
+                      </header>
+
+                      <div className="rsvp-admin-message-count">
+                        <strong>
+                          {adminMessages.length}
+                        </strong>
+                        <span>
+                          {adminMessages.length === 1
+                            ? 'MENSAJE'
+                            : 'MENSAJES'}
+                        </span>
+                      </div>
+
+                      {adminMessages.length === 0 ? (
+                        <div className="rsvp-admin-empty-messages">
+                          Todavía no han dejado mensajes.
+                        </div>
+                      ) : (
+                        <div className="rsvp-admin-message-grid">
+                          {adminMessages.map(
+                            (message) => (
+                              <article
+                                key={`${message.invitationCode}:${message.message}`}
+                              >
+                                <span className="rsvp-admin-message-quote">
+                                  “
+                                </span>
+
+                                <p>
+                                  {message.message}
+                                </p>
+
+                                <footer>
+                                  <strong>
+                                    {message.guestNames.join(' + ')}
+                                  </strong>
+
+                                  <span>
+                                    Código {message.invitationCode}
+                                  </span>
+
+                                  {message.submittedAt && (
+                                    <small>
+                                      {new Date(
+                                        message.submittedAt
+                                      ).toLocaleString(
+                                        'es-PA',
+                                        {
+                                          day: '2-digit',
+                                          month: 'short',
+                                          year: 'numeric',
+                                          hour: 'numeric',
+                                          minute: '2-digit',
+                                        }
+                                      )}
+                                    </small>
+                                  )}
+                                </footer>
+                              </article>
+                            )
+                          )}
+                        </div>
+                      )}
+                    </section>
+                  )}
+
                   <button
                     type="button"
                     className="rsvp-secondary-button rsvp-admin-exit"
@@ -4503,10 +4820,6 @@ function WeddingApp() {
               <>
                 {!rsvpGroup && (
                   <header className="rsvp-code-hero">
-
-                    <p className="eyebrow rsvp-main-eyebrow">
-                      RSVP · 15 · 01 · 2027
-                    </p>
 
                     <h1>
                       RSVP
