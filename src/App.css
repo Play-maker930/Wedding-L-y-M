@@ -17901,3 +17901,28 @@ select {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+
+/* =========================================================
+   V110 — FIX RUNTIME
+   Corrige el scope de las variables del dashboard.
+   Sin cambios visuales.
+========================================================= */
+
+
+/* =========================================================
+   V111 — RSVP
+========================================================= */
+
+/* Hace más visible el primer “RSVP · 15 · 01 · 2027” */
+.rsvp-code-hero .rsvp-main-eyebrow {
+  font-size: 9px !important;
+  letter-spacing: 2.6px !important;
+}
+
+@media (max-width: 650px) {
+  .rsvp-code-hero .rsvp-main-eyebrow {
+    font-size: 8.5px !important;
+    letter-spacing: 2.2px !important;
+  }
+}

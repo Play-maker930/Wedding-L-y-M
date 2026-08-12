@@ -288,27 +288,6 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
 
 
 
-  const adminRespondedInvitationCodes =
-    new Set(
-      [
-        ...(rsvpAdminData?.attending || []),
-        ...(rsvpAdminData?.notAttending || []),
-      ].map((guest) => guest.invitationCode)
-    )
-
-  const adminActivityGroups =
-    rsvpAdminData?.invitationVisits?.activity?.groups || []
-
-  const adminOpenedNoResponse =
-    adminActivityGroups.filter(
-      (group) =>
-        group.opened &&
-        !adminRespondedInvitationCodes.has(
-          group.rsvpCode
-        )
-    )
-
-
   return (
     <svg {...commonProps}>
       {icons[name] || icons.sparkle}
@@ -1683,6 +1662,28 @@ function WeddingApp() {
       })
     }
   }
+
+
+  const adminRespondedInvitationCodes =
+    new Set(
+      [
+        ...(rsvpAdminData?.attending || []),
+        ...(rsvpAdminData?.notAttending || []),
+      ].map((guest) => guest.invitationCode)
+    )
+
+  const adminActivityGroups =
+    rsvpAdminData?.invitationVisits?.activity?.groups || []
+
+  const adminOpenedNoResponse =
+    adminActivityGroups.filter(
+      (group) =>
+        group.opened &&
+        !adminRespondedInvitationCodes.has(
+          group.rsvpCode
+        )
+    )
+
 
   return (
     <>
@@ -4503,13 +4504,12 @@ function WeddingApp() {
                 {!rsvpGroup && (
                   <header className="rsvp-code-hero">
 
-                    <p className="eyebrow">
+                    <p className="eyebrow rsvp-main-eyebrow">
                       RSVP · 15 · 01 · 2027
                     </p>
 
                     <h1>
-                      Confirma tu
-                      <em> asistencia</em>
+                      RSVP
                     </h1>
 
                     <p>
@@ -4518,7 +4518,7 @@ function WeddingApp() {
                     </p>
 
                     <p className="rsvp-deadline">
-                      Por favor, confirma tu asistencia antes del{' '}
+                      Confirma tu asistencia antes del{' '}
                       <strong>30 de octubre.</strong>
                     </p>
 
