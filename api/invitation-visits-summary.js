@@ -19,9 +19,64 @@ const getSupabaseConfig = () => ({
   url:
     process.env.SUPABASE_URL ||
     process.env.VITE_SUPABASE_URL,
+
   key:
     process.env.SUPABASE_SECRET_KEY ||
     process.env.SUPABASE_SERVICE_ROLE_KEY,
+})
+
+const sectionDefinitions = [
+  {
+    id: 'inicio',
+    label: 'Inicio',
+    shortLabel: 'Inicio',
+  },
+  {
+    id: 'boda',
+    label: 'El Gran Día',
+    shortLabel: 'Gran día',
+  },
+  {
+    id: 'informacion',
+    label: 'Información',
+    shortLabel: 'Info',
+  },
+  {
+    id: 'hospedaje',
+    label: 'Hospedaje',
+    shortLabel: 'Hotel',
+  },
+  {
+    id: 'transporte',
+    label: 'Transporte',
+    shortLabel: 'Bus',
+  },
+  {
+    id: 'medellin',
+    label: 'Medellín',
+    shortLabel: 'Medellín',
+  },
+  {
+    id: 'galeria',
+    label: 'Galería',
+    shortLabel: 'Galería',
+  },
+  {
+    id: 'regalos',
+    label: 'Regalos',
+    shortLabel: 'Regalos',
+  },
+  {
+    id: 'rsvp',
+    label: 'RSVP',
+    shortLabel: 'RSVP',
+  },
+]
+
+const supabaseHeaders = (key) => ({
+  apikey: key,
+  Authorization: `Bearer ${key}`,
+  'Content-Type': 'application/json',
 })
 
 export async function POST(request) {
@@ -53,7 +108,8 @@ export async function POST(request) {
       )
     }
 
-    const { url, key } = getSupabaseConfig()
+    const { url, key } =
+      getSupabaseConfig()
 
     if (!url || !key) {
       return json(
@@ -65,20 +121,30 @@ export async function POST(request) {
       )
     }
 
-    const response = await fetch(
-      `${url}/rest/v1/invitation_visits` +
-        `?select=ref_code,group_name,first_visit,last_visit,visit_count`,
-      {
-        headers: {
-          apikey: key,
-          Authorization: `Bearer ${key}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+    const [
+      visitsResponse,
+      pageViewsResponse,
+    ] = await Promise.all([
+      fetch(
+        `${url}/rest/v1/invitation_visits` +
+          `?select=ref_code,group_name,first_visit,last_visit,visit_count`,
+        {
+          headers: supabaseHeaders(key),
+        }
+      ),
 
-    if (!response.ok) {
-      const details = await response.text()
+      fetch(
+        `${url}/rest/v1/invitation_page_views` +
+          `?select=ref_code,section_name,first_visited_at,last_visited_at,visit_count`,
+        {
+          headers: supabaseHeaders(key),
+        }
+      ),
+    ])
+
+    if (!visitsResponse.ok) {
+      const details =
+        await visitsResponse.text()
 
       console.error(
         'Supabase invitation visits summary failed:',
@@ -88,20 +154,59 @@ export async function POST(request) {
       return json(
         {
           success: false,
-          error: 'DATABASE_LOOKUP',
+          error: 'VISITS_LOOKUP',
         },
         500
       )
     }
 
-    const rows = await response.json()
+    if (!pageViewsResponse.ok) {
+      const details =
+        await pageViewsResponse.text()
 
-    const visitsByRef = new Map(
-      rows.map((row) => [
-        row.ref_code,
-        row,
-      ])
-    )
+      console.error(
+        'Supabase page views summary failed:',
+        details
+      )
+
+      return json(
+        {
+          success: false,
+          error: 'PAGE_VIEWS_LOOKUP',
+        },
+        500
+      )
+    }
+
+    const visits =
+      await visitsResponse.json()
+
+    const pageViews =
+      await pageViewsResponse.json()
+
+    const visitsByRef =
+      new Map(
+        visits.map((row) => [
+          row.ref_code,
+          row,
+        ])
+      )
+
+    const pageViewsByRef =
+      new Map()
+
+    pageViews.forEach((row) => {
+      if (!pageViewsByRef.has(row.ref_code)) {
+        pageViewsByRef.set(
+          row.ref_code,
+          []
+        )
+      }
+
+      pageViewsByRef
+        .get(row.ref_code)
+        .push(row)
+    })
 
     const allInvitations =
       Object.entries(invitationRefs).map(
@@ -131,25 +236,27 @@ export async function POST(request) {
         }
       )
 
-    const opened = allInvitations
-      .filter((item) => item.opened)
-      .sort(
-        (a, b) =>
-          new Date(b.lastVisit) -
-          new Date(a.lastVisit)
-      )
-
-    const unopened = allInvitations
-      .filter((item) => !item.opened)
-      .sort((a, b) =>
-        a.groupName.localeCompare(
-          b.groupName,
-          'es',
-          {
-            numeric: true,
-          }
+    const opened =
+      allInvitations
+        .filter((item) => item.opened)
+        .sort(
+          (a, b) =>
+            new Date(b.lastVisit) -
+            new Date(a.lastVisit)
         )
-      )
+
+    const unopened =
+      allInvitations
+        .filter((item) => !item.opened)
+        .sort((a, b) =>
+          a.groupName.localeCompare(
+            b.groupName,
+            'es',
+            {
+              numeric: true,
+            }
+          )
+        )
 
     const totalGroups =
       allInvitations.length
@@ -170,10 +277,184 @@ export async function POST(request) {
     const openRate =
       totalGroups > 0
         ? Math.round(
-            (openedGroups / totalGroups) *
-              100
+            (
+              openedGroups /
+              totalGroups
+            ) * 100
           )
         : 0
+
+    /*
+      Build section activity for every invitation.
+    */
+    const activityGroups =
+      allInvitations.map(
+        (invitation) => {
+          const groupPageViews =
+            pageViewsByRef.get(
+              invitation.refCode
+            ) || []
+
+          const pageViewMap =
+            new Map(
+              groupPageViews.map(
+                (row) => [
+                  row.section_name,
+                  row,
+                ]
+              )
+            )
+
+          const sections =
+            sectionDefinitions.map(
+              (definition) => {
+                const row =
+                  pageViewMap.get(
+                    definition.id
+                  )
+
+                return {
+                  ...definition,
+                  visited:
+                    Boolean(row),
+                  firstVisitedAt:
+                    row?.first_visited_at ||
+                    null,
+                  lastVisitedAt:
+                    row?.last_visited_at ||
+                    null,
+                  visitCount:
+                    Number(
+                      row?.visit_count || 0
+                    ),
+                }
+              }
+            )
+
+          const visitedRows =
+            groupPageViews
+              .filter(
+                (row) =>
+                  row.last_visited_at
+              )
+              .sort(
+                (a, b) =>
+                  new Date(
+                    b.last_visited_at
+                  ) -
+                  new Date(
+                    a.last_visited_at
+                  )
+              )
+
+          const lastRow =
+            visitedRows[0] || null
+
+          const lastDefinition =
+            sectionDefinitions.find(
+              (definition) =>
+                definition.id ===
+                lastRow?.section_name
+            )
+
+          return {
+            ...invitation,
+
+            sections,
+
+            sectionsVisited:
+              sections.filter(
+                (section) =>
+                  section.visited
+              ).length,
+
+            totalSectionVisits:
+              sections.reduce(
+                (sum, section) =>
+                  sum +
+                  section.visitCount,
+                0
+              ),
+
+            lastActivity:
+              lastRow
+                ?.last_visited_at ||
+              invitation.lastVisit ||
+              null,
+
+            lastSection:
+              lastRow
+                ?.section_name ||
+              null,
+
+            lastSectionLabel:
+              lastDefinition
+                ?.label ||
+              null,
+          }
+        }
+      )
+
+    activityGroups.sort(
+      (a, b) => {
+        if (
+          a.lastActivity &&
+          b.lastActivity
+        ) {
+          return (
+            new Date(
+              b.lastActivity
+            ) -
+            new Date(
+              a.lastActivity
+            )
+          )
+        }
+
+        if (a.lastActivity) return -1
+        if (b.lastActivity) return 1
+
+        return a.groupName.localeCompare(
+          b.groupName,
+          'es',
+          {
+            numeric: true,
+          }
+        )
+      }
+    )
+
+    const groupsForSection =
+      (sectionId) =>
+        activityGroups.filter(
+          (group) =>
+            group.sections.some(
+              (section) =>
+                section.id ===
+                  sectionId &&
+                section.visited
+            )
+        ).length
+
+    const activeGroups =
+      activityGroups.filter(
+        (group) =>
+          group.sectionsVisited > 0
+      ).length
+
+    const sectionMetrics =
+      sectionDefinitions.map(
+        (definition) => ({
+          id:
+            definition.id,
+          label:
+            definition.label,
+          groups:
+            groupsForSection(
+              definition.id
+            ),
+        })
+      )
 
     return json({
       success: true,
@@ -188,10 +469,36 @@ export async function POST(request) {
 
       opened,
       unopened,
+
+      activity: {
+        summary: {
+          activeGroups,
+          rsvpGroups:
+            groupsForSection(
+              'rsvp'
+            ),
+          hospedajeGroups:
+            groupsForSection(
+              'hospedaje'
+            ),
+          regalosGroups:
+            groupsForSection(
+              'regalos'
+            ),
+          medellinGroups:
+            groupsForSection(
+              'medellin'
+            ),
+        },
+
+        sectionMetrics,
+        groups:
+          activityGroups,
+      },
     })
   } catch (error) {
     console.error(
-      'Invitation visits summary error:',
+      'Invitation dashboard summary error:',
       error
     )
 

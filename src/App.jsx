@@ -288,6 +288,27 @@ function LineIcon({ name, size = 22, strokeWidth = 1.5 }) {
 
 
 
+  const adminRespondedInvitationCodes =
+    new Set(
+      [
+        ...(rsvpAdminData?.attending || []),
+        ...(rsvpAdminData?.notAttending || []),
+      ].map((guest) => guest.invitationCode)
+    )
+
+  const adminActivityGroups =
+    rsvpAdminData?.invitationVisits?.activity?.groups || []
+
+  const adminOpenedNoResponse =
+    adminActivityGroups.filter(
+      (group) =>
+        group.opened &&
+        !adminRespondedInvitationCodes.has(
+          group.rsvpCode
+        )
+    )
+
+
   return (
     <svg {...commonProps}>
       {icons[name] || icons.sparkle}
@@ -527,6 +548,7 @@ function WeddingApp() {
   const musicRef = useRef(null)
   const homeImageRef = useRef(null)
   const trackedInvitationRef = useRef(null)
+  const trackedSectionsRef = useRef(new Set())
   const galleryTouchStartXRef = useRef(null)
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
 
@@ -594,6 +616,50 @@ function WeddingApp() {
       behavior: 'auto',
     })
   }, [location.pathname, routerNavigate])
+
+  useEffect(() => {
+    const invitationRef = getInvitationRef()
+
+    if (invitationRef.length !== 6) {
+      return
+    }
+
+    const sectionName =
+      PATH_PAGES[location.pathname] ||
+      'inicio'
+
+    const sessionKey =
+      `${invitationRef}:${sectionName}`
+
+    if (
+      trackedSectionsRef.current.has(
+        sessionKey
+      )
+    ) {
+      return
+    }
+
+    trackedSectionsRef.current.add(
+      sessionKey
+    )
+
+    fetch('/api/track-section', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ref: invitationRef,
+        section: sectionName,
+      }),
+      keepalive: true,
+    }).catch((error) => {
+      console.warn(
+        'No fue posible registrar la sección visitada.',
+        error
+      )
+    })
+  }, [location.pathname])
 
   const [rsvpCode, setRsvpCode] = useState('')
   const [rsvpGroup, setRsvpGroup] = useState(null)
@@ -1181,6 +1247,20 @@ function WeddingApp() {
     window.setTimeout(() => {
       setHomeReveal(false)
     }, 1200)
+  }
+
+  const getInvitationRef = () => {
+    const params = new URLSearchParams(
+      window.location.search
+    )
+
+    return String(
+      params.get('ref') || ''
+    )
+      .trim()
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, '')
+      .slice(0, 6)
   }
 
   const normalizeInvitationCode = (value) =>
@@ -3727,6 +3807,20 @@ function WeddingApp() {
                     >
                       APERTURAS
                     </button>
+
+                    <button
+                      type="button"
+                      className={
+                        rsvpAdminSection === 'activity'
+                          ? 'active'
+                          : ''
+                      }
+                      onClick={() =>
+                        setRsvpAdminSection('activity')
+                      }
+                    >
+                      ACTIVIDAD
+                    </button>
                   </div>
 
                   {rsvpAdminSection === 'rsvp' && (
@@ -4104,6 +4198,286 @@ function WeddingApp() {
                             “Abrió” significa que se abrió el enlace
                             asignado a ese grupo. No identifica cuál
                             persona del grupo utilizó físicamente el link.
+                          </p>
+                        </>
+                      )}
+                    </>
+                  )}
+
+
+                  {rsvpAdminSection === 'activity' && (
+                    <>
+                      {!rsvpAdminData.invitationVisits?.activity ? (
+                        <div className="rsvp-admin-visits-unavailable">
+                          <p>
+                            No pudimos cargar la actividad de navegación
+                            en este momento.
+                          </p>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="rsvp-admin-stats rsvp-admin-activity-stats">
+                            <article className="rsvp-admin-stat total">
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .activity
+                                    .summary.activeGroups
+                                }
+                              </strong>
+                              <span>GRUPOS ACTIVOS</span>
+                            </article>
+
+                            <article>
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .activity
+                                    .summary.rsvpGroups
+                                }
+                              </strong>
+                              <span>VIERON RSVP</span>
+                            </article>
+
+                            <article>
+                              <strong>
+                                {
+                                  rsvpAdminData
+                                    .invitationVisits
+                                    .activity
+                                    .summary.hospedajeGroups
+                                }
+                              </strong>
+                              <span>VIERON HOSPEDAJE</span>
+                            </article>
+
+                            <article>
+                              <strong>
+                                {adminOpenedNoResponse.length}
+                              </strong>
+                              <span>ABIERTOS SIN RESPUESTA</span>
+                            </article>
+                          </div>
+
+                          <div className="rsvp-admin-activity-funnel">
+                            <div className="rsvp-admin-activity-funnel-heading">
+                              <span>RECORRIDO DE LOS INVITADOS</span>
+                              <h2>
+                                Qué están
+                                <em> explorando</em>
+                              </h2>
+                            </div>
+
+                            <div className="rsvp-admin-section-metrics">
+                              {
+                                rsvpAdminData
+                                  .invitationVisits
+                                  .activity
+                                  .sectionMetrics
+                                  .map((metric) => (
+                                    <article
+                                      key={metric.id}
+                                      className="rsvp-admin-section-metric"
+                                    >
+                                      <div>
+                                        <strong>
+                                          {metric.groups}
+                                        </strong>
+                                        <span>
+                                          {metric.label}
+                                        </span>
+                                      </div>
+
+                                      <div
+                                        className="rsvp-admin-section-bar"
+                                        aria-label={`${metric.groups} grupos visitaron ${metric.label}`}
+                                      >
+                                        <span
+                                          style={{
+                                            width: `${
+                                              rsvpAdminData
+                                                .invitationVisits
+                                                .summary
+                                                .totalGroups > 0
+                                                ? Math.round(
+                                                    (
+                                                      metric.groups /
+                                                      rsvpAdminData
+                                                        .invitationVisits
+                                                        .summary
+                                                        .totalGroups
+                                                    ) * 100
+                                                  )
+                                                : 0
+                                            }%`,
+                                          }}
+                                        ></span>
+                                      </div>
+                                    </article>
+                                  ))
+                              }
+                            </div>
+                          </div>
+
+                          {adminOpenedNoResponse.length > 0 && (
+                            <section className="rsvp-admin-followup">
+                              <header>
+                                <span>PARA DAR SEGUIMIENTO</span>
+                                <h2>
+                                  Abrieron, pero
+                                  <em> aún no respondieron</em>
+                                </h2>
+                                <p>
+                                  Estos grupos abrieron su invitación,
+                                  pero todavía no registran una respuesta RSVP.
+                                </p>
+                              </header>
+
+                              <div className="rsvp-admin-followup-grid">
+                                {adminOpenedNoResponse.map(
+                                  (group) => (
+                                    <article
+                                      key={group.refCode}
+                                    >
+                                      <strong>
+                                        {group.label}
+                                      </strong>
+
+                                      <span>
+                                        {group.groupName}
+                                        {' · '}
+                                        Código {group.rsvpCode}
+                                      </span>
+
+                                      {group.lastSection && (
+                                        <small>
+                                          Última sección:{' '}
+                                          {group.lastSectionLabel}
+                                        </small>
+                                      )}
+                                    </article>
+                                  )
+                                )}
+                              </div>
+                            </section>
+                          )}
+
+                          <section className="rsvp-admin-group-activity">
+                            <header>
+                              <span>DETALLE POR GRUPO</span>
+                              <h2>
+                                Secciones
+                                <em> visitadas</em>
+                              </h2>
+                              <p>
+                                Cada check indica que el enlace de ese grupo
+                                visitó al menos una vez esa sección.
+                              </p>
+                            </header>
+
+                            <div className="rsvp-admin-group-activity-list">
+                              {adminActivityGroups.map(
+                                (group) => (
+                                  <article
+                                    className="rsvp-admin-group-activity-card"
+                                    key={group.refCode}
+                                  >
+                                    <div className="rsvp-admin-group-activity-person">
+                                      <strong>
+                                        {group.label}
+                                      </strong>
+
+                                      <span>
+                                        {group.groupName}
+                                        {' · '}
+                                        Código {group.rsvpCode}
+                                      </span>
+
+                                      {group.lastActivity && (
+                                        <small>
+                                          Última actividad:{' '}
+                                          {new Date(
+                                            group.lastActivity
+                                          ).toLocaleString(
+                                            'es-PA',
+                                            {
+                                              day: '2-digit',
+                                              month: 'short',
+                                              hour: 'numeric',
+                                              minute: '2-digit',
+                                            }
+                                          )}
+                                        </small>
+                                      )}
+                                    </div>
+
+                                    <div className="rsvp-admin-section-checks">
+                                      {group.sections.map(
+                                        (section) => (
+                                          <span
+                                            key={section.id}
+                                            className={
+                                              section.visited
+                                                ? 'visited'
+                                                : ''
+                                            }
+                                            title={
+                                              section.visited
+                                                ? `${section.label}: ${section.visitCount} visita(s)`
+                                                : `${section.label}: no visitado`
+                                            }
+                                          >
+                                            <i>
+                                              {section.visited
+                                                ? '✓'
+                                                : '—'}
+                                            </i>
+                                            {section.shortLabel}
+                                          </span>
+                                        )
+                                      )}
+                                    </div>
+
+                                    <div className="rsvp-admin-group-activity-meta">
+                                      <span>
+                                        SECCIONES
+                                        <strong>
+                                          {group.sectionsVisited}
+                                        </strong>
+                                      </span>
+
+                                      <span>
+                                        VISITAS
+                                        <strong>
+                                          {group.totalSectionVisits}
+                                        </strong>
+                                      </span>
+
+                                      <span>
+                                        RSVP
+                                        <strong>
+                                          {
+                                            adminRespondedInvitationCodes.has(
+                                              group.rsvpCode
+                                            )
+                                              ? 'Respondido'
+                                              : 'Pendiente'
+                                          }
+                                        </strong>
+                                      </span>
+                                    </div>
+                                  </article>
+                                )
+                              )}
+                            </div>
+                          </section>
+
+                          <p className="rsvp-admin-tracking-note">
+                            Las métricas corresponden al enlace asignado
+                            a cada grupo. Si el link se reenvía, la actividad
+                            continuará asociándose a ese mismo grupo.
                           </p>
                         </>
                       )}

@@ -17584,3 +17584,320 @@ select {
     margin-top: 20px;
   }
 }
+
+
+/* =========================================================
+   V108 — TRACKING DE SECCIONES
+   Sin cambios visuales.
+========================================================= */
+
+
+/* =========================================================
+   V109 — DASHBOARD DE ACTIVIDAD / SECCIONES VISITADAS
+========================================================= */
+
+.rsvp-admin-main-tabs {
+  max-width: 620px !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.rsvp-admin-main-tabs button + button {
+  border-left: 1px solid rgba(138, 133, 96, 0.24);
+}
+
+.rsvp-admin-activity-funnel,
+.rsvp-admin-followup,
+.rsvp-admin-group-activity {
+  margin-top: 46px;
+}
+
+.rsvp-admin-activity-funnel-heading,
+.rsvp-admin-followup > header,
+.rsvp-admin-group-activity > header {
+  margin-bottom: 24px;
+}
+
+.rsvp-admin-activity-funnel-heading > span,
+.rsvp-admin-followup > header > span,
+.rsvp-admin-group-activity > header > span {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--champagne-dark);
+
+  font-size: 7px;
+  letter-spacing: 2px;
+}
+
+.rsvp-admin-activity-funnel-heading h2,
+.rsvp-admin-followup h2,
+.rsvp-admin-group-activity h2 {
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 300;
+  line-height: 0.95;
+}
+
+.rsvp-admin-activity-funnel-heading h2 em,
+.rsvp-admin-followup h2 em,
+.rsvp-admin-group-activity h2 em {
+  font-weight: 300;
+}
+
+.rsvp-admin-followup header p,
+.rsvp-admin-group-activity header p {
+  max-width: 590px;
+
+  margin: 15px 0 0;
+
+  color: var(--gray);
+
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.rsvp-admin-section-metrics {
+  border-top: 1px solid var(--line);
+}
+
+.rsvp-admin-section-metric {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  align-items: center;
+  gap: 22px;
+
+  padding: 17px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.rsvp-admin-section-metric > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.rsvp-admin-section-metric strong {
+  min-width: 30px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 29px;
+  font-weight: 400;
+}
+
+.rsvp-admin-section-metric span {
+  color: var(--gray);
+
+  font-size: 7px;
+  letter-spacing: 1.2px;
+}
+
+.rsvp-admin-section-bar {
+  height: 4px;
+
+  background: rgba(138, 133, 96, 0.12);
+
+  overflow: hidden;
+}
+
+.rsvp-admin-section-bar > span {
+  display: block;
+  height: 100%;
+
+  background: var(--champagne-dark);
+
+  transition: width 0.5s ease;
+}
+
+.rsvp-admin-followup {
+  padding: 32px;
+
+  border: 1px solid rgba(138, 133, 96, 0.24);
+  background: rgba(138, 133, 96, 0.055);
+}
+
+.rsvp-admin-followup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.rsvp-admin-followup-grid article {
+  padding: 17px 18px;
+
+  background: rgba(255, 255, 255, 0.52);
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rsvp-admin-followup-grid strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.rsvp-admin-followup-grid span,
+.rsvp-admin-followup-grid small {
+  color: var(--gray);
+
+  font-size: 7px;
+  line-height: 1.45;
+}
+
+.rsvp-admin-group-activity-list {
+  border-top: 1px solid var(--line);
+}
+
+.rsvp-admin-group-activity-card {
+  display: grid;
+  grid-template-columns:
+    minmax(190px, 0.8fr)
+    minmax(390px, 1.8fr)
+    minmax(180px, 0.7fr);
+  gap: 24px;
+  align-items: center;
+
+  padding: 21px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.rsvp-admin-group-activity-person {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rsvp-admin-group-activity-person > strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.rsvp-admin-group-activity-person > span,
+.rsvp-admin-group-activity-person > small {
+  color: var(--gray);
+
+  font-size: 7px;
+  line-height: 1.45;
+}
+
+.rsvp-admin-section-checks {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.rsvp-admin-section-checks > span {
+  min-height: 46px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  border: 1px solid rgba(138, 133, 96, 0.15);
+
+  color: rgba(82, 78, 69, 0.48);
+
+  font-size: 5.5px;
+  letter-spacing: 0.6px;
+
+  text-align: center;
+}
+
+.rsvp-admin-section-checks > span i {
+  font-style: normal;
+  font-size: 9px;
+}
+
+.rsvp-admin-section-checks > span.visited {
+  border-color: rgba(138, 133, 96, 0.36);
+  background: rgba(138, 133, 96, 0.085);
+
+  color: var(--black);
+}
+
+.rsvp-admin-section-checks > span.visited i {
+  color: var(--champagne-dark);
+}
+
+.rsvp-admin-group-activity-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.rsvp-admin-group-activity-meta > span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  color: var(--champagne-dark);
+
+  font-size: 5.5px;
+  letter-spacing: 1px;
+}
+
+.rsvp-admin-group-activity-meta strong {
+  color: var(--black);
+
+  font-size: 7px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+@media (max-width: 900px) {
+  .rsvp-admin-group-activity-card {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .rsvp-admin-section-checks {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .rsvp-admin-group-activity-meta {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 650px) {
+  .rsvp-admin-main-tabs {
+    max-width: none !important;
+  }
+
+  .rsvp-admin-main-tabs button {
+    font-size: 6.5px !important;
+    letter-spacing: 1.2px !important;
+  }
+
+  .rsvp-admin-section-metric {
+    grid-template-columns: 125px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .rsvp-admin-followup {
+    padding: 24px 18px;
+  }
+
+  .rsvp-admin-followup-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-admin-section-checks {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .rsvp-admin-group-activity-meta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
