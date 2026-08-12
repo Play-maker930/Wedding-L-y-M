@@ -3742,8 +3742,8 @@ function WeddingApp() {
               </h1>
 
               <p>
-                Una tarde entre montañas, naturaleza y momentos
-                que queremos guardar para siempre.
+                A través de los años, lugares y momentos
+                que nos trajeron hasta aquí.
               </p>
 
             </header>
@@ -4838,7 +4838,7 @@ function WeddingApp() {
 
                     <p className="rsvp-deadline">
                       Confirma tu asistencia antes del{' '}
-                      <strong>30 de octubre.</strong>
+                      <strong>30 de octubre de 2026.</strong>
                     </p>
 
                   </header>
