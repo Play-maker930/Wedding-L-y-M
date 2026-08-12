@@ -1621,108 +1621,59 @@ function WeddingApp() {
       return
     }
 
-    const attendingGuests = rsvpGroup.guests.filter(
-      (guest) => rsvpResponses[guest.id] === 'yes'
-    )
-
-    const decliningGuests = rsvpGroup.guests.filter(
-      (guest) => rsvpResponses[guest.id] === 'no'
-    )
-
-    const formspreeEndpoint =
-      import.meta.env.VITE_FORMSPREE_ENDPOINT
-
-    if (!formspreeEndpoint) {
-      setRsvpStatus({
-        state: 'error',
-        message:
-          'El formulario todavía no está conectado. Agrega VITE_FORMSPREE_ENDPOINT en Vercel.',
-      })
-      return
-    }
-
     setRsvpStatus({
       state: 'submitting',
       message: '',
     })
 
-    const payload = {
-      codigo_de_invitacion: rsvpCode,
-      confirmados:
-        attendingGuests.length > 0
-          ? attendingGuests.map((guest) => guest.name).join(', ')
-          : 'Ninguno',
-      no_asisten:
-        decliningGuests.length > 0
-          ? decliningGuests.map((guest) => guest.name).join(', ')
-          : 'Ninguno',
-      total_confirmados: attendingGuests.length,
-      mensaje:
-        rsvpMessage.trim() || 'Sin mensaje adicional',
-      boda: 'Luis & Melanie · 15 de enero de 2027',
-    }
-
     try {
       /*
-        Primero enviamos a Formspree, que ya sabemos que
-        funciona correctamente en producción.
+        Supabase es ahora la única fuente de verdad del RSVP.
+        La confirmación solo se considera enviada cuando
+        /api/rsvp-save responde correctamente.
       */
-      const formspreeResponse = await fetch(
-        formspreeEndpoint,
+      const saveResponse = await fetch(
+        '/api/rsvp-save',
         {
           method: 'POST',
           headers: {
-            Accept: 'application/json',
-            'Content-Type':
-              'application/json',
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            invitationCode: rsvpCode,
+            responses: rsvpGroup.guests.map(
+              (guest) => ({
+                guestId: guest.id,
+                guestName: guest.name,
+                attendance:
+                  rsvpResponses[guest.id],
+              })
+            ),
+            message: rsvpMessage.trim(),
+          }),
         }
       )
 
-      if (!formspreeResponse.ok) {
-        throw new Error(
-          'No fue posible enviar la respuesta.'
-        )
+      let saveData = null
+
+      try {
+        saveData =
+          await saveResponse.json()
+      } catch {
+        saveData = null
       }
 
-      /*
-        Después intentamos guardar en Supabase.
-        Si esta llamada falla, NO bloqueamos la confirmación
-        del invitado porque Formspree ya recibió su RSVP.
-      */
-      try {
-        const saveResponse = await fetch(
-          '/api/rsvp-save',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              invitationCode: rsvpCode,
-              responses: rsvpGroup.guests.map(
-                (guest) => ({
-                  guestId: guest.id,
-                  guestName: guest.name,
-                  attendance:
-                    rsvpResponses[guest.id],
-                })
-              ),
-              message: rsvpMessage.trim(),
-            }),
-          }
+      if (
+        !saveResponse.ok ||
+        !saveData?.success
+      ) {
+        console.warn(
+          'Supabase RSVP save failed:',
+          saveData
         )
 
-        if (!saveResponse.ok) {
-          console.warn(
-            'Formspree recibió el RSVP, pero Supabase no pudo guardarlo.'
-          )
-        }
-      } catch (supabaseError) {
-        console.warn(
-          'Formspree recibió el RSVP, pero la copia en Supabase falló.',
-          supabaseError
+        throw new Error(
+          'No fue posible guardar la respuesta.'
         )
       }
 
@@ -1743,6 +1694,11 @@ function WeddingApp() {
         })
       }, 1800)
     } catch (error) {
+      console.warn(
+        'No fue posible guardar el RSVP.',
+        error
+      )
+
       setRsvpStatus({
         state: 'error',
         message:
