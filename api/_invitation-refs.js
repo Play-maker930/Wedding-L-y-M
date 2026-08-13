@@ -81,7 +81,7 @@ export const invitationRefs = {
   "CZZ94Z": {
     "groupName": "Grupo 16",
     "rsvpCode": "SAL39",
-    "label": "Anabella Noriega + David Lu"
+    "label": "Anabella Noriega"
   },
   "KAP3RK": {
     "groupName": "Grupo 17",

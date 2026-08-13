@@ -204,10 +204,6 @@ export const invitationGroups = {
       {
         "id": "sal39-1",
         "name": "Anabella Noriega"
-      },
-      {
-        "id": "sal39-2",
-        "name": "David Lu"
       }
     ]
   },
