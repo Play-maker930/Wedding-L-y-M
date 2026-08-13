@@ -576,6 +576,7 @@ function WeddingApp() {
   const homeImageRef = useRef(null)
   const trackedInvitationRef = useRef(null)
   const trackedSectionsRef = useRef(new Set())
+  const confirmedInvitationTrackingRef = useRef(false)
   const galleryTouchStartXRef = useRef(null)
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
 
@@ -603,25 +604,109 @@ function WeddingApp() {
       .replace(/[^A-Z0-9]/g, '')
       .slice(0, 6)
 
-    const anonymousVisitorId =
-      invitationRef.length === 6
-        ? ''
-        : getOrCreateAnonymousVisitorId()
+    /*
+      VISITAS CON REF:
+      Solo se consideran reales después de permanecer
+      al menos 10 segundos en la web.
 
-    const visitorTrackingId =
-      invitationRef.length === 6
-        ? invitationRef
-        : anonymousVisitorId
+      VISITAS SIN REF:
+      Se mantienen como tráfico anónimo y se registran
+      inmediatamente, como antes.
+    */
+    if (invitationRef.length === 6) {
+      if (
+        trackedInvitationRef.current === invitationRef
+      ) {
+        return undefined
+      }
+
+      trackedInvitationRef.current =
+        invitationRef
+
+      const confirmationTimer =
+        window.setTimeout(() => {
+          confirmedInvitationTrackingRef.current =
+            true
+
+          fetch('/api/track-visit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ref: invitationRef,
+              visitorId: '',
+            }),
+            keepalive: true,
+          }).catch((error) => {
+            console.warn(
+              'No fue posible registrar la apertura confirmada de la invitación.',
+              error
+            )
+          })
+
+          /*
+            Al cumplirse los 10 segundos registramos también
+            la sección donde la persona se encuentre en ese momento.
+          */
+          const currentSection =
+            PATH_PAGES[
+              window.location.pathname
+            ] || 'inicio'
+
+          const sessionKey =
+            `${invitationRef}:${currentSection}`
+
+          if (
+            !trackedSectionsRef.current.has(
+              sessionKey
+            )
+          ) {
+            trackedSectionsRef.current.add(
+              sessionKey
+            )
+
+            fetch('/api/track-section', {
+              method: 'POST',
+              headers: {
+                'Content-Type':
+                  'application/json',
+              },
+              body: JSON.stringify({
+                ref: invitationRef,
+                visitorId: '',
+                section: currentSection,
+              }),
+              keepalive: true,
+            }).catch((error) => {
+              console.warn(
+                'No fue posible registrar la primera sección confirmada.',
+                error
+              )
+            })
+          }
+        }, 10000)
+
+      return () => {
+        window.clearTimeout(
+          confirmationTimer
+        )
+      }
+    }
+
+    const anonymousVisitorId =
+      getOrCreateAnonymousVisitorId()
 
     if (
-      !visitorTrackingId ||
-      trackedInvitationRef.current === visitorTrackingId
+      !anonymousVisitorId ||
+      trackedInvitationRef.current ===
+        anonymousVisitorId
     ) {
-      return
+      return undefined
     }
 
     trackedInvitationRef.current =
-      visitorTrackingId
+      anonymousVisitorId
 
     fetch('/api/track-visit', {
       method: 'POST',
@@ -629,22 +714,18 @@ function WeddingApp() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ref:
-          invitationRef.length === 6
-            ? invitationRef
-            : '',
-        visitorId:
-          invitationRef.length === 6
-            ? ''
-            : anonymousVisitorId,
+        ref: '',
+        visitorId: anonymousVisitorId,
       }),
       keepalive: true,
     }).catch((error) => {
       console.warn(
-        'No fue posible registrar la apertura de la invitación.',
+        'No fue posible registrar la apertura anónima.',
         error
       )
     })
+
+    return undefined
   }, [])
 
   useEffect(() => {
@@ -664,6 +745,17 @@ function WeddingApp() {
 
   useEffect(() => {
     const invitationRef = getInvitationRef()
+
+    /*
+      Para links personalizados, no registramos ninguna sección
+      hasta que la visita haya superado los 10 segundos.
+    */
+    if (
+      invitationRef.length === 6 &&
+      !confirmedInvitationTrackingRef.current
+    ) {
+      return
+    }
 
     const anonymousVisitorId =
       invitationRef.length === 6
