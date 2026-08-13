@@ -2050,11 +2050,34 @@ function WeddingApp() {
         </nav>
 
         <button
-          className="menu-button"
+          className={
+            menuOpen
+              ? 'menu-button menu-button-open'
+              : 'menu-button menu-button-discoverable'
+          }
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Abrir menú"
+          aria-label={
+            menuOpen
+              ? 'Cerrar menú'
+              : 'Abrir menú'
+          }
         >
-          {menuOpen ? '×' : '☰'}
+          {menuOpen ? (
+            <span className="menu-button-close">×</span>
+          ) : (
+            <>
+              <span className="menu-button-label">
+                MENÚ
+              </span>
+
+              <span
+                className="menu-button-icon"
+                aria-hidden="true"
+              >
+                ☰
+              </span>
+            </>
+          )}
         </button>
 
       </header>
