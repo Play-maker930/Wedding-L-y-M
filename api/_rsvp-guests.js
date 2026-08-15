@@ -155,7 +155,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "bog25-1",
-        "name": "Jorge Icaza"
+        "name": "Jorge Ycaza"
       }
     ]
   },
@@ -194,7 +194,7 @@ export const invitationGroups = {
       },
       {
         "id": "ros87-2",
-        "name": "Anxo Vasquez"
+        "name": "Anxo Vazquez"
       }
     ]
   },
@@ -1028,6 +1028,42 @@ export const invitationGroups = {
       {
         "id": "poa81-1",
         "name": "Lenora Klappe"
+      }
+    ]
+  },
+  "BLB27": {
+    "group": "Grupo 89",
+    "guests": [
+      {
+        "id": "blb27-1",
+        "name": "Vielka Valenzuela"
+      }
+    ]
+  },
+  "HOU64": {
+    "group": "Grupo 90",
+    "guests": [
+      {
+        "id": "hou64-1",
+        "name": "Vivian Valenzuela"
+      }
+    ]
+  },
+  "SEA18": {
+    "group": "Grupo 91",
+    "guests": [
+      {
+        "id": "sea18-1",
+        "name": "Gabriel Grimaldo"
+      }
+    ]
+  },
+  "TQO53": {
+    "group": "Grupo 92",
+    "guests": [
+      {
+        "id": "tqo53-1",
+        "name": "Jorge Luis Rodriguez"
       }
     ]
   }

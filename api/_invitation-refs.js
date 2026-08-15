@@ -61,7 +61,7 @@ export const invitationRefs = {
   "RNKRV9": {
     "groupName": "Grupo 12",
     "rsvpCode": "BOG25",
-    "label": "Jorge Icaza"
+    "label": "Jorge Ycaza"
   },
   "5TKV8W": {
     "groupName": "Grupo 13",
@@ -76,7 +76,7 @@ export const invitationRefs = {
   "TP8FEK": {
     "groupName": "Grupo 15",
     "rsvpCode": "ROS87",
-    "label": "Elena Noriega + Anxo Vasquez"
+    "label": "Elena Noriega + Anxo Vazquez"
   },
   "CZZ94Z": {
     "groupName": "Grupo 16",
@@ -442,5 +442,25 @@ export const invitationRefs = {
     "groupName": "Grupo 88",
     "rsvpCode": "POA81",
     "label": "Lenora Klappe"
+  },
+  "U32JDP": {
+    "groupName": "Grupo 89",
+    "rsvpCode": "BLB27",
+    "label": "Vielka Valenzuela"
+  },
+  "8T69T7": {
+    "groupName": "Grupo 90",
+    "rsvpCode": "HOU64",
+    "label": "Vivian Valenzuela"
+  },
+  "S3KQD5": {
+    "groupName": "Grupo 91",
+    "rsvpCode": "SEA18",
+    "label": "Gabriel Grimaldo"
+  },
+  "J3HHH3": {
+    "groupName": "Grupo 92",
+    "rsvpCode": "TQO53",
+    "label": "Jorge Luis Rodriguez"
   }
 }
