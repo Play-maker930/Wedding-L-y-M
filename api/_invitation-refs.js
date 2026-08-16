@@ -460,12 +460,14 @@ export const invitationRefs = {
   "U32JDP": {
     "groupName": "Grupo 89",
     "rsvpCode": "BLB27",
-    "label": "Vielka Valenzuela"
+    "label": "Vielka Valenzuela",
+    "experience": "lite"
   },
   "8T69T7": {
     "groupName": "Grupo 90",
     "rsvpCode": "HOU64",
-    "label": "Vivian Valenzuela"
+    "label": "Vivian Valenzuela",
+    "experience": "lite"
   },
   "S3KQD5": {
     "groupName": "Grupo 91",
