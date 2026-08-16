@@ -567,11 +567,29 @@ function WeddingApp() {
   const activePage =
     PATH_PAGES[location.pathname] || 'inicio'
 
+  const invitationRefFromUrl = String(
+    new URLSearchParams(
+      window.location.search
+    ).get('ref') || ''
+  )
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, '')
+    .slice(0, 6)
+
+  const hasInvitationRef =
+    invitationRefFromUrl.length === 6
+
   const [showInvitation, setShowInvitation] = useState(
     () => location.pathname === '/'
   )
   const [showStoryFilm, setShowStoryFilm] = useState(false)
   const [homeReveal, setHomeReveal] = useState(false)
+
+  const [invitationExperience, setInvitationExperience] =
+    useState('lite')
+  const [experienceResolved, setExperienceResolved] =
+    useState(false)
   const musicRef = useRef(null)
   const homeImageRef = useRef(null)
   const trackedInvitationRef = useRef(null)
@@ -592,6 +610,73 @@ function WeddingApp() {
   }, [])
 
   useEffect(() => {
+    let cancelled = false
+
+    const resolveExperience = async () => {
+      const params = new URLSearchParams(
+        window.location.search
+      )
+
+      const ref = String(
+        params.get('ref') || ''
+      )
+        .trim()
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, '')
+        .slice(0, 6)
+
+      if (ref.length !== 6) {
+        if (!cancelled) {
+          setInvitationExperience('lite')
+          setExperienceResolved(true)
+        }
+        return
+      }
+
+      try {
+        const response = await fetch(
+          '/api/invitation-experience',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ref }),
+          }
+        )
+
+        const data = await response.json()
+
+        if (!cancelled) {
+          setInvitationExperience(
+            response.ok &&
+              data?.experience === 'full'
+              ? 'full'
+              : 'lite'
+          )
+          setExperienceResolved(true)
+        }
+      } catch (error) {
+        console.warn(
+          'No fue posible resolver la versión de la invitación.',
+          error
+        )
+
+        if (!cancelled) {
+          setInvitationExperience('lite')
+          setExperienceResolved(true)
+        }
+      }
+    }
+
+    resolveExperience()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
     const params = new URLSearchParams(
       window.location.search
     )
@@ -607,7 +692,7 @@ function WeddingApp() {
     /*
       VISITAS CON REF:
       Solo se consideran reales después de permanecer
-      al menos 10 segundos en la web.
+      al menos 5 segundos en la web.
 
       VISITAS SIN REF:
       Se mantienen como tráfico anónimo y se registran
@@ -646,7 +731,7 @@ function WeddingApp() {
           })
 
           /*
-            Al cumplirse los 10 segundos registramos también
+            Al cumplirse los 5 segundos registramos también
             la sección donde la persona se encuentre en ese momento.
           */
           const currentSection =
@@ -685,7 +770,7 @@ function WeddingApp() {
               )
             })
           }
-        }, 10000)
+        }, 5000)
 
       return () => {
         window.clearTimeout(
@@ -734,6 +819,21 @@ function WeddingApp() {
       return
     }
 
+    if (
+      experienceResolved &&
+      invitationExperience === 'lite' &&
+      location.pathname === PAGE_PATHS.galeria
+    ) {
+      routerNavigate(
+        {
+          pathname: PAGE_PATHS.inicio,
+          search: window.location.search || '',
+        },
+        { replace: true }
+      )
+      return
+    }
+
     setMenuOpen(false)
     setActiveGalleryImage(null)
 
@@ -741,14 +841,19 @@ function WeddingApp() {
       top: 0,
       behavior: 'auto',
     })
-  }, [location.pathname, routerNavigate])
+  }, [
+    location.pathname,
+    routerNavigate,
+    invitationExperience,
+    experienceResolved,
+  ])
 
   useEffect(() => {
     const invitationRef = getInvitationRef()
 
     /*
       Para links personalizados, no registramos ninguna sección
-      hasta que la visita haya superado los 10 segundos.
+      hasta que la visita haya superado los 5 segundos.
     */
     if (
       invitationRef.length === 6 &&
@@ -1281,7 +1386,7 @@ function WeddingApp() {
       .replace(/;/g, '\\;')
   }
 
-  const pages = [
+  const fullPages = [
     { id: 'inicio', label: 'Inicio', path: PAGE_PATHS.inicio },
     { id: 'boda', label: 'El Gran Día', path: PAGE_PATHS.boda },
     {
@@ -1293,9 +1398,22 @@ function WeddingApp() {
     { id: 'rsvp', label: 'RSVP', path: PAGE_PATHS.rsvp },
   ]
 
+  const pages =
+    invitationExperience === 'lite'
+      ? fullPages.filter(
+          (page) => page.id !== 'galeria'
+        )
+      : fullPages
+
   const navigate = (page) => {
+    const safePage =
+      invitationExperience === 'lite' &&
+      page === 'galeria'
+        ? 'inicio'
+        : page
+
     const destination =
-      PAGE_PATHS[page] || PAGE_PATHS.inicio
+      PAGE_PATHS[safePage] || PAGE_PATHS.inicio
 
     const performNavigation = () => {
       const currentSearch =
@@ -1389,8 +1507,64 @@ function WeddingApp() {
     }
   }
 
-  const openInvitation = () => {
+  const openInvitation = async () => {
+    let resolvedExperience =
+      invitationExperience
+
+    if (!experienceResolved) {
+      const ref = getInvitationRef()
+
+      if (ref.length === 6) {
+        try {
+          const response = await fetch(
+            '/api/invitation-experience',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ ref }),
+            }
+          )
+
+          const data = await response.json()
+
+          resolvedExperience =
+            response.ok &&
+              data?.experience === 'full'
+              ? 'full'
+              : 'lite'
+        } catch {
+          resolvedExperience = 'lite'
+        }
+      } else {
+        resolvedExperience = 'lite'
+      }
+
+      setInvitationExperience(
+        resolvedExperience
+      )
+      setExperienceResolved(true)
+    }
+
     setShowInvitation(false)
+
+    if (resolvedExperience === 'lite') {
+      setShowStoryFilm(false)
+      setHomeReveal(true)
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto',
+      })
+
+      window.setTimeout(() => {
+        setHomeReveal(false)
+      }, 1200)
+
+      return
+    }
+
     setShowStoryFilm(true)
   }
 
@@ -1863,6 +2037,45 @@ function WeddingApp() {
       new Date(b.submittedAt || 0) -
       new Date(a.submittedAt || 0)
   )
+
+
+
+  if (!hasInvitationRef) {
+    return (
+      <main className="invitation-access-denied">
+        <div className="invitation-access-denied-card">
+          <span className="invitation-access-denied-monogram">
+            
+          </span>
+
+          <p className="invitation-access-denied-eyebrow">
+            INVITACIÓN PRIVADA
+          </p>
+
+          <h1>
+            Este enlace es
+            <em> solo para nuestros invitados.</em>
+          </h1>
+
+          <p className="invitation-access-denied-copy">
+            Lo sentimos, no pudimos identificar una invitación
+            asociada a este enlace. Si eres uno de nuestros invitados,
+            por favor abre el enlace personalizado que recibiste
+            directamente de nosotros.
+          </p>
+
+          <div
+            className="invitation-access-denied-line"
+            aria-hidden="true"
+          ></div>
+
+          <small>
+            Luis & Melanie
+          </small>
+        </div>
+      </main>
+    )
+  }
 
 
   return (
@@ -3802,7 +4015,7 @@ function WeddingApp() {
           </section>
         )}
 
-        {activePage === 'galeria' && (
+        {activePage === 'galeria' && invitationExperience === 'full' && (
           <section className="gallery-preboda-page page-transition">
 
             <header className="gallery-preboda-heading">

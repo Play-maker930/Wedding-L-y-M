@@ -18459,3 +18459,120 @@ select {
     animation: none !important;
   }
 }
+
+
+/* =========================================================
+   V118 — FULL / LITE
+   LITE: sin transición de fotos y sin Galería.
+========================================================= */
+
+
+/* =========================================================
+   V119 — ACCESO SIN REF
+========================================================= */
+
+.invitation-access-denied {
+  min-height: 100svh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px 22px;
+
+  background: var(--ivory);
+  color: var(--black);
+}
+
+.invitation-access-denied-card {
+  width: min(100%, 620px);
+
+  text-align: center;
+}
+
+.invitation-access-denied-monogram {
+  display: block;
+
+  margin-bottom: 34px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+
+.invitation-access-denied-eyebrow {
+  margin: 0 0 13px;
+
+  color: var(--champagne-dark);
+
+  font-size: 7px;
+  letter-spacing: 2.4px;
+}
+
+.invitation-access-denied h1 {
+  margin: 0 auto;
+
+  max-width: 560px;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 6vw, 68px);
+  font-weight: 300;
+  line-height: 0.98;
+}
+
+.invitation-access-denied h1 em {
+  display: block;
+  font-weight: 300;
+}
+
+.invitation-access-denied-copy {
+  max-width: 500px;
+
+  margin: 25px auto 0;
+
+  color: var(--gray);
+
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.invitation-access-denied-line {
+  width: 44px;
+  height: 1px;
+
+  margin: 31px auto 20px;
+
+  background: rgba(138, 133, 96, 0.55);
+}
+
+.invitation-access-denied small {
+  color: var(--champagne-dark);
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 1.7px;
+}
+
+@media (max-width: 650px) {
+  .invitation-access-denied {
+    padding: 28px 24px;
+  }
+
+  .invitation-access-denied-monogram {
+    margin-bottom: 30px;
+    font-size: 21px;
+  }
+
+  .invitation-access-denied h1 {
+    font-size: 44px;
+  }
+
+  .invitation-access-denied-copy {
+    margin-top: 22px;
+    font-size: 9px;
+    line-height: 1.75;
+  }
+}
+

@@ -356,32 +356,38 @@ export const invitationRefs = {
   "VVPBZA": {
     "groupName": "Grupo 71",
     "rsvpCode": "GYE55",
-    "label": "María Yanguez"
+    "label": "María Yanguez",
+    "experience": "lite"
   },
   "545P74": {
     "groupName": "Grupo 72",
     "rsvpCode": "MAO16",
-    "label": "Edwin Vega + Veronica Aleman"
+    "label": "Edwin Vega + Veronica Aleman",
+    "experience": "lite"
   },
   "S4CJ37": {
     "groupName": "Grupo 73",
     "rsvpCode": "POP01",
-    "label": "Even Vasquez"
+    "label": "Even Vasquez",
+    "experience": "lite"
   },
   "VKJVU7": {
     "groupName": "Grupo 74",
     "rsvpCode": "SMR67",
-    "label": "Jhonatan Lopez"
+    "label": "Jhonatan Lopez",
+    "experience": "lite"
   },
   "KXHTX2": {
     "groupName": "Grupo 75",
     "rsvpCode": "BWI29",
-    "label": "JoseAntonio Jimenez"
+    "label": "JoseAntonio Jimenez",
+    "experience": "lite"
   },
   "STTJMP": {
     "groupName": "Grupo 76",
     "rsvpCode": "GRU80",
-    "label": "Hector Bustavino"
+    "label": "Hector Bustavino",
+    "experience": "lite"
   },
   "VBHMVD": {
     "groupName": "Grupo 77",
@@ -406,32 +412,38 @@ export const invitationRefs = {
   "RPRUFS": {
     "groupName": "Grupo 81",
     "rsvpCode": "BGA89",
-    "label": "Ivana Jimenez"
+    "label": "Ivana Jimenez",
+    "experience": "lite"
   },
   "WQ4Y35": {
     "groupName": "Grupo 82",
     "rsvpCode": "ATL68",
-    "label": "Constantino Peralta + Thelma Bodden"
+    "label": "Constantino Peralta + Thelma Bodden",
+    "experience": "lite"
   },
   "FVUAUU": {
     "groupName": "Grupo 83",
     "rsvpCode": "DEN62",
-    "label": "Raysa Gonzalez"
+    "label": "Raysa Gonzalez",
+    "experience": "lite"
   },
   "29YFS4": {
     "groupName": "Grupo 84",
     "rsvpCode": "MTY69",
-    "label": "Raul Sandoval"
+    "label": "Raul Sandoval",
+    "experience": "lite"
   },
   "BZ5DFT": {
     "groupName": "Grupo 85",
     "rsvpCode": "PEI01",
-    "label": "Ana Lorena Fernandez"
+    "label": "Ana Lorena Fernandez",
+    "experience": "lite"
   },
   "QXNWJM": {
     "groupName": "Grupo 86",
     "rsvpCode": "SJD35",
-    "label": "Raul Gañan"
+    "label": "Raul Gañan",
+    "experience": "lite"
   },
   "3KJ8KP": {
     "groupName": "Grupo 87",
@@ -456,7 +468,8 @@ export const invitationRefs = {
   "S3KQD5": {
     "groupName": "Grupo 91",
     "rsvpCode": "SEA18",
-    "label": "Gabriel Grimaldo"
+    "label": "Gabriel Grimaldo",
+    "experience": "lite"
   },
   "J3HHH3": {
     "groupName": "Grupo 92",

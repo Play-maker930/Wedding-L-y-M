@@ -94,7 +94,7 @@ export async function POST(request) {
         ].join(',')
       )
       .order('updated_at', {
-        ascending: false,
+        ascending: true,
       })
 
     if (error) {
@@ -155,6 +155,17 @@ export async function POST(request) {
         pending.push(baseGuest)
       }
     })
+
+    /*
+      En el panel privado mostramos respuestas en orden cronológico:
+      la primera respuesta arriba y la más reciente al final.
+    */
+    const sortByResponseTime = (a, b) =>
+      new Date(a.submittedAt || 0) -
+      new Date(b.submittedAt || 0)
+
+    attending.sort(sortByResponseTime)
+    notAttending.sort(sortByResponseTime)
 
     const total = allGuests.length
     const responded =
