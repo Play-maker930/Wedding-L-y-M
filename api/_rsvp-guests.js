@@ -1066,6 +1066,15 @@ export const invitationGroups = {
         "name": "Jorge Luis Rodriguez"
       }
     ]
+  },
+  "AXM41": {
+    "group": "Grupo 93",
+    "guests": [
+      {
+        "id": "axm41-1",
+        "name": "Mario Quitanilla"
+      }
+    ]
   }
 }
 

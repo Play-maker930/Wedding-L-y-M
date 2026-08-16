@@ -18576,3 +18576,16 @@ select {
   }
 }
 
+
+
+.invitation-access-denied-monogram,
+.invitation-access-denied-line,
+.invitation-access-denied-card > small {
+  display: none !important;
+}
+
+.invitation-access-denied-eyebrow {
+  margin-top: 0 !important;
+}
+
+

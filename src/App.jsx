@@ -2044,11 +2044,7 @@ function WeddingApp() {
     return (
       <main className="invitation-access-denied">
         <div className="invitation-access-denied-card">
-          <span className="invitation-access-denied-monogram">
-            
-          </span>
-
-          <p className="invitation-access-denied-eyebrow">
+<p className="invitation-access-denied-eyebrow">
             INVITACIÓN PRIVADA
           </p>
 
@@ -2063,16 +2059,7 @@ function WeddingApp() {
             por favor abre el enlace personalizado que recibiste
             directamente de nosotros.
           </p>
-
-          <div
-            className="invitation-access-denied-line"
-            aria-hidden="true"
-          ></div>
-
-          <small>
-            Luis & Melanie
-          </small>
-        </div>
+</div>
       </main>
     )
   }

@@ -346,12 +346,14 @@ export const invitationRefs = {
   "ZJEVKR": {
     "groupName": "Grupo 69",
     "rsvpCode": "NAS87",
-    "label": "Johana Gutierrez"
+    "label": "Johana Gutierrez",
+    "experience": "lite"
   },
   "S2BUKS": {
     "groupName": "Grupo 70",
     "rsvpCode": "CTG42",
-    "label": "María Lourdes Muñoz"
+    "label": "María Lourdes Muñoz",
+    "experience": "lite"
   },
   "VVPBZA": {
     "groupName": "Grupo 71",
@@ -475,5 +477,10 @@ export const invitationRefs = {
     "groupName": "Grupo 92",
     "rsvpCode": "TQO53",
     "label": "Jorge Luis Rodriguez"
+  },
+  "PYBM24": {
+    "groupName": "Grupo 93",
+    "rsvpCode": "AXM41",
+    "label": "Mario Quitanilla"
   }
 }
