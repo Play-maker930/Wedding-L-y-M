@@ -483,6 +483,18 @@ export const invitationRefs = {
   "PYBM24": {
     "groupName": "Grupo 93",
     "rsvpCode": "AXM41",
-    "label": "Mario Quintanilla"
+    "label": "Mario Quitanilla"
+  },
+  "FPRALW": {
+    "groupName": "Grupo 94",
+    "rsvpCode": "YUL62",
+    "label": "Nuria y Gabriel Diaz",
+    "experience": "lite"
+  },
+  "U6PS2R": {
+    "groupName": "Grupo 95",
+    "rsvpCode": "LIM47",
+    "label": "Yaneth y Héctor Cotes",
+    "experience": "lite"
   }
 }

@@ -1072,7 +1072,33 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "axm41-1",
-        "name": "Mario Quintanilla"
+        "name": "Mario Quitanilla"
+      }
+    ]
+  },
+  "YUL62": {
+    "group": "Grupo 94",
+    "guests": [
+      {
+        "id": "yul62-1",
+        "name": "Nuria Diaz"
+      },
+      {
+        "id": "yul62-2",
+        "name": "Gabriel Diaz"
+      }
+    ]
+  },
+  "LIM47": {
+    "group": "Grupo 95",
+    "guests": [
+      {
+        "id": "lim47-1",
+        "name": "Yaneth Cotes"
+      },
+      {
+        "id": "lim47-2",
+        "name": "Héctor Cotes"
       }
     ]
   }
