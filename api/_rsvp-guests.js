@@ -893,7 +893,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "smr67-1",
-        "name": "Jhonatan Lopez"
+        "name": "Jhonnatan Lopez"
       }
     ]
   },
@@ -902,7 +902,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "bwi29-1",
-        "name": "JoseAntonio Jimenez"
+        "name": "Joseantonio Jimenez"
       }
     ]
   },
@@ -1072,7 +1072,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "axm41-1",
-        "name": "Mario Quitanilla"
+        "name": "Mario Quintanilla"
       }
     ]
   }
