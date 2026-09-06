@@ -131,7 +131,7 @@ export const invitationRefs = {
   "2ED9MT": {
     "groupName": "Grupo 26",
     "rsvpCode": "PTY46",
-    "label": "Melanie Paz + Luis"
+    "label": "Melanie Paz + Luis Pinto"
   },
   "GMEQ4A": {
     "groupName": "Grupo 27",
@@ -376,13 +376,13 @@ export const invitationRefs = {
   "VKJVU7": {
     "groupName": "Grupo 74",
     "rsvpCode": "SMR67",
-    "label": "Jhonatan Lopez",
+    "label": "Jhonnatan Lopez",
     "experience": "lite"
   },
   "KXHTX2": {
     "groupName": "Grupo 75",
     "rsvpCode": "BWI29",
-    "label": "JoseAntonio Jimenez",
+    "label": "Joseantonio Jimenez",
     "experience": "lite"
   },
   "STTJMP": {
@@ -484,5 +484,17 @@ export const invitationRefs = {
     "groupName": "Grupo 93",
     "rsvpCode": "AXM41",
     "label": "Mario Quitanilla"
+  },
+  "FPRALW": {
+    "groupName": "Grupo 94",
+    "rsvpCode": "YUL62",
+    "label": "Nuria y Gabriel Diaz",
+    "experience": "lite"
+  },
+  "U6PS2R": {
+    "groupName": "Grupo 95",
+    "rsvpCode": "LIM47",
+    "label": "Yaneth y Héctor Cotes",
+    "experience": "lite"
   }
 }

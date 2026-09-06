@@ -321,7 +321,7 @@ export const invitationGroups = {
       },
       {
         "id": "pty46-2",
-        "name": "Luis"
+        "name": "Luis Pinto"
       }
     ]
   },
@@ -893,7 +893,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "smr67-1",
-        "name": "Jhonatan Lopez"
+        "name": "Jhonnatan Lopez"
       }
     ]
   },
@@ -902,7 +902,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "bwi29-1",
-        "name": "JoseAntonio Jimenez"
+        "name": "Joseantonio Jimenez"
       }
     ]
   },
@@ -1073,6 +1073,32 @@ export const invitationGroups = {
       {
         "id": "axm41-1",
         "name": "Mario Quitanilla"
+      }
+    ]
+  },
+  "YUL62": {
+    "group": "Grupo 94",
+    "guests": [
+      {
+        "id": "yul62-1",
+        "name": "Nuria Diaz"
+      },
+      {
+        "id": "yul62-2",
+        "name": "Gabriel Diaz"
+      }
+    ]
+  },
+  "LIM47": {
+    "group": "Grupo 95",
+    "guests": [
+      {
+        "id": "lim47-1",
+        "name": "Yaneth Cotes"
+      },
+      {
+        "id": "lim47-2",
+        "name": "Héctor Cotes"
       }
     ]
   }
