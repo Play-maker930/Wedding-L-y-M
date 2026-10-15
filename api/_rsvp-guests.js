@@ -321,7 +321,7 @@ export const invitationGroups = {
       },
       {
         "id": "pty46-2",
-        "name": "Luis"
+        "name": "Luis Pinto"
       }
     ]
   },
