@@ -893,7 +893,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "smr67-1",
-        "name": "Jhonnatan Lopez"
+        "name": "Jhonatan Lopez"
       }
     ]
   },
@@ -902,7 +902,7 @@ export const invitationGroups = {
     "guests": [
       {
         "id": "bwi29-1",
-        "name": "Joseantonio Jimenez"
+        "name": "JoseAntonio Jimenez"
       }
     ]
   },
@@ -1099,6 +1099,24 @@ export const invitationGroups = {
       {
         "id": "lim47-2",
         "name": "Héctor Cotes"
+      }
+    ]
+  },
+  "PMV26": {
+    "group": "Grupo 96",
+    "guests": [
+      {
+        "id": "pmv26-1",
+        "name": "Marianne Rusodimos"
+      }
+    ]
+  },
+  "AEP27": {
+    "group": "Grupo 97",
+    "guests": [
+      {
+        "id": "aep27-1",
+        "name": "Beatriz Gonzalez"
       }
     ]
   }

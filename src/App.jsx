@@ -577,6 +577,10 @@ function WeddingApp() {
     .replace(/[^A-Z0-9]/g, '')
     .slice(0, 6)
 
+  // La extensión se aplica solo a los enlaces personalizados indicados.
+  const extendedRsvpRefs = new Set(['WQ4Y35', 'FVUAUU', '29YFS4', 'QXNWJM', 'UBPD86', 'MF5MX9'])
+  const hasExtendedRsvpDeadline = extendedRsvpRefs.has(invitationRefFromUrl)
+
   const hasInvitationRef =
     invitationRefFromUrl.length === 6
 
@@ -5109,7 +5113,7 @@ function WeddingApp() {
 
                     <p className="rsvp-deadline">
                       Confirma tu asistencia antes del{' '}
-                      <strong>30 de octubre de 2026.</strong>
+                      <strong>{hasExtendedRsvpDeadline ? '30 de noviembre de 2026.' : '30 de octubre de 2026.'}</strong>
                     </p>
 
                   </header>
