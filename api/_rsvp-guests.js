@@ -321,7 +321,7 @@ export const invitationGroups = {
       },
       {
         "id": "pty46-2",
-        "name": "Luis Pinto"
+        "name": "Luis"
       }
     ]
   },
@@ -1117,6 +1117,37 @@ export const invitationGroups = {
       {
         "id": "aep27-1",
         "name": "Beatriz Gonzalez"
+      }
+    ]
+  },
+  "LHR10": {
+    "group": "Grupo 98",
+    "guests": [
+      {
+        "id": "lhr10-1",
+        "name": "Uriel Barrios"
+      }
+    ]
+  },
+  "CDG34": {
+    "group": "Grupo 99",
+    "guests": [
+      {
+        "id": "cdg34-1",
+        "name": "Cecilia Santana"
+      }
+    ]
+  },
+  "DXB15": {
+    "group": "Grupo 100",
+    "guests": [
+      {
+        "id": "dxb15-1",
+        "name": "Aidee Alves"
+      },
+      {
+        "id": "dxb15-2",
+        "name": "Jorge Alves"
       }
     ]
   }

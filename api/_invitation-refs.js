@@ -508,5 +508,23 @@ export const invitationRefs = {
     "rsvpCode": "AEP27",
     "label": "Beatriz Gonzalez",
     "experience": "lite"
+  },
+  "ZNFCPA": {
+    "groupName": "Grupo 98",
+    "rsvpCode": "LHR10",
+    "label": "Uriel Barrios",
+    "experience": "lite"
+  },
+  "1Q1BS3": {
+    "groupName": "Grupo 99",
+    "rsvpCode": "CDG34",
+    "label": "Cecilia Santana",
+    "experience": "lite"
+  },
+  "1JP99G": {
+    "groupName": "Grupo 100",
+    "rsvpCode": "DXB15",
+    "label": "Aidee Alves y Jorge Alves",
+    "experience": "lite"
   }
 }
