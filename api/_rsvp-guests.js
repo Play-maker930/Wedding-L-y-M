@@ -1150,6 +1150,37 @@ export const invitationGroups = {
         "name": "Jorge Alves"
       }
     ]
+  },
+  "SYD60": {
+    "group": "Grupo 101",
+    "guests": [
+      {
+        "id": "syd60-1",
+        "name": "Ashley Lopez"
+      }
+    ]
+  },
+  "FCO50": {
+    "group": "Grupo 102",
+    "guests": [
+      {
+        "id": "fco50-1",
+        "name": "Ingrid Dutary de Ramos"
+      },
+      {
+        "id": "fco50-2",
+        "name": "Wigberto Ramos"
+      }
+    ]
+  },
+  "AMS57": {
+    "group": "Grupo 103",
+    "guests": [
+      {
+        "id": "ams57-1",
+        "name": "Laura Billingslea"
+      }
+    ]
   }
 }
 

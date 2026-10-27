@@ -526,5 +526,23 @@ export const invitationRefs = {
     "rsvpCode": "DXB15",
     "label": "Aidee Alves y Jorge Alves",
     "experience": "lite"
+  },
+  "WRIK6W": {
+    "groupName": "Grupo 101",
+    "rsvpCode": "SYD60",
+    "label": "Ashley Lopez",
+    "experience": "lite"
+  },
+  "HJWFBS": {
+    "groupName": "Grupo 102",
+    "rsvpCode": "FCO50",
+    "label": "Ingrid Dutary de Ramos y Wigberto Ramos",
+    "experience": "lite"
+  },
+  "T9F73I": {
+    "groupName": "Grupo 103",
+    "rsvpCode": "AMS57",
+    "label": "Laura Billingslea",
+    "experience": "lite"
   }
 }
