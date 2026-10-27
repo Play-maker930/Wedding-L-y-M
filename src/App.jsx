@@ -578,7 +578,7 @@ function WeddingApp() {
     .slice(0, 6)
 
   // La extensión se aplica solo a los enlaces personalizados indicados.
-  const extendedRsvpRefs = new Set(['WQ4Y35', 'FVUAUU', '29YFS4', 'QXNWJM', 'UBPD86', 'MF5MX9', 'ZNFCPA', '1Q1BS3', '1JP99G', 'AGJNGF'])
+  const extendedRsvpRefs = new Set(['WQ4Y35', 'FVUAUU', '29YFS4', 'QXNWJM', 'UBPD86', 'MF5MX9', 'ZNFCPA', '1Q1BS3', '1JP99G', 'WRIK6W', 'HJWFBS', 'T9F73I'])
   const hasExtendedRsvpDeadline = extendedRsvpRefs.has(invitationRefFromUrl)
 
   const hasInvitationRef =

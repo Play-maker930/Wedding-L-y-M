@@ -542,7 +542,7 @@ export const invitationRefs = {
   "T9F73I": {
     "groupName": "Grupo 103",
     "rsvpCode": "AMS57",
-    "label": "Laura Billingslea",
+    "label": "Laura Billingslea y Billy Billingslea",
     "experience": "lite"
   }
 }
