@@ -450,7 +450,8 @@ export const invitationRefs = {
   "3KJ8KP": {
     "groupName": "Grupo 87",
     "rsvpCode": "CIX84",
-    "label": "Eduardo Miranda + Julie Burgos"
+    "label": "Eduardo Miranda + Julie Burgos",
+    "experience": "lite"
   },
   "46HDS7": {
     "groupName": "Grupo 88",
