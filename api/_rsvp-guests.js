@@ -1185,6 +1185,50 @@ export const invitationGroups = {
         "name": "Billy Billingslea"
       }
     ]
+  },
+  "JFK65": {
+    "group": "Grupo 104",
+    "guests": [
+      {
+        "id": "jfk65-1",
+        "name": "Ana Victoria Gallardo"
+      }
+    ]
+  },
+  "LAX43": {
+    "group": "Grupo 105",
+    "guests": [
+      {
+        "id": "lax43-1",
+        "name": "Miguel Miranda"
+      }
+    ]
+  },
+  "SIN30": {
+    "group": "Grupo 106",
+    "guests": [
+      {
+        "id": "sin30-1",
+        "name": "Eimer"
+      },
+      {
+        "id": "sin30-2",
+        "name": "Rita"
+      }
+    ]
+  },
+  "MIA81": {
+    "group": "Grupo 107",
+    "guests": [
+      {
+        "id": "mia81-1",
+        "name": "Yadira Miranda"
+      },
+      {
+        "id": "mia81-2",
+        "name": "Sergio Perez"
+      }
+    ]
   }
 }
 

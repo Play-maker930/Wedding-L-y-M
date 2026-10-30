@@ -544,5 +544,29 @@ export const invitationRefs = {
     "rsvpCode": "AMS57",
     "label": "Laura Billingslea y Billy Billingslea",
     "experience": "lite"
+  },
+  "680WW4": {
+    "groupName": "Grupo 104",
+    "rsvpCode": "JFK65",
+    "label": "Ana Victoria Gallardo",
+    "experience": "lite"
+  },
+  "ZDM4C1": {
+    "groupName": "Grupo 105",
+    "rsvpCode": "LAX43",
+    "label": "Miguel Miranda",
+    "experience": "lite"
+  },
+  "GSGXWL": {
+    "groupName": "Grupo 106",
+    "rsvpCode": "SIN30",
+    "label": "Eimer y Rita",
+    "experience": "lite"
+  },
+  "UWF3MV": {
+    "groupName": "Grupo 107",
+    "rsvpCode": "MIA81",
+    "label": "Yadira Miranda y Sergio Perez",
+    "experience": "lite"
   }
 }
